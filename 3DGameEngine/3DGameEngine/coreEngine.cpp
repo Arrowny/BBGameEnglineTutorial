@@ -2,10 +2,12 @@
 #include "Window.h"
 #include "Timing.h"
 #include "Game.h"
+#include "RenderUtil.h"
 #include <stdio.h>
 
-coreEngine::coreEngine(Game* game, Window* window, double frameRate) :
+coreEngine::coreEngine(Game* game, RenderUtil* renderUtil, Window* window, double frameRate) :
 m_game(game),
+m_renderUtil(renderUtil),
 m_window(window),
 m_frameTime(1.0 / frameRate)
 {
@@ -76,7 +78,7 @@ void coreEngine::Run(){
 
 			if (frameCounter >= 1.0){
 
-				//std::cout << "Frames/sec:" << frames << std::endl;
+				std::cout << "Frames/sec:" << frames << std::endl;
 				frames = 0;
 				frameCounter = 0;
 
@@ -101,6 +103,7 @@ void coreEngine::Run(){
 
 void coreEngine::Render()
 {
+	m_renderUtil->clearScreen();
 	m_game->render();
 	m_window->Render();
 }
