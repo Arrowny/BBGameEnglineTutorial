@@ -12,7 +12,7 @@ int main(int argc, char** argv)
 {
 
 	Window window(WIDTH, HEIGHT, TITLE);
-	CoreEngine core(&window);
+	CoreEngine core(5000.0, &window);
 	core.start();
 	return 0;
 }

@@ -79,12 +79,14 @@
   <ItemGroup>
     <ClInclude Include="coreEngine.h" />
     <ClInclude Include="timing.h" />
+    <ClInclude Include="util.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="coreEngine.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="timing.cpp" />
+    <ClCompile Include="util.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
