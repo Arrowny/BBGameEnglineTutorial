@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <SDL\SDL.h>
+#include <GL\glew.h>
 
 class Window
 {
@@ -12,6 +13,7 @@ public:
 	void Update();
 
 	bool isClosed() { return m_isClosed; }
+	void Clear() { glClear(GL_COLOR_BUFFER_BIT); }
 protected:
 private:
 	Window(const Window& other) {}
