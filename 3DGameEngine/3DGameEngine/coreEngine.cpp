@@ -67,19 +67,19 @@ void coreEngine::Run(){
 			unprocessedTime -= m_frameTime;
 			frameCounter += passedTime;
 
-			m_game->input();
-			m_game->update();
-
 			if (m_window->isClosed())
 			{
 				Stop();
 			}
 
+			m_game->input();
+			m_game->update();
+
 			Time::setDelta(m_frameTime);
 
 			if (frameCounter >= 1.0){
 
-				std::cout << "Frames/sec:" << frames << std::endl;
+				//std::cout << "Frames/sec:" << frames << std::endl;
 				frames = 0;
 				frameCounter = 0;
 

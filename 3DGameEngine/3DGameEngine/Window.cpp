@@ -2,7 +2,8 @@
 #include <GL\glew.h>
 #include <iostream>
 
-Window::Window(int width, int height, const std::string& title)
+Window::Window(int width, int height, const std::string& title):
+m_input(this)
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 
@@ -93,6 +94,7 @@ void Window::Update()
 		if (e.type == SDL_KEYDOWN)
 		{
 			int value = e.key.keysym.scancode;
+			std::cout << "Down:" << value << std::endl;
 
 			m_input.SetKey(value, true);
 			m_input.SetKeyDown(value, true);
@@ -100,6 +102,7 @@ void Window::Update()
 		if (e.type == SDL_KEYUP)
 		{
 			int value = e.key.keysym.scancode;
+			std::cout << "Up:" << value << std::endl;
 
 			m_input.SetKey(value, false);
 			m_input.SetKeyUp(value, true);

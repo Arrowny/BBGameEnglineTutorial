@@ -12,8 +12,6 @@ Game::~Game()
 
 void Game::input(){
 
-	//i.Update();
-
 }
 
 void Game::update(){

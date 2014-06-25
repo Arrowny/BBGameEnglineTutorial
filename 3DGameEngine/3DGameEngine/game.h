@@ -17,7 +17,6 @@ public:
 protected:
 private:
 
-	Input i;
 };
 
 #endif // GAME_H
