@@ -14,13 +14,18 @@ public:
 	//Swap buffers to show latest image
 	void Update();
 	bool isClosed();
+	void Render();
+	void Dispose();
+	inline SDL_Window* GetSDLWindow() { return m_window; }
+
+	bool m_isClosed;
 
 private:
 	SDL_Window* m_window;
 	SDL_GLContext m_glContext;
 
 	//Check if window is 'X'ed
-	bool m_isClosed;
+	//bool m_isClosed;
 };
 
 

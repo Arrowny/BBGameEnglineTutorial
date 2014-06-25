@@ -3,7 +3,9 @@
 
 namespace Time
 {
-	double GetTime();
+	double	getTime();
+	double	getDelta();
+	void	setDelta(double delta);
 };
 
-#endif
+#endif // TIME_H

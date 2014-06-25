@@ -59,3 +59,16 @@ void Window::Update(){
 		}
 	}
 }
+
+void Window::Render(){
+
+	Color(1.0f, 0.5f, 0.3f, 0.5f);
+	Update();
+
+}
+
+void Window::Dispose(){
+
+	SDL_GL_DeleteContext(m_window);
+
+}
