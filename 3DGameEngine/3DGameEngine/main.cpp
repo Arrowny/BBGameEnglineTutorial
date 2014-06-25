@@ -6,24 +6,13 @@
 #define WIDTH 800
 #define HEIGHT 600
 #define TITLE "3D_Game_Engine"
-
-void init()
-{
-	glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
-}
+#include "coreEngine.h"
 
 int main(int argc, char** argv)
 {
 
 	Window window(WIDTH, HEIGHT, TITLE);
-
-	init();
-	while (!window.isClosed())
-	{
-		window.Clear();
-		window.SwapBuffers();
-		window.Update();
-	}
-
+	CoreEngine core(&window);
+	core.start();
 	return 0;
 }

@@ -4,9 +4,13 @@
 class CoreEngine
 {
 public:
-	CoreEngine();
-	virtual ~CoreEngine();
+	CoreEngine(Window* window);
+
+	void start();
+	void stop();
 protected:
 private:
+	bool isRunning;
+	Window* m_window;
 };
 

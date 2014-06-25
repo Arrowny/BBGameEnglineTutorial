@@ -27,6 +27,8 @@ Window::Window(int width, int height, std::string title)
 	}
 
 	m_isClosed = false;
+
+	glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
 }
 
 
@@ -35,6 +37,33 @@ Window::~Window()
 	SDL_GL_DeleteContext(m_glContext);
 	SDL_DestroyWindow(m_window);
 	SDL_Quit();
+}
+
+void Window::Render()
+{
+	Clear();
+	SwapBuffers();
+	Update();
+}
+
+int Window::GetWidth()
+{
+	int* width;
+	int* height;
+
+	SDL_GetWindowSize(m_window, width, height);
+
+	return *width;
+}
+
+int Window::GetHeight()
+{
+	int* width;
+	int* height;
+
+	SDL_GetWindowSize(m_window, width, height);
+
+	return *height;
 }
 
 void Window::SwapBuffers()

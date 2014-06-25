@@ -9,15 +9,20 @@ public:
 	Window(int width, int height, std::string title);
 	virtual ~Window();
 
-	void SwapBuffers();
-	void Update();
+	void Render();
+	int GetWidth();
+	int GetHeight();
+	std::string GetTitle() { return SDL_GetWindowTitle(m_window); }
 
 	bool isClosed() { return m_isClosed; }
-	void Clear() { glClear(GL_COLOR_BUFFER_BIT); }
 protected:
 private:
 	Window(const Window& other) {}
 	void operator=(const Window& other){}
+
+	void Clear() { glClear(GL_COLOR_BUFFER_BIT); }
+	void SwapBuffers();
+	void Update();
 
 	SDL_Window* m_window;
 	SDL_GLContext m_glContext;
