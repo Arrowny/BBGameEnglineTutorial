@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <SDL\SDL.h>
+#include "Input.h" 
 
 class Window
 {
@@ -21,8 +22,9 @@ public:
 	bool m_isClosed;
 
 private:
-	SDL_Window* m_window;
-	SDL_GLContext m_glContext;
+	SDL_Window*		m_window;
+	SDL_GLContext	m_glContext;
+	Input			m_input;
 
 	//Check if window is 'X'ed
 	//bool m_isClosed;

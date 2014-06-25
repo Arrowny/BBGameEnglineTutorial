@@ -61,13 +61,14 @@ void coreEngine::Run(){
 
 		while (unprocessedTime > m_frameTime){
 
-			m_game->input();
-			m_game->update();
-
 			render = true;
+			m_window->Update();
 
 			unprocessedTime -= m_frameTime;
 			frameCounter += passedTime;
+
+			m_game->input();
+			m_game->update();
 
 			if (m_window->isClosed())
 			{

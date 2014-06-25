@@ -12,7 +12,7 @@ Game::~Game()
 
 void Game::input(){
 
-	i.Update();
+	//i.Update();
 
 }
 

@@ -369,8 +369,7 @@ public:
 	static const int NUM_KEYS = 512;
 	static const int NUM_MOUSEBUTTONS = 256;
 
-	//Input(Window* window);
-	Input();
+	Input(Window* window);
 	
 	void Update();
 

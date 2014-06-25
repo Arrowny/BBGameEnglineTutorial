@@ -3,23 +3,10 @@
 #include <SDL/SDL.h>
 #include <cstring>
 
-//Input::Input(Window* window) :
-//m_mouseX(0),
-//m_mouseY(0),
-//m_window(window)
-//{
-//	memset(m_inputs, 0, NUM_KEYS * sizeof(bool));
-//	memset(m_downKeys, 0, NUM_KEYS * sizeof(bool));
-//	memset(m_upKeys, 0, NUM_KEYS * sizeof(bool));
-//
-//	memset(m_mouseInput, 0, NUM_MOUSEBUTTONS * sizeof(bool));
-//	memset(m_downMouse, 0, NUM_MOUSEBUTTONS * sizeof(bool));
-//	memset(m_upMouse, 0, NUM_MOUSEBUTTONS * sizeof(bool));
-//}
-
-Input::Input() :
+Input::Input(Window* window) :
 m_mouseX(0),
-m_mouseY(0)
+m_mouseY(0),
+m_window(window)
 {
 	memset(m_inputs, 0, NUM_KEYS * sizeof(bool));
 	memset(m_downKeys, 0, NUM_KEYS * sizeof(bool));
@@ -29,6 +16,19 @@ m_mouseY(0)
 	memset(m_downMouse, 0, NUM_MOUSEBUTTONS * sizeof(bool));
 	memset(m_upMouse, 0, NUM_MOUSEBUTTONS * sizeof(bool));
 }
+
+//Input::Input() :
+//m_mouseX(0),
+//m_mouseY(0)
+//{
+//	memset(m_inputs, 0, NUM_KEYS * sizeof(bool));
+//	memset(m_downKeys, 0, NUM_KEYS * sizeof(bool));
+//	memset(m_upKeys, 0, NUM_KEYS * sizeof(bool));
+//
+//	memset(m_mouseInput, 0, NUM_MOUSEBUTTONS * sizeof(bool));
+//	memset(m_downMouse, 0, NUM_MOUSEBUTTONS * sizeof(bool));
+//	memset(m_upMouse, 0, NUM_MOUSEBUTTONS * sizeof(bool));
+//}
 
 void Input::Update()
 {

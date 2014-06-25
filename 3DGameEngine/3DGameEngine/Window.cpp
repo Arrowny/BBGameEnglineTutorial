@@ -46,16 +46,77 @@ bool Window::isClosed(){
 	return m_isClosed;
 }
 
-void Window::Update(){
+//void Window::Update(){
+//
+//	SDL_GL_SwapWindow(m_window);
+//
+//	SDL_Event e;
+//
+//	while (SDL_PollEvent(&e)){
+//
+//		if (e.type == SDL_QUIT){
+//			m_isClosed = true;
+//		}
+//	}
+//}
 
+void Window::Update()
+{
 	SDL_GL_SwapWindow(m_window);
 
+	for (int i = 0; i < Input::NUM_MOUSEBUTTONS; i++)
+	{
+		m_input.SetMouseDown(i, false);
+		m_input.SetMouseUp(i, false);
+	}
+
+	for (int i = 0; i < Input::NUM_KEYS; i++)
+	{
+		m_input.SetKeyDown(i, false);
+		m_input.SetKeyUp(i, false);
+	}
+
 	SDL_Event e;
-
-	while (SDL_PollEvent(&e)){
-
-		if (e.type == SDL_QUIT){
+	while (SDL_PollEvent(&e))
+	{
+		if (e.type == SDL_QUIT)
+		{
 			m_isClosed = true;
+		}
+
+		if (e.type == SDL_MOUSEMOTION)
+		{
+			m_input.SetMouseX(e.motion.x);
+			m_input.SetMouseY(e.motion.y);
+		}
+
+		if (e.type == SDL_KEYDOWN)
+		{
+			int value = e.key.keysym.scancode;
+
+			m_input.SetKey(value, true);
+			m_input.SetKeyDown(value, true);
+		}
+		if (e.type == SDL_KEYUP)
+		{
+			int value = e.key.keysym.scancode;
+
+			m_input.SetKey(value, false);
+			m_input.SetKeyUp(value, true);
+		}
+		if (e.type == SDL_MOUSEBUTTONDOWN)
+		{
+			int value = e.button.button;
+
+			m_input.SetMouse(value, true);
+			m_input.SetMouseDown(value, true);
+		}
+		if (e.type == SDL_MOUSEBUTTONUP)
+		{
+			int value = e.button.button;
+
+			m_input.SetMouse(value, false);
+			m_input.SetMouseUp(value, true);
 		}
 	}
 }
