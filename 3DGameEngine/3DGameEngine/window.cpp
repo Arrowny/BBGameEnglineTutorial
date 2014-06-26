@@ -28,7 +28,7 @@ Window::Window(int width, int height, std::string title)
 
 	m_isClosed = false;
 
-	glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
+	InitGraphics();
 }
 
 
@@ -43,7 +43,6 @@ void Window::Render()
 {
 	Clear();
 	SwapBuffers();
-	Update();
 }
 
 int Window::GetWidth()
@@ -66,19 +65,29 @@ int Window::GetHeight()
 	return *height;
 }
 
+void Window::InitGraphics()
+{
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+
+	glFrontFace(GL_CW);
+	glCullFace(GL_BACK);
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_DEPTH_TEST);
+
+	//TODO: Initialize depth clamp
+
+	glEnable(GL_FRAMEBUFFER_SRGB);
+}
+
 void Window::SwapBuffers()
 {
 	SDL_GL_SwapWindow(m_window);
 }
 
-void Window::Update()
+void Window::Update(SDL_Event e)
 {
-	SDL_Event e;
-	while (SDL_PollEvent(&e))
+	if (e.type == SDL_QUIT)
 	{
-		if (e.type == SDL_QUIT)
-		{
-			m_isClosed = true;
-		}
+		m_isClosed = true;
 	}
 }

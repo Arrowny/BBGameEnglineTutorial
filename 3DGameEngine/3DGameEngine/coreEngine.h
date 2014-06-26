@@ -12,14 +12,14 @@ public:
 	void stop();
 protected:
 private:
+
+	void UpdateWindowAndInput();
+
 	bool isRunning;
 	Input* m_input;
 	Window* m_window;
 	Game* m_game;
-
-
 	double m_frameTime;
 
-	double SECOND = 1000000000l;
 };
 

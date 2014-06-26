@@ -80,6 +80,7 @@
     <ClInclude Include="coreEngine.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="input.h" />
+    <ClInclude Include="mesh.h" />
     <ClInclude Include="timing.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="window.h" />
@@ -89,6 +90,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mesh.cpp" />
     <ClCompile Include="timing.cpp" />
     <ClCompile Include="util.cpp" />
     <ClCompile Include="window.cpp" />

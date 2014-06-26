@@ -15,9 +15,10 @@ public:
 	std::string GetTitle() { return SDL_GetWindowTitle(m_window); }
 	SDL_Window* GetSDLWindow() { return m_window; }
 
-	void Clear() { glClear(GL_COLOR_BUFFER_BIT); }
+	void Clear() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
+	void InitGraphics();
 	void SwapBuffers();
-	void Update();
+	void Update(SDL_Event e);
 
 	bool isClosed() { return m_isClosed; }
 protected:

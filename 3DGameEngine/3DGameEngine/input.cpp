@@ -17,7 +17,7 @@ Input::Input(Window* window) :
 	memset(m_upMouse, 0, NUM_MOUSEBUTTONS * sizeof(bool));
 }
 
-void Input::Update()
+void Input::Clear()
 {
 	for (int i = 0; i < Input::NUM_MOUSEBUTTONS; i++)
 	{
@@ -30,55 +30,54 @@ void Input::Update()
 		SetKeyDown(i, false);
 		SetKeyUp(i, false);
 	}
+}
 
-	SDL_Event e;
-	while (SDL_PollEvent(&e))
+void Input::Update(SDL_Event e)
+{
+
+	switch (e.type) 
 	{
-
-		switch (e.type) 
+		case SDL_MOUSEMOTION:
 		{
-			case SDL_MOUSEMOTION:
-			{
-				SetMouseX(e.motion.x);
-				SetMouseY(e.motion.y);
-				break;
-			}
+			SetMouseX(e.motion.x);
+			SetMouseY(e.motion.y);
+			break;
+		}
 
-			case SDL_KEYDOWN:
-			{
-				int value = e.key.keysym.scancode;
+		case SDL_KEYDOWN:
+		{
+			int value = e.key.keysym.scancode;
 
-				SetKey(value, true);
-				SetKeyDown(value, true);
-				break;
-			}
+			SetKey(value, true);
+			SetKeyDown(value, true);
+			break;
+		}
 
-			case SDL_KEYUP:
-			{
-				int value = e.key.keysym.scancode;
+		case SDL_KEYUP:
+		{
+			int value = e.key.keysym.scancode;
 
-				SetKey(value, false);
-				SetKeyUp(value, true);
-				break;
-			}
+			SetKey(value, false);
+			SetKeyUp(value, true);
+			break;
+		}
 
-			case SDL_MOUSEBUTTONDOWN:
-			{
-				int value = e.button.button;
+		case SDL_MOUSEBUTTONDOWN:
+		{
+			int value = e.button.button;
 
-				SetMouse(value, true);
-				SetMouseDown(value, true);
-				break;
-			}
+			SetMouse(value, true);
+			SetMouseDown(value, true);
+			break;
+		}
 
-			case SDL_MOUSEBUTTONUP:
-			{
-				int value = e.button.button;
+		case SDL_MOUSEBUTTONUP:
+		{
+			int value = e.button.button;
 
-				SetMouse(value, false);
-				SetMouseUp(value, true);
-				break;
-			}
+			SetMouse(value, false);
+			SetMouseUp(value, true);
+			break;
 		}
 	}
 }

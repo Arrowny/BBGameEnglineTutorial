@@ -38,14 +38,13 @@ void CoreEngine::start()
 		frameCounter += passedTime;
 
 		if (m_window->isClosed()){ stop(); }
-		m_window->Update();
 
 		while (unprocessedTime > m_frameTime)
 		{
 			render = true;
 
-			m_input->Update();
-			m_game->Input();
+			UpdateWindowAndInput();
+			m_game->ProcessInput(m_input);
 			m_game->Update();
 
 			if (frameCounter > 1.0)
@@ -75,6 +74,17 @@ void CoreEngine::stop()
 	if (!isRunning){ return; }
 
 	isRunning = false;
+}
+
+void CoreEngine::UpdateWindowAndInput()
+{
+	m_input->Clear();
+	SDL_Event e;
+	while (SDL_PollEvent(&e))
+	{
+		m_window->Update(e);
+		m_input->Update(e);
+	}
 }
 
 

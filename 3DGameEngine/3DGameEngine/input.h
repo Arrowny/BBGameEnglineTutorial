@@ -1,6 +1,7 @@
 #ifndef MYINPUT_H
 #define MYINPUT_H
 #include <glm\glm.hpp>
+#include <SDL\SDL.h>
 
 class Window;
 
@@ -643,7 +644,8 @@ public:
 
 	Input(Window* window);
 
-	void Update();
+	void Update(SDL_Event e);
+	void Clear();
 
 	inline bool GetKey(int keyCode)            const { return m_inputs[keyCode]; }
 	inline bool GetKeyDown(int keyCode)        const { return m_downKeys[keyCode]; }
