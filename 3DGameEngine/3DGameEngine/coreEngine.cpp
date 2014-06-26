@@ -5,10 +5,12 @@
 #include <iostream>
 
 
-CoreEngine::CoreEngine(double frameRate, Window* window):
+CoreEngine::CoreEngine(double frameRate, Window* window, Game* game):
 m_window(window),
-m_frameTime(double(1.0)/frameRate)
+m_frameTime(double(1.0)/frameRate),
+m_game(game)
 {
+	m_input = new Input(m_window);
 	isRunning = false;
 }
 
@@ -35,13 +37,16 @@ void CoreEngine::start()
 		unprocessedTime += passedTime;
 		frameCounter += passedTime;
 
+		if (m_window->isClosed()){ stop(); }
+		m_window->Update();
+
 		while (unprocessedTime > m_frameTime)
 		{
 			render = true;
-			unprocessedTime -= m_frameTime;
-			if (m_window->isClosed()){ stop(); }
 
-			//TODO: Update Game
+			m_input->Update();
+			m_game->Input();
+			m_game->Update();
 
 			if (frameCounter > 1.0)
 			{
@@ -49,10 +54,14 @@ void CoreEngine::start()
 				frames = 0;
 				frameCounter = 0.0;
 			}
+
+			
+			unprocessedTime -= m_frameTime;
 		}
 
 		if (render) 
 		{ 
+			m_game->Render();
 			m_window->Render(); 
 			frames++;
 		}

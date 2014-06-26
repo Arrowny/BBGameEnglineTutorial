@@ -54,7 +54,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;glew32s.lib;glu32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
@@ -78,12 +78,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="coreEngine.h" />
+    <ClInclude Include="game.h" />
+    <ClInclude Include="input.h" />
     <ClInclude Include="timing.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="coreEngine.cpp" />
+    <ClCompile Include="game.cpp" />
+    <ClCompile Include="input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="timing.cpp" />
     <ClCompile Include="util.cpp" />

@@ -74,7 +74,6 @@ void Window::SwapBuffers()
 void Window::Update()
 {
 	SDL_Event e;
-
 	while (SDL_PollEvent(&e))
 	{
 		if (e.type == SDL_QUIT)
