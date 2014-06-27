@@ -18,6 +18,7 @@ public:
 	void Render();
 	void Dispose();
 	inline SDL_Window* GetSDLWindow() { return m_window; }
+	void swapBuffers();
 
 	bool m_isClosed;
 

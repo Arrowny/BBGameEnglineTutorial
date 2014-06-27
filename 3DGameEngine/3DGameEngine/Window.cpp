@@ -63,8 +63,7 @@ bool Window::isClosed(){
 
 void Window::Update()
 {
-	SDL_GL_SwapWindow(m_window);
-
+	
 	for (int i = 0; i < Input::NUM_MOUSEBUTTONS; i++)
 	{
 		m_input.SetMouseDown(i, false);
@@ -78,6 +77,7 @@ void Window::Update()
 	}
 
 	SDL_Event e;
+
 	while (SDL_PollEvent(&e))
 	{
 		if (e.type == SDL_QUIT)
@@ -126,7 +126,7 @@ void Window::Update()
 
 void Window::Render(){
 
-	Color(1.0f, 0.5f, 0.3f, 0.5f);
+	//Color(1.0f, 0.5f, 0.3f, 0.5f);
 	Update();
 
 }
@@ -134,5 +134,11 @@ void Window::Render(){
 void Window::Dispose(){
 
 	SDL_GL_DeleteContext(m_window);
+
+}
+
+void Window::swapBuffers(){
+
+	SDL_GL_SwapWindow(m_window);
 
 }

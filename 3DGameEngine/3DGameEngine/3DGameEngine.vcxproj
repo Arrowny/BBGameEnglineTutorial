@@ -83,8 +83,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="RenderUtil.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Timing.cpp" />
-    <ClCompile Include="Vertex.cpp" />
+    <ClCompile Include="Util.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -93,9 +94,14 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="RenderUtil.h" />
+    <ClInclude Include="Shader.h" />
     <ClInclude Include="Timing.h" />
-    <ClInclude Include="Vertex.h" />
+    <ClInclude Include="Util.h" />
     <ClInclude Include="Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\basicShader.fs" />
+    <None Include="res\basicShader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

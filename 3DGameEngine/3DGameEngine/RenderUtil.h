@@ -3,6 +3,7 @@
 #include <iostream>
 #include <GL\glew.h>
 #include <SDL\SDL.h>
+#include <string>
 
 class RenderUtil
 {
@@ -12,6 +13,7 @@ public:
 	
 	void clearScreen();
 	void initGraphics();
+	char* getOpenGLVersion();
 
 
 protected:

@@ -4,6 +4,7 @@
 #include "Input.h"
 #include <iostream>
 
+
 class Game
 {
 public:
@@ -17,6 +18,7 @@ public:
 protected:
 private:
 
+	
 };
 
 #endif // GAME_H

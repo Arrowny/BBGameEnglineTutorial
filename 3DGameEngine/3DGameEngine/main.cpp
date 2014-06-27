@@ -5,6 +5,7 @@
 #include "coreEngine.h"
 #include "Game.h"
 #include "RenderUtil.h"
+#include "Mesh.h"
 
 #define WIDTH 800
 #define HEIGHT 600
@@ -13,12 +14,21 @@
 
 int main(int argc, char** argv)
 {
-	Game game;
-	RenderUtil renderUtil;
-	renderUtil.initGraphics();
 	//Create new window with (Width, Height, Title)
 	Window window(WIDTH, HEIGHT, TITLE);
-	coreEngine core(&game, &renderUtil, &window, FRAME_CAP);
+
+	Vertex vertices[] = { Vertex(glm::vec3(-0.5, -0.5, 0.0)),
+						  Vertex(glm::vec3(0.0, 0.5, 0)),
+						  Vertex(glm::vec3(0.5, -0.5, 0)), };
+
+	Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]));
+	Shader shader("./res/basicShader");
+	Game game;
+	RenderUtil renderUtil;
+	std::cout << renderUtil.getOpenGLVersion() << std::endl;
+	//renderUtil.initGraphics();
+	
+	coreEngine core(&game, &renderUtil, &window, &mesh, &shader, FRAME_CAP);
 	
 	core.Start();
 

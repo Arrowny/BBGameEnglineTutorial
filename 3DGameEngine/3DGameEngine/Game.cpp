@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "Input.h"
 
 Game::Game()
 {
@@ -19,5 +18,7 @@ void Game::update(){
 }
 
 void Game::render(){
+
+	
 
 }
