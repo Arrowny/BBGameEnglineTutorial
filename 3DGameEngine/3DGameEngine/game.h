@@ -21,6 +21,7 @@ private:
 
 	Mesh*		m_mesh;
 	Shader*		m_shader;
+	Transform	transform;
 	
 };
 

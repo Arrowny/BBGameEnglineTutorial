@@ -96,6 +96,7 @@
     <ClInclude Include="RenderUtil.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Timing.h" />
+    <ClInclude Include="Transform.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>

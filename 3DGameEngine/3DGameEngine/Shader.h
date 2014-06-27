@@ -4,6 +4,7 @@
 #include <GL/glew.h>
 #include <glm\glm.hpp>
 #include "Timing.h"
+#include "Transform.h"
 
 class Shader
 {
@@ -11,7 +12,7 @@ public:
 	Shader(const std::string& fileName);
 
 	void Bind();
-	void Update();
+	void Update(const Transform& transform);
 
 	virtual ~Shader();
 protected:
@@ -23,6 +24,7 @@ private:
 	enum
 	{
 		UNIFORM_U,
+		TRANSFORM_U,
 
 		NUM_UNIFORMS
 	};

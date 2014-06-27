@@ -15,9 +15,17 @@ void Game::input(){
 
 }
 
+float counter = 0.0f;
+
 void Game::update(){
 
-	m_shader->Update();
+	float sinCounter = sinf(counter);
+	float cosCounter = cosf(counter);
+
+	transform.GetPos().x = sinCounter;
+
+	m_shader->Update(transform);
+	counter += 0.0001f;
 
 }
 

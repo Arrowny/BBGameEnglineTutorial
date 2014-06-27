@@ -21,6 +21,7 @@ Shader::Shader(const std::string& fileName)
 	CheckShaderError(m_program, GL_LINK_STATUS, true, "Invalid shader program");
 
 	m_uniforms[UNIFORM_U] = glGetUniformLocation(m_program, "uniformFloat");
+	m_uniforms[TRANSFORM_U] = glGetUniformLocation(m_program, "transform");
 }
 
 Shader::~Shader()
@@ -41,10 +42,13 @@ void Shader::Bind()
 
 float temp = 0.0f;
 
-void Shader::Update()
+void Shader::Update(const Transform& transform)
 {
 	temp += Time::getDelta();
+	glm::mat4 model = transform.GetModel();
+
 	glUniform1f(m_uniforms[UNIFORM_U], (float)glm::abs(glm::sin(temp)));
+	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
 }
 
 
