@@ -3,12 +3,13 @@
 
 #include "Input.h"
 #include <iostream>
-
+#include "Mesh.h"
+#include "Shader.h"
 
 class Game
 {
 public:
-	Game();
+	Game(Mesh* mesh, Shader* shader);
 	~Game();
 
 	void input();
@@ -18,6 +19,8 @@ public:
 protected:
 private:
 
+	Mesh*		m_mesh;
+	Shader*		m_shader;
 	
 };
 

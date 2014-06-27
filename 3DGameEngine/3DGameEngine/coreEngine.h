@@ -6,13 +6,12 @@
 #include "Game.h"
 #include "Input.h"
 #include "RenderUtil.h"
-#include "Mesh.h"
-#include "Shader.h"
+
 
 class coreEngine
 {
 public:
-	coreEngine(Game* game, RenderUtil* renderUtil, Window* window, Mesh* mesh, Shader* shader, double frameRate);
+	coreEngine(Game* game, RenderUtil* renderUtil, Window* window, double frameRate);
 	~coreEngine(); 
 
 	void Start(); //Starts running the game; contains central game loop.
@@ -28,8 +27,7 @@ private:
 	Window*		m_window;
 	RenderUtil*	m_renderUtil;
 	double		m_frameTime;
-	Mesh*		m_mesh;
-	Shader*		m_shader;
+	
 	
 
 };

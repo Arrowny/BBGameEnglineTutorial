@@ -47,20 +47,6 @@ bool Window::isClosed(){
 	return m_isClosed;
 }
 
-//void Window::Update(){
-//
-//	SDL_GL_SwapWindow(m_window);
-//
-//	SDL_Event e;
-//
-//	while (SDL_PollEvent(&e)){
-//
-//		if (e.type == SDL_QUIT){
-//			m_isClosed = true;
-//		}
-//	}
-//}
-
 void Window::Update()
 {
 	

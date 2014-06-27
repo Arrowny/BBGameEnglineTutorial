@@ -12,11 +12,15 @@ Shader::Shader(const std::string& fileName)
 	for (unsigned int i = 0; i < NUM_SHADERS; i++)
 		glAttachShader(m_program, m_shaders[i]);
 
+	glBindAttribLocation(m_program, 0, "position");
+
 	glLinkProgram(m_program);
 	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error linking shader program");
 
 	glValidateProgram(m_program);
 	CheckShaderError(m_program, GL_LINK_STATUS, true, "Invalid shader program");
+
+	m_uniforms[UNIFORM_U] = glGetUniformLocation(m_program, "uniformFloat");
 }
 
 Shader::~Shader()
@@ -33,6 +37,14 @@ Shader::~Shader()
 void Shader::Bind()
 {
 	glUseProgram(m_program);
+}
+
+float temp = 0.0f;
+
+void Shader::Update()
+{
+	temp += Time::getDelta();
+	glUniform1f(m_uniforms[UNIFORM_U], (float)glm::abs(glm::sin(temp)));
 }
 
 
