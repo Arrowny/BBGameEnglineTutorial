@@ -19,15 +19,26 @@ int main(int argc, char** argv)
 
 	Vertex vertices[] = { Vertex(glm::vec3(-0.8, -0.8, 0.0)),
 						  Vertex(glm::vec3(0.0, 0.8, 0)),
-						  Vertex(glm::vec3(0.8, -0.8, 0)), };
+						  Vertex(glm::vec3(0.8, -0.8, 0)),
+						  Vertex(glm::vec3(0.0, -0.8, 0.8)), 
+						  Vertex(glm::vec3(0.0, -0.8, -0.8)), 
+	};
 
-	Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]));
+	unsigned int indices[] = { 3, 1, 0,
+							   2, 1, 3,
+							   0, 2, 3,
+							   4, 1, 2,
+							   1, 4, 0,
+							   2, 0, 4 };
+
+	//Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
+	Mesh mesh("./res/cube.obj");
 	Shader shader("./res/basicShader");
 	Game game(&mesh, &shader);
 	RenderUtil renderUtil;
 	renderUtil.initGraphics();
 	
-	coreEngine core(&game, &renderUtil, &window,FRAME_CAP);
+	coreEngine core(&game, &renderUtil, &window, FRAME_CAP);
 	core.Start();
 
 	//std::cin.get();

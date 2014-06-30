@@ -45,7 +45,7 @@ float temp = 0.0f;
 void Shader::Update(const Transform& transform)
 {
 	temp += Time::getDelta();
-	glm::mat4 model = transform.GetModel();
+	glm::mat4 model = transform.GetProjection();
 
 	glUniform1f(m_uniforms[UNIFORM_U], (float)glm::abs(glm::sin(temp)));
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);

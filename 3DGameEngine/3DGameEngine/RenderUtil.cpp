@@ -20,10 +20,15 @@ void RenderUtil::initGraphics(){
 
 	std::cout << getOpenGLVersion() << std::endl;
 
-	glFrontFace(GL_CW);
-	glCullFace(GL_BACK);
-	glEnable(GL_CULL_FACE);
+	//glFrontFace(GL_CW);
+	//glCullFace(GL_BACK);
+	//glEnable(GL_CULL_FACE);
 	//glEnable(GL_DEPTH_TEST);
+
+	glEnable(GL_DEPTH_TEST);
+
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
 
 	glEnable(GL_FRAMEBUFFER_SRGB);
 

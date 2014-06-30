@@ -22,10 +22,12 @@ void Game::update(){
 	float sinCounter = sinf(counter);
 	float cosCounter = cosf(counter);
 
-	transform.GetPos().x = sinCounter;
+	transform.GetPos().z = -3.0;
+	transform.GetRot().y = counter * 50;
+	//transform.SetScale(glm::vec3(0.1f , 0.1f, 0.1f));
 
 	m_shader->Update(transform);
-	counter += 0.0001f;
+	counter += 0.0003f;
 
 }
 
