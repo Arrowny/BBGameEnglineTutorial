@@ -105,7 +105,7 @@ void coreEngine::Run(){
 
 void coreEngine::Render()
 {
-	m_window->Color(0.0f, 0.0f, 0.0f, 1.0f);
+	m_window->ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	m_game->render();
 	m_window->swapBuffers();
 }

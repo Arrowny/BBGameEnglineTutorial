@@ -36,7 +36,7 @@ Window::~Window(){
 	SDL_Quit();
 }
 
-void Window::Color(float r, float g, float b, float a){
+void Window::ClearColor(float r, float g, float b, float a){
 
 	glClearColor(r, g, b, a);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -96,6 +96,7 @@ void Window::Update()
 		if (e.type == SDL_MOUSEBUTTONDOWN)
 		{
 			int value = e.button.button;
+			std::cout << "MDown:" << value << std::endl;
 
 			m_input.SetMouse(value, true);
 			m_input.SetMouseDown(value, true);
@@ -103,6 +104,7 @@ void Window::Update()
 		if (e.type == SDL_MOUSEBUTTONUP)
 		{
 			int value = e.button.button;
+			std::cout << "MUp:" << value << std::endl;
 
 			m_input.SetMouse(value, false);
 			m_input.SetMouseUp(value, true);

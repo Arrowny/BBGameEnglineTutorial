@@ -10,7 +10,7 @@ public:
 	Window(int width, int height, const std::string& title);
 	~Window();
 
-	void Color(float r, float g, float b, float a);
+	void ClearColor(float r, float g, float b, float a);
 
 	//Swap buffers to show latest image
 	void Update();
