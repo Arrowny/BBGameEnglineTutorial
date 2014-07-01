@@ -24,5 +24,6 @@ void Game::update(){
 }
 
 void Game::render(){
+	m_shader->Bind();
 	m_mesh->Draw();
 }

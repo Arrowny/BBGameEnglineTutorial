@@ -12,7 +12,7 @@ public:
 	
 	void clearScreen();
 	void initGraphics();
-
+	const GLubyte* getOpenGLVersion();
 
 protected:
 private:

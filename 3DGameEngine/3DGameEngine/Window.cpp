@@ -39,7 +39,7 @@ Window::~Window(){
 void Window::Color(float r, float g, float b, float a){
 
 	glClearColor(r, g, b, a);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 bool Window::isClosed(){
@@ -47,23 +47,8 @@ bool Window::isClosed(){
 	return m_isClosed;
 }
 
-//void Window::Update(){
-//
-//	SDL_GL_SwapWindow(m_window);
-//
-//	SDL_Event e;
-//
-//	while (SDL_PollEvent(&e)){
-//
-//		if (e.type == SDL_QUIT){
-//			m_isClosed = true;
-//		}
-//	}
-//}
-
 void Window::Update()
 {
-	SDL_GL_SwapWindow(m_window);
 
 	for (int i = 0; i < Input::NUM_MOUSEBUTTONS; i++)
 	{
@@ -127,7 +112,7 @@ void Window::Update()
 void Window::Render(){
 
 	Color(1.0f, 0.5f, 0.0f, 0.5f);
-	Update();
+
 
 }
 
@@ -135,4 +120,9 @@ void Window::Dispose(){
 
 	SDL_GL_DeleteContext(m_window);
 
+}
+
+void Window::SwapBuffers()
+{
+	SDL_GL_SwapWindow(m_window);
 }

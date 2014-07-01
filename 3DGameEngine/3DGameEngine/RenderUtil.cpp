@@ -28,7 +28,8 @@ void RenderUtil::initGraphics(){
 	glEnable(GL_FRAMEBUFFER_SRGB);
 
 }
-//GLstring getOpenGLVersion()
-//{
-//	return glGetString(GL_VERSION);
-//}
+
+const GLubyte* RenderUtil::getOpenGLVersion()
+{
+	return glGetString(GL_VERSION);
+}

@@ -26,21 +26,12 @@ int main(int argc, char** argv)
 	Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]));
 	Shader shader("./res/basicShader");
 
-	//Game game();
+	//Game game;
 	Game game(&mesh, &shader);
 	RenderUtil renderUtil;
 	renderUtil.initGraphics();
-	//Create new window with (Width, Height, Title)
-	
 	coreEngine core(&game, &renderUtil, &window, FRAME_CAP);
-	
-	
-
 	core.Start();
-	
-
-
-	//std::cin.get();
 
 	return 0;
 }

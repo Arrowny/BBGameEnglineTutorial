@@ -14,7 +14,8 @@ m_renderUtil(renderUtil),
 m_window(window),
 m_frameTime(1.0 / frameRate)
 {	
-	m_renderUtil->initGraphics();
+	//m_renderUtil->initGraphics();
+	std::cout << m_renderUtil->getOpenGLVersion() << std::endl;
 	m_isRunning = false;
 }
 
@@ -28,6 +29,8 @@ void coreEngine::Start()
 	{
 		return;
 	}
+
+	std::cout << "In the coreStart" << std::endl;
 
 	Run();
 
@@ -44,7 +47,7 @@ void coreEngine::Stop()
 }
 
 void coreEngine::Run(){
-
+	std::cout << "In the coreRun" << std::endl;
 	m_isRunning = true;
 
 	int frames = 0;
@@ -111,9 +114,13 @@ void coreEngine::Run(){
 
 void coreEngine::Render()
 {
+	//std::cout << "In the coreRender" << std::endl;
+	
 	//m_renderUtil->clearScreen();
-	m_game->render();
 	m_window->Render();
+	m_game->render();
+
+	m_window->SwapBuffers();
 }
 
 void coreEngine::cleanUp()
