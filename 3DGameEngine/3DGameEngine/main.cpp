@@ -31,10 +31,12 @@ int main(int argc, char** argv)
 							   1, 4, 0,
 							   2, 0, 4 };
 
+	Camera camera(glm::vec3(0.0f, 0.0f, -10.0f), 70.0f, (float)WIDTH / (float)HEIGHT, 0.1f, 1000.0f);
+
 	//Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
 	Mesh mesh("./res/cube.obj");
 	Shader shader("./res/basicShader");
-	Game game(&mesh, &shader);
+	Game game(&mesh, &shader, &camera);
 	RenderUtil renderUtil;
 	renderUtil.initGraphics();
 	

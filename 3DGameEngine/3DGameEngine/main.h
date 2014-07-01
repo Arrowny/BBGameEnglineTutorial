@@ -4,23 +4,16 @@
 #include <string>
 #include "Window.h"
 
-class MainComponent
+class Main
 {
 public:
-	MainComponent();
-	~MainComponent();
 
-	void start();
-	void stop();
-	void run();
-	void render();
-	void cleanUp();
+	float getWidth();
+	float getHeight();
 
 protected:
 private:
-	bool				m_isRunning;
-	const Window*		m_window;
 
 };
 
-#endif // COREENGINE_H
+#endif

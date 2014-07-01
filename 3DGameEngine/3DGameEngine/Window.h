@@ -19,6 +19,7 @@ public:
 	void Dispose();
 	inline SDL_Window* GetSDLWindow() { return m_window; }
 	void swapBuffers();
+	inline const Input& GetInput()	const { return m_input; }
 
 	bool m_isClosed;
 
