@@ -5,10 +5,11 @@
 #include <iostream>
 
 
-CoreEngine::CoreEngine(double frameRate, Window* window, Game* game):
+CoreEngine::CoreEngine(double frameRate, Window* window, Game* game, Shader* shader):
+m_frameTime(double(1.0) / frameRate),
 m_window(window),
-m_frameTime(double(1.0)/frameRate),
-m_game(game)
+m_game(game),
+m_shader(shader)
 {
 	m_input = new Input(m_window);
 	isRunning = false;
@@ -25,6 +26,7 @@ void CoreEngine::start()
 
 	double lastTime = Time::GetTime();
 	double unprocessedTime = 0;
+	m_shader->Bind();
 
 	while (isRunning)
 	{
@@ -49,7 +51,7 @@ void CoreEngine::start()
 
 			unprocessedTime -= m_frameTime;
 
-			//Debug:
+			//DEBUG: Display information
 			if (frameCounter > 1.0)
 			{
 				std::cout << "Frames/Second: " << frames << std::endl;

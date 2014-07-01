@@ -10,7 +10,7 @@ Game::Game()
 {
 	Vertex Triangle[] = {	Vertex(glm::vec3(-1.0, -1.0,  0.0)),
 							Vertex(glm::vec3( 1.0, -1.0,  0.0)), 
-							Vertex(glm::vec3( 0.0,  1.0, 0.0)) };
+							Vertex(glm::vec3( 0.0,  1.0,  0.0)) };
 
 	TriangleMesh = new Mesh(Triangle, sizeof(Triangle)/sizeof(Triangle[0]));
 }

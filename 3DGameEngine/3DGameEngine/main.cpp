@@ -17,7 +17,8 @@ int main(int argc, char** argv)
 	std::cout << "Start 3D game engine" << std::endl;
 	Window window(WIDTH, HEIGHT, TITLE);
 	Game game;
-	CoreEngine core(double(5000.0), &window, &game);
+	Shader shader("./res/shader");
+	CoreEngine core(double(5000.0), &window, &game, &shader);
 	core.start();
 	return 0;
 }

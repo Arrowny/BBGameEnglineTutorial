@@ -75,4 +75,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shader.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\shader.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
