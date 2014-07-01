@@ -9,7 +9,8 @@
 class Game
 {
 public:
-	Game(Vertex* vertices);
+	Game();
+	//Game(Mesh* vertices, Shader* shader);
 	~Game();
 
 	void input();

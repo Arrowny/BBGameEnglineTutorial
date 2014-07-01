@@ -1,11 +1,18 @@
 #include "Game.h"
 #include "Input.h"
 
-Game::Game(Vertex* vertices)
+Game::Game()
 {
-	/*Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]));
-	mesh.Draw();*/
+
 }
+
+//Game::Game(Mesh* mesh, Shader* shader)
+//{
+//	shader->Bind();
+////	shader.Update(transform);
+////	texture.Bind(0);
+//	mesh->Draw();
+//}
 
 
 Game::~Game()
@@ -21,5 +28,5 @@ void Game::update(){
 }
 
 void Game::render(){
-	//mesh.Draw();
+	
 }

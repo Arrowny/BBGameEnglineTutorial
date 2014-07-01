@@ -83,7 +83,7 @@ void coreEngine::Run(){
 
 			if (frameCounter >= 1.0){
 
-				//std::cout << "Frames/sec:" << frames << std::endl;
+				std::cout << "Frames/sec:" << frames << std::endl;
 				frames = 0;
 				frameCounter = 0;
 
@@ -110,7 +110,7 @@ void coreEngine::Render()
 {
 	m_renderUtil->clearScreen();
 	m_game->render();
-	//m_window->Render();
+	m_window->Render();
 }
 
 void coreEngine::cleanUp()
