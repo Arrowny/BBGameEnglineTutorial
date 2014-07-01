@@ -1,5 +1,5 @@
 #include "RenderUtil.h"
-
+#include <String>
 
 RenderUtil::RenderUtil()
 {
@@ -18,7 +18,7 @@ void RenderUtil::clearScreen(){
 
 void RenderUtil::initGraphics(){
 
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glClearColor(2.0f, 1.5f, 0.0f, 0.5f);
 
 	glFrontFace(GL_CW);
 	glCullFace(GL_BACK);
@@ -28,3 +28,7 @@ void RenderUtil::initGraphics(){
 	glEnable(GL_FRAMEBUFFER_SRGB);
 
 }
+//GLstring getOpenGLVersion()
+//{
+//	return glGetString(GL_VERSION);
+//}

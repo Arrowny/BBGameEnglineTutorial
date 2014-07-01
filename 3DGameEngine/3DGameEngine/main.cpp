@@ -6,6 +6,7 @@
 #include "Game.h"
 #include "RenderUtil.h"
 
+
 #define WIDTH 800
 #define HEIGHT 600
 #define TITLE "3DGameEngine"
@@ -13,14 +14,22 @@
 
 int main(int argc, char** argv)
 {
+	Vertex vertices[] = { Vertex(glm::vec3(-0.5, -0.5, 0.0)),
+		Vertex(glm::vec3(0.0, 0.5, 0.0)),
+		Vertex(glm::vec3(0.5, -0.5, 0.0)) };
+
 	Game game;
 	RenderUtil renderUtil;
-	renderUtil.initGraphics();
+	//renderUtil.initGraphics();
 	//Create new window with (Width, Height, Title)
 	Window window(WIDTH, HEIGHT, TITLE);
 	coreEngine core(&game, &renderUtil, &window, FRAME_CAP);
 	
+	
+
 	core.Start();
+	
+
 
 	//std::cin.get();
 

@@ -4,13 +4,17 @@
 #include "Game.h"
 #include "RenderUtil.h"
 #include <stdio.h>
+#include <glm/glm.hpp>
+#include "Shader.h"
+#include "Mesh.h"
 
 coreEngine::coreEngine(Game* game, RenderUtil* renderUtil, Window* window, double frameRate) :
 m_game(game),
 m_renderUtil(renderUtil),
 m_window(window),
 m_frameTime(1.0 / frameRate)
-{
+{	
+	m_renderUtil->initGraphics();
 	m_isRunning = false;
 }
 
@@ -106,7 +110,7 @@ void coreEngine::Render()
 {
 	m_renderUtil->clearScreen();
 	m_game->render();
-	m_window->Render();
+	//m_window->Render();
 }
 
 void coreEngine::cleanUp()

@@ -3,11 +3,13 @@
 
 #include "Input.h"
 #include <iostream>
+#include "Mesh.h"
+#include "Shader.h"
 
 class Game
 {
 public:
-	Game();
+	Game(Vertex* vertices);
 	~Game();
 
 	void input();
