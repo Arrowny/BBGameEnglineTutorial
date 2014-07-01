@@ -12,6 +12,8 @@ public:
 	void stop();
 protected:
 private:
+	CoreEngine(const CoreEngine& other) {}
+	void operator=(const CoreEngine& other) {}
 
 	void UpdateWindowAndInput();
 

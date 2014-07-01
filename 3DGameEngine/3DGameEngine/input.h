@@ -657,6 +657,8 @@ public:
 	
 protected:
 private:
+	Input(const Input& other) {}
+	void operator=(const Input& other) {}
 
 	void SetCursor(bool value)                 const;
 	void SetMousePosition(const glm::vec2& pos) const;
