@@ -6,11 +6,12 @@
 #include "Mesh.h"
 #include "Shader.h"
 #include "Camera.h"
+#include "Texture.h"
 
 class Game
 {
 public:
-	Game(Mesh* mesh, Shader* shader, Camera* camera);
+	Game(Mesh* mesh, Shader* shader, Camera* camera, Texture* texture);
 	~Game();
 
 	void input(const Input& input);
@@ -24,6 +25,7 @@ private:
 	Shader*		m_shader;
 	Transform	transform;
 	Camera*		m_camera;
+	Texture*	m_texture;
 
 };
 

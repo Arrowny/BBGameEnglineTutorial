@@ -75,7 +75,6 @@ void coreEngine::Run(){
 
 			unprocessedTime -= m_frameTime;
 			
-
 			if (m_window->isClosed())
 			{
 				Stop();

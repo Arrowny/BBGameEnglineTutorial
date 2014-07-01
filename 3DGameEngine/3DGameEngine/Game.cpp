@@ -1,10 +1,11 @@
 #include "Game.h"
 #include "main.h"
 
-Game::Game(Mesh* mesh, Shader* shader, Camera* camera):
+Game::Game(Mesh* mesh, Shader* shader, Camera* camera, Texture* texture):
 m_mesh(mesh),
 m_shader(shader),
-m_camera(camera)
+m_camera(camera),
+m_texture(texture)
 {
 }
 
@@ -39,6 +40,7 @@ void Game::update(){
 void Game::render(){
 
 	m_shader->Bind();
+	m_texture->Bind(0);
 	m_mesh->Draw();
 
 }

@@ -6,6 +6,7 @@
 #include "Game.h"
 #include "RenderUtil.h"
 #include "Mesh.h"
+#include "Texture.h"
 
 #define WIDTH 800
 #define HEIGHT 600
@@ -14,15 +15,15 @@
 
 int main(int argc, char** argv)
 {
-	//Create new window with (Width, Height, Title)
+	///////////////////////////////////////////Declarations///////////////////////////////////////////
+
 	Window window(WIDTH, HEIGHT, TITLE);
 
-	Vertex vertices[] = { Vertex(glm::vec3(-0.8, -0.8, 0.0)),
-						  Vertex(glm::vec3(0.0, 0.8, 0)),
-						  Vertex(glm::vec3(0.8, -0.8, 0)),
-						  Vertex(glm::vec3(0.0, -0.8, 0.8)), 
-						  Vertex(glm::vec3(0.0, -0.8, -0.8)), 
-	};
+	Vertex vertices[] = { Vertex(glm::vec3(-0.8, -0.8, 0.0), glm::vec2(1.0f, 0.0)),
+						  Vertex(glm::vec3(0.0, 0.8, 0.0), glm::vec2(0.5f, 0.0)),
+						  Vertex(glm::vec3(0.8, -0.8, 0.0), glm::vec2(1.0f, 0.0)),
+						  Vertex(glm::vec3(0.0, -0.8, 0.8), glm::vec2(0.0, 0.5f)),
+						  Vertex(glm::vec3(0.0, -0.8, -0.8), glm::vec2(0.0, 0.5f)) };
 
 	unsigned int indices[] = { 3, 1, 0,
 							   2, 1, 3,
@@ -33,17 +34,19 @@ int main(int argc, char** argv)
 
 	Camera camera(glm::vec3(0.0f, 0.0f, -10.0f), 70.0f, (float)WIDTH / (float)HEIGHT, 0.1f, 1000.0f);
 
-	//Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
-	Mesh mesh("./res/cube.obj");
+	Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
+	//Mesh mesh("./res/cube.obj");
 	Shader shader("./res/basicShader");
-	Game game(&mesh, &shader, &camera);
-	RenderUtil renderUtil;
-	renderUtil.initGraphics();
-	
-	coreEngine core(&game, &renderUtil, &window, FRAME_CAP);
-	core.Start();
+	Texture texture("./res/colour.jpg");
 
-	//std::cin.get();
+	RenderUtil renderUtil;
+	Game game(&mesh, &shader, &camera, &texture);
+	coreEngine core(&game, &renderUtil, &window, FRAME_CAP);
+
+	///////////////////////////////////////////Core_Stuff////////////////////////////////////////////////
+	
+	renderUtil.initGraphics();
+	core.Start();
 
 	return 0;
 }
