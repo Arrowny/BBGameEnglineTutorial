@@ -1,20 +1,6 @@
 #pragma once
 #include <GL\glew.h>
-#include <glm\glm.hpp>
-
-struct Vertex
-{
-public:
-	Vertex(const glm::vec3& pos)
-	{
-		this->pos = pos;
-	}
-
-	inline glm::vec3* GetPos() { return &pos; }
-protected:
-private:
-	glm::vec3 pos;
-};
+#include "vertex.h"
 
 class Mesh
 {
@@ -30,7 +16,6 @@ public:
 
 		NUM_BUFFERS
 	};
-
 
 	GLuint m_vertexArrayObject;
 	GLuint m_vertexArrayBuffers[NUM_BUFFERS];

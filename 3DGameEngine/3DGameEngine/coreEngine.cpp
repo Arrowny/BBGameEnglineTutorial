@@ -47,15 +47,15 @@ void CoreEngine::start()
 			m_game->ProcessInput(m_input);
 			m_game->Update();
 
+			unprocessedTime -= m_frameTime;
+
+			//Debug:
 			if (frameCounter > 1.0)
 			{
 				std::cout << "Frames/Second: " << frames << std::endl;
 				frames = 0;
 				frameCounter = 0.0;
 			}
-
-			
-			unprocessedTime -= m_frameTime;
 		}
 
 		if (render) 
