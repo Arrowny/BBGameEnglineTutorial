@@ -9,8 +9,8 @@
 class Game
 {
 public:
-	Game();
-	//Game(Mesh* vertices, Shader* shader);
+	//Game();
+	Game(Mesh* mesh, Shader* shader);
 	~Game();
 
 	void input();
@@ -19,7 +19,8 @@ public:
 
 protected:
 private:
-
+	Mesh* m_mesh;
+	Shader* m_shader;
 };
 
 #endif // GAME_H

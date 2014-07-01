@@ -62,6 +62,15 @@ void coreEngine::Run(){
 		lastTime = startTime;
 
 		unprocessedTime += passedTime;
+		frameCounter += passedTime;
+
+		if (frameCounter >= 1.0){
+
+			std::cout << "Frames/sec:" << frames << std::endl;
+			frames = 0;
+			frameCounter = 0;
+
+		}
 
 		while (unprocessedTime > m_frameTime){
 
@@ -69,7 +78,7 @@ void coreEngine::Run(){
 			m_window->Update();
 
 			unprocessedTime -= m_frameTime;
-			frameCounter += passedTime;
+			
 
 			if (m_window->isClosed())
 			{
@@ -81,13 +90,7 @@ void coreEngine::Run(){
 
 			Time::setDelta(m_frameTime);
 
-			if (frameCounter >= 1.0){
-
-				std::cout << "Frames/sec:" << frames << std::endl;
-				frames = 0;
-				frameCounter = 0;
-
-			}
+			
 		}
 
 		if (render){
@@ -108,7 +111,7 @@ void coreEngine::Run(){
 
 void coreEngine::Render()
 {
-	m_renderUtil->clearScreen();
+	//m_renderUtil->clearScreen();
 	m_game->render();
 	m_window->Render();
 }

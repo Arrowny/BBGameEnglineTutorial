@@ -17,19 +17,21 @@
 
 int main(int argc, char** argv)
 {
+	Window window(WIDTH, HEIGHT, TITLE);
+
 	Vertex vertices[] = { Vertex(glm::vec3(-0.5, -0.5, 0.0)),
-		Vertex(glm::vec3(0.0, 0.5, 0.0)),
-		Vertex(glm::vec3(0.5, -0.5, 0.0)) };
+						  Vertex(glm::vec3(0.0, 0.5, 0.0)),
+						  Vertex(glm::vec3(0.5, -0.5, 0.0)) };
 
-	//Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]));
-	//Shader shader("./res/basicShader");
+	Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]));
+	Shader shader("./res/basicShader");
 
-	Game game;
-	//Game game(&mesh, &shader);
+	//Game game();
+	Game game(&mesh, &shader);
 	RenderUtil renderUtil;
 	renderUtil.initGraphics();
 	//Create new window with (Width, Height, Title)
-	Window window(WIDTH, HEIGHT, TITLE);
+	
 	coreEngine core(&game, &renderUtil, &window, FRAME_CAP);
 	
 	

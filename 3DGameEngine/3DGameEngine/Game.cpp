@@ -1,19 +1,15 @@
 #include "Game.h"
 #include "Input.h"
 
-Game::Game()
-{
-
-}
-
-//Game::Game(Mesh* mesh, Shader* shader)
+//Game::Game()
 //{
-//	shader->Bind();
-////	shader.Update(transform);
-////	texture.Bind(0);
-//	mesh->Draw();
+//
 //}
 
+Game::Game(Mesh* mesh, Shader* shader) :
+m_mesh(mesh),
+m_shader(shader)
+{}
 
 Game::~Game()
 {
@@ -28,5 +24,5 @@ void Game::update(){
 }
 
 void Game::render(){
-	
+	m_mesh->Draw();
 }

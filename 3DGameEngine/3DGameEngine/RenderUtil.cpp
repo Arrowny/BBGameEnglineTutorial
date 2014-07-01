@@ -18,7 +18,7 @@ void RenderUtil::clearScreen(){
 
 void RenderUtil::initGraphics(){
 
-	glClearColor(2.0f, 1.5f, 0.0f, 0.5f);
+	//glClearColor(2.0f, 1.5f, 0.0f, 0.5f);
 
 	glFrontFace(GL_CW);
 	glCullFace(GL_BACK);
