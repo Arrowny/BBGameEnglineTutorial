@@ -26,6 +26,7 @@ void CoreEngine::start()
 
 	double lastTime = Time::GetTime();
 	double unprocessedTime = 0;
+
 	m_shader->Bind();
 
 	while (isRunning)
@@ -62,9 +63,9 @@ void CoreEngine::start()
 
 		if (render) 
 		{ 
-			//m_window->Render();
+
 			m_window->Clear();
-			m_game->Render();
+			m_game->Render(); //TODO: implement meshes somewhere more sensible
 			m_window->SwapBuffers();
 			frames++;
 		}
