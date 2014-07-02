@@ -17,8 +17,9 @@ m_shader(shader)
 	Vertex Triangle[] = {	Vertex(glm::vec3(-1.0f, -1.0f, 0.0f)),
 							Vertex(glm::vec3( 0.0f,  1.0f, 0.0f)),
 							Vertex(glm::vec3( 1.0f, -1.0f, 0.0f)) };
+	unsigned int Indices[] = { 0, 1, 2 };
 
-	TriangleMesh = new Mesh(Triangle, sizeof(Triangle)/sizeof(Triangle[0]));
+	TriangleMesh = new Mesh(Triangle, sizeof(Triangle) / sizeof(Triangle[0]), Indices, sizeof(Indices)/sizeof(Indices[0]));
 
 	m_transform = new Transform(glm::vec3(0.0), glm::vec3(0.0));
 }
