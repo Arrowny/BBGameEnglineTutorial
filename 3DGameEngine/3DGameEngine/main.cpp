@@ -21,9 +21,16 @@ int main(int argc, char** argv)
 
 	Vertex vertices[] = { Vertex(glm::vec3(-1.0, -1.0, 0.0)),
 						  Vertex(glm::vec3(0.0, 1.0, 0.0)),
-						  Vertex(glm::vec3(1.0, -1.0, 0.0)) };
-	unsigned int indices[] = { 0, 1, 2 };
+						  Vertex(glm::vec3(1.0, -1.0, 0.0)), 
+						  Vertex(glm::vec3(0.0, -1.0, 1.0))};
+
+	unsigned int indices[] = {	0, 1, 3,
+								3, 1, 2,
+								2, 1, 0,
+								0, 2, 3};
+
 	Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
+	//Mesh monkey("./res/monkey");
 	Shader shader("./res/basicShader");
 	Transform transform;
 

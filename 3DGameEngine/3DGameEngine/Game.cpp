@@ -28,7 +28,7 @@ void Game::update(){
 	//m_shader->Update(glm::abs(sin(temp))+0.5);
 
 	m_transform.SetPos(glm::vec3(sin(temp), 0, 0));
-	m_transform.SetRot(glm::vec3(0, 0, sin(temp)* 360));
+	m_transform.SetRot(glm::vec3(0, sin(temp) * 300, sin(temp) * 300));
 }
 
 void Game::render(){
