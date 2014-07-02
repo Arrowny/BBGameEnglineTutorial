@@ -6,6 +6,7 @@ class Mesh
 {
 public:
 	Mesh(Vertex* vertices, unsigned int numVertices);
+	//Mesh(Verts* vertices, unsigned int numVertices);
 	virtual ~Mesh();
 
 	void Draw();

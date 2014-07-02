@@ -1,15 +1,13 @@
 #pragma once
 #include <glm\glm.hpp>
 
-class Vertex
+struct Vertex
 {
-public:
-	Vertex(const glm::vec3& pos);
-	virtual ~Vertex();
+	Vertex(const glm::vec3& pos)
+	{
+		this->pos = pos;
+	}
 
 	glm::vec3 pos;
-
-private:
-	
 };
 

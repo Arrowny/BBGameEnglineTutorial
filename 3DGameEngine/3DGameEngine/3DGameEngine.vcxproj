@@ -96,7 +96,6 @@
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="timing.cpp" />
     <ClCompile Include="util.cpp" />
-    <ClCompile Include="vertex.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
