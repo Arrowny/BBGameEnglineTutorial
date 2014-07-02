@@ -2,28 +2,53 @@
 #include <vector>
 
 
-Mesh::Mesh(Vertex* vertices, unsigned int numVertices)
+Mesh::Mesh(const std::string& fileName)
 {
-	m_drawCount = numVertices;
+	IndexedModel model = OBJModel(fileName).ToIndexedModel();
+	InitMesh(model);
+}
+
+Mesh::Mesh(Vertex* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices)
+{
+	IndexedModel model;
+
 
 	glGenVertexArrays(1, &m_vertexArrayObject);// create space for vertex array
 	glBindVertexArray(m_vertexArrayObject);// actual use it
 
-	std::vector<glm::vec3> positions;
-	//std::vector<glm::vec2> texCoords;
+	//std::vector<glm::vec3> positions;
+	////std::vector<glm::vec2> texCoords;
 
-	positions.reserve(numVertices);
-	//texCoords.reserve(numVertices);
+	//model.positions.reserve(numVertices);
+	////texCoords.reserve(numVertices);
 
 	for (unsigned int i = 0; i < numVertices; i++){
 
-		positions.push_back(*vertices[i].GetPos());
+		model.positions.push_back(*vertices[i].GetPos());
 		//texCoords.push_back(*vertices[i].GetTexCoord());
 	}
+	for (unsigned int i = 0; i < numIndices; i++){
+		model.indices.push_back(indices[i]);
+	}
+
+	InitMesh(model);
+
+}
+
+
+Mesh::~Mesh()
+{
+	glDeleteBuffers(NUM_BUFFERS, m_vertexArrayBuffers);
+	glDeleteVertexArrays(1, &m_vertexArrayObject);
+}
+
+void Mesh::InitMesh(const IndexedModel& model)
+{
+	m_drawCount = model.indices.size();
 
 	glGenBuffers(NUM_BUFFERS, m_vertexArrayBuffers); //m_vertexArrayBuffers is already a pointer, so not use &
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[POSITION_VB]);// make it thinks that this block of data is an array
-	glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(positions[0]), &positions[0], GL_STATIC_DRAW);// put all vertices data in this array
+	glBufferData(GL_ARRAY_BUFFER, model.indices.size() * sizeof(model.positions[0]), &model.positions[0], GL_STATIC_DRAW);// put all vertices data in this array
 
 	glEnableVertexAttribArray(0);// make opengl look at a non_sequential array as a sequential array of data
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
@@ -37,16 +62,7 @@ Mesh::Mesh(Vertex* vertices, unsigned int numVertices)
 	//glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
 	glBindVertexArray(0);// stop use it
-
 }
-
-
-Mesh::~Mesh()
-{
-	glDeleteBuffers(NUM_BUFFERS, m_vertexArrayBuffers);
-	glDeleteVertexArrays(1, &m_vertexArrayObject);
-}
-
 void Mesh::Draw()
 {
 	glBindVertexArray(m_vertexArrayObject);// actual use it
