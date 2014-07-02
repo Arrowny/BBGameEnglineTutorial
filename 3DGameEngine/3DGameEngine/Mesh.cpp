@@ -61,13 +61,17 @@ void Mesh::InitMesh(const IndexedModel& model)
 	//glEnableVertexAttribArray(1);// make opengl look at a non_sequential array as a sequential array of data
 	//glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vertexArrayBuffers[INDEX_VB]);// array of element consisting of data in the other arrays
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, model.indices.size() * sizeof(model.indices[0]), &model.indices[0], GL_STATIC_DRAW);
+
 	glBindVertexArray(0);// stop use it
 }
 void Mesh::Draw()
 {
 	glBindVertexArray(m_vertexArrayObject);// actual use it
 
-	glDrawArrays(GL_TRIANGLES, 0, m_drawCount);
+	//glDrawArrays(GL_TRIANGLES, 0, m_drawCount);
+	glDrawElements(GL_TRIANGLES, m_drawCount, GL_UNSIGNED_INT, 0);
 
 	glBindVertexArray(0);
 }
