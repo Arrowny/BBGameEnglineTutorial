@@ -379,7 +379,7 @@ public:
 	inline bool GetMouse(int keyCode)          const { return m_mouseInput[keyCode]; }
 	inline bool GetMouseDown(int keyCode)      const { return m_downMouse[keyCode]; }
 	inline bool GetMouseUp(int keyCode)        const { return m_upMouse[keyCode]; }
-	inline glm::fvec2 GetMousePosition()         const { return glm::fvec2((float)m_mouseX, (float)m_mouseY); }
+	inline glm::fvec2 GetMousePosition()       const { return glm::fvec2((float)m_mouseX, (float)m_mouseY); }
 
 	void SetCursor(bool value)                 const;
 	void SetMousePosition(const glm::fvec2& pos) const;

@@ -2,9 +2,15 @@
 #include <GL\glew.h>
 #include <iostream>
 
+int Window::m_width = 0;
+int Window::m_height = 0;
+
 Window::Window(int width, int height, const std::string& title):
 m_input(this)
 {
+	Window::m_width = width;
+	Window::m_height = height;
+
 	SDL_Init(SDL_INIT_EVERYTHING);
 
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
@@ -129,4 +135,14 @@ void Window::swapBuffers(){
 
 	SDL_GL_SwapWindow(m_window);
 
+}
+
+int Window::getWidth(){
+
+	return m_width;
+}
+
+int Window::getHeight(){
+
+	return m_height;
 }

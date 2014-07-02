@@ -4,6 +4,7 @@
 #include <glm\gtx\transform.hpp>
 #include "Timing.h"
 #include "Input.h"
+#include "Window.h"
 
 struct Camera
 {
@@ -22,11 +23,56 @@ public:
 		return projection * glm::lookAt(pos, pos + forward, up);
 	}
 
+	bool mouseLocked = false;
+
 	void input(const Input& input)
 	{
 		
-		float movAmt = (float)(5 * Time::getDelta());
-		float rotAmt = (float)(200 * Time::getDelta());
+		float sensitivity = 3.0f;
+		float movAmt = (float)(10 * Time::getDelta());
+		//float rotAmt = (float)(200 * Time::getDelta());
+
+		if (input.GetKey(input.KEY_ESCAPE))
+		{
+			input.SetCursor(true);
+			mouseLocked = false;
+		}
+
+		if (mouseLocked)
+		{
+			glm::fvec2 centerPosition = glm::fvec2((float)Window::getWidth() / 2.0f, (float)Window::getHeight() / 2.0f);
+			glm::fvec2 deltaPos = input.GetMousePosition() - centerPosition;
+
+			bool rotY = deltaPos.x != 0;
+			bool rotX = deltaPos.y != 0;
+
+			if (rotY)
+			{
+
+				rotateY(glm::radians(-deltaPos.x * sensitivity));
+			}
+				
+			if (rotX)
+			{
+
+				rotateX(glm::radians(deltaPos.y * sensitivity * 1.5f));
+			}
+				
+
+			if (rotY || rotX){
+
+				input.SetMousePosition(centerPosition);
+			}
+				
+		}
+
+		if (input.GetMouseDown(1))
+		{
+			glm::fvec2 centerPosition = glm::fvec2((float)Window::getWidth() / 2.0f, (float)Window::getHeight() / 2.0f);
+			input.SetMousePosition(centerPosition);
+			input.SetCursor(false);
+			mouseLocked = true;
+		}
 
 		if (input.GetKey(input.KEY_W))
 			move(forward, movAmt);
@@ -37,14 +83,15 @@ public:
 		if (input.GetKey(input.KEY_D))
 			move(getRight(), movAmt);
 
-		if (input.GetKey(input.KEY_UP))
+		/*if (input.GetKey(input.KEY_UP))
 			rotateX(-rotAmt);
 		if (input.GetKey(input.KEY_DOWN))
 			rotateX(rotAmt);
 		if (input.GetKey(input.KEY_LEFT))
 			rotateY(rotAmt);
 		if (input.GetKey(input.KEY_RIGHT))
-			rotateY(-rotAmt);
+			rotateY(-rotAmt);*/
+
 
 	}
 

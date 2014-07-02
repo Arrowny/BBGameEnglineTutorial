@@ -8,8 +8,8 @@
 #include "Mesh.h"
 #include "Texture.h"
 
-#define WIDTH 800
-#define HEIGHT 600
+#define WIDTH 1000
+#define HEIGHT 800
 #define TITLE "3DGameEngine"
 #define FRAME_CAP 5000.0
 
