@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\VS_test\MonkeyHead[final]\MonkeyHead[final]\obj_loader.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="coreEngine.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Input.h" />

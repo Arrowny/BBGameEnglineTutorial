@@ -33,9 +33,10 @@ int main(int argc, char** argv)
 	//Mesh monkey("./res/monkey");
 	Shader shader("./res/basicShader");
 	Transform transform;
+	Camera camera(glm::vec3(0, 0, -2), 70.0f, (float)WIDTH / (float)HEIGHT, 1.0f, 1000.0f);
 
 	//Game game;
-	Game game(&mesh, &shader, transform);
+	Game game(&mesh, &shader, transform, camera);
 	RenderUtil renderUtil;
 	renderUtil.initGraphics();
 	coreEngine core(&game, &renderUtil, &window, FRAME_CAP);

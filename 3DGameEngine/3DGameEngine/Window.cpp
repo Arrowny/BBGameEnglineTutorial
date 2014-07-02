@@ -111,7 +111,7 @@ void Window::Update()
 
 void Window::Render(){
 
-	Color(1.0f, 0.5f, 0.0f, 0.5f);
+	Color(2.0f, 1.5f, 0.0f, 0.5f);
 
 
 }

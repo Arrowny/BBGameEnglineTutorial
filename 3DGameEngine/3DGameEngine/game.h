@@ -12,7 +12,7 @@ class Game
 {
 public:
 	//Game();
-	Game(Mesh* mesh, Shader* shader, Transform transform);
+	Game(Mesh* mesh, Shader* shader, Transform transform, Camera camera);
 	~Game();
 
 	void input();
@@ -24,6 +24,7 @@ private:
 	Mesh* m_mesh;
 	Shader* m_shader;
 	Transform m_transform;
+	Camera m_camera;
 };
 
 #endif // GAME_H

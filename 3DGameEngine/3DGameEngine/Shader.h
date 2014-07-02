@@ -1,7 +1,8 @@
 #pragma once
 #include <string>
 #include <GL/glew.h>
-#include "Transform.h"
+#include "Transform.h"	
+#include "Camera.h"
 
 class Shader
 {
@@ -9,7 +10,7 @@ public:
 
 	Shader(const std::string& fileName);
 	void Bind();//bind the shader, set the GPU in a state using vertex shader and frag shader in this class
-	void Update(const Transform& transform);
+	void Update(const Transform& transform, const Camera& camera);
 	//void Update(float value);
 
 	~Shader();

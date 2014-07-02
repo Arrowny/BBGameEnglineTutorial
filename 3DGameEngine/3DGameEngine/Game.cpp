@@ -6,10 +6,11 @@
 //
 //}
 
-Game::Game(Mesh* mesh, Shader* shader, Transform transform) :
+Game::Game(Mesh* mesh, Shader* shader, Transform transform, Camera camera) :
 m_mesh(mesh),
 m_shader(shader),
-m_transform(transform)
+m_transform(transform),
+m_camera(camera)
 {}
 
 Game::~Game()
@@ -33,6 +34,6 @@ void Game::update(){
 
 void Game::render(){
 	m_shader->Bind();
-	m_shader->Update(m_transform);
+	m_shader->Update(m_transform, m_camera);
 	m_mesh->Draw();
 }

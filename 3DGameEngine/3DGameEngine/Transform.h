@@ -3,7 +3,6 @@
 #include <glm\gtx\transform.hpp>
 
 
-
 class Transform
 {
 public:
