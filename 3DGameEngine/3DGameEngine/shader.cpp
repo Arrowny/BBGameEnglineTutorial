@@ -118,3 +118,41 @@ void Shader::Bind()
 {
 	glUseProgram(m_program);
 }
+
+void Shader::addUniform(std::string uniform)
+{
+	GLint uniformLocation = glGetUniformLocation(m_program, uniform.c_str());
+
+	if (uniformLocation == 0xFFFFFFFF)
+	{
+		std::cerr << "Error: Could not find uniform " + uniform << std::endl;
+		exit(1);
+	}
+
+	m_uniforms[uniform] = uniformLocation;
+}
+
+void Shader::setUniform(std::string uniformName, GLint value)
+{
+	glUniform1i(m_uniforms[uniformName], value);
+}
+
+void Shader::setUniform(std::string uniformName, GLfloat value)
+{
+	glUniform1f(m_uniforms[uniformName], value);
+}
+
+void Shader::setUniform(std::string uniformName, glm::vec3 value)
+{
+	glUniform3f(m_uniforms[uniformName], value.x, value.y, value.z);
+}
+
+void Shader::setUniform(std::string uniformName, glm::vec4 value)
+{
+	glUniform4f(m_uniforms[uniformName], value.x, value.y, value.z, value.w);
+}
+
+void Shader::setUniform(std::string uniformName, glm::mat4 value)
+{
+	glUniformMatrix4fv(m_uniforms[uniformName], 1, GL_FALSE, &value[0][0]);
+}

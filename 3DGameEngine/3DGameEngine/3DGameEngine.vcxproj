@@ -83,6 +83,7 @@
     <ClInclude Include="mesh.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="timing.h" />
+    <ClInclude Include="transform.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="vertex.h" />
     <ClInclude Include="window.h" />
@@ -95,12 +96,13 @@
     <ClCompile Include="mesh.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="timing.cpp" />
+    <ClCompile Include="transform.cpp" />
     <ClCompile Include="util.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\shader.frag" />
-    <None Include="res\shader.vert" />
+    <None Include="res\shaders\shader.frag" />
+    <None Include="res\shaders\shader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

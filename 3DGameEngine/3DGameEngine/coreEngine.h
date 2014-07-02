@@ -7,7 +7,7 @@
 class CoreEngine
 {
 public:
-	CoreEngine(double frameRate, Window* window, Game* game, Shader* shader);
+	CoreEngine(double frameRate, Window* window, Game* game);
 
 	void start();
 	void stop();
@@ -22,7 +22,6 @@ private:
 	Input* m_input;
 	Window* m_window;
 	Game* m_game;
-	Shader* m_shader;
 	double m_frameTime;
 
 };
