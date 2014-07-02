@@ -41,7 +41,10 @@ void Game::ProcessInput(Input* &m_input)
 
 void Game::Update()
 {
-	m_transform->setTranslationExplicit(std::sin(Time::GetTime()), 0.0, 0.0);
+	float tmpUpdate = std::sin(Time::GetTime());
+	m_transform->setTranslationExplicit(tmpUpdate, 0.0, 0.0);
+	m_transform->setRotationExplicit(0.0, 0.0, tmpUpdate*360.0);
+	m_transform->setScaleExplicit(tmpUpdate, tmpUpdate, tmpUpdate);
 }
 
 void Game::Render()
