@@ -25,6 +25,8 @@ private:
 	{
 		UNIFORM_U,
 		TRANSFORM_U,
+		NORMAL_U,
+		LIGHTDIR_U,
 
 		NUM_UNIFORMS
 	};
@@ -35,6 +37,6 @@ private:
 
 	GLuint m_program;
 	GLuint m_shaders[NUM_SHADERS];
-	GLuint m_uniforms[NUM_SHADERS];
+	GLuint m_uniforms[NUM_UNIFORMS];
 
 };
