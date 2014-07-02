@@ -73,6 +73,7 @@ namespace
 		ShaderSourceStringsLengths[0] = text.size();
 
 		glShaderSource(shader, 1, shaderSourceStrings, ShaderSourceStringsLengths);
+		glCompileShader(shader);
 
 		CheckShaderError(shader, GL_COMPILE_STATUS, false, "Error: shader creation failure");
 
