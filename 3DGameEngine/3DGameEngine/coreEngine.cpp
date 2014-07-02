@@ -62,8 +62,10 @@ void CoreEngine::start()
 
 		if (render) 
 		{ 
+			//m_window->Render();
+			m_window->Clear();
 			m_game->Render();
-			m_window->Render(); 
+			m_window->SwapBuffers();
 			frames++;
 		}
 		else { Util::Sleep(1); }
