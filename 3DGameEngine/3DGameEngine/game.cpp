@@ -9,7 +9,7 @@ Mesh* TriangleMesh;
 Game::Game()
 {
 	Vertex Triangle[] = {	Vertex(glm::vec3(-1.0f, -1.0f, 0.0f)),
-							Vertex(glm::vec3(0.0f, 1.0f, 0.0f)),
+							Vertex(glm::vec3( 0.0f,  1.0f, 0.0f)),
 							Vertex(glm::vec3( 1.0f, -1.0f, 0.0f)) 
 							 };
 
@@ -23,6 +23,8 @@ Game::~Game()
 
 void Game::ProcessInput(Input* &m_input)
 {
+
+	//DEBUG: Test code to make sure inputs are working correctly
 	if (m_input->GetKeyDown(82))
 		std::cout << "up key pressed" << std::endl;
 
