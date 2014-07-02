@@ -5,12 +5,14 @@
 #include <iostream>
 #include "Mesh.h"
 #include "Shader.h"
+#include "Transform.h"
+#include "Timing.h"
 
 class Game
 {
 public:
 	//Game();
-	Game(Mesh* mesh, Shader* shader);
+	Game(Mesh* mesh, Shader* shader, Transform transform);
 	~Game();
 
 	void input();
@@ -21,6 +23,7 @@ protected:
 private:
 	Mesh* m_mesh;
 	Shader* m_shader;
+	Transform m_transform;
 };
 
 #endif // GAME_H

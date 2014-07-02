@@ -6,9 +6,10 @@
 //
 //}
 
-Game::Game(Mesh* mesh, Shader* shader) :
+Game::Game(Mesh* mesh, Shader* shader, Transform transform) :
 m_mesh(mesh),
-m_shader(shader)
+m_shader(shader),
+m_transform(transform)
 {}
 
 Game::~Game()
@@ -19,11 +20,19 @@ void Game::input(){
 
 }
 
-void Game::update(){
+float temp = 0.0f;
 
+void Game::update(){
+	temp += Time::getDelta();
+
+	//m_shader->Update(glm::abs(sin(temp))+0.5);
+
+	m_transform.SetPos(glm::vec3(sin(temp), 0, 0));
+	m_transform.SetRot(glm::vec3(0, 0, sin(temp)* 360));
 }
 
 void Game::render(){
 	m_shader->Bind();
+	m_shader->Update(m_transform);
 	m_mesh->Draw();
 }

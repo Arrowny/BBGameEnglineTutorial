@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 #include "Vertex.h"
 
+
 class Mesh
 {
 public:
@@ -16,6 +17,7 @@ private:
 	{
 		POSITION_VB,
 		//TEXCOORD_VB,
+		INDEX_VB,
 
 		NUM_BUFFERS
 	};

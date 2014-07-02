@@ -19,15 +19,16 @@ int main(int argc, char** argv)
 {
 	Window window(WIDTH, HEIGHT, TITLE);
 
-	Vertex vertices[] = { Vertex(glm::vec3(-0.5, -0.5, 0.0)),
-						  Vertex(glm::vec3(0.0, 0.5, 0.0)),
-						  Vertex(glm::vec3(0.5, -0.5, 0.0)) };
+	Vertex vertices[] = { Vertex(glm::vec3(-1.0, -1.0, 0.0)),
+						  Vertex(glm::vec3(0.0, 1.0, 0.0)),
+						  Vertex(glm::vec3(1.0, -1.0, 0.0)) };
 
 	Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]));
 	Shader shader("./res/basicShader");
+	Transform transform;
 
 	//Game game;
-	Game game(&mesh, &shader);
+	Game game(&mesh, &shader, transform);
 	RenderUtil renderUtil;
 	renderUtil.initGraphics();
 	coreEngine core(&game, &renderUtil, &window, FRAME_CAP);

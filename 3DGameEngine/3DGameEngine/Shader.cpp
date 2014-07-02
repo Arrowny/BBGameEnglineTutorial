@@ -11,8 +11,8 @@ Shader::Shader(const std::string& fileName)
 	for (unsigned int i = 0; i < NUM_SHADERS; i++)
 		glAttachShader(m_program, m_shaders[i]);
 
-	glBindAttribLocation(m_program, 0, "position");
-	glBindAttribLocation(m_program, 1, "texCoord");
+	//glBindAttribLocation(m_program, 0, "position");    // because we are not using "attribute vec3 position;" in the vertex shader file
+	//glBindAttribLocation(m_program, 1, "texCoord");   
 
 	glLinkProgram(m_program);
 	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error: Porgram linking failed");
@@ -20,7 +20,8 @@ Shader::Shader(const std::string& fileName)
 	glValidateProgram(m_program);
 	CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: Program is invalid");
 
-	//m_uniforms[TRANSFORM_U] = glGetUniformLocation(m_program, "transform");
+	m_uniforms[TRANSFORM_U] = glGetUniformLocation(m_program, "transform");
+	//m_uniforms[FLOAT_U] = glGetUniformLocation(m_program, "uniformfloat");
 }
 
 
@@ -39,12 +40,16 @@ void Shader::Bind()
 	glUseProgram(m_program);
 }
 
-//void Shader::Update(const Transform& transform)// add for transform
-//{
-//	glm::mat4 model = transform.GetModel();
-//	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
-//}
+void Shader::Update(const Transform& transform)// add for transform
+{
+	glm::mat4 model = transform.GetModel();
+	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
+}
 
+//void Shader::Update(float value)
+//{
+//	glUniform1f(m_uniforms[FLOAT_U], value);
+//}
 
 GLuint Shader::CreateShader(const std::string& text, GLenum shaderType)
 {
