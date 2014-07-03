@@ -23,6 +23,15 @@ public:
 																	this->m_scale.z = sz;	}
 
 	glm::mat4 getTransformation() const;
+	void initProjectionMatrix(const double& zNear, const double& zFar, const double& fov, const double& screenWidth, const double& screenHeight) 
+	{
+		this->zNear = zNear;
+		this->zFar = zFar;
+		this->fov = fov;
+		aspect = screenWidth / screenHeight;
+	}
+		
+	glm::mat4 getPerspectiveMatrix() { return glm::mat4(glm::perspective(fov, aspect, zNear, zFar)); }
 
 	glm::vec3 m_trans;
 	glm::vec3 m_rot;
@@ -30,5 +39,10 @@ public:
 private:
 	Transform(const Transform& other) {}
 	void operator=(const Transform& other) {}
+
+	double zNear;
+	double zFar;
+	double fov;
+	double aspect;
 };
 

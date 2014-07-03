@@ -17,3 +17,5 @@ glm::mat4 Transform::getTransformation() const
 
 	return transMat * rotMat * scaleMat;
 }
+
+

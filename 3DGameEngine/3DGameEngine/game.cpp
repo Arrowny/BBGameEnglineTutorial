@@ -8,11 +8,8 @@ Mesh* TestMesh;
 Game::Game(Shader* shader) :
 m_shader(shader)
 {
-	
 	shader->addUniform("transform");
-
 	TestMesh = new Mesh("./res/object_files/box.obj");
-
 	m_transform = new Transform(glm::vec3(0.0), glm::vec3(0.0));
 }
 

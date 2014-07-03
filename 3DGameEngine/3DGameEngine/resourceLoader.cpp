@@ -69,8 +69,4 @@ void Loader::LoadMeshInfo(const std::string& meshFileName, std::vector<glm::vec3
 			indices.push_back(thirdInd);
 		}
 	}
-
-	/*Mesh output(vertices,indices);
-
-	return &output;*/
 }
