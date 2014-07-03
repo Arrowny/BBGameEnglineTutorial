@@ -81,6 +81,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="mesh.h" />
+    <ClInclude Include="resourceLoader.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="timing.h" />
     <ClInclude Include="transform.h" />
@@ -94,6 +95,7 @@
     <ClCompile Include="input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mesh.cpp" />
+    <ClCompile Include="resourceLoader.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="timing.cpp" />
     <ClCompile Include="transform.cpp" />

@@ -1,32 +1,32 @@
 #include "shader.h"
+#include "resourceLoader.h"
 #include <iostream>
-#include <fstream>
 
 namespace
 {
-	static std::string LoadShader(const std::string& fileName)
-	{
-		std::ifstream file;
-		file.open(fileName.c_str());
+	//static std::string LoadShader(const std::string& fileName)
+	//{
+	//	std::ifstream file;
+	//	file.open(fileName.c_str());
 
-		std::string output;
-		std::string line;
+	//	std::string output;
+	//	std::string line;
 
-		if (file.is_open())
-		{
-			while (file.good())
-			{
-				getline(file, line);
-				output.append(line + "\n");
-			}
-		}
-		else
-		{
-			std::cerr << "File Readin Error: unable to load shader" << std::endl;
-		}
+	//	if (file.is_open())
+	//	{
+	//		while (file.good())
+	//		{
+	//			getline(file, line);
+	//			output.append(line + "\n");
+	//		}
+	//	}
+	//	else
+	//	{
+	//		std::cerr << "File Readin Error: unable to load shader" << std::endl;
+	//	}
 
-		return output;
-	}
+	//	return output;
+	//}
 
 	static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage)
 	{
@@ -85,8 +85,8 @@ Shader::Shader(const std::string& fileName)
 {
 	m_program = glCreateProgram();
 
-	m_shaders[VERTEX_SHADER] = CreateShader(LoadShader(fileName + ".vert"), GL_VERTEX_SHADER);
-	m_shaders[FRAGMENT_SHADER] = CreateShader(LoadShader(fileName + ".frag"), GL_FRAGMENT_SHADER);
+	m_shaders[VERTEX_SHADER] = CreateShader(Loader::LoadShader(fileName + ".vert"), GL_VERTEX_SHADER);
+	m_shaders[FRAGMENT_SHADER] = CreateShader(Loader::LoadShader(fileName + ".frag"), GL_FRAGMENT_SHADER);
 
 	for (unsigned int ii = 0; ii < NUM_SHADERS; ii++)
 	{

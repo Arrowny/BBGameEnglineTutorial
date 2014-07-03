@@ -1,6 +1,9 @@
 #pragma once
+#include <string>
 #include <GL\glew.h>
 #include "vertex.h"
+#include "resourceLoader.h"
+
 
 class Mesh
 {
@@ -24,7 +27,5 @@ public:
 	unsigned int m_drawCount;
 
 private:
-	Mesh(const Mesh& other) {}
-	void operator=(const Mesh& other) {}
 };
 
