@@ -34,11 +34,12 @@ int main(int argc, char** argv)
 
 	glm::fvec4 baseColor(0.0f, 1.0f, 1.0f, 1.0f);
 
-	Camera camera(glm::vec3(0.0f, 0.0f, -10.0f), 70.0f, (float)WIDTH / (float)HEIGHT, 0.1f, 1000.0f);
+	Camera camera(glm::vec3(0.0f, 0.0f, -7.0f), 70.0f, (float)WIDTH / (float)HEIGHT, 0.1f, 1000.0f);
 
-	//Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
-	Mesh mesh("./res/monkey3.obj");
-	Shader shader("./res/basicShader");
+	Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
+	//Mesh mesh("./res/triforce.obj");
+	//Shader shader("./res/basicShader");
+	Shader shader("./res/phongShader");
 	Texture texture("./res/colour.jpg");
 
 	RenderUtil renderUtil;

@@ -28,6 +28,7 @@ private:
 		NORMAL_U,
 		LIGHTDIR_U,
 		COLOR_U,
+		AMBIENTL_U,
 
 		NUM_UNIFORMS
 	};

@@ -106,5 +106,11 @@
     <None Include="res\basicShader.vs">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\phongShader.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\phongShader.vs">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

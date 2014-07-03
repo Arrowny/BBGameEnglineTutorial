@@ -82,6 +82,10 @@ public:
 			move(getLeft(), movAmt);
 		if (input.GetKey(input.KEY_D))
 			move(getRight(), movAmt);
+		if (input.GetKey(input.KEY_SPACE))
+			move(up, movAmt);
+		if (input.GetKey(input.KEY_LCTRL))
+			move(up, -movAmt);
 
 		/*if (input.GetKey(input.KEY_UP))
 			rotateX(-rotAmt);
