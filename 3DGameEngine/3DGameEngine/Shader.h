@@ -12,7 +12,7 @@ public:
 	Shader(const std::string& fileName);
 
 	void Bind();
-	void Update(const Transform& transform, const Camera camera);
+	void Update(const Transform& transform, const Camera camera, glm::fvec4 color);
 
 	virtual ~Shader();
 protected:
@@ -27,6 +27,7 @@ private:
 		TRANSFORM_U,
 		NORMAL_U,
 		LIGHTDIR_U,
+		COLOR_U,
 
 		NUM_UNIFORMS
 	};

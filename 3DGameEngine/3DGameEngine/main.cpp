@@ -32,6 +32,8 @@ int main(int argc, char** argv)
 							   1, 4, 0,
 							   2, 0, 4 };
 
+	glm::fvec4 baseColor(0.0f, 1.0f, 1.0f, 1.0f);
+
 	Camera camera(glm::vec3(0.0f, 0.0f, -10.0f), 70.0f, (float)WIDTH / (float)HEIGHT, 0.1f, 1000.0f);
 
 	//Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
@@ -40,7 +42,7 @@ int main(int argc, char** argv)
 	Texture texture("./res/colour.jpg");
 
 	RenderUtil renderUtil;
-	Game game(&mesh, &shader, &camera, &texture);
+	Game game(&mesh, &shader, &camera, &texture, &baseColor);
 	coreEngine core(&game, &renderUtil, &window, FRAME_CAP);
 
 	///////////////////////////////////////////Core_Stuff////////////////////////////////////////////////

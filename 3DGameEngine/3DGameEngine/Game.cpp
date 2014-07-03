@@ -1,11 +1,12 @@
 #include "Game.h"
 #include "main.h"
 
-Game::Game(Mesh* mesh, Shader* shader, Camera* camera, Texture* texture):
+Game::Game(Mesh* mesh, Shader* shader, Camera* camera, Texture* texture, glm::vec4* color):
 m_mesh(mesh),
 m_shader(shader),
 m_camera(camera),
-m_texture(texture)
+m_texture(texture),
+m_color(color)
 {
 }
 
@@ -20,9 +21,6 @@ void Game::input(const Input& input){
 
 }
 
-float counter = 0.0f;
-
-
 void Game::update(){
 
 	float sinCounter = sinf(counter);
@@ -32,7 +30,7 @@ void Game::update(){
 	transform.GetRot().y = counter * 50;
 	//transform.SetScale(glm::vec3(0.1f , 0.1f, 0.1f));
 
-	m_shader->Update(transform, *m_camera);
+	m_shader->Update(transform, *m_camera, *m_color);
 	counter += 0.0003f;
 
 }

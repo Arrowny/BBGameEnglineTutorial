@@ -11,12 +11,14 @@
 class Game
 {
 public:
-	Game(Mesh* mesh, Shader* shader, Camera* camera, Texture* texture);
+	Game(Mesh* mesh, Shader* shader, Camera* camera, Texture* texture, glm::vec4* color);
 	~Game();
 
 	void input(const Input& input);
 	void update();
 	void render();
+
+	float counter = 0.0f;
 
 protected:
 private:
@@ -26,6 +28,7 @@ private:
 	Transform	transform;
 	Camera*		m_camera;
 	Texture*	m_texture;
+	glm::vec4*	m_color;
 
 };
 

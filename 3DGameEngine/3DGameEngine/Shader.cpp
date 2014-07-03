@@ -13,6 +13,8 @@ Shader::Shader(const std::string& fileName)
 		glAttachShader(m_program, m_shaders[i]);
 
 	glBindAttribLocation(m_program, 0, "position");
+	glBindAttribLocation(m_program, 1, "texCoord");
+	glBindAttribLocation(m_program, 2, "normal");
 
 	glLinkProgram(m_program);
 	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error linking shader program");
@@ -24,6 +26,7 @@ Shader::Shader(const std::string& fileName)
 	m_uniforms[TRANSFORM_U] = glGetUniformLocation(m_program, "transform");
 	m_uniforms[NORMAL_U] = glGetUniformLocation(m_program, "Normal");
 	m_uniforms[LIGHTDIR_U] = glGetUniformLocation(m_program, "lightDirection");
+	m_uniforms[COLOR_U] = glGetUniformLocation(m_program, "baseColor");
 }
 
 Shader::~Shader()
@@ -44,7 +47,7 @@ void Shader::Bind()
 
 float temp = 0.0f;
 
-void Shader::Update(const Transform& transform, const Camera camera)
+void Shader::Update(const Transform& transform, const Camera camera, const glm::fvec4 color)
 {
 	temp += Time::getDelta();
 	glm::mat4 model = transform.GetProjection(camera);
@@ -54,6 +57,7 @@ void Shader::Update(const Transform& transform, const Camera camera)
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
 	glUniformMatrix4fv(m_uniforms[NORMAL_U], 1, GL_FALSE, &Normal[0][0]);
 	glUniform3f(m_uniforms[LIGHTDIR_U], 0.1f, 0.1f, 0.1f);
+	glUniform4f(m_uniforms[COLOR_U], (float)color[0], (float)color[1], (float)color[2], (float)color[3]);
 }
 
 
