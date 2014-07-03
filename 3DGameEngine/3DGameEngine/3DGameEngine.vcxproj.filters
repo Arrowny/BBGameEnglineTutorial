@@ -16,6 +16,9 @@
     <Filter Include="Resource Files\shaders">
       <UniqueIdentifier>{8bfc0329-b4c5-4683-96ba-e6d1434ca671}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Obj_files">
+      <UniqueIdentifier>{0ee34d98-3b6a-448f-85c7-19d3670048b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window.h">
@@ -94,5 +97,13 @@
     <None Include="res\shaders\shader.frag">
       <Filter>Resource Files\shaders</Filter>
     </None>
+    <None Include="res\object_files\box.mtl">
+      <Filter>Resource Files\Obj_files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="res\object_files\box.obj">
+      <Filter>Resource Files\Obj_files</Filter>
+    </Object>
   </ItemGroup>
 </Project>

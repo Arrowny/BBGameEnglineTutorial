@@ -103,8 +103,12 @@
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\object_files\box.mtl" />
     <None Include="res\shaders\shader.frag" />
     <None Include="res\shaders\shader.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="res\object_files\box.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
