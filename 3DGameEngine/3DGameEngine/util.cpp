@@ -36,7 +36,7 @@ std::vector<std::string> RemoveEmptyStrings(const std::vector<std::string>& sVec
 {
 	std::vector<std::string> output;
 
-	for (int ii = 0; ii < sVec.size; ii++)
+	for (unsigned int ii = 0; ii < sVec.size(); ii++)
 	{
 		if (sVec[ii] != "")
 		{

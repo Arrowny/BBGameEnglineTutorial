@@ -29,10 +29,10 @@ std::string Loader::LoadShader(const std::string& fileName)
 	return LoadShader(fileName);
 }
 
-Mesh Loader::LoadMesh(std::string meshFileName)
+Mesh Loader::LoadMesh(const std::string& meshFileName)
 {
 	std::vector<std::string> splitArray = Util::Split(meshFileName, '.');
-	std::string extension = splitArray[splitArray.size - 1];
+	std::string extension = splitArray[splitArray.size() - 1];
 
 	if (extension != "obj")
 	{
@@ -46,12 +46,12 @@ Mesh Loader::LoadMesh(std::string meshFileName)
 	std::vector<std::string> meshData = Util::Split(LoadFile(meshFileName), '\n');
 	std::vector<std::string> tokens;
 
-	for (int ii = 0; ii < meshData.size; ii++)
+	for (unsigned int ii = 0; ii < meshData.size(); ii++)
 	{
 		tokens = Util::Split(meshData[ii], ' ');
 		tokens = Util::RemoveEmptyStrings(tokens);
 
-		if (tokens.size == 0 || tokens[0] == "#") //empty or object file comment
+		if (tokens.size() == 0 || tokens[0] == "#") //empty or object file comment
 		{
 			continue;
 		}

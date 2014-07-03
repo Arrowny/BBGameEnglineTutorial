@@ -1,12 +1,9 @@
 #include "game.h"
-#include "mesh.h"
-#include "vertex.h"
-#include "timing.h"
 #include <iostream>
 
 
 
-Mesh* TriangleMesh;
+Mesh* TestMesh;
 
 Game::Game(Shader* shader) :
 m_shader(shader)
@@ -14,12 +11,14 @@ m_shader(shader)
 	
 	shader->addUniform("transform");
 
-	Vertex Triangle[] = {	Vertex(glm::vec3(-1.0f, -1.0f, 0.0f)),
-							Vertex(glm::vec3( 0.0f,  1.0f, 0.0f)),
-							Vertex(glm::vec3( 1.0f, -1.0f, 0.0f)) };
-	unsigned int Indices[] = { 0, 1, 2 };
+	//Vertex Triangle[] = {	Vertex(glm::vec3(-1.0f, -1.0f, 0.0f)),
+	//						Vertex(glm::vec3( 0.0f,  1.0f, 0.0f)),
+	//						Vertex(glm::vec3( 1.0f, -1.0f, 0.0f)) };
+	//unsigned int Indices[] = { 0, 1, 2 };
 
-	TriangleMesh = new Mesh(Triangle, sizeof(Triangle) / sizeof(Triangle[0]), Indices, sizeof(Indices)/sizeof(Indices[0]));
+	//TestMesh = new Mesh(Triangle, sizeof(Triangle) / sizeof(Triangle[0]), Indices, sizeof(Indices)/sizeof(Indices[0]));
+
+	*TestMesh = Loader::LoadMesh("./res/object_files/box.obj");
 
 	m_transform = new Transform(glm::vec3(0.0), glm::vec3(0.0));
 }
@@ -52,5 +51,5 @@ void Game::Render()
 {
 	m_shader->Bind();
 	m_shader->setUniform("transform", m_transform->getTransformation());
-	TriangleMesh->Draw();
+	TestMesh->Draw();
 }

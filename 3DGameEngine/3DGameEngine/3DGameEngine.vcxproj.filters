@@ -97,13 +97,5 @@
     <None Include="res\shaders\shader.frag">
       <Filter>Resource Files\shaders</Filter>
     </None>
-    <None Include="res\object_files\box.mtl">
-      <Filter>Resource Files\Obj_files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="res\object_files\box.obj">
-      <Filter>Resource Files\Obj_files</Filter>
-    </Object>
   </ItemGroup>
 </Project>

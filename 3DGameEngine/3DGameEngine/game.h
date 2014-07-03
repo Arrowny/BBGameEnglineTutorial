@@ -2,6 +2,10 @@
 #include "input.h"
 #include "shader.h"
 #include "transform.h"
+#include "mesh.h"
+#include "vertex.h"
+#include "timing.h"
+#include "resourceLoader.h"
 
 class Game
 {
