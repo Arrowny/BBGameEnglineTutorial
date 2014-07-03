@@ -32,7 +32,7 @@ std::vector<std::string> Util::Split(const std::string& s, char delim)
     return elems;
 }
 
-std::vector<std::string> RemoveEmptyStrings(const std::vector<std::string>& sVec)
+std::vector<std::string> Util::RemoveEmptyStrings(const std::vector<std::string>& sVec)
 {
 	std::vector<std::string> output;
 

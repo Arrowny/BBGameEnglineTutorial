@@ -1,6 +1,6 @@
 #include "resourceLoader.h"
 
-std::string LoadFile(const std::string& fileName)
+std::string Loader::LoadFile(const std::string& fileName)
 {
 	std::ifstream file;
 	file.open(fileName.c_str());
@@ -26,10 +26,10 @@ std::string LoadFile(const std::string& fileName)
 
 std::string Loader::LoadShader(const std::string& fileName)
 {
-	return LoadShader(fileName);
+	return Loader::LoadFile(fileName);
 }
 
-Mesh Loader::LoadMesh(const std::string& meshFileName)
+void Loader::LoadMeshInfo(const std::string& meshFileName, std::vector<glm::vec3>& vertices, std::vector<unsigned int>& indices)
 {
 	std::vector<std::string> splitArray = Util::Split(meshFileName, '.');
 	std::string extension = splitArray[splitArray.size() - 1];
@@ -40,10 +40,7 @@ Mesh Loader::LoadMesh(const std::string& meshFileName)
 		exit(1);
 	}
 
-	std::vector<Vertex> vertices;
-	std::vector<unsigned int> indices;
-
-	std::vector<std::string> meshData = Util::Split(LoadFile(meshFileName), '\n');
+	std::vector<std::string> meshData = Util::Split(Loader::LoadFile(meshFileName), '\n');
 	std::vector<std::string> tokens;
 
 	for (unsigned int ii = 0; ii < meshData.size(); ii++)
@@ -60,20 +57,20 @@ Mesh Loader::LoadMesh(const std::string& meshFileName)
 			double x = std::atof(tokens[1].c_str());
 			double y = std::atof(tokens[2].c_str());
 			double z = std::atof(tokens[3].c_str());
-			vertices.push_back(Vertex(glm::vec3(x, y, z)));
+			vertices.push_back(glm::vec3(x, y, z));
 		}
 		else if (tokens[0] == "f") //face
 		{
 			int firstInd = (std::atoi(tokens[1].c_str()) - 1);
-			int secondInd = (std::atoi(tokens[1].c_str()) - 1);
-			int thirdInd = (std::atoi(tokens[1].c_str()) - 1);
+			int secondInd = (std::atoi(tokens[2].c_str()) - 1);
+			int thirdInd = (std::atoi(tokens[3].c_str()) - 1);
 			indices.push_back(firstInd); 
 			indices.push_back(secondInd); 
 			indices.push_back(thirdInd);
 		}
 	}
 
-	Mesh output(&vertices[0], vertices.size(), &indices[0], indices.size());
+	/*Mesh output(vertices,indices);
 
-	return output;
+	return &output;*/
 }

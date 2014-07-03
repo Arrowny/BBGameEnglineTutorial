@@ -4,15 +4,13 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include "mesh.h"
 #include "util.h"
 #include "vertex.h"
 
-class Mesh;
-
 namespace Loader
 {
+	std::string LoadFile(const std::string& fileName);
 	std::string LoadShader(const std::string& fileName);
-	Mesh LoadMesh(const std::string& fileName);
+	void LoadMeshInfo(const std::string& meshFileName, std::vector<glm::vec3>& vertices, std::vector<unsigned int>& indices);
 };
 
