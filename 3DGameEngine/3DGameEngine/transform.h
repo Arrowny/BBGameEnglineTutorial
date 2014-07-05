@@ -4,10 +4,16 @@
 class Transform
 {
 public:
+	Transform() :
+		m_trans(glm::vec3(0.0,0.0,0.0)),
+		m_rot(glm::vec3(0.0, 0.0, 0.0)),
+		m_scale(glm::vec3(1.0, 1.0, 1.0)) {}
+
 	Transform(const glm::vec3& translation, const glm::vec3& rotation, const glm::vec3& scale = glm::vec3(1.0f, 1.0f, 1.0f)) :
 		m_trans(translation),
 		m_rot(rotation),
 		m_scale(scale) {}
+
 	virtual ~Transform();
 
 	inline void setTranslationExplicit(float x, float y, float z) { this->m_trans.x = x;
@@ -23,16 +29,9 @@ public:
 																	this->m_scale.z = sz;	}
 
 	glm::mat4 getTransformation() const;
-	void initProjectionMatrix(const double& zNear, const double& zFar, const double& fov, const double& screenWidth, const double& screenHeight) 
-	{
-		this->zNear = zNear;
-		this->zFar = zFar;
-		this->fov = fov;
-		aspect = screenWidth / screenHeight;
-	}
+	glm::mat4 getPerspectiveMatrix();
+	void initPerspectiveMatrix(const double& zNear, const double& zFar, const double& fov, const double& screenWidth, const double& screenHeight);
 		
-	glm::mat4 getPerspectiveMatrix() { return glm::mat4(glm::perspective(fov, aspect, zNear, zFar)); }
-
 	glm::vec3 m_trans;
 	glm::vec3 m_rot;
 	glm::vec3 m_scale;
@@ -44,5 +43,7 @@ private:
 	double zFar;
 	double fov;
 	double aspect;
+
+	bool perspectiveInitialized = false;
 };
 

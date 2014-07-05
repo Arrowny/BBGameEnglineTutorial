@@ -6,6 +6,7 @@
 #include "vertex.h"
 #include "timing.h"
 #include "resourceLoader.h"
+#include "camera.h"
 
 class Game
 {

@@ -1,5 +1,5 @@
 #include "transform.h"
-
+#include <iostream>
 
 Transform::~Transform()
 {
@@ -16,6 +16,28 @@ glm::mat4 Transform::getTransformation() const
 	glm::mat4 rotMat = rotZMat * rotYMat * rotXMat; //TODO: use quaternions to generate rotation matrix
 
 	return transMat * rotMat * scaleMat;
+}
+
+glm::mat4 Transform::getPerspectiveMatrix()
+{
+	if (perspectiveInitialized)
+	{ 
+		return glm::mat4(glm::perspective(fov, aspect, zNear, zFar)); 
+	}
+	else
+	{
+		std::cerr << "Error: Perspective matrix not initialized" << std::endl;
+		exit(1);
+	}
+}
+
+void Transform::initPerspectiveMatrix(const double& zNear, const double& zFar, const double& fov, const double& screenWidth, const double& screenHeight)
+{
+	perspectiveInitialized = true;
+	this->zNear = zNear;
+	this->zFar = zFar;
+	this->fov = fov;
+	aspect = screenWidth / screenHeight;
 }
 
 
