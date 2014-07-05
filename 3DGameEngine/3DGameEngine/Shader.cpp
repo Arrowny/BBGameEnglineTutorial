@@ -3,7 +3,7 @@
 #include <iostream>
 
 glm::fvec3 ambientLight(0.2f, 0.2f, 0.2f);
-directionalLight Shader::m_directionalLight = directionalLight(baseLight(glm::fvec3(1, 1, 1), 0), glm::fvec3(0, 0, 0));
+directionalLight Shader::m_directionalLight = directionalLight(baseLight(glm::fvec3(1, 1, 1), 0.8f), glm::fvec3(0.0f, 0.2f, -0.5f));
 
 Shader::Shader(const std::string& fileName)
 {

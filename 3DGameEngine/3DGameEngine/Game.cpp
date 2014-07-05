@@ -26,7 +26,8 @@ void Game::update(){
 	float sinCounter = sinf(counter);
 	float cosCounter = cosf(counter);
 
-	transform.GetPos().z = -3.0;
+	//transform.GetPos().z = -10.0;
+	//transform.GetPos().x = sinCounter * 2;
 	transform.GetRot().y = counter * 50;
 	//transform.SetScale(glm::vec3(0.1f , 0.1f, 0.1f));
 

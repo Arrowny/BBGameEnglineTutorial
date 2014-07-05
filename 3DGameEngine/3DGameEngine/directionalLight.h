@@ -11,7 +11,7 @@ public:
 
 	directionalLight(const baseLight& base = baseLight(), glm::fvec3 direction = glm::fvec3(0, 0, 0)):
 		m_base(base),
-		m_direction(direction)
+		m_direction(glm::normalize(direction))
 	{}
 
 protected:
