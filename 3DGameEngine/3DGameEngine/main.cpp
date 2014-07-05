@@ -18,7 +18,7 @@ int main(int argc, char** argv)
 
 	Window window(WIDTH, HEIGHT, TITLE);
 	Shader shader("./res/shaders/shader");
-	Game game(&shader);
+	Game game(&shader,WIDTH,HEIGHT);
 	CoreEngine core(double(FRAME_CAP), &window, &game);
 	core.start();
 	return 0;

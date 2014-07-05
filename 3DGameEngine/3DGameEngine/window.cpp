@@ -69,7 +69,7 @@ void Window::InitGraphics()
 {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-	glFrontFace(GL_CW);
+	glFrontFace(GL_CCW);
 	glCullFace(GL_BACK);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);

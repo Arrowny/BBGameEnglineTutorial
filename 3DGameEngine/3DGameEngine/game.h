@@ -10,7 +10,7 @@
 class Game
 {
 public:
-	Game(Shader* shader);
+	Game(Shader* shader, double screenWidth, double screenHeight);
 	virtual ~Game();
 
 	void ProcessInput(Input* &m_input);
