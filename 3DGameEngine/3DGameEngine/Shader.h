@@ -5,6 +5,8 @@
 #include <glm\glm.hpp>
 #include "Timing.h"
 #include "Transform.h"
+#include "directionalLight.h"
+#include "baseLight.h"
 
 class Shader
 {
@@ -29,6 +31,9 @@ private:
 		LIGHTDIR_U,
 		COLOR_U,
 		AMBIENTL_U,
+		DIRLIGHTC_U,
+		DIRLIGHTI_U,
+		DIRLIGHTD_U,
 
 		NUM_UNIFORMS
 	};
@@ -40,5 +45,6 @@ private:
 	GLuint m_program;
 	GLuint m_shaders[NUM_SHADERS];
 	GLuint m_uniforms[NUM_UNIFORMS];
+	static directionalLight m_directionalLight;
 
 };

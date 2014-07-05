@@ -92,8 +92,10 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="baseLight.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="coreEngine.h" />
+    <ClInclude Include="directionalLight.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Mesh.h" />

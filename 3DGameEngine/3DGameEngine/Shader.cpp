@@ -2,6 +2,8 @@
 #include <fstream>
 #include <iostream>
 
+glm::fvec3 ambientLight(0.2f, 0.2f, 0.2f);
+directionalLight Shader::m_directionalLight = directionalLight(baseLight(glm::fvec3(1, 1, 1), 0), glm::fvec3(0, 0, 0));
 
 Shader::Shader(const std::string& fileName)
 {
@@ -9,8 +11,9 @@ Shader::Shader(const std::string& fileName)
 	m_shaders[0] = CreateShader(LoadShader(fileName + ".vs"), GL_VERTEX_SHADER);
 	m_shaders[1] = CreateShader(LoadShader(fileName + ".fs"), GL_FRAGMENT_SHADER);
 
-	for (unsigned int i = 0; i < NUM_SHADERS; i++)
+	for (unsigned int i = 0; i < NUM_SHADERS; i++){
 		glAttachShader(m_program, m_shaders[i]);
+	}
 
 	glBindAttribLocation(m_program, 0, "position");
 	glBindAttribLocation(m_program, 1, "texCoord");
@@ -28,6 +31,9 @@ Shader::Shader(const std::string& fileName)
 	m_uniforms[LIGHTDIR_U] = glGetUniformLocation(m_program, "lightDirection");
 	m_uniforms[COLOR_U] = glGetUniformLocation(m_program, "baseColor");
 	m_uniforms[AMBIENTL_U] = glGetUniformLocation(m_program, "ambientLight");
+	m_uniforms[DIRLIGHTC_U] = glGetUniformLocation(m_program, "directionalLight.base.color");
+	m_uniforms[DIRLIGHTI_U] = glGetUniformLocation(m_program, "directionalLight.base.intensity");
+	m_uniforms[DIRLIGHTD_U] = glGetUniformLocation(m_program, "directionalLight.direction");
 }
 
 Shader::~Shader()
@@ -58,8 +64,12 @@ void Shader::Update(const Transform& transform, const Camera camera, const glm::
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
 	glUniformMatrix4fv(m_uniforms[NORMAL_U], 1, GL_FALSE, &Normal[0][0]);
 	glUniform3f(m_uniforms[LIGHTDIR_U], 0.0f, 1.0f, 1.0f);
-	glUniform3f(m_uniforms[AMBIENTL_U], 0.2f, 0.2f, 0.2f);
+	glUniform3f(m_uniforms[AMBIENTL_U], (float)ambientLight[0], (float)ambientLight[1], (float)ambientLight[2]);
 	glUniform4f(m_uniforms[COLOR_U], (float)color[0], (float)color[1], (float)color[2], (float)color[3]);
+	glUniform3f(m_uniforms[DIRLIGHTC_U], (float)m_directionalLight.m_base.m_color[0], (float)m_directionalLight.m_base.m_color[1], (float)m_directionalLight.m_base.m_color[2]);
+	glUniform1f(m_uniforms[DIRLIGHTI_U], (float)m_directionalLight.m_base.m_intensity);
+	glUniform3f(m_uniforms[DIRLIGHTD_U], (float)m_directionalLight.m_direction[0], (float)m_directionalLight.m_direction[1], (float)m_directionalLight.m_direction[2]);
+
 }
 
 
