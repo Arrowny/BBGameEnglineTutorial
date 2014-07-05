@@ -11,9 +11,11 @@
 class Game
 {
 public:
-	Game(Mesh* mesh, Shader* shader, Camera* camera, Texture* texture, glm::vec4* color);
+	/*Game(Mesh* mesh, Shader* shader, Camera* camera, Texture* texture, glm::vec4* color);*/
+	Game() {}
 	~Game();
 
+	void init();
 	void input(const Input& input);
 	void update();
 	void render();
@@ -29,6 +31,7 @@ private:
 	Camera*		m_camera;
 	Texture*	m_texture;
 	glm::vec4*	m_color;
+	Material	m_material;
 
 };
 

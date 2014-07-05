@@ -7,6 +7,7 @@
 #include "Transform.h"
 #include "directionalLight.h"
 #include "baseLight.h"
+#include "Material.h"
 
 class Shader
 {

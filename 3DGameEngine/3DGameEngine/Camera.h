@@ -126,7 +126,7 @@ public:
 		glm::fvec3 hAxis = glm::cross(yAxis, forward);
 		glm::normalize(hAxis);
 
-		forward = glm::vec3((glm::rotate(angle, hAxis) * glm::fvec4(forward, 0.0)));
+		forward = glm::vec3((glm::rotate(angle, hAxis) * glm::fvec4(forward, 1.0)));
 		glm::normalize(forward);
 
 		up = glm::cross(forward, hAxis);
@@ -139,7 +139,7 @@ public:
 		glm::fvec3 hAxis = glm::cross(yAxis, forward);
 		glm::normalize(hAxis);
 
-		forward = glm::vec3((glm::rotate(angle, yAxis) * glm::fvec4(forward, 0.0)));
+		forward = glm::vec3((glm::rotate(angle, yAxis) * glm::fvec4(forward, 1.0)));
 		glm::normalize(forward);
 
 		up = glm::cross(forward, hAxis);

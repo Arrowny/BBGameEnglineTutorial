@@ -1,18 +1,38 @@
 #include "Game.h"
 #include "main.h"
 
-Game::Game(Mesh* mesh, Shader* shader, Camera* camera, Texture* texture, glm::vec4* color):
-m_mesh(mesh),
-m_shader(shader),
-m_camera(camera),
-m_texture(texture),
-m_color(color)
-{
-}
-
-
 Game::~Game()
 {
+	if (m_texture) delete m_texture;
+	if (m_mesh) delete m_mesh;
+}
+
+void Game::init(){
+
+	Vertex vertices[] = { Vertex(glm::vec3(-0.8, -0.8, 0.0), glm::vec2(1.0f, 0.0), glm::vec3(0, 0, -1)),
+						  Vertex(glm::vec3(0.0, 0.8, 0.0), glm::vec2(0.5f, 0.0), glm::vec3(0, 0, -1)),
+						  Vertex(glm::vec3(0.8, -0.8, 0.0), glm::vec2(1.0f, 0.0), glm::vec3(0, 0, -1)),
+						  Vertex(glm::vec3(0.0, -0.8, 0.8), glm::vec2(0.0, 0.5f), glm::vec3(0, 0, -1)),
+						  Vertex(glm::vec3(0.0, -0.8, -0.8), glm::vec2(0.0, 0.5f), glm::vec3(0, 0, -1)) };
+
+	unsigned int indices[] = { 3, 1, 0,
+							   2, 1, 3,
+							   0, 2, 3,
+							   4, 1, 2,
+							   1, 4, 0,
+							   2, 0, 4 };
+
+	glm::fvec4 baseColor(1.0f, 1.0f, 0.0f, 1.0f);
+
+	m_camera = new Camera(glm::vec3(0.0f, 0.0f, -10.0f), 70.0f, (float)Window::getWidth() / (float)Window::getHeight(), 0.1f, 1000.0f);
+
+	//Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
+	m_mesh = new Mesh("./res/cube.obj");
+	//Shader shader("./res/basicShader");
+	m_shader = new Shader("./res/phongShader");
+	m_texture = new Texture("./res/colour.jpg");
+	m_material = Material(m_texture, baseColor);
+
 }
 
 void Game::input(const Input& input){
@@ -31,7 +51,7 @@ void Game::update(){
 	transform.GetRot().y = counter * 50;
 	//transform.SetScale(glm::vec3(0.1f , 0.1f, 0.1f));
 
-	m_shader->Update(transform, *m_camera, *m_color);
+	m_shader->Update(transform, *m_camera, m_material.color);
 	counter += 0.0003f;
 
 }
@@ -39,7 +59,7 @@ void Game::update(){
 void Game::render(){
 
 	m_shader->Bind();
-	m_texture->Bind(0);
+	m_material.texture->Bind(0);
 	m_mesh->Draw();
 
 }

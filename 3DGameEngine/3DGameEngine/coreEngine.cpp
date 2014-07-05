@@ -43,6 +43,8 @@ void coreEngine::Run(){
 
 	m_isRunning = true;
 
+	m_game->init();
+
 	int frames = 0;
 	double frameCounter = 0;
 
