@@ -84,6 +84,7 @@
     <ClInclude Include="mesh.h" />
     <ClInclude Include="resourceLoader.h" />
     <ClInclude Include="shader.h" />
+    <ClInclude Include="stb_image.h" />
     <ClInclude Include="timing.h" />
     <ClInclude Include="transform.h" />
     <ClInclude Include="util.h" />
@@ -99,6 +100,7 @@
     <ClCompile Include="mesh.cpp" />
     <ClCompile Include="resourceLoader.cpp" />
     <ClCompile Include="shader.cpp" />
+    <ClCompile Include="stb_image.c" />
     <ClCompile Include="timing.cpp" />
     <ClCompile Include="transform.cpp" />
     <ClCompile Include="util.cpp" />
