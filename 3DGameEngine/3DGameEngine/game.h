@@ -3,6 +3,7 @@
 #include "shader.h"
 #include "transform.h"
 #include "mesh.h"
+#include "texture.h"
 #include "vertex.h"
 #include "timing.h"
 #include "resourceLoader.h"

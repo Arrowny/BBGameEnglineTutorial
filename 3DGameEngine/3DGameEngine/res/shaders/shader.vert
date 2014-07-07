@@ -1,13 +1,17 @@
 #version 330
 
 attribute vec3 position;
+attribute vec2 textCoord;
 
-out vec4 color;
+out vec4 pointColor;
 
 uniform mat4 transform;
 
+varying vec2 textCoord0;
+
 void main()
 {
-	color = vec4(clamp(position, 0.0, 1.0), 1.0);
+	pointColor = vec4(clamp(position, 0.0, 1.0), 1.0);
 	gl_Position = transform*vec4(position, 1.0f);
+	textCoord0 = textCoord;
 }

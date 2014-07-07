@@ -10,7 +10,7 @@ public:
 	Texture(const std::string& fileName);
 	virtual ~Texture();
 
-	void Bind(const unsigned int textInt);
+	void Bind(const unsigned int& whichText);
 
 private:
 	Texture(const Texture& other) {}

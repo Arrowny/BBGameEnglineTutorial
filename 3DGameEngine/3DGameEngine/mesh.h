@@ -8,7 +8,7 @@
 class Mesh
 {
 public:
-	Mesh(std::vector<glm::vec3> vertices, std::vector<unsigned int> indices);
+	Mesh(std::vector<glm::vec3> vertices, std::vector<unsigned int> indices, std::vector<glm::vec2> textCoords);
 	Mesh(const std::string meshFileName);
 	virtual ~Mesh();
 
@@ -18,6 +18,7 @@ public:
 	{
 		POSITION_VB,
 		INDEX_VB,
+		TEXTURE_VB,
 
 		NUM_BUFFERS
 	};
@@ -31,6 +32,6 @@ private:
 	Mesh(const Mesh& other);
 	void operator=(const Mesh& other);
 
-	void initMesh(std::vector<glm::vec3> vertices, std::vector<unsigned int> indices);
+	void initMesh(std::vector<glm::vec3> vertices, std::vector<unsigned int> indices, std::vector<glm::vec2> textCoords);
 };
 

@@ -1,19 +1,39 @@
 #include "game.h"
 #include <iostream>
+#include <vector>
 
 
 
 Mesh* TestMesh;
+Texture* TestTexture;
 Camera* camera;
 
 Game::Game(Shader* shader, double screenWidth, double screenHeight) :
 m_shader(shader)
 {
-	std::cout << "DELTA: " << Time::DELTA << std::endl;
+	std::vector<glm::vec3> vertices;
+	std::vector<unsigned int> indices;
+	std::vector<glm::vec2> textCoords;
+
 	camera = new Camera();
 	camera->reinitPerspectiveMatrix(.01f, 1000.0f, 70.0f, 800.0f, 600.0f);
 	shader->addUniform("transform");
-	TestMesh = new Mesh("./res/object_files/box.obj");
+	
+	vertices.push_back(glm::vec3(-0.5, -0.5, 0.0));
+	vertices.push_back(glm::vec3( 0.0,  0.5, 0.0));
+	vertices.push_back(glm::vec3( 0.5, -0.5, 0.0));
+
+	indices.push_back(0);
+	indices.push_back(1);
+	indices.push_back(2);
+
+	textCoords.push_back(glm::vec2(0.0, 0.0));
+	textCoords.push_back(glm::vec2(0.5, 1.0));
+	textCoords.push_back(glm::vec2(1.0, 0.0));
+
+	//TestMesh = new Mesh("./res/object_files/box.obj");
+	TestMesh = new Mesh(vertices, indices, textCoords);
+	TestTexture = new Texture("./res/texture_files/bricks.jpg");
 	m_transform = new Transform();
 }
 
@@ -39,5 +59,6 @@ void Game::Render()
 {
 	m_shader->Bind();
 	m_shader->setUniform("transform", camera->getPerspectiveTransform()*camera->getCameraTransform()*m_transform->getTransformation());
+	TestTexture->Bind(0);
 	TestMesh->Draw();
 }
