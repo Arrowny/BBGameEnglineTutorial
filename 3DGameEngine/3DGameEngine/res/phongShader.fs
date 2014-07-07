@@ -4,6 +4,7 @@ in vec4 color;
 
 varying vec2 texCoord0;
 varying vec3 normal0;
+varying vec3 worldPos0;
 
 struct BaseLight
 {
@@ -20,21 +21,38 @@ struct DirectionalLight
 uniform sampler2D diffuse;
 uniform vec3 lightDirection;
 uniform vec3 ambientLight;
+uniform vec3 eyePos;
 
 uniform DirectionalLight directionalLight;
+
+uniform float specularIntensity;
+uniform float specularPower;
 
 vec4 calcLight(BaseLight base, vec3 direction, vec3 normal)
 {
     float diffuseFactor = dot(normal, -direction);
 
     vec4 diffuseColor = vec4(0, 0, 0, 0);
+    vec4 specularColor = vec4(0, 0, 0, 0);
 
     if(diffuseFactor > 0)
     {
         diffuseColor = vec4(base.color, 1.0) * base.intensity * diffuseFactor;
+
+        vec3 directionToEye = normalize(eyePos - worldPos0);
+        vec3 reflectDirection = normalize(reflect(direction, normal));
+
+        float specularFactor = dot(directionToEye, reflectDirection);
+        specularFactor = pow(specularFactor, specularPower);
+
+        if(specularPower > 0)
+        {
+            specularColor = vec4(base.color, 1.0) * specularIntensity * specularFactor;
+        }
+
     }
 
-    return diffuseColor;
+    return diffuseColor + specularColor;
 }
 
 vec4 calcDirectionalLight(DirectionalLight directionalLight, vec3 normal)

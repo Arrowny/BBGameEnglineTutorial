@@ -15,7 +15,7 @@ public:
 	Shader(const std::string& fileName);
 
 	void Bind();
-	void Update(const Transform& transform, const Camera camera, glm::fvec4 color);
+	void Update(const Transform& transform, const Camera camera, const glm::fvec4 color, float specI, float specP);
 
 	virtual ~Shader();
 protected:
@@ -35,6 +35,9 @@ private:
 		DIRLIGHTC_U,
 		DIRLIGHTI_U,
 		DIRLIGHTD_U,
+		SPECI_U,
+		SPECP_U,
+		EYEPOS_U,
 
 		NUM_UNIFORMS
 	};

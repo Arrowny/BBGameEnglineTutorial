@@ -18,6 +18,11 @@ public:
 
 	}
 
+	inline glm::vec3 getPos() const
+	{
+		return pos;
+	}
+
 	inline glm::mat4 GetViewProjection() const
 	{
 		return projection * glm::lookAt(pos, pos + forward, up);

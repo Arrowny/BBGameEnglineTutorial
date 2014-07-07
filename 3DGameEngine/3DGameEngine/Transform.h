@@ -25,6 +25,11 @@ public:
 		return posMat * rotMat * scaleMat;
 	}
 
+	inline glm::vec3 GetCameraPos(const Camera& camera) const
+	{
+		return camera.getPos();
+	}
+
 	inline glm::mat4 GetProjection(const Camera& camera) const
 	{
 		glm::mat4 VP = camera.GetViewProjection();

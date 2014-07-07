@@ -34,6 +34,9 @@ Shader::Shader(const std::string& fileName)
 	m_uniforms[DIRLIGHTC_U] = glGetUniformLocation(m_program, "directionalLight.base.color");
 	m_uniforms[DIRLIGHTI_U] = glGetUniformLocation(m_program, "directionalLight.base.intensity");
 	m_uniforms[DIRLIGHTD_U] = glGetUniformLocation(m_program, "directionalLight.direction");
+	m_uniforms[SPECI_U] = glGetUniformLocation(m_program, "specularIntensity");
+	m_uniforms[SPECP_U] = glGetUniformLocation(m_program, "specularPower");
+	m_uniforms[EYEPOS_U] = glGetUniformLocation(m_program, "eyePos");
 }
 
 Shader::~Shader()
@@ -54,11 +57,12 @@ void Shader::Bind()
 
 float temp = 0.0f;
 
-void Shader::Update(const Transform& transform, const Camera camera, const glm::fvec4 color)
+void Shader::Update(const Transform& transform, const Camera camera, const glm::fvec4 color, float specI, float specP)
 {
 	temp += Time::getDelta();
 	glm::mat4 model = transform.GetProjection(camera);
 	glm::mat4 Normal = transform.GetModel();
+	glm::vec3 eyePos = transform.GetCameraPos(camera);
 
 	glUniform1f(m_uniforms[UNIFORM_U], (float)glm::abs(glm::sin(temp)));
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
@@ -69,6 +73,9 @@ void Shader::Update(const Transform& transform, const Camera camera, const glm::
 	glUniform3f(m_uniforms[DIRLIGHTC_U], (float)m_directionalLight.m_base.m_color[0], (float)m_directionalLight.m_base.m_color[1], (float)m_directionalLight.m_base.m_color[2]);
 	glUniform1f(m_uniforms[DIRLIGHTI_U], (float)m_directionalLight.m_base.m_intensity);
 	glUniform3f(m_uniforms[DIRLIGHTD_U], (float)m_directionalLight.m_direction[0], (float)m_directionalLight.m_direction[1], (float)m_directionalLight.m_direction[2]);
+	glUniform1f(m_uniforms[SPECI_U], (float)specI);
+	glUniform1f(m_uniforms[SPECP_U], (float)specP);
+	glUniform3f(m_uniforms[EYEPOS_U], (float)eyePos[0], (float)eyePos[1], (float)eyePos[2]);
 
 }
 

@@ -6,15 +6,20 @@
 
 struct Material
 {
-	Texture* texture;
-	glm::fvec4 color;
+	Texture*	texture;
+	glm::fvec4	color;
+	float		specularIntensity;
+	float		specularPower;
 
 	Material() {};
 
-	Material(Texture* texture, const glm::fvec4 color):
+	Material(Texture* texture, const glm::fvec4 color, float specularIntensity, float specularPower):
 		texture(texture),
-		color(color)
+		color(color),
+		specularIntensity(specularIntensity),
+		specularPower(specularPower)
 		{}
+
 };
 
 #endif

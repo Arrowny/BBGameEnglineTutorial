@@ -22,21 +22,21 @@ void Game::init(){
 							   1, 4, 0,
 							   2, 0, 4 };
 
-	glm::fvec4 baseColor(1.0f, 1.0f, 0.0f, 1.0f);
+	glm::fvec4 baseColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 	m_camera = new Camera(glm::vec3(0.0f, 0.0f, -10.0f), 70.0f, (float)Window::getWidth() / (float)Window::getHeight(), 0.1f, 1000.0f);
 
-	//Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
-	m_mesh = new Mesh("./res/cube.obj");
+	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
+	m_mesh = new Mesh("./res/triforce.obj");
 	//Shader shader("./res/basicShader");
 	m_shader = new Shader("./res/phongShader");
 	m_texture = new Texture("./res/colour.jpg");
-	m_material = Material(m_texture, baseColor);
+	m_material = Material(m_texture, baseColor, 2, 32);
 
 }
 
 void Game::input(const Input& input){
-
+	
 	m_camera->input(input);
 
 }
@@ -51,7 +51,7 @@ void Game::update(){
 	transform.GetRot().y = counter * 50;
 	//transform.SetScale(glm::vec3(0.1f , 0.1f, 0.1f));
 
-	m_shader->Update(transform, *m_camera, m_material.color);
+	m_shader->Update(transform, *m_camera, m_material.color, m_material.specularIntensity, m_material.specularPower);
 	counter += 0.0003f;
 
 }
