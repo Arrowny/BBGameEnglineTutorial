@@ -4,29 +4,6 @@
 
 namespace
 {
-	//static std::string LoadShader(const std::string& fileName)
-	//{
-	//	std::ifstream file;
-	//	file.open(fileName.c_str());
-
-	//	std::string output;
-	//	std::string line;
-
-	//	if (file.is_open())
-	//	{
-	//		while (file.good())
-	//		{
-	//			getline(file, line);
-	//			output.append(line + "\n");
-	//		}
-	//	}
-	//	else
-	//	{
-	//		std::cerr << "File Readin Error: unable to load shader" << std::endl;
-	//	}
-
-	//	return output;
-	//}
 
 	static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage)
 	{
@@ -101,6 +78,10 @@ Shader::Shader(const std::string& fileName)
 
 	glValidateProgram(m_program);
 	CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: Shader program linking failed");
+
+	addUniform("transform");
+	addUniform("color");
+	addUniform("isTextured");
 }
 
 
@@ -156,4 +137,22 @@ void Shader::setUniform(std::string uniformName, glm::vec4 value)
 void Shader::setUniform(std::string uniformName, glm::mat4 value)
 {
 	glUniformMatrix4fv(m_uniforms[uniformName], 1, GL_FALSE, &value[0][0]);
+}
+
+void Shader::updateBasicUniformsAndTexture(glm::mat4 projectionMatrix, glm::mat4 worldMatrix, Material* mat)
+{
+
+	setUniform("transform", projectionMatrix*worldMatrix);
+	setUniform("color", mat->m_color);
+
+	if (mat->m_texture != NULL)
+	{
+		mat->m_texture->Bind(0); //TODO: update so that multiple textures can be bound
+		setUniform("isTextured", true);
+	}
+	else
+	{
+		Util::unbindTexture();
+		setUniform("isTextured", false);
+	}
 }

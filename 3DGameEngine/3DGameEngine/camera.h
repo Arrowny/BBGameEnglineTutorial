@@ -26,6 +26,7 @@ public:
 	glm::vec3 getUp() { return m_up; }
 	glm::mat4 getPerspectiveTransform() { return m_perspectiveTransform.getPerspectiveMatrix(); }
 	glm::mat4 getCameraTransform() { return glm::lookAt(m_pos, m_pos + m_center, m_up); }
+	glm::mat4 getProjectionTransform() { return m_perspectiveTransform.getPerspectiveMatrix() * glm::lookAt(m_pos, m_pos + m_center, m_up); }
 	
 	glm::vec3 m_pos;
 private:

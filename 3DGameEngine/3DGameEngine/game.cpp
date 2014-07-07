@@ -5,8 +5,8 @@
 
 
 Mesh* TestMesh;
-Texture* TestTexture;
-Camera* camera;
+Material* TestMaterial;
+
 
 Game::Game(Shader* shader, double screenWidth, double screenHeight) :
 m_shader(shader)
@@ -15,9 +15,8 @@ m_shader(shader)
 	std::vector<unsigned int> indices;
 	std::vector<glm::vec2> textCoords;
 
-	camera = new Camera();
-	camera->reinitPerspectiveMatrix(.01f, 1000.0f, 70.0f, 800.0f, 600.0f);
-	shader->addUniform("transform");
+	m_camera = new Camera();
+	m_camera->reinitPerspectiveMatrix(.01f, 1000.0f, 70.0f, 800.0f, 600.0f);
 	
 	vertices.push_back(glm::vec3(-0.5, -0.5, 0.0));
 	vertices.push_back(glm::vec3( 0.0,  0.5, 0.0));
@@ -33,8 +32,9 @@ m_shader(shader)
 
 	//TestMesh = new Mesh("./res/object_files/box.obj");
 	TestMesh = new Mesh(vertices, indices, textCoords);
-	TestTexture = new Texture("./res/texture_files/bricks.jpg");
-	m_transform = new Transform();
+	TestMaterial = new Material("./res/texture_files/bricks.jpg", glm::vec3(0.0, 1.0, 1.0));
+	//TestMaterial = new Material(glm::vec3(0.0, 1.0, 1.0));
+	m_worldTransform = new Transform();
 }
 
 
@@ -44,13 +44,13 @@ Game::~Game()
 
 void Game::ProcessInput(Input* &m_input)
 {
-	camera->input(*m_input);
+	m_camera->input(*m_input);
 }
 
 void Game::Update()
 {
 	float tmpUpdate = std::sin(Time::GetTime());
-	m_transform->setTranslationExplicit(tmpUpdate, 0.0, 5.0f);
+	m_worldTransform->setTranslationExplicit(tmpUpdate, 0.0, 5.0f);
 	//m_transform->setRotationExplicit(0.0, tmpUpdate*360.0, 0.0);
 	//m_transform->setScaleExplicit(tmpUpdate, tmpUpdate, tmpUpdate);
 }
@@ -58,7 +58,6 @@ void Game::Update()
 void Game::Render()
 {
 	m_shader->Bind();
-	m_shader->setUniform("transform", camera->getPerspectiveTransform()*camera->getCameraTransform()*m_transform->getTransformation());
-	TestTexture->Bind(0);
+	m_shader->updateBasicUniformsAndTexture(m_camera->getProjectionTransform(), m_worldTransform->getTransformation(), TestMaterial);
 	TestMesh->Draw();
 }

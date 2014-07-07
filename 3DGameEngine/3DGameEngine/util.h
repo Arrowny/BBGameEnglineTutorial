@@ -30,12 +30,14 @@
 
 #include <vector>
 #include <string>
+#include <GL\glew.h>
 
 namespace Util
 {
 	void Sleep(int milliseconds);
 	std::vector<std::string> Split(const std::string &s, char delim);
 	std::vector<std::string> RemoveEmptyStrings(const std::vector<std::string>& sVec);
+	void unbindTexture();
 };
 
 #endif

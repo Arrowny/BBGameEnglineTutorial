@@ -3,6 +3,7 @@
 #include "shader.h"
 #include "transform.h"
 #include "mesh.h"
+#include "material.h"
 #include "texture.h"
 #include "vertex.h"
 #include "timing.h"
@@ -24,7 +25,8 @@ private:
 	void operator=(const Game& other) {}
 
 	Shader* m_shader;
-	Transform* m_transform;
+	Transform* m_worldTransform;
+	Camera* m_camera;
 
 };
 

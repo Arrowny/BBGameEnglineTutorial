@@ -3,6 +3,7 @@
 #include <map>
 #include <GL\glew.h>
 #include <glm\glm.hpp>
+#include "material.h"
 
 class Shader
 {
@@ -18,6 +19,8 @@ public:
 	void setUniform(std::string uniformName, glm::vec3 value);
 	void setUniform(std::string uniformName, glm::vec4 value);
 	void setUniform(std::string uniformName, glm::mat4 value);
+
+	void updateBasicUniformsAndTexture(glm::mat4 projectionMatrix, glm::mat4 worldMatrix,Material* mat);
 
 private:
 	Shader(const Shader& other) {}

@@ -46,3 +46,8 @@ std::vector<std::string> Util::RemoveEmptyStrings(const std::vector<std::string>
 
 	return output;
 }
+
+void Util::unbindTexture()
+{
+	
+}

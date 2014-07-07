@@ -81,7 +81,9 @@
     <ClInclude Include="coreEngine.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="input.h" />
+    <ClInclude Include="material.h" />
     <ClInclude Include="mesh.h" />
+    <ClInclude Include="phongShader.h" />
     <ClInclude Include="resourceLoader.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="stb_image.h" />
@@ -98,7 +100,9 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="material.cpp" />
     <ClCompile Include="mesh.cpp" />
+    <ClCompile Include="phongShader.cpp" />
     <ClCompile Include="resourceLoader.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="stb_image.c" />
@@ -109,6 +113,8 @@
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\shaders\phongShader.frag" />
+    <None Include="res\shaders\phongShader.vert" />
     <None Include="res\shaders\shader.frag" />
     <None Include="res\shaders\shader.vert" />
   </ItemGroup>
