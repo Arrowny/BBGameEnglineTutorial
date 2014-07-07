@@ -1,4 +1,5 @@
 #include "camera.h"
+#include <iostream>
 
 Camera::Camera()
 {
@@ -27,27 +28,47 @@ Camera::~Camera()
 
 void Camera::input(const Input& input)
 {
-	float movAmt = 5.0f;
-	float rotAmt = 100.0;
+	float movAmt = 500.0f;
+	float rotAmt = 20000.0;
+
+	if (input.GetKeyDown(Input::KEY_W))
+	{
+		move(m_center, movAmt*Time::DELTA);
+	}
+
+	if (input.GetKeyDown(Input::KEY_S))
+	{
+		move(m_center, -movAmt*Time::DELTA);
+	}
+
+	if (input.GetKeyDown(Input::KEY_A))
+	{
+		move(getLeft(), movAmt*Time::DELTA);
+	}
+
+	if (input.GetKeyDown(Input::KEY_D))
+	{
+		move(getRight(), movAmt*Time::DELTA);
+	}
 
 	if (input.GetKeyDown(Input::KEY_UP))
 	{
-		move(m_center, movAmt);
+		rotateX(-rotAmt*Time::DELTA);
 	}
 
 	if (input.GetKeyDown(Input::KEY_DOWN))
 	{
-		move(m_center, -movAmt);
+		rotateX(rotAmt*Time::DELTA);
 	}
 
 	if (input.GetKeyDown(Input::KEY_LEFT))
 	{
-		move(getLeft(), movAmt);
+		rotateY(rotAmt*Time::DELTA);
 	}
 
 	if (input.GetKeyDown(Input::KEY_RIGHT))
 	{
-		move(getRight(), movAmt);
+		rotateY(-rotAmt*Time::DELTA);
 	}
 
 }

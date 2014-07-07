@@ -9,6 +9,7 @@ Camera* camera;
 Game::Game(Shader* shader, double screenWidth, double screenHeight) :
 m_shader(shader)
 {
+	std::cout << "DELTA: " << Time::DELTA << std::endl;
 	camera = new Camera();
 	camera->reinitPerspectiveMatrix(.01f, 1000.0f, 70.0f, 800.0f, 600.0f);
 	shader->addUniform("transform");
@@ -29,7 +30,7 @@ void Game::ProcessInput(Input* &m_input)
 void Game::Update()
 {
 	float tmpUpdate = std::sin(Time::GetTime());
-	m_transform->setTranslationExplicit(tmpUpdate, 0.0, -5.0f);
+	m_transform->setTranslationExplicit(tmpUpdate, 0.0, 5.0f);
 	//m_transform->setRotationExplicit(0.0, tmpUpdate*360.0, 0.0);
 	//m_transform->setScaleExplicit(tmpUpdate, tmpUpdate, tmpUpdate);
 }

@@ -11,6 +11,7 @@ m_window(window),
 m_game(game)
 {
 	m_input = new Input(m_window);
+	Time::DELTA = m_frameTime;
 	isRunning = false;
 }
 

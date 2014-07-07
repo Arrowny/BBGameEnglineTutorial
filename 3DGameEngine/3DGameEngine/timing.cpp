@@ -32,6 +32,8 @@
 	static std::chrono::system_clock::time_point m_epoch = std::chrono::high_resolution_clock::now();
 #endif
 
+double Time::DELTA;
+
 double Time::GetTime()
 {
 	#ifdef OS_WINDOWS

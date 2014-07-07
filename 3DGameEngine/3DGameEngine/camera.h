@@ -3,6 +3,8 @@
 #include <glm\gtx\transform.hpp>
 #include "transform.h"
 #include "Input.h"
+#include "timing.h"
+
 class Camera
 {
 public:

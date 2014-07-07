@@ -3,6 +3,7 @@
 #include "game.h"
 #include "input.h"
 #include "shader.h"
+#include "timing.h"
 
 class CoreEngine
 {
