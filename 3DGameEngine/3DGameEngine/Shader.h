@@ -1,5 +1,6 @@
 #pragma once
 
+#include <map>
 #include <string>
 #include <GL/glew.h>
 #include <glm\glm.hpp>
@@ -8,6 +9,7 @@
 #include "directionalLight.h"
 #include "baseLight.h"
 #include "Material.h"
+#include "pointLight.h"
 
 class Shader
 {
@@ -16,11 +18,19 @@ public:
 
 	void Bind();
 	void Update(const Transform& transform, const Camera camera, const glm::fvec4 color, float specI, float specP);
+	static void SetPointLights(pointLight* pointLights, int arraySize);
+	void AddUniform(const std::string& uniform);
+
+	void SetUniformi(const std::string& name, int value);
+	void SetUniformf(const std::string& name, float value);
+	void SetUniform(const std::string& name, const glm::fmat4& value);
+	void SetUniform(const std::string& name, const glm::fvec3& value);
 
 	virtual ~Shader();
 protected:
 private:
 	static const unsigned int NUM_SHADERS = 2;
+	static const unsigned int MAX_POINT_LIGHTS = 4;
 	Shader(const Shader& other) {}
 	void operator=(const Shader& other) {}
 
@@ -38,6 +48,12 @@ private:
 		SPECI_U,
 		SPECP_U,
 		EYEPOS_U,
+		POINTLBC_U,
+		POINTLBI_U,
+		POINTLAC_U,
+		POINTLAL_U,
+		POINTLAE_U,
+		POINTLP_U,
 
 		NUM_UNIFORMS
 	};
@@ -49,6 +65,9 @@ private:
 	GLuint m_program;
 	GLuint m_shaders[NUM_SHADERS];
 	GLuint m_uniforms[NUM_UNIFORMS];
+	std::map<std::string, int> n_uniforms;
 	static directionalLight m_directionalLight;
+	static pointLight* m_pointLights;
+	static int m_numPointLights;
 
 };

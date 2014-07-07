@@ -1,9 +1,15 @@
 #include "shader.h"
 #include <fstream>
 #include <iostream>
+#include <sstream>
+#include <cassert>
+#include <cstdlib>
 
 glm::fvec3 ambientLight(0.2f, 0.2f, 0.2f);
 directionalLight Shader::m_directionalLight = directionalLight(baseLight(glm::fvec3(1, 1, 1), 0.8f), glm::fvec3(0.0f, 0.2f, -0.5f));
+pointLight* Shader::m_pointLights = NULL;
+int Shader::m_numPointLights = 0;
+
 
 Shader::Shader(const std::string& fileName)
 {
@@ -37,6 +43,28 @@ Shader::Shader(const std::string& fileName)
 	m_uniforms[SPECI_U] = glGetUniformLocation(m_program, "specularIntensity");
 	m_uniforms[SPECP_U] = glGetUniformLocation(m_program, "specularPower");
 	m_uniforms[EYEPOS_U] = glGetUniformLocation(m_program, "eyePos");
+
+	for (int i = 0; i < MAX_POINT_LIGHTS; i++)
+	{
+		std::ostringstream pointLightNameBuilder;
+		pointLightNameBuilder << "pointLights[" << i << "]";
+		std::string pointLightName = pointLightNameBuilder.str();
+
+		std::string baseColor		= pointLightName + ".base.color";
+		std::string baseIntensity	= pointLightName + ".base.intensity";
+		std::string attenConstant	= pointLightName + ".atten.constant";
+		std::string attenLinear		= pointLightName + ".atten.linear";
+		std::string attenExponent	= pointLightName + ".atten.exponent";
+		std::string position		= pointLightName + ".position";
+
+		m_uniforms[POINTLBC_U] = glGetUniformLocation(m_program, baseColor.c_str());
+		m_uniforms[POINTLBI_U] = glGetUniformLocation(m_program, baseIntensity.c_str());
+		m_uniforms[POINTLAC_U] = glGetUniformLocation(m_program, attenConstant.c_str());
+		m_uniforms[POINTLAL_U] = glGetUniformLocation(m_program, attenExponent.c_str());
+		m_uniforms[POINTLAE_U] = glGetUniformLocation(m_program, attenLinear.c_str());
+		m_uniforms[POINTLP_U] = glGetUniformLocation(m_program, position.c_str());
+		
+	}
 }
 
 Shader::~Shader()
@@ -76,9 +104,14 @@ void Shader::Update(const Transform& transform, const Camera camera, const glm::
 	glUniform1f(m_uniforms[SPECI_U], (float)specI);
 	glUniform1f(m_uniforms[SPECP_U], (float)specP);
 	glUniform3f(m_uniforms[EYEPOS_U], (float)eyePos[0], (float)eyePos[1], (float)eyePos[2]);
+	glUniform3f(m_uniforms[POINTLBC_U], (float)m_pointLights->base.m_color[0], (float)m_pointLights->base.m_color[1], (float)m_pointLights->base.m_color[2]);
+	glUniform1f(m_uniforms[POINTLBI_U], (float)m_pointLights->base.m_intensity);
+	glUniform1f(m_uniforms[POINTLAC_U], (float)m_pointLights->atten.m_constant);
+	glUniform1f(m_uniforms[POINTLAE_U], (float)m_pointLights->atten.m_exponent);
+	glUniform1f(m_uniforms[POINTLAL_U], (float)m_pointLights->atten.m_linear);
+	glUniform3f(m_uniforms[POINTLP_U], (float)m_pointLights->position[0], (float)m_pointLights->position[1], (float)m_pointLights->position[2]);
 
 }
-
 
 std::string Shader::LoadShader(const std::string& fileName)
 {
@@ -144,4 +177,18 @@ GLuint Shader::CreateShader(const std::string& text, GLenum shaderType)
 	CheckShaderError(shader, GL_COMPILE_STATUS, false, "Error compiling shader!");
 
 	return shader;
+}
+
+void Shader::SetPointLights(pointLight* pointLights, int arraySize)
+{
+	if (arraySize > MAX_POINT_LIGHTS)
+	{
+		std::cerr << "Error: Too many point lights. Max allowed:" << MAX_POINT_LIGHTS << "Making:" << arraySize << std::endl;
+	}
+	else
+	{
+		Shader::m_numPointLights = arraySize;
+		Shader::m_pointLights = pointLights;
+		
+	}
 }

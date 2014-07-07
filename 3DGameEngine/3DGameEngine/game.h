@@ -7,6 +7,7 @@
 #include "Shader.h"
 #include "Camera.h"
 #include "Texture.h"
+#include "pointLight.h"
 
 class Game
 {
@@ -32,6 +33,7 @@ private:
 	Texture*	m_texture;
 	glm::vec4*	m_color;
 	Material	m_material;
+	pointLight* m_pLights;
 
 };
 

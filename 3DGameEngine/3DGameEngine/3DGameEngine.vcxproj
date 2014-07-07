@@ -92,6 +92,7 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Attenuation.h" />
     <ClInclude Include="baseLight.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="coreEngine.h" />
@@ -102,6 +103,7 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="obj_loader.h" />
+    <ClInclude Include="pointLight.h" />
     <ClInclude Include="RenderUtil.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stb_image.h" />

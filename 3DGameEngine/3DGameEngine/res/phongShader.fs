@@ -1,5 +1,8 @@
 #version 330
 
+const int MAX_POINT_LIGHTS = 4;
+
+
 in vec4 color;
 
 varying vec2 texCoord0;
@@ -18,12 +21,27 @@ struct DirectionalLight
     vec3 direction;
 };
 
+struct Attenuation
+{
+    float constant;
+    float linear;
+    float exponent;
+};
+
+struct PointLight
+{
+    BaseLight base;
+    Attenuation atten;
+    vec3 position;
+};
+
 uniform sampler2D diffuse;
 uniform vec3 lightDirection;
 uniform vec3 ambientLight;
 uniform vec3 eyePos;
 
 uniform DirectionalLight directionalLight;
+uniform PointLight pointLights[MAX_POINT_LIGHTS];
 
 uniform float specularIntensity;
 uniform float specularPower;
@@ -60,6 +78,22 @@ vec4 calcDirectionalLight(DirectionalLight directionalLight, vec3 normal)
     return calcLight(directionalLight.base, -directionalLight.direction, normal);
 }
 
+vec4 calcPointLight(PointLight pointLight, vec3 normal)
+{
+    vec3 lightDirection = worldPos0 - pointLight.position;
+    float distanceToPoint = length(lightDirection);
+    lightDirection = normalize(lightDirection);
+
+    vec4 color = calcLight(pointLight.base, lightDirection, normal);
+
+    float attenuation = pointLight.atten.constant + 
+                        pointLight.atten.linear * distanceToPoint + 
+                        pointLight.atten.exponent * distanceToPoint * distanceToPoint +
+                        0.0001;
+
+    return color / attenuation;
+}
+
 void main()
 {
 
@@ -69,6 +103,11 @@ void main()
     vec3 normal = normalize(normal0);
 
     totalLight += calcDirectionalLight(directionalLight, normal);
+
+    for(int i = 0; i < MAX_POINT_LIGHTS; i++)
+    {
+        totalLight += calcPointLight(pointLights[i], normal);
+    }
 
 	gl_FragColor = color * texture * totalLight;
 

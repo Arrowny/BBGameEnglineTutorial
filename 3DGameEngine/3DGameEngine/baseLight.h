@@ -11,8 +11,7 @@ public:
 	baseLight(const glm::fvec3& color = glm::fvec3(0, 0, 0), float intensity = 0):
 		m_color(color),
 		m_intensity(intensity)
-	{
-	}
+	{}
 
 protected:
 private:
