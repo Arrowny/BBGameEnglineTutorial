@@ -15,7 +15,7 @@ public:
 	Game(Mesh* mesh, Shader* shader, Transform transform, Camera camera);
 	~Game();
 
-	void input();
+	void input(Input& input);
 	void update();
 	void render();
 

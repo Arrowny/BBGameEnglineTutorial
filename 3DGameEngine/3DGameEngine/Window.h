@@ -19,6 +19,9 @@ public:
 	void Dispose();
 	void SwapBuffers();
 	inline SDL_Window* GetSDLWindow() { return m_window; }
+	inline Input GetInput() { return m_input; }
+	inline float GetWidth() { return WIDTH; }
+	inline float GetHeight() { return HEIGHT; }
 
 	bool m_isClosed;
 
@@ -27,7 +30,9 @@ private:
 	SDL_GLContext	m_glContext;
 	Input			m_input;
 
-	//Check if window is 'X'ed
+	float WIDTH;
+	float HEIGHT;
+
 	//bool m_isClosed;
 };
 

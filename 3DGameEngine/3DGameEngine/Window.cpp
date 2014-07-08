@@ -5,6 +5,9 @@
 Window::Window(int width, int height, const std::string& title):
 m_input(this)
 {
+	WIDTH = (float)width;
+	HEIGHT = (float)height;
+
 	SDL_Init(SDL_INIT_EVERYTHING);
 
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
@@ -111,7 +114,7 @@ void Window::Update()
 
 void Window::Render(){
 
-	Color(2.0f, 1.5f, 0.0f, 0.5f);
+	Color(1.0f, 1.0f, 0.0f, 0.5f);
 
 
 }

@@ -69,7 +69,7 @@ void coreEngine::Run(){
 
 		if (frameCounter >= 1.0){
 
-			std::cout << "Frames/sec:" << frames << std::endl;
+			//std::cout << "Frames/sec:" << frames << std::endl;
 			frames = 0;
 			frameCounter = 0;
 
@@ -88,12 +88,10 @@ void coreEngine::Run(){
 				Stop();
 			}
 
-			m_game->input();
+			m_game->input(m_window->GetInput());
 			m_game->update();
 
-			Time::setDelta(m_frameTime);
-
-			
+			Time::setDelta(m_frameTime);		
 		}
 
 		if (render){

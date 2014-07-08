@@ -1,7 +1,10 @@
 #pragma once
-#include <glm/glm.hpp>
+//#include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
-#include <glm/vec3.hpp>
+#include<glm/gtx/rotate_vector.hpp>
+#include "Input.h"
+#include "timing.h"
+#include "Window.h"
 
 
 class Camera
@@ -14,8 +17,8 @@ public:
 		m_forward = glm::vec3(0, 0, 1);
 		m_up = glm::vec3(0, 1, 0);
 
-		glm::normalize(m_up);
-		glm::normalize(m_forward);
+		m_up = glm::normalize(m_up);
+		m_forward = glm::normalize(m_forward);
 	}
 
 	inline glm::mat4 GetViewProjection() const
@@ -23,36 +26,125 @@ public:
 		return m_perspective * glm::lookAt(m_position, m_position + m_forward, m_up);
 	}
 
-	inline void move(glm::vec3 dir, float amt)
+
+	void Input(Input input)
 	{
-		m_position = m_position + dir * amt;
+		float movAmt = (float)(10 * Time::getDelta());
+		//std::cout << "movAmt: "<<movAmt << std::endl;
+
+		float rotAmt = (float)(100 * Time::getDelta());
+
+
+		
+		if (input.GetKey(input.KEY_W))
+			move(m_forward,movAmt);
+		if (input.GetKey(input.KEY_S))
+			move(m_forward, -movAmt);
+		if (input.GetKey(input.KEY_A))
+			move(GetLeft(), movAmt);
+		if (input.GetKey(input.KEY_D))
+			move(GetRight(), movAmt);
+
+		if (input.GetKey(input.KEY_UP))
+			RotateX(-rotAmt);
+		if (input.GetKey(input.KEY_DOWN))
+			RotateX(rotAmt);
+		if (input.GetKey(input.KEY_LEFT))
+			RotateY(-rotAmt);
+		if (input.GetKey(input.KEY_RIGHT))
+			RotateY(rotAmt);
 	}
+
+
+	inline void move(glm::fvec3 dir, float amt)
+	{
+		m_position = m_position + (dir * amt);
+	}	
 
 	inline void RotateX(float angle)
 	{
-		glm::vec3 Haxis = glm::cross(glm::vec3(0, 1, 0), m_forward);
-		glm::normalize(Haxis);
+		glm::fvec3 Haxis = glm::cross(yAxis, m_forward);
+		Haxis = glm::normalize(Haxis);
+		
+		m_forward = glm::rotate(m_forward, angle, Haxis);
+		m_forward = glm::normalize(m_forward);
 
-		m_forward = glm::ro
+		m_up = glm::cross(m_forward, Haxis);
+		m_up = glm::normalize(m_up);
 	}
-	inline glm::vec3 GetLeft()
+
+	inline void RotateY(float angle)
 	{
-		glm::vec3 left = glm::cross(m_up, m_forward);
-		glm::normalize(left);
+		glm::fvec3 Haxis = glm::cross(yAxis, m_forward);
+		Haxis = glm::normalize(Haxis);
+
+		m_forward = glm::rotate(m_forward, angle, yAxis);
+		m_forward = glm::normalize(m_forward);
+
+		m_up = glm::cross(m_forward, Haxis);
+		m_up = glm::normalize(m_up);
+	}
+
+	inline glm::fvec3 GetLeft()
+	{
+		glm::fvec3 left = glm::cross(m_forward, m_up);
+		left = glm::normalize(left);
 		return left;
 	}
 
-	inline glm::vec3 GetRight()
+	inline glm::fvec3 GetRight()
 	{
-		glm::vec3 right = glm::cross(m_forward, m_up);
-		glm::normalize(right);
+		glm::fvec3 right = glm::cross(m_up, m_forward);
+		right = glm::normalize(right);
 		return right;
 	}
 
-	inline glm::vec3 GetPos()
+	inline glm::fvec3 GetPos() const
 	{
 		return m_position;
 	}
+	 
+	inline glm::fvec3 GetUp() const
+	{
+		return m_up;
+	}
+
+	inline glm::fvec3 GetForward() const
+	{
+		return m_forward;
+	}
+
+	//inline glm::mat4 InitCamera(glm::fvec3& forward, glm::fvec3& up) const
+	//{	
+	//	glm::mat4 m;
+
+	//	glm::fvec3 f = forward;
+	//	f = glm::normalize(f);
+
+	//	glm::fvec3 r = up;
+	//	r = glm::normalize(r);
+	//	r = glm::cross(r, f);
+
+	//	glm::fvec3 u = glm::cross(f, r);
+
+	//	m[0][0] = r.x;	m[0][1] = r.y;	m[0][2] = r.z;	m[0][3] = 0;
+	//	m[1][0] = u.x;	m[1][1] = u.y;	m[1][2] = u.z;	m[1][3] = 0;
+	//	m[2][0] = f.x;	m[2][1] = f.y;	m[2][2] = f.z;	m[2][3] = 0;
+	//	m[3][0] = 0;	m[3][1] = 0;	m[3][2] = 0;	m[3][3] = 1;
+	//	
+	//	return m;
+	//}
+
+	//inline glm::mat4 InitTranslation(float x, float y, float z) const
+	//{
+	//	glm::mat4 m;
+	//	m[0][0] = 1;	m[0][1] = 0;	m[0][2] = 0;	m[0][3] = x;
+	//	m[1][0] = 0;	m[1][1] = 1;	m[1][2] = 0;	m[1][3] = y;
+	//	m[2][0] = 0;	m[2][1] = 0;	m[2][2] = 1;	m[2][3] = z;
+	//	m[3][0] = 0;	m[3][1] = 0;	m[3][2] = 0;	m[3][3] = 1;
+
+	//	return m;
+	//}
 
 private:
 	glm::mat4 m_perspective;
@@ -60,6 +152,6 @@ private:
 	glm::vec3 m_forward;
 	glm::vec3 m_up;
 
-
+	const glm::fvec3 yAxis = glm::fvec3(0, 1, 0);
 };
 
