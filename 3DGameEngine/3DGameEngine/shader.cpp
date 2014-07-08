@@ -30,7 +30,7 @@ namespace
 				glGetShaderInfoLog(shader, sizeof(error), NULL, error);
 			}
 
-			std::cerr << errorMessage << ": " << error << "." << std::endl;
+			std::cerr << errorMessage << ": " << error << std::endl;
 		}
 	}
 
@@ -78,10 +78,6 @@ Shader::Shader(const std::string& fileName)
 
 	glValidateProgram(m_program);
 	CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: Shader program linking failed");
-
-	addUniform("transform");
-	addUniform("color");
-	addUniform("isTextured");
 }
 
 
@@ -137,22 +133,4 @@ void Shader::setUniform(std::string uniformName, glm::vec4 value)
 void Shader::setUniform(std::string uniformName, glm::mat4 value)
 {
 	glUniformMatrix4fv(m_uniforms[uniformName], 1, GL_FALSE, &value[0][0]);
-}
-
-void Shader::updateBasicUniformsAndTexture(glm::mat4 projectionMatrix, glm::mat4 worldMatrix, Material* mat)
-{
-
-	setUniform("transform", projectionMatrix*worldMatrix);
-	setUniform("color", mat->m_color);
-
-	if (mat->m_texture != NULL)
-	{
-		mat->m_texture->Bind(0); //TODO: update so that multiple textures can be bound
-		setUniform("isTextured", true);
-	}
-	else
-	{
-		Util::unbindTexture();
-		setUniform("isTextured", false);
-	}
 }

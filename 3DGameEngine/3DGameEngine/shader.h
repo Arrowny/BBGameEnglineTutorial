@@ -4,6 +4,7 @@
 #include <GL\glew.h>
 #include <glm\glm.hpp>
 #include "material.h"
+#include "util.h"
 
 class Shader
 {
@@ -20,7 +21,7 @@ public:
 	void setUniform(std::string uniformName, glm::vec4 value);
 	void setUniform(std::string uniformName, glm::mat4 value);
 
-	void updateBasicUniformsAndTexture(glm::mat4 projectionMatrix, glm::mat4 worldMatrix,Material* mat);
+	virtual void updateBasicUniformsAndTexture(glm::mat4 projectionMatrix, glm::mat4 worldMatrix,Material* mat) = 0;
 
 private:
 	Shader(const Shader& other) {}

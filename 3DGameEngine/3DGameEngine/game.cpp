@@ -8,7 +8,7 @@ Mesh* TestMesh;
 Material* TestMaterial;
 
 
-Game::Game(Shader* shader, double screenWidth, double screenHeight) :
+Game::Game(PhongShader* shader, double screenWidth, double screenHeight) :
 m_shader(shader)
 {
 	std::vector<glm::vec3> vertices;

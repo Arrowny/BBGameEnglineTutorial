@@ -2,6 +2,7 @@
 #include "window.h"
 #include <SDL\SDL.h>
 #include <GL\glew.h>
+#include <glm\glm.hpp>
 #include "coreEngine.h"
 #include "game.h"
 #include "phongShader.h"
@@ -18,8 +19,8 @@ int main(int argc, char** argv)
 	std::cout << "Start 3D game engine" << std::endl;
 
 	Window window(WIDTH, HEIGHT, TITLE);
-	Shader* shader = new PhongShader("./res/shaders/shader");
-	Game game(shader,WIDTH,HEIGHT);
+	PhongShader* pShader = new PhongShader("./res/shaders/phongShader", glm::vec3(0.1,0.1,0.1));
+	Game game(pShader, WIDTH, HEIGHT);
 	CoreEngine core(double(FRAME_CAP), &window, &game);
 	core.start();
 	return 0;

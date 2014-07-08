@@ -1,6 +1,7 @@
 #pragma once
 #include "input.h"
 #include "shader.h"
+#include "phongShader.h"
 #include "transform.h"
 #include "mesh.h"
 #include "material.h"
@@ -13,7 +14,7 @@
 class Game
 {
 public:
-	Game(Shader* shader, double screenWidth, double screenHeight);
+	Game(PhongShader* shader, double screenWidth, double screenHeight);
 	virtual ~Game();
 
 	void ProcessInput(Input* &m_input);
@@ -24,7 +25,7 @@ private:
 	Game(const Game& other) {}
 	void operator=(const Game& other) {}
 
-	Shader* m_shader;
+	PhongShader* m_shader;
 	Transform* m_worldTransform;
 	Camera* m_camera;
 
