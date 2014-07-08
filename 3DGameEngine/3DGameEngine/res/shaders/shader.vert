@@ -1,11 +1,12 @@
 #version 400
 
-attribute vec3 position;
-attribute vec2 textCoord;
+layout(location = 0) in vec3 position;
+layout(location = 1) in vec2 textCoord;
+out vec2 textCoord0;
 
 uniform mat4 transform;
 
-varying vec2 textCoord0;
+
 
 void main()
 {

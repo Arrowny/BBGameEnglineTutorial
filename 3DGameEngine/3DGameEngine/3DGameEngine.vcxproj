@@ -77,8 +77,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="baseLight.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="coreEngine.h" />
+    <ClInclude Include="directionalLight.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="material.h" />

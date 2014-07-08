@@ -1,10 +1,14 @@
 #version 400
 
+
+in vec2 textCoord0;
+layout(location = 0) out fragColor;
+
 uniform sampler2D diffuse;
 uniform vec3 color;
 uniform bool isTextured;
 
-varying vec2 textCoord0;
+
 
 void main()
 {
@@ -13,10 +17,10 @@ void main()
 
 	if(isTextured)
 	{
-		gl_FragColor = textureColor*vec4(color,1.0);
+		fragColor = textureColor*vec4(color,1.0);
 	}
 	else
 	{
-		gl_FragColor = vec4(color,1.0);
+		fragColor = vec4(color,1.0);
 	}
 }

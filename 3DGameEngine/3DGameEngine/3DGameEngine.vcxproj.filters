@@ -69,6 +69,12 @@
     <ClInclude Include="phongShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="baseLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="directionalLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="window.cpp">
