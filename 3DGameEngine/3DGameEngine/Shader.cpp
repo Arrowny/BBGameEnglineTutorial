@@ -50,12 +50,15 @@ Shader::Shader(const std::string& fileName)
 	m_uniforms[POINTLAL_1] = glGetUniformLocation(m_program, "pointLights[0].atten.linear");
 	m_uniforms[POINTLAE_1] = glGetUniformLocation(m_program, "pointLights[0].atten.exponent");
 	m_uniforms[POINTLP_1] = glGetUniformLocation(m_program, "pointLights[0].position");
+	m_uniforms[POINTLR_1] = glGetUniformLocation(m_program, "pointLights[0].range");
+
 	m_uniforms[POINTLBC_2] = glGetUniformLocation(m_program, "pointLights[1].base.color");
 	m_uniforms[POINTLBI_2] = glGetUniformLocation(m_program, "pointLights[1].base.intensity");
 	m_uniforms[POINTLAC_2] = glGetUniformLocation(m_program, "pointLights[1].atten.constant");
 	m_uniforms[POINTLAL_2] = glGetUniformLocation(m_program, "pointLights[1].atten.linear");
 	m_uniforms[POINTLAE_2] = glGetUniformLocation(m_program, "pointLights[1].atten.exponent");
 	m_uniforms[POINTLP_2] = glGetUniformLocation(m_program, "pointLights[1].position");
+	m_uniforms[POINTLR_2] = glGetUniformLocation(m_program, "pointLights[1].range");
 
 	/*for (int i = 0; i < MAX_POINT_LIGHTS; i++)
 	{
@@ -124,6 +127,7 @@ void Shader::Update(const Transform& transform, const Camera camera, const glm::
 	glUniform1f(m_uniforms[POINTLAE_1], (float)m_pointLights[0].atten.m_exponent);
 	glUniform1f(m_uniforms[POINTLAL_1], (float)m_pointLights[0].atten.m_linear);
 	glUniform3f(m_uniforms[POINTLP_1], (float)m_pointLights[0].position[0], (float)m_pointLights[0].position[1], (float)m_pointLights[0].position[2]);
+	glUniform1f(m_uniforms[POINTLR_1], (float)m_pointLights[0].range);
 
 	glUniform3f(m_uniforms[POINTLBC_2], (float)m_pointLights[1].base.m_color[0], (float)m_pointLights[1].base.m_color[1], (float)m_pointLights[1].base.m_color[2]);
 	glUniform1f(m_uniforms[POINTLBI_2], (float)m_pointLights[1].base.m_intensity);
@@ -131,6 +135,7 @@ void Shader::Update(const Transform& transform, const Camera camera, const glm::
 	glUniform1f(m_uniforms[POINTLAE_2], (float)m_pointLights[1].atten.m_exponent);
 	glUniform1f(m_uniforms[POINTLAL_2], (float)m_pointLights[1].atten.m_linear);
 	glUniform3f(m_uniforms[POINTLP_2], (float)m_pointLights[1].position[0], (float)m_pointLights[1].position[1], (float)m_pointLights[1].position[2]);
+	glUniform1f(m_uniforms[POINTLR_2], (float)m_pointLights[1].range);
 
 }
 

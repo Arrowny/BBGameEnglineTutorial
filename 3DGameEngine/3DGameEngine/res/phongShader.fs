@@ -2,7 +2,6 @@
 
 const int MAX_POINT_LIGHTS = 4;
 
-
 in vec4 color;
 
 varying vec2 texCoord0;
@@ -33,6 +32,7 @@ struct PointLight
     BaseLight base;
     Attenuation atten;
     vec3 position;
+    float range;
 };
 
 uniform sampler2D diffuse;
@@ -82,6 +82,12 @@ vec4 calcPointLight(PointLight pointLight, vec3 normal)
 {
     vec3 lightDirection = worldPos0 - pointLight.position;
     float distanceToPoint = length(lightDirection);
+
+    if(distanceToPoint > pointLight.range)
+    {
+        return vec4(0, 0, 0, 0);
+    }
+
     lightDirection = normalize(lightDirection);
 
     vec4 color = calcLight(pointLight.base, lightDirection, normal);
@@ -106,7 +112,10 @@ void main()
 
     for(int i = 0; i < MAX_POINT_LIGHTS; i++)
     {
-        totalLight += calcPointLight(pointLights[i], normal);
+        if(pointLights[i].base.intensity > 0)
+        {
+            totalLight += calcPointLight(pointLights[i], normal);
+        }
     }
 
 	gl_FragColor = color * texture * totalLight;

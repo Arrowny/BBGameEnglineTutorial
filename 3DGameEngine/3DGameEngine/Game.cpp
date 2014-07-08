@@ -1,8 +1,8 @@
 #include "Game.h"
 #include "main.h"
 
-pointLight pLight1 = pointLight(baseLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.8f), Attenuation(0, 0, 1), glm::fvec3(-2.0f, 0.0f, -1.0f));
-pointLight pLight2 = pointLight(baseLight(glm::fvec3(0.0f, 0.0f, 1.0f), 0.8f), Attenuation(0, 0, 1), glm::fvec3(2.0f, 0.0f, -1.0f));
+pointLight pLight1 = pointLight(baseLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.8f), Attenuation(1, 0, 1), glm::fvec3(-2.0f, 0.0f, -1.0f), 10);
+pointLight pLight2 = pointLight(baseLight(glm::fvec3(0.0f, 0.0f, 1.0f), 0.8f), Attenuation(1, 0, 1), glm::fvec3(2.0f, 0.0f, -1.0f), 10);
 
 Game::~Game()
 {
@@ -30,7 +30,7 @@ void Game::init(){
 	m_camera = new Camera(glm::vec3(0.0f, 0.0f, -10.0f), 70.0f, (float)Window::getWidth() / (float)Window::getHeight(), 0.1f, 1000.0f);
 
 	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
-	m_mesh = new Mesh("./res/shield.obj");
+	m_mesh = new Mesh("./res/triforce.obj");
 	//Shader shader("./res/basicShader");
 	m_shader = new Shader("./res/phongShader");
 	m_texture = new Texture("./res/colour.jpg");
@@ -64,8 +64,8 @@ void Game::update(){
 	//transform.GetRot().y = counter * 50;
 	//transform.SetScale(glm::vec3(0.1f , 0.1f, 0.1f));
 
-	m_pLights[0].position = (glm::fvec3(sinCounter * 3, 0, -0.5));
-	m_pLights[1].position = (glm::fvec3(0.0, sinCounter * 3, -0.5));
+	m_pLights[0].position = (glm::fvec3(sinCounter * 2.5, 0, -0.5));
+	m_pLights[1].position = (glm::fvec3(0.0, sinCounter * 2.5, -0.5));
 
 	m_shader->Update(transform, *m_camera, m_material.color, m_material.specularIntensity, m_material.specularPower);
 	counter += 0.0003f;
