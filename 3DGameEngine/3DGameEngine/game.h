@@ -12,7 +12,6 @@
 class Game
 {
 public:
-	/*Game(Mesh* mesh, Shader* shader, Camera* camera, Texture* texture, glm::vec4* color);*/
 	Game() {}
 	~Game();
 
