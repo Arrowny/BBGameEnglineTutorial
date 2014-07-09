@@ -19,10 +19,12 @@ Game::Game()
 
 	m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
 	//Mesh mesh("./res/cube.obj");
-	m_shader = new Shader("./res/basicShader");
+	m_shader = new Shader("./res/phongShader");
 	m_transform = new Transform();
 	m_camera = new Camera(glm::vec3(0, 0, -4), 70.0f, (float)WindowParameter::width/ (float)WindowParameter::height, 1.0f, 1000.0f);
 	m_material = new Material( new Texture("./res/bricks.jpg"), glm::fvec3(0.0,1.0,1.0));
+
+	m_shader->SetAmbient(glm::fvec3(0.3, 0.3, 0.3));
 }
 
 Game::~Game()
@@ -47,6 +49,6 @@ void Game::update(){
 void Game::render(){
 	m_shader->Bind();
 	m_shader->Update(*m_transform, *m_camera, *m_material);
-	m_material->GetTexture()->Bind(0);
+	m_material->m_texture->Bind(0);
 	m_mesh->Draw();
 }

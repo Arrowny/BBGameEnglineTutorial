@@ -14,6 +14,8 @@ public:
 	void Update(Transform& transform,Camera& camera, Material& material);
 	//void Update(float value);
 
+	inline void SetAmbient(glm::fvec3 ambient) { ambientLight = ambient; }
+
 	~Shader();
 
 private:
@@ -27,6 +29,7 @@ private:
 	{
 		TRANSFORM_U,
 		BASIC_COLOR_U,
+		L_AMBIENT_U,
 		FLOAT_U,
 
 		NUM_UNIFORMS
@@ -35,5 +38,7 @@ private:
 	GLuint m_program;
 	GLuint m_shaders[NUM_SHADERS];
 	GLuint m_uniforms[NUM_UNIFORMS];
+
+	glm::vec3 ambientLight;
 };
 

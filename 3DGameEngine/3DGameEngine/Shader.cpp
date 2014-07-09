@@ -22,6 +22,7 @@ Shader::Shader(const std::string& fileName)
 
 	m_uniforms[TRANSFORM_U] = glGetUniformLocation(m_program, "transform");
 	m_uniforms[BASIC_COLOR_U] = glGetUniformLocation(m_program, "basicColor");
+	m_uniforms[L_AMBIENT_U] = glGetUniformLocation(m_program, "ambientLight");
 	//m_uniforms[FLOAT_U] = glGetUniformLocation(m_program, "uniformfloat");
 }
 
@@ -49,7 +50,8 @@ void Shader::Update(Transform& transform, Camera& camera, Material& material)
 
 	//glm::mat4 model = transform.GetModel();
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
-	glUniform3f(m_uniforms[BASIC_COLOR_U], (GLfloat)material.GetColor().x, (GLfloat)material.GetColor().y, (GLfloat)material.GetColor().z);
+	glUniform3fv(m_uniforms[BASIC_COLOR_U], 1, &material.basic_color[0]);//, (GLfloat)material.GetColor().y, (GLfloat)material.GetColor().z);
+	glUniform3fv(m_uniforms[L_AMBIENT_U],1,&ambientLight[0]);
 }
 
 //void Shader::Update(float value)

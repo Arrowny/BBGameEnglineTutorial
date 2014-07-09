@@ -12,7 +12,11 @@ uniform sampler2D diffuse;
 
 void main()
 {
+	vec4 textureColor = texture2D(diffuse, texCoord0.xy);
 
-   // gl_FragColor = color;
-   gl_FragColor = texture2D(diffuse, texCoord0) * vec4(basicColor,1.0);
-}
+	if(textureColor == vec4(0,0,0,0))
+		{gl_FragColor = vec4(basicColor,1);}
+   else
+   	    {gl_FragColor = textureColor * vec4(basicColor,1.0);}
+    gl_FragColor;
+}	
