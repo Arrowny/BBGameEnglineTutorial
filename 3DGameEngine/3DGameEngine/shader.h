@@ -5,6 +5,7 @@
 #include <glm\glm.hpp>
 #include "material.h"
 #include "util.h"
+#include "camera.h"
 
 class Shader
 {
@@ -21,7 +22,7 @@ public:
 	void setUniform(std::string uniformName, glm::vec4 value);
 	void setUniform(std::string uniformName, glm::mat4 value);
 
-	virtual void updateBasicUniformsAndTexture(glm::mat4 projectionMatrix, glm::mat4 worldMatrix,Material* mat) = 0;
+	virtual void updateBasicUniformsAndTexture(Camera& camera, const glm::mat4& worldMatrix, const Material& mat) = 0;
 
 private:
 	Shader(const Shader& other) {}

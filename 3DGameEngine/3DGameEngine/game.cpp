@@ -61,6 +61,6 @@ void Game::Update()
 void Game::Render()
 {
 	m_shader->Bind();
-	m_shader->updateBasicUniformsAndTexture(m_camera->getProjectionTransform(), m_worldTransform->getTransformation(), TestMaterial);
+	m_shader->updateBasicUniformsAndTexture(*m_camera, m_worldTransform->getTransformation(), *TestMaterial);
 	TestMesh->Draw();
 }

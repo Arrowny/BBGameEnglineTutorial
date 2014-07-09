@@ -16,34 +16,15 @@ m_ambientLight(ambientLight)
 	addUniform("dLight.base.color");
 	addUniform("dLight.base.intensity");
 	addUniform("dLight.direction");
+	
+	addUniform("specularIntensity");
+	addUniform("specularPower");
+	addUniform("eyePos");
 }
 
 
 PhongShader::~PhongShader()
 {
-}
-
-void PhongShader::updateBasicUniformsAndTexture(glm::mat4 projectionMatrix, glm::mat4 worldMatrix, Material* mat)
-{
-
-	setUniform("ambientLight", m_ambientLight);
-	setUniform("baseColor", mat->m_color);
-	
-	setUniform("transformProjected", projectionMatrix*worldMatrix);
-	setUniform("transformWorld", worldMatrix);
-	setUniform("dLight", m_dLight);
-	
-
-	if (mat->m_texture != NULL)
-	{
-		mat->m_texture->Bind(0); //TODO: update so that multiple textures can be bound
-		setUniform("isTextured", true);
-	}
-	else
-	{
-		Util::unbindTexture();
-		setUniform("isTextured", false);
-	}
 }
 
 void PhongShader::setUniform(std::string uniformName, BaseLight base)
@@ -57,3 +38,34 @@ void PhongShader::setUniform(std::string uniformName, DirectionalLight dLight)
 	setUniform(uniformName + ".base", dLight.m_base);
 	setUniform(uniformName + ".direction", dLight.m_direction);
 }
+
+void PhongShader::updateBasicUniformsAndTexture(Camera& camera, const glm::mat4& worldMatrix, const Material& mat)
+{
+
+	setUniform("ambientLight", m_ambientLight);
+	setUniform("baseColor", mat.m_color);
+	
+	setUniform("transformProjected", camera.getProjectionTransform()*worldMatrix);
+	setUniform("transformWorld", worldMatrix);
+	setUniform("dLight", m_dLight);
+
+	setUniform("specularIntensity", mat.m_specularIntensity);
+	setUniform("specularPower", mat.m_specularPower);
+	setUniform("eyePos", camera.m_pos);
+	
+
+	if (mat.m_texture != NULL)
+	{
+		mat.m_texture->Bind(0); //TODO: update so that multiple textures can be bound
+		setUniform("isTextured", true);
+	}
+	else
+	{
+		Util::unbindTexture();
+		setUniform("isTextured", false);
+	}
+}
+
+
+
+
