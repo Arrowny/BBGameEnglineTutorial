@@ -11,8 +11,8 @@ Shader::Shader(const std::string& fileName)
 	for (unsigned int i = 0; i < NUM_SHADERS; i++)
 		glAttachShader(m_program, m_shaders[i]);
 
-	//glBindAttribLocation(m_program, 0, "position");    // because we are not using "attribute vec3 position;" in the vertex shader file
-	//glBindAttribLocation(m_program, 1, "texCoord");   
+	glBindAttribLocation(m_program, 0, "position");    // because we are not using "attribute vec3 position;" in the vertex shader file
+	glBindAttribLocation(m_program, 1, "texCoord");   
 
 	glLinkProgram(m_program);
 	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error: Porgram linking failed");
@@ -21,6 +21,7 @@ Shader::Shader(const std::string& fileName)
 	CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: Program is invalid");
 
 	m_uniforms[TRANSFORM_U] = glGetUniformLocation(m_program, "transform");
+	m_uniforms[BASIC_COLOR_U] = glGetUniformLocation(m_program, "basicColor");
 	//m_uniforms[FLOAT_U] = glGetUniformLocation(m_program, "uniformfloat");
 }
 
@@ -40,7 +41,7 @@ void Shader::Bind()
 	glUseProgram(m_program);
 }
 
-void Shader::Update(const Transform& transform, const Camera& camera)// add for transform
+void Shader::Update(Transform& transform, Camera& camera, Material& material)
 {
 	glm::mat4 model = camera.GetViewProjection() * transform.GetModel();
 	//glm::mat4 model = camera.GetViewProjection()* camera.InitCamera(camera.GetForward(), camera.GetUp())* 
@@ -48,6 +49,7 @@ void Shader::Update(const Transform& transform, const Camera& camera)// add for 
 
 	//glm::mat4 model = transform.GetModel();
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
+	glUniform3f(m_uniforms[BASIC_COLOR_U], (GLfloat)material.GetColor().x, (GLfloat)material.GetColor().y, (GLfloat)material.GetColor().z);
 }
 
 //void Shader::Update(float value)

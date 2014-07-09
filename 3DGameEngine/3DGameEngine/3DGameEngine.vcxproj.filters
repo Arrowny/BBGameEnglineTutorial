@@ -31,8 +31,22 @@
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="Window.h" />
+    <ClInclude Include="Material.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3DGameEngine.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="res">
+      <UniqueIdentifier>{c83df154-7df4-4aa4-8e8f-be041985fde2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\basicShader.fs">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\basicShader.vs">
+      <Filter>res</Filter>
+    </None>
   </ItemGroup>
 </Project>

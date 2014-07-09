@@ -6,10 +6,6 @@
 #include "Game.h"
 #include "RenderUtil.h"
 
-
-
-
-
 #define WIDTH 600
 #define HEIGHT 600
 #define TITLE "3DGameEngine"
@@ -22,13 +18,11 @@ int main(int argc, char** argv)
 	WindowParameter::width = WIDTH;
 	WindowParameter::height = HEIGHT;
 
-	
-
-	//Game game;
 	Game game;
 	RenderUtil renderUtil;
 	renderUtil.initGraphics();
 	coreEngine core(&game, &renderUtil, &window, FRAME_CAP);
+
 	core.Start();
 
 	return 0;

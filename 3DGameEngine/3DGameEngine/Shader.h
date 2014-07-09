@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 #include "Transform.h"	
 #include "Camera.h"
+#include "Material.h"
 
 class Shader
 {
@@ -10,7 +11,7 @@ public:
 
 	Shader(const std::string& fileName);
 	void Bind();//bind the shader, set the GPU in a state using vertex shader and frag shader in this class
-	void Update(const Transform& transform, const Camera& camera);
+	void Update(Transform& transform,Camera& camera, Material& material);
 	//void Update(float value);
 
 	~Shader();
@@ -25,6 +26,7 @@ private:
 	enum
 	{
 		TRANSFORM_U,
+		BASIC_COLOR_U,
 		FLOAT_U,
 
 		NUM_UNIFORMS

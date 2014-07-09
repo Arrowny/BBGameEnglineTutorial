@@ -7,7 +7,7 @@
 #include "Shader.h"
 #include "Transform.h"
 #include "Timing.h"
-#include "Texture.h"
+#include "Material.h"
 class Game
 {
 public:
@@ -25,7 +25,7 @@ private:
 	Shader* m_shader;
 	Transform* m_transform;
 	Camera* m_camera;
-	Texture* m_texture;
+	Material* m_material;
 };
 
 #endif // GAME_H

@@ -97,6 +97,7 @@
     <ClInclude Include="coreEngine.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="RenderUtil.h" />
     <ClInclude Include="resource.h" />
@@ -110,6 +111,10 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3DGameEngine.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\basicShader.fs" />
+    <None Include="res\basicShader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

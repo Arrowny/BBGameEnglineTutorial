@@ -22,7 +22,7 @@ Game::Game()
 	m_shader = new Shader("./res/basicShader");
 	m_transform = new Transform();
 	m_camera = new Camera(glm::vec3(0, 0, -4), 70.0f, (float)WindowParameter::width/ (float)WindowParameter::height, 1.0f, 1000.0f);
-	m_texture = new Texture("./res/bricks.jpg");
+	m_material = new Material( new Texture("./res/bricks.jpg"), glm::fvec3(0.0,1.0,1.0));
 }
 
 Game::~Game()
@@ -46,7 +46,7 @@ void Game::update(){
 
 void Game::render(){
 	m_shader->Bind();
-	m_shader->Update(*m_transform, *m_camera);
-	m_texture->Bind(0);
+	m_shader->Update(*m_transform, *m_camera, *m_material);
+	m_material->GetTexture()->Bind(0);
 	m_mesh->Draw();
 }

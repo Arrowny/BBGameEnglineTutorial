@@ -29,7 +29,6 @@ public:
 	bool mouselocked = false;
 
 	glm::vec2 centerPosition = glm::vec2(WindowParameter::width / 2, WindowParameter::height / 2);
-	//glm::vec2 centerPosition = glm::vec2(400, 300);
 
 	void Input(Input input)
 	{
@@ -56,7 +55,6 @@ public:
 			if (rotX || rotY)
 			{
 				input.SetMousePosition(glm::vec2(WindowParameter::width / 2, WindowParameter::height / 2));
-				//input.SetMousePosition(glm::vec2(400, 300));
 			}
 			//if (SDL_BUTTON_MIDDLE)
 			//	sdl_middle
