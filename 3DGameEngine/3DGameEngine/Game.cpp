@@ -3,12 +3,13 @@
 
 pointLight pLight1 = pointLight(baseLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.8f), Attenuation(0, 0, 1), glm::fvec3(-2.0f, 0.0f, -0.5f), 10);
 pointLight pLight2 = pointLight(baseLight(glm::fvec3(0.0f, 0.0f, 1.0f), 0.8f), Attenuation(0, 0, 1), glm::fvec3(2.0f, 0.0f, -0.5f), 10);
-spotLight sLight1 = spotLight(pointLight(baseLight(glm::fvec3(0, 1, 0), 0.8f), Attenuation(0, 0, 0.5f), glm::fvec3(-2, 0, 5), 30), glm::normalize(glm::fvec3(1, 1, 1)), 0.8f);
+spotLight sLight1 = spotLight(pointLight(baseLight(glm::fvec3(0, 1, 0), 0.8f), Attenuation(0, 0, 1.0f), glm::fvec3(-2, 0, 5), 30), glm::normalize(glm::fvec3(1, 1, 1)), 0.8f);
 
 Game::~Game()
 {
 	if (m_texture) delete m_texture;
 	if (m_mesh) delete m_mesh;
+	if (m_meshRenderer) delete m_meshRenderer;
 }
 
 void Game::init(){
@@ -30,12 +31,16 @@ void Game::init(){
 
 	m_camera = new Camera(glm::vec3(0.0f, 0.0f, -10.0f), 70.0f, (float)Window::getWidth() / (float)Window::getHeight(), 0.1f, 1000.0f);
 
+	m_root = gameObject();
 	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
-	m_mesh = new Mesh("./res/shield.obj");
-	//Shader shader("./res/basicShader");
-	m_shader = new Shader("./res/phongShader");
+	m_mesh = new Mesh("./res/triforce.obj");
 	m_texture = new Texture("./res/colour.jpg");
 	m_material = Material(m_texture, baseColor, 1, 24);
+	m_shader = new Shader("./res/phongShader");
+	//Shader shader("./res/basicShader");
+
+	m_meshRenderer = new meshRenderer(*m_mesh, m_material, *m_shader);
+	m_root.AddComponent(m_meshRenderer);
 
 	m_pLights = new pointLight[2];
 	m_pLights[0] = pLight1;
@@ -52,6 +57,7 @@ void Game::init(){
 void Game::input(const Input& input){
 	
 	m_camera->input(input);
+	m_root.input();
 
 }
 
@@ -66,7 +72,7 @@ void Game::update(){
 
 	//transform.GetPos().z = -10.0;
 	//transform.GetPos().x = sinCounter * 2;
-	//transform.GetRot().y = counter * 50;
+	transform.GetRot().y = counter * 50;
 	//transform.SetScale(glm::vec3(0.1f , 0.1f, 0.1f));
 
 	m_pLights[0].position = (glm::fvec3(sinCounter * 2.5, 0, -0.5));
@@ -76,14 +82,14 @@ void Game::update(){
 	m_sLights[0].direction = m_camera->getForward();
 
 	m_shader->Update(transform, *m_camera, m_material);
+	m_root.update();
+
 	counter += 0.0003f;
 
 }
 
 void Game::render(){
 
-	m_shader->Bind();
-	m_material.texture->Bind(0);
-	m_mesh->Draw();
+	m_root.render();
 
 }

@@ -91,7 +91,6 @@ void Shader::Bind()
 
 float temp = 0.0f;
 
-//void Shader::Update(const Transform& transform, const Camera camera, const glm::fvec4 color, float specI, float specP)
 void Shader::Update(const Transform& transform, const Camera camera, const Material& material)
 {
 	temp += Time::getDelta();

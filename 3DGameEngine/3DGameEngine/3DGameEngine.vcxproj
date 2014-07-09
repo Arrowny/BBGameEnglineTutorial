@@ -79,9 +79,11 @@
   <ItemGroup>
     <ClCompile Include="coreEngine.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="meshRenderer.cpp" />
     <ClCompile Include="obj_loader.cpp" />
     <ClCompile Include="RenderUtil.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -98,10 +100,13 @@
     <ClInclude Include="coreEngine.h" />
     <ClInclude Include="directionalLight.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="gameComponent.h" />
+    <ClInclude Include="gameObject.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="meshRenderer.h" />
     <ClInclude Include="obj_loader.h" />
     <ClInclude Include="pointLight.h" />
     <ClInclude Include="RenderUtil.h" />
