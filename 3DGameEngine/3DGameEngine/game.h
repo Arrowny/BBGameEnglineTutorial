@@ -12,7 +12,7 @@ class Game
 {
 public:
 	//Game();
-	Game(Mesh* mesh, Shader* shader, Transform transform, Camera camera, Texture* texture);
+	Game();
 	~Game();
 
 	void input(Input& input);
@@ -23,8 +23,8 @@ protected:
 private:
 	Mesh* m_mesh;
 	Shader* m_shader;
-	Transform m_transform;
-	Camera m_camera;
+	Transform* m_transform;
+	Camera* m_camera;
 	Texture* m_texture;
 };
 

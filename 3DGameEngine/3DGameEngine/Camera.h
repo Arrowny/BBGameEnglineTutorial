@@ -189,6 +189,6 @@ private:
 	glm::vec3 m_forward;
 	glm::vec3 m_up;
 
-	const glm::fvec3 yAxis = glm::fvec3(0, 1, 0);
+	glm::fvec3 yAxis = glm::fvec3(0, 1, 0);
 };
 
