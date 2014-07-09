@@ -33,6 +33,7 @@ private:
 	glm::vec4*	m_color;
 	Material	m_material;
 	pointLight* m_pLights;
+	spotLight*  m_sLights;
 
 };
 

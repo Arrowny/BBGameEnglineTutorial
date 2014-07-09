@@ -18,6 +18,11 @@ public:
 
 	}
 
+	inline glm::vec3 getForward() const
+	{
+		return forward;
+	}
+
 	inline glm::vec3 getPos() const
 	{
 		return pos;

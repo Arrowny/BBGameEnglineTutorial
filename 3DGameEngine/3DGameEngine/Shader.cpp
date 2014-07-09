@@ -8,8 +8,9 @@
 glm::fvec3 ambientLight(0.2f, 0.2f, 0.2f);
 directionalLight Shader::m_directionalLight = directionalLight(baseLight(glm::fvec3(1, 1, 1), 0.2f), glm::fvec3(0.0f, 0.2f, -0.5f));
 pointLight* Shader::m_pointLights = NULL;
+spotLight* Shader::m_spotLights = NULL;
 int Shader::m_numPointLights = 0;
-
+int Shader::m_numSpotLights = 0;
 
 Shader::Shader(const std::string& fileName)
 {
@@ -60,27 +61,16 @@ Shader::Shader(const std::string& fileName)
 	m_uniforms[POINTLP_2] = glGetUniformLocation(m_program, "pointLights[1].position");
 	m_uniforms[POINTLR_2] = glGetUniformLocation(m_program, "pointLights[1].range");
 
-	/*for (int i = 0; i < MAX_POINT_LIGHTS; i++)
-	{
-		std::ostringstream pointLightNameBuilder;
-		pointLightNameBuilder << "pointLights[" << i << "]";
-		std::string pointLightName = pointLightNameBuilder.str();
+	m_uniforms[SPOTLBC_1] = glGetUniformLocation(m_program, "spotLights[0].pointLight.base.color");
+	m_uniforms[SPOTLBI_1] = glGetUniformLocation(m_program, "spotLights[0].pointLight.base.intensity");
+	m_uniforms[SPOTLAC_1] = glGetUniformLocation(m_program, "spotLights[0].pointLight.atten.constant");
+	m_uniforms[SPOTLAL_1] = glGetUniformLocation(m_program, "spotLights[0].pointLight.atten.linear");
+	m_uniforms[SPOTLAE_1] = glGetUniformLocation(m_program, "spotLights[0].pointLight.atten.exponent");
+	m_uniforms[SPOTLP_1] = glGetUniformLocation(m_program, "spotLights[0].pointLight.position");
+	m_uniforms[SPOTLR_1] = glGetUniformLocation(m_program, "spotLights[0].pointLight.range");
+	m_uniforms[SPOTLD_1] = glGetUniformLocation(m_program, "spotLights[0].direction");
+	m_uniforms[SPOTLC_1] = glGetUniformLocation(m_program, "spotLights[0].cutoff");
 
-		std::string baseColor		= pointLightName + ".base.color";
-		std::string baseIntensity	= pointLightName + ".base.intensity";
-		std::string attenConstant	= pointLightName + ".atten.constant";
-		std::string attenLinear		= pointLightName + ".atten.linear";
-		std::string attenExponent	= pointLightName + ".atten.exponent";
-		std::string position		= pointLightName + ".position";
-
-		m_uniforms[POINTLBC_U] = glGetUniformLocation(m_program, baseColor.c_str());
-		m_uniforms[POINTLBI_U] = glGetUniformLocation(m_program, baseIntensity.c_str());
-		m_uniforms[POINTLAC_U] = glGetUniformLocation(m_program, attenConstant.c_str());
-		m_uniforms[POINTLAL_U] = glGetUniformLocation(m_program, attenExponent.c_str());
-		m_uniforms[POINTLAE_U] = glGetUniformLocation(m_program, attenLinear.c_str());
-		m_uniforms[POINTLP_U] = glGetUniformLocation(m_program, position.c_str());
-		
-	}*/
 }
 
 Shader::~Shader()
@@ -136,6 +126,16 @@ void Shader::Update(const Transform& transform, const Camera camera, const glm::
 	glUniform1f(m_uniforms[POINTLAL_2], (float)m_pointLights[1].atten.m_linear);
 	glUniform3f(m_uniforms[POINTLP_2], (float)m_pointLights[1].position[0], (float)m_pointLights[1].position[1], (float)m_pointLights[1].position[2]);
 	glUniform1f(m_uniforms[POINTLR_2], (float)m_pointLights[1].range);
+
+	glUniform3f(m_uniforms[SPOTLBC_1], (float)m_spotLights[0].pointL.base.m_color[0], (float)m_spotLights[0].pointL.base.m_color[1], (float)m_spotLights[0].pointL.base.m_color[2]);
+	glUniform1f(m_uniforms[SPOTLBI_1], (float)m_spotLights[0].pointL.base.m_intensity);
+	glUniform1f(m_uniforms[SPOTLAC_1], (float)m_spotLights[0].pointL.atten.m_constant);
+	glUniform1f(m_uniforms[SPOTLAE_1], (float)m_spotLights[0].pointL.atten.m_exponent);
+	glUniform1f(m_uniforms[SPOTLAL_1], (float)m_spotLights[0].pointL.atten.m_linear);
+	glUniform3f(m_uniforms[SPOTLP_1], (float)m_spotLights[0].pointL.position[0], (float)m_spotLights[0].pointL.position[1], (float)m_spotLights[0].pointL.position[2]);
+	glUniform1f(m_uniforms[SPOTLR_1], (float)m_spotLights[0].pointL.range);
+	glUniform3f(m_uniforms[SPOTLD_1], (float)m_spotLights[0].direction[0], (float)m_spotLights[0].direction[1], (float)m_spotLights[0].direction[2]);
+	glUniform1f(m_uniforms[SPOTLC_1], (float)m_spotLights[0].cutoff);
 
 }
 
@@ -216,5 +216,18 @@ void Shader::SetPointLights(pointLight* pointLights, int arraySize)
 		Shader::m_numPointLights = arraySize;
 		Shader::m_pointLights = pointLights;
 		
+	}
+}
+
+void Shader::SetSpotLights(spotLight* spotLights, int arraySize)
+{
+	if (arraySize > MAX_SPOT_LIGHTS)
+	{
+		std::cerr << "Error: Too many spot lights" << std::endl;
+	}
+	else
+	{
+		Shader::m_numSpotLights = arraySize;
+		Shader::m_spotLights = spotLights;
 	}
 }

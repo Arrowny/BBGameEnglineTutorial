@@ -1,8 +1,9 @@
 #include "Game.h"
 #include "main.h"
 
-pointLight pLight1 = pointLight(baseLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.8f), Attenuation(1, 0, 1), glm::fvec3(-2.0f, 0.0f, -1.0f), 10);
-pointLight pLight2 = pointLight(baseLight(glm::fvec3(0.0f, 0.0f, 1.0f), 0.8f), Attenuation(1, 0, 1), glm::fvec3(2.0f, 0.0f, -1.0f), 10);
+pointLight pLight1 = pointLight(baseLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.8f), Attenuation(0, 0, 1), glm::fvec3(-2.0f, 0.0f, -0.5f), 10);
+pointLight pLight2 = pointLight(baseLight(glm::fvec3(0.0f, 0.0f, 1.0f), 0.8f), Attenuation(0, 0, 1), glm::fvec3(2.0f, 0.0f, -0.5f), 10);
+spotLight sLight1 = spotLight(pointLight(baseLight(glm::fvec3(0, 1, 0), 0.8f), Attenuation(0, 0, 0.5f), glm::fvec3(-2, 0, 5), 30), glm::normalize(glm::fvec3(1, 1, 1)), 0.8f);
 
 Game::~Game()
 {
@@ -40,7 +41,11 @@ void Game::init(){
 	m_pLights[0] = pLight1;
 	m_pLights[1] = pLight2;
 
+	m_sLights = new spotLight[1];
+	m_sLights[0] = sLight1;
+
 	Shader::SetPointLights(m_pLights, 2);
+	Shader::SetSpotLights(m_sLights, 1);
 
 }
 
@@ -66,6 +71,9 @@ void Game::update(){
 
 	m_pLights[0].position = (glm::fvec3(sinCounter * 2.5, 0, -0.5));
 	m_pLights[1].position = (glm::fvec3(0.0, sinCounter * 2.5, -0.5));
+
+	m_sLights[0].pointL.position = m_camera->getPos();
+	m_sLights[0].direction = m_camera->getForward();
 
 	m_shader->Update(transform, *m_camera, m_material.color, m_material.specularIntensity, m_material.specularPower);
 	counter += 0.0003f;

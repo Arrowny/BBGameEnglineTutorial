@@ -10,6 +10,7 @@
 #include "baseLight.h"
 #include "Material.h"
 #include "pointLight.h"
+#include "spotLight.h"
 
 class Shader
 {
@@ -19,6 +20,7 @@ public:
 	void Bind();
 	void Update(const Transform& transform, const Camera camera, const glm::fvec4 color, float specI, float specP);
 	static void SetPointLights(pointLight* pointLights, int arraySize);
+	static void SetSpotLights(spotLight* spotLights, int arraySize);
 	void AddUniform(const std::string& uniform);
 
 	void SetUniformi(const std::string& name, int value);
@@ -31,6 +33,7 @@ protected:
 private:
 	static const unsigned int NUM_SHADERS = 2;
 	static const unsigned int MAX_POINT_LIGHTS = 4;
+	static const unsigned int MAX_SPOT_LIGHTS = 4;
 	Shader(const Shader& other) {}
 	void operator=(const Shader& other) {}
 
@@ -48,6 +51,7 @@ private:
 		SPECI_U,
 		SPECP_U,
 		EYEPOS_U,
+
 		POINTLBC_1,
 		POINTLBI_1,
 		POINTLAC_1,
@@ -55,6 +59,7 @@ private:
 		POINTLAE_1,
 		POINTLP_1,
 		POINTLR_1,
+
 		POINTLBC_2,
 		POINTLBI_2,
 		POINTLAC_2,
@@ -62,6 +67,16 @@ private:
 		POINTLAE_2,
 		POINTLP_2,
 		POINTLR_2,
+
+		SPOTLBC_1,
+		SPOTLBI_1,
+		SPOTLAC_1,
+		SPOTLAL_1,
+		SPOTLAE_1,
+		SPOTLP_1,
+		SPOTLR_1,
+		SPOTLD_1,
+		SPOTLC_1,
 
 		NUM_UNIFORMS
 	};
@@ -76,6 +91,8 @@ private:
 	std::map<std::string, int> n_uniforms;
 	static directionalLight m_directionalLight;
 	static pointLight* m_pointLights;
+	static spotLight* m_spotLights;
 	static int m_numPointLights;
+	static int m_numSpotLights;
 
 };
