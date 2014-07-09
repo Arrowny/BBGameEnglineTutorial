@@ -26,16 +26,17 @@ m_ambientLight(ambientLight)
 
 	for (int ii = 0; ii < MAX_POINT_LIGHTS; ii++)
 	{
-		std::ostringstream iteration;
-		iteration << ii;
-
-		addUniform("pointLights[" + iteration.str() + "].base.color");
-		addUniform("pointLights[" + iteration.str() + "].base.intensity");
-		addUniform("pointLights[" + iteration.str() + "].base.intensity");
-		addUniform("pointLights[" + iteration.str() + "].atten.constant");
-		addUniform("pointLights[" + iteration.str() + "].atten.linear");
-		addUniform("pointLights[" + iteration.str() + "].atten.exponent");
-		addUniform("pointLights[" + iteration.str() + "].position");
+		std::ostringstream pointLightNameOSS;
+		pointLightNameOSS << "pointLights[" << ii << "]";
+		std::string pointLightName = pointLightNameOSS.str();
+		
+		addUniform(pointLightName + ".base.color");
+		addUniform(pointLightName + ".base.intensity");
+		addUniform(pointLightName + ".base.intensity");
+		addUniform(pointLightName + ".atten.constant");
+		addUniform(pointLightName + ".atten.linear");
+		addUniform(pointLightName + ".atten.exponent");
+		addUniform(pointLightName + ".position");
 	}
 }
 
@@ -65,9 +66,10 @@ void PhongShader::setUniform(std::string uniformName, Attenuation atten)
 
 void PhongShader::setUniform(std::string uniformName, PointLight pLight)
 {
-	setUniform(uniformName + ".base", pLight.m_base);
 	setUniform(uniformName + ".atten", pLight.m_atten);
+	setUniform(uniformName + ".base", pLight.m_base);
 	setUniform(uniformName + ".position", pLight.m_position);
+	
 }
 
 void PhongShader::updateBasicUniformsAndTexture(Camera& camera, const glm::mat4& worldMatrix, const Material& mat)
@@ -86,9 +88,10 @@ void PhongShader::updateBasicUniformsAndTexture(Camera& camera, const glm::mat4&
 	
 	for (int ii = 0; ii < m_pointLights.size(); ii++)
 	{
-		std::ostringstream iteration;
-		iteration << ii;
-		setUniform("pointlights[" + iteration.str() + "]", m_pointLights[ii]);
+		std::ostringstream pointLightNameOSS;
+		pointLightNameOSS << "pointLights[" << ii << "]";
+		std::string pointLightName = pointLightNameOSS.str();
+		setUniform(pointLightName, m_pointLights[ii]);
 	}
 
 

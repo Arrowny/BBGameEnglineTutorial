@@ -1,4 +1,4 @@
-#version 400
+#version 330
 
 const int MAX_POINT_LIGHTS = 4;
 
@@ -80,13 +80,13 @@ vec4 calcDirectionalLight(DirectionalLight dLight, vec3 normal)
 
 vec4 calcPointLight(PointLight pointLight, vec3 normal)
 {
-	vec3 lightDirection = worldPos0 - pointLight.position;
+	vec3 lightDirection =  pointLight.position - worldPos0;
 	float distanceToPoint = length(lightDirection);
 	lightDirection = normalize(lightDirection);
 
-	vec4 color = calcLight(pointLight.base, lightDirection, normal);
+	vec4 color = calcLight(pointLight.base, -lightDirection, normal);
 
-	float attenuation = pointLight.atten.constant + pointLight.atten.linear * distanceToPoint + pointLight.atten.exponent * distanceToPoint *distanceToPoint + 0.000001;
+	float attenuation = pointLight.atten.constant + pointLight.atten.linear * distanceToPoint + pointLight.atten.exponent * distanceToPoint *distanceToPoint + 0.00001;
 
 	return color / attenuation;
 }

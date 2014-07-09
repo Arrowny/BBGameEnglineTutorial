@@ -34,8 +34,9 @@ m_shader(shader)
 	textCoords.push_back(glm::vec2(0.5, 1.0));
 
 	std::vector<PointLight> pointLights;
-	pointLights.push_back(PointLight(BaseLight(glm::vec3(1, 0, 0), .8), Attenuation(0, 0, 10), glm::vec3(-2.0, 0.0, 3.0)));
-	pointLights.push_back(PointLight(BaseLight(glm::vec3(0, 0, 1), .8), Attenuation(0, 0, 10), glm::vec3(2.0, 0.0, 3.0)));
+	pointLights.push_back(PointLight(BaseLight(glm::vec3(0, 0, 1), .8), Attenuation(0, 0, .1), glm::vec3(-2.0, 0.0, 3.0)));
+	pointLights.push_back(PointLight(BaseLight(glm::vec3(1, 0, 0), .8), Attenuation(0, 0, .1), glm::vec3(2.0, 0.0, 3.0)));
+	//pointLights.push_back(PointLight(BaseLight(glm::vec3(0, 1, 1), .8), Attenuation(0, 0, 10), glm::vec3(4.0, 0.0, 3.0)));
 	shader->setPointLights(pointLights);
 
 	//TestMesh = new Mesh("./res/object_files/box.obj");
