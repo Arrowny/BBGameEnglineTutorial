@@ -19,11 +19,11 @@ public:
 	void setUniform(std::string uniformName, PointLight pLight);
 
 	virtual void updateBasicUniformsAndTexture(Camera& camera, const glm::mat4& worldMatrix, const Material& mat);
-	void setPointLights(std::vector<PointLight> pointLights);
+	void setPointLights(std::vector<PointLight>* pointLights);
 	
 	glm::vec3 m_ambientLight;
 	DirectionalLight m_dLight;
 private:
-	std::vector<PointLight> m_pointLights;
+	std::vector<PointLight>* m_pointLights;
 };
 

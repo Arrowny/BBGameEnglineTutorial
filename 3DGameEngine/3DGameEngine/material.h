@@ -7,7 +7,7 @@ class Material
 {
 public:
 	Material(glm::vec3 color);
-	Material(const std::string& fileName, const glm::vec3& color);
+	Material(const glm::vec3& color, const float& specularIntensity, const float& specularPower);
 	Material(const std::string& fileName, const glm::vec3& color, const float& specularIntensity, const float& specularPower);
 	virtual ~Material();
 

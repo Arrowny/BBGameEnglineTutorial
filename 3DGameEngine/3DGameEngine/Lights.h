@@ -61,14 +61,16 @@ struct PointLight
 	PointLight() :
 		m_position(glm::vec3(0.0, 0.0, 0.0)) {}
 
-	PointLight(BaseLight base, Attenuation atten, glm::vec3 position) :
+	PointLight(BaseLight base, Attenuation atten, glm::vec3 position, float range) :
 		m_base(base),
 		m_atten(atten),
-		m_position(position) {}
+		m_position(position),
+		m_range(range) {}
 
 	virtual ~PointLight() {}
 
 	BaseLight m_base;
 	Attenuation m_atten;
 	glm::vec3 m_position;
+	float m_range;
 };

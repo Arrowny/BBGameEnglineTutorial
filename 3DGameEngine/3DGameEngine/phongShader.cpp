@@ -37,6 +37,7 @@ m_ambientLight(ambientLight)
 		addUniform(pointLightName + ".atten.linear");
 		addUniform(pointLightName + ".atten.exponent");
 		addUniform(pointLightName + ".position");
+		addUniform(pointLightName + ".range");
 	}
 }
 
@@ -69,6 +70,7 @@ void PhongShader::setUniform(std::string uniformName, PointLight pLight)
 	setUniform(uniformName + ".atten", pLight.m_atten);
 	setUniform(uniformName + ".base", pLight.m_base);
 	setUniform(uniformName + ".position", pLight.m_position);
+	setUniform(uniformName + ".range", pLight.m_range);
 	
 }
 
@@ -86,12 +88,12 @@ void PhongShader::updateBasicUniformsAndTexture(Camera& camera, const glm::mat4&
 	setUniform("specularPower", mat.m_specularPower);
 	setUniform("eyePos", camera.m_pos);
 	
-	for (int ii = 0; ii < m_pointLights.size(); ii++)
+	for (int ii = 0; ii < m_pointLights->size(); ii++)
 	{
 		std::ostringstream pointLightNameOSS;
 		pointLightNameOSS << "pointLights[" << ii << "]";
 		std::string pointLightName = pointLightNameOSS.str();
-		setUniform(pointLightName, m_pointLights[ii]);
+		setUniform(pointLightName, (*m_pointLights)[ii]);
 	}
 
 
@@ -107,11 +109,11 @@ void PhongShader::updateBasicUniformsAndTexture(Camera& camera, const glm::mat4&
 	}
 }
 
-void PhongShader::setPointLights(std::vector<PointLight> pointLights)
+void PhongShader::setPointLights(std::vector<PointLight>* pointLights)
 {
-	if (pointLights.size() >= MAX_POINT_LIGHTS)
+	if (pointLights->size() >= MAX_POINT_LIGHTS)
 	{
-		std::cerr << "Error: too many PointLights to be initialized.\n Max number of PointLights: " << MAX_POINT_LIGHTS << ".\n Number of PointLights sent in: " << pointLights.size() << "." << std::endl;
+		std::cerr << "Error: too many PointLights to be initialized.\n Max number of PointLights: " << MAX_POINT_LIGHTS << ".\n Number of PointLights sent in: " << pointLights->size() << "." << std::endl;
 		exit(1);
 	}
 
