@@ -2,11 +2,17 @@
 #include <GL\glew.h>
 #include <iostream>
 
+
+float WindowSize::W_width;
+float WindowSize::W_height;
+
+
 Window::Window(int width, int height, const std::string& title):
 m_input(this)
 {
 	WIDTH = (float)width;
 	HEIGHT = (float)height;
+
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 

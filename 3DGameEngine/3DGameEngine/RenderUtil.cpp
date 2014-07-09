@@ -26,7 +26,7 @@ void RenderUtil::initGraphics(){
 	glCullFace(GL_BACK);
 
 
-
+	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_FRAMEBUFFER_SRGB);
 
 }

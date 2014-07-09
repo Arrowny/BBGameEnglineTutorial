@@ -21,6 +21,7 @@ Shader::Shader(const std::string& fileName)
 	CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: Program is invalid");
 
 	m_uniforms[TRANSFORM_U] = glGetUniformLocation(m_program, "transform");
+	m_uniforms[COLOR_U] = glGetUniformLocation(m_program, "color");
 	//m_uniforms[FLOAT_U] = glGetUniformLocation(m_program, "uniformfloat");
 }
 
@@ -48,6 +49,8 @@ void Shader::Update(const Transform& transform, const Camera& camera)// add for 
 
 	//glm::mat4 model = transform.GetModel();
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
+	glUniform2fv(m_uniforms[COLOR_U],1,)
+	
 }
 
 //void Shader::Update(float value)

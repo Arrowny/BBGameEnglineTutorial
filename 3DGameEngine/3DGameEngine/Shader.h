@@ -25,7 +25,8 @@ private:
 	enum
 	{
 		TRANSFORM_U,
-		FLOAT_U,
+		COLOR_U,
+		//FLOAT_U,
 
 		NUM_UNIFORMS
 	};

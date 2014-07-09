@@ -10,13 +10,14 @@
 class Camera
 {
 public:
+	
 	Camera(const glm::vec3& pos, float fov, float aspect, float zNear, float zFar)
 	{
 		m_perspective = glm::perspective(fov, aspect, zNear, zFar);
 		m_position = pos;
 		m_forward = glm::vec3(0, 0, 1);
 		m_up = glm::vec3(0, 1, 0);
-
+		
 		m_up = glm::normalize(m_up);
 		m_forward = glm::normalize(m_forward);
 	}
@@ -26,16 +27,52 @@ public:
 		return m_perspective * glm::lookAt(m_position, m_position + m_forward, m_up);
 	}
 
+	bool mouselocked = false;
+
+	glm::vec2 centerPosition = glm::vec2(WindowSize::W_width/ 2,WindowSize::W_height/ 2);
+	//glm::vec2 centerPosition = glm::vec2(400, 300);
 
 	void Input(Input input)
 	{
-		float movAmt = (float)(10 * Time::getDelta());
-		//std::cout << "movAmt: "<<movAmt << std::endl;
+		float snsitivity = 0.5f;
 
+		float movAmt = (float)(10 * Time::getDelta());
 		float rotAmt = (float)(100 * Time::getDelta());
 
+		if (input.GetKey(input.KEY_ESCAPE))
+		{
+			input.SetCursor(true);
+			mouselocked = false;
+		}
 
+		if (mouselocked)
+		{
+			glm::vec2 deltaPos = glm::vec2(input.GetMousePosition().x - centerPosition.x, input.GetMousePosition().y - centerPosition.y);
+			bool rotY = deltaPos.x != 0;
+			bool rotX = deltaPos.y != 0;
+			if (rotY)
+				RotateY(deltaPos.x * snsitivity);
+			if (rotX)
+				RotateX(-deltaPos.y * snsitivity);
+			if (rotX || rotY)
+			{
+				input.SetMousePosition(glm::vec2(WindowSize::W_width/ 2,WindowSize::W_height / 2));
+				//input.SetMousePosition(glm::vec2(400, 300));
+			}
+			//if (SDL_BUTTON_MIDDLE)
+			//	sdl_middle
+
+		}
+
+
+		if (input.GetMouseDown(1))
+		{
+			input.SetMousePosition(centerPosition);
+			input.SetCursor(false);
+			mouselocked = true;
+		}
 		
+
 		if (input.GetKey(input.KEY_W))
 			move(m_forward,movAmt);
 		if (input.GetKey(input.KEY_S))
@@ -45,16 +82,17 @@ public:
 		if (input.GetKey(input.KEY_D))
 			move(GetRight(), movAmt);
 
-		if (input.GetKey(input.KEY_UP))
+
+
+		/*if (input.GetKey(input.KEY_UP))
 			RotateX(-rotAmt);
 		if (input.GetKey(input.KEY_DOWN))
 			RotateX(rotAmt);
 		if (input.GetKey(input.KEY_LEFT))
-			RotateY(-rotAmt);
-		if (input.GetKey(input.KEY_RIGHT))
 			RotateY(rotAmt);
+		if (input.GetKey(input.KEY_RIGHT))
+			RotateY(-rotAmt);*/
 	}
-
 
 	inline void move(glm::fvec3 dir, float amt)
 	{
@@ -87,14 +125,14 @@ public:
 
 	inline glm::fvec3 GetLeft()
 	{
-		glm::fvec3 left = glm::cross(m_forward, m_up);
+		glm::fvec3 left = glm::cross(m_up, m_forward);
 		left = glm::normalize(left);
 		return left;
 	}
 
 	inline glm::fvec3 GetRight()
 	{
-		glm::fvec3 right = glm::cross(m_up, m_forward);
+		glm::fvec3 right = glm::cross(m_forward, m_up);
 		right = glm::normalize(right);
 		return right;
 	}
@@ -151,7 +189,6 @@ private:
 	glm::vec3 m_position;
 	glm::vec3 m_forward;
 	glm::vec3 m_up;
-
 	const glm::fvec3 yAxis = glm::fvec3(0, 1, 0);
 };
 

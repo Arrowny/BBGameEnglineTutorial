@@ -4,6 +4,12 @@
 #include <SDL\SDL.h>
 #include "Input.h" 
 
+namespace WindowSize
+{
+	extern float W_width;
+	extern float W_height;
+};
+
 class Window
 {
 public:
@@ -20,8 +26,8 @@ public:
 	void SwapBuffers();
 	inline SDL_Window* GetSDLWindow() { return m_window; }
 	inline Input GetInput() { return m_input; }
-	inline float GetWidth() { return WIDTH; }
-	inline float GetHeight() { return HEIGHT; }
+	inline float GetWidth() const { return WIDTH; }
+	inline float GetHeight() const { return HEIGHT; }
 
 	bool m_isClosed;
 
