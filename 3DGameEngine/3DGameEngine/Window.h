@@ -4,6 +4,12 @@
 #include <SDL\SDL.h>
 #include "Input.h" 
 
+namespace WindowParameter{
+	extern float width;
+	extern float height;
+}
+
+
 class Window
 {
 public:

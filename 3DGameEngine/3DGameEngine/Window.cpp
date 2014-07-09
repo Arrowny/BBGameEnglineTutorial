@@ -2,6 +2,10 @@
 #include <GL\glew.h>
 #include <iostream>
 
+
+float WindowParameter::width;
+float WindowParameter::height;
+
 Window::Window(int width, int height, const std::string& title):
 m_input(this)
 {

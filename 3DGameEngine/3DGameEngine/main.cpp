@@ -19,6 +19,9 @@ int main(int argc, char** argv)
 {
 	Window window(WIDTH, HEIGHT, TITLE);
 
+	WindowParameter::width = WIDTH;
+	WindowParameter::height = HEIGHT;
+
 	Vertex vertices[] = { Vertex(glm::vec3(-1.0, -1.0, 0.0)),
 						  Vertex(glm::vec3(0.0, 1.0, 0.0)),
 						  Vertex(glm::vec3(1.0, -1.0, 0.0)), 
