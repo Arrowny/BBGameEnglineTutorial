@@ -12,6 +12,7 @@ m_window(window),
 m_frameTime(1.0 / frameRate)
 {
 	m_isRunning = false;
+	renderUtil->initGraphics();
 }
 
 coreEngine::~coreEngine()
@@ -26,7 +27,6 @@ void coreEngine::Start()
 	}
 
 	Run();
-
 }
 
 void coreEngine::Stop()

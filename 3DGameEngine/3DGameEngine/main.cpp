@@ -13,17 +13,12 @@
 
 int main(int argc, char** argv)
 {
-	///////////////////////////////////////////Declarations///////////////////////////////////////////
-
 	Window window(WIDTH, HEIGHT, TITLE);
 	RenderUtil renderUtil;
 	Game game;
 
 	coreEngine core(&game, &renderUtil, &window, FRAME_CAP);
 
-	///////////////////////////////////////////Core_Stuff////////////////////////////////////////////
-	
-	renderUtil.initGraphics();
 	core.Start();
 
 	return 0;

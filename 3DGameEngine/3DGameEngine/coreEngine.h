@@ -27,8 +27,6 @@ private:
 	Window*		m_window;
 	RenderUtil*	m_renderUtil;
 	double		m_frameTime;
-	
-	
 
 };
 

@@ -17,7 +17,6 @@ public:
 	void initGraphics();
 	char* getOpenGLVersion();
 
-
 protected:
 private:
 
