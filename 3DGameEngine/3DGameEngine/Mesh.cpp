@@ -25,7 +25,7 @@ Mesh::Mesh(Vertex* vertices, unsigned int numVertices, unsigned int* indices, un
 	for (unsigned int i = 0; i < numVertices; i++){
 
 		model.positions.push_back(*vertices[i].GetPos());
-		//texCoords.push_back(*vertices[i].GetTexCoord());
+		model.texCoords.push_back(*vertices[i].GetTexCoord());
 	}
 	for (unsigned int i = 0; i < numIndices; i++){
 		model.indices.push_back(indices[i]);
@@ -54,12 +54,12 @@ void Mesh::InitMesh(const IndexedModel& model)
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
 
-	////glGenBuffers(NUM_BUFFERS, m_vertexArrayBuffers); //m_vertexArrayBuffers is already a pointer, so not use &
-	//glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TEXCOORD_VB]);// make it thinks that this block of data is an array
-	//glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(texCoords[0]), &texCoords[0], GL_STATIC_DRAW);// put all vertices data in this array
+	//glGenBuffers(NUM_BUFFERS, m_vertexArrayBuffers); //m_vertexArrayBuffers is already a pointer, so not use &
+	glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TEXCOORD_VB]);// make it thinks that this block of data is an array
+	glBufferData(GL_ARRAY_BUFFER, model.indices.size() * sizeof(model.texCoords[0]), &model.texCoords[0], GL_STATIC_DRAW);// put all vertices data in this array
 
-	//glEnableVertexAttribArray(1);// make opengl look at a non_sequential array as a sequential array of data
-	//glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(1);// make opengl look at a non_sequential array as a sequential array of data
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vertexArrayBuffers[INDEX_VB]);// array of element consisting of data in the other arrays
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, model.indices.size() * sizeof(model.indices[0]), &model.indices[0], GL_STATIC_DRAW);
