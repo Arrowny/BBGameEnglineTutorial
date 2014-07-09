@@ -77,12 +77,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="baseLight.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="coreEngine.h" />
-    <ClInclude Include="directionalLight.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="input.h" />
+    <ClInclude Include="Lights.h" />
     <ClInclude Include="material.h" />
     <ClInclude Include="mesh.h" />
     <ClInclude Include="phongShader.h" />

@@ -73,10 +73,8 @@ void Window::InitGraphics()
 	glCullFace(GL_BACK);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
-
-	//TODO: Initialize depth clamp
-
-	glEnable(GL_FRAMEBUFFER_SRGB);
+	glEnable(GL_DEPTH_CLAMP);
+	glEnable(GL_TEXTURE_2D);
 }
 
 void Window::SwapBuffers()

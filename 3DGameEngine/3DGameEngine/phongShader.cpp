@@ -1,4 +1,7 @@
 #include "phongShader.h"
+#include <iostream>
+#include <sstream>
+
 
 
 PhongShader::PhongShader(const std::string& fileName, glm::vec3 ambientLight) :
@@ -20,6 +23,20 @@ m_ambientLight(ambientLight)
 	addUniform("specularIntensity");
 	addUniform("specularPower");
 	addUniform("eyePos");
+
+	for (int ii = 0; ii < MAX_POINT_LIGHTS; ii++)
+	{
+		std::ostringstream iteration;
+		iteration << ii;
+
+		addUniform("pointLights[" + iteration.str() + "].base.color");
+		addUniform("pointLights[" + iteration.str() + "].base.intensity");
+		addUniform("pointLights[" + iteration.str() + "].base.intensity");
+		addUniform("pointLights[" + iteration.str() + "].atten.constant");
+		addUniform("pointLights[" + iteration.str() + "].atten.linear");
+		addUniform("pointLights[" + iteration.str() + "].atten.exponent");
+		addUniform("pointLights[" + iteration.str() + "].position");
+	}
 }
 
 
@@ -39,6 +56,20 @@ void PhongShader::setUniform(std::string uniformName, DirectionalLight dLight)
 	setUniform(uniformName + ".direction", dLight.m_direction);
 }
 
+void PhongShader::setUniform(std::string uniformName, Attenuation atten)
+{
+	setUniform(uniformName + ".constant", atten.m_constant);
+	setUniform(uniformName + ".linear", atten.m_linear);
+	setUniform(uniformName + ".exponent", atten.m_exponent);
+}
+
+void PhongShader::setUniform(std::string uniformName, PointLight pLight)
+{
+	setUniform(uniformName + ".base", pLight.m_base);
+	setUniform(uniformName + ".atten", pLight.m_atten);
+	setUniform(uniformName + ".position", pLight.m_position);
+}
+
 void PhongShader::updateBasicUniformsAndTexture(Camera& camera, const glm::mat4& worldMatrix, const Material& mat)
 {
 
@@ -53,6 +84,13 @@ void PhongShader::updateBasicUniformsAndTexture(Camera& camera, const glm::mat4&
 	setUniform("specularPower", mat.m_specularPower);
 	setUniform("eyePos", camera.m_pos);
 	
+	for (int ii = 0; ii < m_pointLights.size(); ii++)
+	{
+		std::ostringstream iteration;
+		iteration << ii;
+		setUniform("pointlights[" + iteration.str() + "]", m_pointLights[ii]);
+	}
+
 
 	if (mat.m_texture != NULL)
 	{
@@ -64,6 +102,17 @@ void PhongShader::updateBasicUniformsAndTexture(Camera& camera, const glm::mat4&
 		Util::unbindTexture();
 		setUniform("isTextured", false);
 	}
+}
+
+void PhongShader::setPointLights(std::vector<PointLight> pointLights)
+{
+	if (pointLights.size() >= MAX_POINT_LIGHTS)
+	{
+		std::cerr << "Error: too many PointLights to be initialized.\n Max number of PointLights: " << MAX_POINT_LIGHTS << ".\n Number of PointLights sent in: " << pointLights.size() << "." << std::endl;
+		exit(1);
+	}
+
+	m_pointLights = pointLights;
 }
 
 
