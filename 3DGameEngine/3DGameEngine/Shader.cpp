@@ -91,7 +91,8 @@ void Shader::Bind()
 
 float temp = 0.0f;
 
-void Shader::Update(const Transform& transform, const Camera camera, const glm::fvec4 color, float specI, float specP)
+//void Shader::Update(const Transform& transform, const Camera camera, const glm::fvec4 color, float specI, float specP)
+void Shader::Update(const Transform& transform, const Camera camera, const Material& material)
 {
 	temp += Time::getDelta();
 	glm::mat4 model = transform.GetProjection(camera);
@@ -103,13 +104,13 @@ void Shader::Update(const Transform& transform, const Camera camera, const glm::
 	glUniformMatrix4fv(m_uniforms[NORMAL_U], 1, GL_FALSE, &Normal[0][0]);
 	glUniform3f(m_uniforms[LIGHTDIR_U], 0.0f, 1.0f, 1.0f);
 	glUniform3f(m_uniforms[AMBIENTL_U], (float)ambientLight[0], (float)ambientLight[1], (float)ambientLight[2]);
-	glUniform4f(m_uniforms[COLOR_U], (float)color[0], (float)color[1], (float)color[2], (float)color[3]);
+	glUniform4fv(m_uniforms[COLOR_U], 1, &material.color[0]);
 	glUniform3f(m_uniforms[DIRLIGHTC_U], (float)m_directionalLight.m_base.m_color[0], (float)m_directionalLight.m_base.m_color[1], (float)m_directionalLight.m_base.m_color[2]);
 	glUniform1f(m_uniforms[DIRLIGHTI_U], (float)m_directionalLight.m_base.m_intensity);
 	glUniform3f(m_uniforms[DIRLIGHTD_U], (float)m_directionalLight.m_direction[0], (float)m_directionalLight.m_direction[1], (float)m_directionalLight.m_direction[2]);
-	glUniform1f(m_uniforms[SPECI_U], (float)specI);
-	glUniform1f(m_uniforms[SPECP_U], (float)specP);
-	glUniform3f(m_uniforms[EYEPOS_U], (float)eyePos[0], (float)eyePos[1], (float)eyePos[2]);
+	glUniform1f(m_uniforms[SPECI_U], (float)material.specularIntensity);
+	glUniform1f(m_uniforms[SPECP_U], (float)material.specularPower);
+	glUniform3fv(m_uniforms[EYEPOS_U], 1, &eyePos[0]);
 
 	glUniform3f(m_uniforms[POINTLBC_1], (float)m_pointLights[0].base.m_color[0], (float)m_pointLights[0].base.m_color[1], (float)m_pointLights[0].base.m_color[2]);
 	glUniform1f(m_uniforms[POINTLBI_1], (float)m_pointLights[0].base.m_intensity);

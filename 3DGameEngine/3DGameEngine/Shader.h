@@ -18,7 +18,7 @@ public:
 	Shader(const std::string& fileName);
 
 	void Bind();
-	void Update(const Transform& transform, const Camera camera, const glm::fvec4 color, float specI, float specP);
+	void Update(const Transform& transform, const Camera camera, const Material& material);
 	static void SetPointLights(pointLight* pointLights, int arraySize);
 	static void SetSpotLights(spotLight* spotLights, int arraySize);
 	void AddUniform(const std::string& uniform);

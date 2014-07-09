@@ -31,11 +31,11 @@ void Game::init(){
 	m_camera = new Camera(glm::vec3(0.0f, 0.0f, -10.0f), 70.0f, (float)Window::getWidth() / (float)Window::getHeight(), 0.1f, 1000.0f);
 
 	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
-	m_mesh = new Mesh("./res/triforce.obj");
+	m_mesh = new Mesh("./res/shield.obj");
 	//Shader shader("./res/basicShader");
 	m_shader = new Shader("./res/phongShader");
 	m_texture = new Texture("./res/colour.jpg");
-	m_material = Material(m_texture, baseColor, 1, 16);
+	m_material = Material(m_texture, baseColor, 1, 24);
 
 	m_pLights = new pointLight[2];
 	m_pLights[0] = pLight1;
@@ -75,7 +75,7 @@ void Game::update(){
 	m_sLights[0].pointL.position = m_camera->getPos();
 	m_sLights[0].direction = m_camera->getForward();
 
-	m_shader->Update(transform, *m_camera, m_material.color, m_material.specularIntensity, m_material.specularPower);
+	m_shader->Update(transform, *m_camera, m_material);
 	counter += 0.0003f;
 
 }

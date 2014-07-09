@@ -5,8 +5,6 @@
 #include "coreEngine.h"
 #include "Game.h"
 #include "RenderUtil.h"
-#include "Mesh.h"
-#include "Texture.h"
 
 #define WIDTH 1000
 #define HEIGHT 800
@@ -18,12 +16,12 @@ int main(int argc, char** argv)
 	///////////////////////////////////////////Declarations///////////////////////////////////////////
 
 	Window window(WIDTH, HEIGHT, TITLE);
-
 	RenderUtil renderUtil;
 	Game game;
+
 	coreEngine core(&game, &renderUtil, &window, FRAME_CAP);
 
-	///////////////////////////////////////////Core_Stuff////////////////////////////////////////////////
+	///////////////////////////////////////////Core_Stuff////////////////////////////////////////////
 	
 	renderUtil.initGraphics();
 	core.Start();
