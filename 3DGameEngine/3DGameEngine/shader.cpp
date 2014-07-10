@@ -5,6 +5,11 @@
 namespace
 {
 
+	std::string LoadShader(const std::string& fileName)
+	{
+		return Loader::LoadFile(fileName);
+	}
+
 	static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage)
 	{
 		GLint success = 0;
@@ -62,8 +67,8 @@ Shader::Shader(const std::string& fileName)
 {
 	m_program = glCreateProgram();
 
-	m_shaders[VERTEX_SHADER] = CreateShader(Loader::LoadShader(fileName + ".vert"), GL_VERTEX_SHADER);
-	m_shaders[FRAGMENT_SHADER] = CreateShader(Loader::LoadShader(fileName + ".frag"), GL_FRAGMENT_SHADER);
+	m_shaders[VERTEX_SHADER] = CreateShader(LoadShader(fileName + ".vert"), GL_VERTEX_SHADER);
+	m_shaders[FRAGMENT_SHADER] = CreateShader(LoadShader(fileName + ".frag"), GL_FRAGMENT_SHADER);
 
 	for (unsigned int ii = 0; ii < NUM_SHADERS; ii++)
 	{

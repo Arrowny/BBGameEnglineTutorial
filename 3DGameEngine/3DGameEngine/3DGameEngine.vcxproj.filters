@@ -72,6 +72,9 @@
     <ClInclude Include="Lights.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="testGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="window.cpp">
@@ -87,9 +90,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="util.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="input.cpp">
@@ -120,6 +120,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="phongShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

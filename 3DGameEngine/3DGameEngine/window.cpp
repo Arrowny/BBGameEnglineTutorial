@@ -47,22 +47,22 @@ void Window::Render()
 
 int Window::GetWidth()
 {
-	int* width;
-	int* height;
+	int width;
+	int height;
 
-	SDL_GetWindowSize(m_window, width, height);
+	SDL_GetWindowSize(m_window, &width, &height);
 
-	return *width;
+	return width;
 }
 
 int Window::GetHeight()
 {
-	int* width;
-	int* height;
+	int width;
+	int height;
 
-	SDL_GetWindowSize(m_window, width, height);
+	SDL_GetWindowSize(m_window, &width, &height);
 
-	return *height;
+	return height;
 }
 
 void Window::InitGraphics()

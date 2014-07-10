@@ -88,6 +88,7 @@
     <ClInclude Include="resourceLoader.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="stb_image.h" />
+    <ClInclude Include="testGame.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="timing.h" />
     <ClInclude Include="transform.h" />
@@ -98,7 +99,6 @@
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="coreEngine.cpp" />
-    <ClCompile Include="game.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="material.cpp" />
@@ -107,6 +107,7 @@
     <ClCompile Include="resourceLoader.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="stb_image.c" />
+    <ClCompile Include="testGame.cpp" />
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="timing.cpp" />
     <ClCompile Include="transform.cpp" />

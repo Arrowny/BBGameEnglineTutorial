@@ -1,6 +1,6 @@
 #pragma once
 #include "window.h"
-#include "game.h"
+#include "testGame.h"
 #include "input.h"
 #include "shader.h"
 #include "timing.h"
@@ -8,7 +8,7 @@
 class CoreEngine
 {
 public:
-	CoreEngine(double frameRate, Window* window, Game* game);
+	CoreEngine(Window* window, Game* game);
 
 	void start();
 	void stop();

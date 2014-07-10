@@ -4,6 +4,7 @@
 #include <GL\glew.h>
 #include "vertex.h"
 #include "resourceLoader.h"
+#include "util.h"
 
 class Mesh
 {

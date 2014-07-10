@@ -1,15 +1,17 @@
 #include "coreEngine.h"
 #include "timing.h"
 #include "util.h"
-
 #include <iostream>
 
+#define FRAME_CAP 5000
 
-CoreEngine::CoreEngine(double frameRate, Window* window, Game* game):
-m_frameTime(double(1.0) / frameRate),
+
+CoreEngine::CoreEngine(Window* window, Game* game) :
+m_frameTime(double(1.0) / FRAME_CAP),
 m_window(window),
 m_game(game)
 {
+	m_game->Init(window);
 	m_input = new Input(m_window);
 	Time::DELTA = m_frameTime;
 	isRunning = false;
