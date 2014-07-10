@@ -1,6 +1,7 @@
 #version 330
 
 const int MAX_POINT_LIGHTS = 4;
+const int MAX_SPOT_LIGHTS = 4;
 
 layout(location = 0) out vec4 fragColor;
 in vec2 textCoord0;
@@ -34,6 +35,13 @@ struct PointLight
 	float range;
 };
 
+struct SpotLight
+{
+	PointLight pLight;
+	vec3 direction;
+	float cutoff;
+};
+
 
 uniform sampler2D diffuse;
 uniform vec3 baseColor;
@@ -42,6 +50,7 @@ uniform bool isTextured;
 
 uniform DirectionalLight dLight;
 uniform PointLight pointLights[MAX_POINT_LIGHTS];
+uniform SpotLight spotLights[MAX_SPOT_LIGHTS];
 
 uniform float specularIntensity;
 uniform float specularPower;
@@ -79,23 +88,38 @@ vec4 calcDirectionalLight(DirectionalLight dLight, vec3 normal)
 	return calcLight(dLight.base, -dLight.direction, normal);
 }
 
-vec4 calcPointLight(PointLight pointLight, vec3 normal)
+vec4 calcPointLight(PointLight pLight, vec3 normal)
 {
-	vec3 lightDirection =  pointLight.position - worldPos0;
+	vec3 lightDirection =  pLight.position - worldPos0;
 	float distanceToPoint = length(lightDirection);
 	
-	if(distanceToPoint > pointLight.range) //performance optimization
+	if(distanceToPoint > pLight.range) //performance optimization
 	{
 		return vec4(0,0,0,0);
 	}
 
 	lightDirection = normalize(lightDirection);
 
-	vec4 color = calcLight(pointLight.base, -lightDirection, normal);
+	vec4 color = calcLight(pLight.base, -lightDirection, normal);
 
-	float attenuation = pointLight.atten.constant + pointLight.atten.linear * distanceToPoint + pointLight.atten.exponent * distanceToPoint *distanceToPoint + 0.00001;
+	float attenuation = pLight.atten.constant + pLight.atten.linear * distanceToPoint + pLight.atten.exponent * distanceToPoint *distanceToPoint + 0.00001;
 
 	return color / attenuation;
+}
+
+vec4 calcSpotLight(SpotLight sLight, vec3 normal)
+{
+	vec3 lightDirection = normalize(worldPos0 - sLight.pLight.position);
+	float spotFactor = dot(lightDirection, sLight.direction);
+	
+	vec4 color = vec4(0,0,0,0);
+
+	if(spotFactor > sLight.cutoff)
+	{
+		color = calcPointLight(sLight.pLight, normal) * (1.0 - (1.0 - spotFactor)/(1.0 - sLight.cutoff));
+	}
+
+	return color;
 }
 
 void main()
@@ -113,13 +137,15 @@ void main()
 
 	totalLight += calcDirectionalLight(dLight, normal);
 
+	//note: dangerous no parentheses
 	for(int ii = 0; ii < MAX_POINT_LIGHTS; ii++)
-	{
 		if(pointLights[ii].base.intensity > 0) //performance optimization
-		{
 			totalLight += calcPointLight(pointLights[ii], normal);
-		}
-	}
+
+	//note: dangerous no parentheses
+	for(int ii = 0; ii < MAX_SPOT_LIGHTS; ii++)
+		if(spotLights[ii].pLight.base.intensity > 0) //performance optimization
+			totalLight += calcSpotLight(spotLights[ii], normal);
 
 	fragColor = color * totalLight;
 }

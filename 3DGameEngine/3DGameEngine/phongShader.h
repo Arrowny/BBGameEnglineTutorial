@@ -4,6 +4,7 @@
 #include "camera.h"
 
 #define MAX_POINT_LIGHTS 4
+#define MAX_SPOT_LIGHTS 4
 
 class PhongShader :
 	public Shader
@@ -17,13 +18,16 @@ public:
 	void setUniform(std::string uniformName, DirectionalLight dLight);
 	void setUniform(std::string uniformName, Attenuation atten);
 	void setUniform(std::string uniformName, PointLight pLight);
+	void setUniform(std::string uniformName, SpotLight sLight);
 
 	virtual void updateBasicUniformsAndTexture(Camera& camera, const glm::mat4& worldMatrix, const Material& mat);
-	void setPointLights(std::vector<PointLight>* pointLights);
+	//void setPointLights(std::vector<PointLight>* pointLights);
+	//void setSpotLights(std::vector<SpotLight>* spotLights);
 	
 	glm::vec3 m_ambientLight;
 	DirectionalLight m_dLight;
-private:
-	std::vector<PointLight>* m_pointLights;
+
+	std::vector<PointLight> m_pointLights;
+	std::vector<SpotLight> m_spotLights;
 };
 

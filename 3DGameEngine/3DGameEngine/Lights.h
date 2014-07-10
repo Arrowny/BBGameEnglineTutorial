@@ -61,7 +61,7 @@ struct PointLight
 	PointLight() :
 		m_position(glm::vec3(0.0, 0.0, 0.0)) {}
 
-	PointLight(BaseLight base, Attenuation atten, glm::vec3 position, float range) :
+	PointLight(BaseLight base, Attenuation atten, glm::vec3 position = glm::vec3(1,1,1), float range = 20) :
 		m_base(base),
 		m_atten(atten),
 		m_position(position),
@@ -73,4 +73,20 @@ struct PointLight
 	Attenuation m_atten;
 	glm::vec3 m_position;
 	float m_range;
+};
+
+struct SpotLight
+{
+	SpotLight() :
+		m_direction(glm::vec3(0,0,0)),
+		m_cutoff(1.0f) {}
+
+	SpotLight(PointLight pLight, glm::vec3 direction, float cutoff) :
+		m_pLight(pLight),
+		m_direction(direction),
+		m_cutoff(cutoff) {}
+
+	PointLight m_pLight;
+	glm::vec3 m_direction;
+	float m_cutoff;
 };

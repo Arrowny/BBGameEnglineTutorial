@@ -32,12 +32,28 @@ m_ambientLight(ambientLight)
 		
 		addUniform(pointLightName + ".base.color");
 		addUniform(pointLightName + ".base.intensity");
-		addUniform(pointLightName + ".base.intensity");
 		addUniform(pointLightName + ".atten.constant");
 		addUniform(pointLightName + ".atten.linear");
 		addUniform(pointLightName + ".atten.exponent");
 		addUniform(pointLightName + ".position");
 		addUniform(pointLightName + ".range");
+	}
+
+	for (int ii = 0; ii < MAX_SPOT_LIGHTS; ii++)
+	{
+		std::ostringstream spotLightNameOSS;
+		spotLightNameOSS << "spotLights[" << ii << "]";
+		std::string spotLightName = spotLightNameOSS.str();
+
+		addUniform(spotLightName + ".pLight.base.color");
+		addUniform(spotLightName + ".pLight.base.intensity");
+		addUniform(spotLightName + ".pLight.atten.constant");
+		addUniform(spotLightName + ".pLight.atten.linear");
+		addUniform(spotLightName + ".pLight.atten.exponent");
+		addUniform(spotLightName + ".pLight.position");
+		addUniform(spotLightName + ".pLight.range");
+		addUniform(spotLightName + ".direction");
+		addUniform(spotLightName + ".cutoff");
 	}
 }
 
@@ -74,6 +90,13 @@ void PhongShader::setUniform(std::string uniformName, PointLight pLight)
 	
 }
 
+void PhongShader::setUniform(std::string uniformName, SpotLight sLight)
+{
+	setUniform(uniformName + ".pLight", sLight.m_pLight);
+	setUniform(uniformName + ".direction", sLight.m_direction);
+	setUniform(uniformName + ".cutoff", sLight.m_cutoff);
+}
+
 void PhongShader::updateBasicUniformsAndTexture(Camera& camera, const glm::mat4& worldMatrix, const Material& mat)
 {
 
@@ -88,12 +111,36 @@ void PhongShader::updateBasicUniformsAndTexture(Camera& camera, const glm::mat4&
 	setUniform("specularPower", mat.m_specularPower);
 	setUniform("eyePos", camera.m_pos);
 	
-	for (int ii = 0; ii < m_pointLights->size(); ii++)
+	if (m_pointLights.size() < MAX_POINT_LIGHTS)
+	{ 
+		for (int ii = 0; ii < m_pointLights.size(); ii++)
+		{
+			std::ostringstream pointLightNameOSS;
+			pointLightNameOSS << "pointLights[" << ii << "]";
+			std::string pointLightName = pointLightNameOSS.str();
+			setUniform(pointLightName, m_pointLights[ii]);
+		}
+	}
+	else
 	{
-		std::ostringstream pointLightNameOSS;
-		pointLightNameOSS << "pointLights[" << ii << "]";
-		std::string pointLightName = pointLightNameOSS.str();
-		setUniform(pointLightName, (*m_pointLights)[ii]);
+		std::cerr << "Error: too many PointLights.\n Max number of PointLights: " << MAX_POINT_LIGHTS << ".\n Number of PointLights sent in: " << m_pointLights.size() << "." << std::endl;
+		exit(1);
+	}
+
+	if (m_spotLights.size() < MAX_SPOT_LIGHTS)
+	{ 
+		for (int ii = 0; ii < m_spotLights.size(); ii++)
+		{
+			std::ostringstream spotLightNameOSS;
+			spotLightNameOSS << "spotLights[" << ii << "]";
+			std::string spotLightName = spotLightNameOSS.str();
+			setUniform(spotLightName, m_spotLights[ii]);
+		}
+	}
+	else
+	{
+		std::cerr << "Error: too many SpotLights.\n Max number of PointLights: " << MAX_SPOT_LIGHTS << ".\n Number of SpotLights sent in: " << m_spotLights.size() << "." << std::endl;
+		exit(1);
 	}
 
 
@@ -109,16 +156,27 @@ void PhongShader::updateBasicUniformsAndTexture(Camera& camera, const glm::mat4&
 	}
 }
 
-void PhongShader::setPointLights(std::vector<PointLight>* pointLights)
-{
-	if (pointLights->size() >= MAX_POINT_LIGHTS)
-	{
-		std::cerr << "Error: too many PointLights to be initialized.\n Max number of PointLights: " << MAX_POINT_LIGHTS << ".\n Number of PointLights sent in: " << pointLights->size() << "." << std::endl;
-		exit(1);
-	}
-
-	m_pointLights = pointLights;
-}
+//void PhongShader::setPointLights(std::vector<PointLight>* pointLights)
+//{
+//	if (pointLights->size() >= MAX_POINT_LIGHTS)
+//	{
+//		std::cerr << "Error: too many PointLights to be initialized.\n Max number of PointLights: " << MAX_POINT_LIGHTS << ".\n Number of PointLights sent in: " << pointLights->size() << "." << std::endl;
+//		exit(1);
+//	}
+//
+//	m_pointLights = pointLights;
+//}
+//
+//void PhongShader::setSpotLights(std::vector<SpotLight>* spotLights)
+//{
+//	if (spotLights->size() >= MAX_SPOT_LIGHTS)
+//	{
+//		std::cerr << "Error: too many SpotLights to be initialized.\n Max number of PointLights: " << MAX_SPOT_LIGHTS << ".\n Number of SpotLights sent in: " << spotLights->size() << "." << std::endl;
+//		exit(1);
+//	}
+//
+//	m_spotLights = spotLights;
+//}
 
 
 
