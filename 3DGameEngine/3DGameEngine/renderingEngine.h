@@ -8,6 +8,7 @@ public:
 	renderingEngine();
 
 	void Render(gameObject* object);
+	char* getOpenGLVersion();
 
 	virtual ~renderingEngine();
 protected:

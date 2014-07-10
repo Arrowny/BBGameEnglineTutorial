@@ -5,13 +5,12 @@
 #include "Window.h"
 #include "Game.h"
 #include "Input.h"
-#include "RenderUtil.h"
 #include "renderingEngine.h"
 
 class coreEngine
 {
 public:
-	coreEngine(Game* game, RenderUtil* renderUtil, Window* window, double frameRate);
+	coreEngine(Game* game, renderingEngine* renderingEngine, Window* window, double frameRate);
 	~coreEngine(); 
 
 	void Start(); //Starts running the game; contains central game loop.
@@ -25,7 +24,6 @@ private:
 	bool			  m_isRunning;
 	Game*			  m_game;
 	Window*			  m_window;
-	RenderUtil*		  m_renderUtil;
 	double			  m_frameTime;
 	renderingEngine*  m_renderingEngine;
 

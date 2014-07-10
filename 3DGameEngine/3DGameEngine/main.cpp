@@ -4,7 +4,7 @@
 #include "Window.h"
 #include "coreEngine.h"
 #include "Game.h"
-#include "RenderUtil.h"
+#include "renderingEngine.h"
 
 #define WIDTH 1000
 #define HEIGHT 800
@@ -14,10 +14,10 @@
 int main(int argc, char** argv)
 {
 	Window window(WIDTH, HEIGHT, TITLE);
-	RenderUtil renderUtil;
+	renderingEngine renderingEngine;
 	Game game;
 
-	coreEngine core(&game, &renderUtil, &window, FRAME_CAP);
+	coreEngine core(&game, &renderingEngine, &window, FRAME_CAP);
 
 	core.Start();
 

@@ -2,24 +2,21 @@
 #include "Window.h"
 #include "Timing.h"
 #include "Game.h"
-#include "RenderUtil.h"
 #include <stdio.h>
 
-coreEngine::coreEngine(Game* game, RenderUtil* renderUtil, Window* window, double frameRate) :
+coreEngine::coreEngine(Game* game, renderingEngine* renderingEngine, Window* window, double frameRate) :
 m_game(game),
-m_renderUtil(renderUtil),
 m_window(window),
 m_frameTime(1.0 / frameRate),
-m_renderingEngine(NULL)
+m_renderingEngine(renderingEngine)
 {
 	m_isRunning = false;
-	renderUtil->initGraphics();
 }
 
 coreEngine::~coreEngine()
 {
 	m_window->Dispose();
-	if (m_renderingEngine) delete m_renderingEngine;
+	//if (m_renderingEngine) delete m_renderingEngine;
 }
 
 void coreEngine::Start()
@@ -110,7 +107,6 @@ void coreEngine::Run(){
 
 void coreEngine::Render()
 {
-	m_window->ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	m_renderingEngine->Render(&m_game->GetRoot());
 	m_window->swapBuffers();
 }

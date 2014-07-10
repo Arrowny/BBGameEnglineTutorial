@@ -14,12 +14,10 @@ public:
 		m_camera = &camera;
 	}
 
-	virtual void render(const Transform& transform)
+	virtual void render(const Transform& transform, Shader* shader)
 	{
-		Shader* shade = Shader::GetInstance();
-
-		shade->Bind();
-		shade->Update(transform, *m_camera, *m_material);
+		shader->Bind();
+		shader->Update(transform, *m_camera, *m_material);
 		m_material->texture->Bind(0);
 		m_mesh->Draw();
 	}

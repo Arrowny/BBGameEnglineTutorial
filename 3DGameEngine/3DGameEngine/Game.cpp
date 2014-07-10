@@ -88,9 +88,3 @@ void Game::update(){
 	counter += 0.0003f;
 
 }
-
-void Game::render(){
-
-	m_root.render();
-
-}
