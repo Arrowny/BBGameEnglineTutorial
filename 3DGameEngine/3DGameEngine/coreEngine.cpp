@@ -94,9 +94,7 @@ void coreEngine::Run(){
 
 		if (render){
 
-			//Render();
-			m_renderingEngine->Render(&m_game->GetRoot());
-			m_window->swapBuffers();
+			Render();
 			frames++;
 		}
 
@@ -113,7 +111,7 @@ void coreEngine::Run(){
 void coreEngine::Render()
 {
 	m_window->ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	m_game->render();
+	m_renderingEngine->Render(&m_game->GetRoot());
 	m_window->swapBuffers();
 }
 

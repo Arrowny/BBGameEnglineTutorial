@@ -40,6 +40,7 @@ private:
 	spotLight*		m_sLights;
 	meshRenderer*	m_meshRenderer;
 	gameObject		m_root;
+	gameObject		planeObject;
 
 };
 

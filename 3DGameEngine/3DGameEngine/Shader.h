@@ -17,6 +17,12 @@ class Shader
 public:
 	Shader(const std::string& fileName);
 
+	static Shader* GetInstance()
+	{
+		static Shader instance("./res/phongShader");
+		return &instance;
+	}
+
 	void Bind();
 	void Update(const Transform& transform, const Camera camera, const Material& material);
 	static void SetPointLights(pointLight* pointLights, int arraySize);

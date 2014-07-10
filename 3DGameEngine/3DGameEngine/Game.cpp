@@ -31,7 +31,7 @@ void Game::init(){
 
 	m_camera = new Camera(glm::vec3(0.0f, 0.0f, -10.0f), 70.0f, (float)Window::getWidth() / (float)Window::getHeight(), 0.1f, 1000.0f);
 
-	m_root = gameObject();
+	planeObject = gameObject();
 	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
 	m_mesh = new Mesh("./res/triforce.obj");
 	m_texture = new Texture("./res/colour.jpg");
@@ -39,8 +39,10 @@ void Game::init(){
 	m_shader = new Shader("./res/phongShader");
 	//Shader shader("./res/basicShader");
 
-	m_meshRenderer = new meshRenderer(*m_mesh, m_material, *m_shader, *m_camera);
-	m_root.AddComponent(m_meshRenderer);
+	m_meshRenderer = new meshRenderer(*m_mesh, m_material, *m_camera);
+	planeObject.AddComponent(m_meshRenderer);
+
+	m_root.AddChild(planeObject);
 
 	m_pLights = new pointLight[2];
 	m_pLights[0] = pLight1;
