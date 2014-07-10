@@ -28,11 +28,11 @@ void gameObject::update()
 		m_children[i]->update();
 }
 
-void gameObject::render(Shader* shader)
+void gameObject::render(Shader* shader, renderingEngine* renderingEngine)
 {
 	for (unsigned int i = 0; i < m_components.size(); i++)
-		m_components[i]->render(m_transform, shader);
+		m_components[i]->render(m_transform, shader, renderingEngine);
 
 	for (unsigned int i = 0; i < m_children.size(); i++)
-		m_children[i]->render(shader);
+		m_children[i]->render(shader, renderingEngine);
 }

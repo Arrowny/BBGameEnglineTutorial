@@ -18,7 +18,7 @@ public:
 	~Game();
 
 	void init();
-	void input(const Input& input);
+	void input();
 	void update();
 	void render();
 

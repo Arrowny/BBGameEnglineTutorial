@@ -36,10 +36,8 @@ void Game::init(){
 	m_mesh = new Mesh("./res/triforce.obj");
 	m_texture = new Texture("./res/colour.jpg");
 	m_material = Material(m_texture, baseColor, 1, 36);
-	m_shader = new Shader("./res/phongShader");
-	//Shader shader("./res/basicShader");
 
-	m_meshRenderer = new meshRenderer(*m_mesh, m_material, *m_camera);
+	m_meshRenderer = new meshRenderer(*m_mesh, m_material);
 	planeObject.AddComponent(m_meshRenderer);
 
 	m_root.AddChild(planeObject);
@@ -56,9 +54,9 @@ void Game::init(){
 
 }
 
-void Game::input(const Input& input){
+void Game::input(/*const Input& input*/){
 	
-	m_camera->input(input);
+	//m_camera->input(input);
 	m_root.input();
 
 }
@@ -80,11 +78,14 @@ void Game::update(){
 	m_pLights[0].position = (glm::fvec3(sinCounter * 2.5, 0, -0.5));
 	m_pLights[1].position = (glm::fvec3(0.0, sinCounter * 2.5, -0.5));
 
-	m_sLights[0].pointL.position = m_camera->getPos();
-	m_sLights[0].direction = m_camera->getForward();
+	/*m_sLights[0].pointL.position = m_camera->getPos();
+	m_sLights[0].direction = m_camera->getForward();*/
 
+	m_sLights[0].pointL.position = (glm::fvec3(sinCounter * 5, 1, -1.5));
+	m_sLights[0].direction = glm::fvec3(0,0,1);
+
+	planeObject.GetTransform().GetRot().y = counter * 10;
 	m_root.update();
 
 	counter += 0.0003f;
-
 }

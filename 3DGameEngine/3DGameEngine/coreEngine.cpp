@@ -82,7 +82,8 @@ void coreEngine::Run(){
 				Stop();
 			}
 
-			m_game->input(m_window->GetInput());
+			m_game->input();
+			m_renderingEngine->input(m_window->GetInput());
 			m_game->update();
 
 			Time::setDelta(m_frameTime);

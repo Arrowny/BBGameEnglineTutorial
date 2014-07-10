@@ -11,6 +11,9 @@
 #include "Material.h"
 #include "pointLight.h"
 #include "spotLight.h"
+#include "renderingEngine.h"
+
+class renderingEngine;
 
 class Shader
 {
@@ -24,15 +27,9 @@ public:
 	}
 
 	void Bind();
-	void Update(const Transform& transform, const Camera camera, const Material& material);
+	virtual void Update(const Transform& transform, const Material& material, renderingEngine* renderE);
 	static void SetPointLights(pointLight* pointLights, int arraySize);
 	static void SetSpotLights(spotLight* spotLights, int arraySize);
-	void AddUniform(const std::string& uniform);
-
-	void SetUniformi(const std::string& name, int value);
-	void SetUniformf(const std::string& name, float value);
-	void SetUniform(const std::string& name, const glm::fmat4& value);
-	void SetUniform(const std::string& name, const glm::fvec3& value);
 
 	virtual ~Shader();
 protected:

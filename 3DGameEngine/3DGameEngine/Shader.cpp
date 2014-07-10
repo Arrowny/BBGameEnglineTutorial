@@ -91,12 +91,12 @@ void Shader::Bind()
 
 float temp = 0.0f;
 
-void Shader::Update(const Transform& transform, const Camera camera, const Material& material)
+void Shader::Update(const Transform& transform, const Material& material, renderingEngine* renderE)
 {
 	temp += Time::getDelta();
-	glm::mat4 model = transform.GetProjection(camera);
+	glm::mat4 model = transform.GetProjection(renderE->GetMainCamera());
 	glm::mat4 Normal = transform.GetModel();
-	glm::vec3 eyePos = transform.GetCameraPos(camera);
+	glm::vec3 eyePos = transform.GetCameraPos(renderE->GetMainCamera());
 
 	glUniform1f(m_uniforms[UNIFORM_U], (float)glm::abs(glm::sin(temp)));
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);

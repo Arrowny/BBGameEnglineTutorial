@@ -4,6 +4,7 @@
 #include "gameComponent.h"
 #include "Transform.h"
 #include "Shader.h"
+#include "renderingEngine.h"
 
 class gameObject
 {
@@ -15,8 +16,9 @@ public:
 
 	void input();
 	void update();
-	void render(Shader* shader);
+	void render(Shader* shader, renderingEngine* renderingEngine);
 
+	inline Transform& GetTransform() { return m_transform; }
 protected:
 private:
 	std::vector<gameObject*> m_children;

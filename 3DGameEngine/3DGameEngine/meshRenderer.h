@@ -7,17 +7,16 @@
 class meshRenderer : public gameComponent
 {
 public:
-	meshRenderer(Mesh& mesh, Material& material, Camera& camera)
+	meshRenderer(Mesh& mesh, Material& material)
 	{
 		m_mesh = &mesh;
 		m_material = &material;
-		m_camera = &camera;
 	}
 
-	virtual void render(const Transform& transform, Shader* shader)
+	virtual void render(const Transform& transform, Shader* shader, renderingEngine* renderingEngine)
 	{
 		shader->Bind();
-		shader->Update(transform, *m_camera, *m_material);
+		shader->Update(transform, *m_material, renderingEngine);
 		m_material->texture->Bind(0);
 		m_mesh->Draw();
 	}
