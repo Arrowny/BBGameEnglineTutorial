@@ -18,14 +18,14 @@ Game::Game()
 
 
 	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
-	m_mesh = new Mesh("./res/monkey3.obj");
+	m_mesh = new Mesh("./res/cube.obj");
 	m_shader = new Shader("./res/phongShader");
 	m_transform = new Transform();
 	m_camera = new Camera(glm::vec3(0, 0, -4), 70.0f, (float)WindowParameter::width/ (float)WindowParameter::height, 1.0f, 1000.0f);
 	m_material = new Material( new Texture("./res/bricks.jpg"), glm::fvec3(0.0,1.0,1.0));
 
 	m_shader->SetAmbient(glm::fvec3(0.3, 0.3, 0.3));
-	m_shader->SetDirectionalLight(DirectionalLight(BaseLight(glm::vec3(1, 1, 1), 0.8f), glm::vec3(1, 0, 0)));
+	m_shader->SetDirectionalLight(DirectionalLight(BaseLight(glm::vec3(1, 1, 1), 0.8f), glm::vec3(0, 0, -1)));
 }
 
 Game::~Game()
@@ -43,8 +43,9 @@ void Game::update(){
 
 	//m_shader->Update(glm::abs(sin(temp))+0.5);
 
-	//m_transform.SetPos(glm::vec3(sin(temp), 0, 0));
-	//m_transform->SetRot(glm::vec3(0, sin(temp) * 300, 0));
+	m_transform->SetPos(glm::vec3(sin(temp), 0, cos(temp)));
+	m_transform->SetRot(glm::vec3(temp * 100, temp * 100, temp * 100));
+
 }
 
 void Game::render(){

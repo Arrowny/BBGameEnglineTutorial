@@ -25,9 +25,9 @@ void RenderUtil::initGraphics(){
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 
+	glEnable(GL_DEPTH_CLAMP);
 
-
-	glEnable(GL_FRAMEBUFFER_SRGB);
+//	glEnable(GL_FRAMEBUFFER_SRGB);// it is already rgb colors so we do not need to do sth to it
 
 }
 

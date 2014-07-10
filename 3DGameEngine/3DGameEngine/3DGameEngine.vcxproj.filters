@@ -33,6 +33,7 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="BaseLight.h" />
     <ClInclude Include="DirectionalLight.h" />
+    <ClInclude Include="Attenuation.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3DGameEngine.rc" />

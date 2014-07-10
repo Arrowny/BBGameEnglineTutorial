@@ -28,6 +28,13 @@ Shader::Shader(const std::string& fileName)
 	m_uniforms[L_DIRECTIONAL_BASE_COLOR_U] = glGetUniformLocation(m_program, "directionalLight.base.color");
 	m_uniforms[L_DIRECTIONAL_BASE_INTENSITY_U] = glGetUniformLocation(m_program, "directionalLight.base.intensity");
 	m_uniforms[L_DIRECTIONAL_DIRECTION_U] = glGetUniformLocation(m_program, "directionalLight.direction");
+	m_uniforms[EYEPOS_U] = glGetUniformLocation(m_program, "eyePos");
+	m_uniforms[L_SPECULARINTENSITY_U] = glGetUniformLocation(m_program, "specularIntensity");
+	m_uniforms[L_SPECULARPOWER_U] = glGetUniformLocation(m_program, "specularPower");
+	//m_uniforms[EYEPOS_U] = glGetUniformLocation(m_program, "eyePos");
+	//m_uniforms[EYEPOS_U] = glGetUniformLocation(m_program, "eyePos");
+	//m_uniforms[EYEPOS_U] = glGetUniformLocation(m_program, "eyePos");
+
 	//m_uniforms[FLOAT_U] = glGetUniformLocation(m_program, "uniformfloat");
 
 	//DirectionalLight directionalLight = DirectionalLight(&BaseLight(glm::vec3(1, 1, 1), 0.0f), glm::vec3(0, 0, 0)); //DirectionalLight(&BaseLight(glm::fvec3(1, 1, 1), 0.2f), glm::fvec3(0.0f, 0.2f, -0.5f));
@@ -64,6 +71,9 @@ void Shader::Update(Transform& transform, Camera& camera, Material& material)
 	glUniform3fv(m_uniforms[L_DIRECTIONAL_BASE_COLOR_U], 1, &directionalLight.base.color[0]);
 	glUniform1f(m_uniforms[L_DIRECTIONAL_BASE_INTENSITY_U], directionalLight.base.intensity);
 	glUniform3fv(m_uniforms[L_DIRECTIONAL_DIRECTION_U], 1, &directionalLight.direction[0]);
+	glUniform3fv(m_uniforms[EYEPOS_U], 1, &camera.GetPos()[0]);
+	glUniform1f(m_uniforms[L_SPECULARINTENSITY_U], material.specularIntensity);
+	glUniform1f(m_uniforms[L_SPECULARPOWER_U], material.specularPower);
 
 }
 
