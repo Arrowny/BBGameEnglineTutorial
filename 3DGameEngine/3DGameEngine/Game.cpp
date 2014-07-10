@@ -39,7 +39,7 @@ void Game::init(){
 	m_shader = new Shader("./res/phongShader");
 	//Shader shader("./res/basicShader");
 
-	m_meshRenderer = new meshRenderer(*m_mesh, m_material, *m_shader);
+	m_meshRenderer = new meshRenderer(*m_mesh, m_material, *m_shader, *m_camera);
 	m_root.AddComponent(m_meshRenderer);
 
 	m_pLights = new pointLight[2];
@@ -81,7 +81,6 @@ void Game::update(){
 	m_sLights[0].pointL.position = m_camera->getPos();
 	m_sLights[0].direction = m_camera->getForward();
 
-	m_shader->Update(transform, *m_camera, m_material);
 	m_root.update();
 
 	counter += 0.0003f;
