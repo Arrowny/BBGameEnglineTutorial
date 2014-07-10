@@ -88,13 +88,14 @@
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timing.cpp" />
-    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\VS_test\MonkeyHead[final]\MonkeyHead[final]\obj_loader.h" />
+    <ClInclude Include="BaseLight.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="coreEngine.h" />
+    <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Material.h" />

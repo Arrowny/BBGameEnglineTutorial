@@ -4,6 +4,7 @@
 #include "Transform.h"	
 #include "Camera.h"
 #include "Material.h"
+#include "DirectionalLight.h"
 
 class Shader
 {
@@ -11,10 +12,11 @@ public:
 
 	Shader(const std::string& fileName);
 	void Bind();//bind the shader, set the GPU in a state using vertex shader and frag shader in this class
-	void Update(Transform& transform,Camera& camera, Material& material);
+	void Update(Transform& transform,Camera& camera, Material& material);//, DirectionalLight& directionalLight
 	//void Update(float value);
 
 	inline void SetAmbient(glm::fvec3 ambient) { ambientLight = ambient; }
+	inline void SetDirectionalLight(DirectionalLight directionallight) { directionalLight = directionallight; }
 
 	~Shader();
 
@@ -27,9 +29,13 @@ private:
 
 	enum
 	{
+		TRANSFORM_P_U,
 		TRANSFORM_U,
 		BASIC_COLOR_U,
 		L_AMBIENT_U,
+		L_DIRECTIONAL_BASE_COLOR_U,
+		L_DIRECTIONAL_BASE_INTENSITY_U,
+		L_DIRECTIONAL_DIRECTION_U,
 		FLOAT_U,
 
 		NUM_UNIFORMS
@@ -40,5 +46,6 @@ private:
 	GLuint m_uniforms[NUM_UNIFORMS];
 
 	glm::vec3 ambientLight;
+	DirectionalLight directionalLight;
 };
 

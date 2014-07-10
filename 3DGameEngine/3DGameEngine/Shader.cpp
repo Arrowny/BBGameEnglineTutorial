@@ -13,6 +13,7 @@ Shader::Shader(const std::string& fileName)
 
 	glBindAttribLocation(m_program, 0, "position");    // because we are not using "attribute vec3 position;" in the vertex shader file
 	glBindAttribLocation(m_program, 1, "texCoord");   
+	glBindAttribLocation(m_program, 2, "normal");
 
 	glLinkProgram(m_program);
 	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error: Porgram linking failed");
@@ -20,10 +21,17 @@ Shader::Shader(const std::string& fileName)
 	glValidateProgram(m_program);
 	CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: Program is invalid");
 
+	m_uniforms[TRANSFORM_P_U] = glGetUniformLocation(m_program, "transformProjected");
 	m_uniforms[TRANSFORM_U] = glGetUniformLocation(m_program, "transform");
 	m_uniforms[BASIC_COLOR_U] = glGetUniformLocation(m_program, "basicColor");
 	m_uniforms[L_AMBIENT_U] = glGetUniformLocation(m_program, "ambientLight");
+	m_uniforms[L_DIRECTIONAL_BASE_COLOR_U] = glGetUniformLocation(m_program, "directionalLight.base.color");
+	m_uniforms[L_DIRECTIONAL_BASE_INTENSITY_U] = glGetUniformLocation(m_program, "directionalLight.base.intensity");
+	m_uniforms[L_DIRECTIONAL_DIRECTION_U] = glGetUniformLocation(m_program, "directionalLight.direction");
 	//m_uniforms[FLOAT_U] = glGetUniformLocation(m_program, "uniformfloat");
+
+	//DirectionalLight directionalLight = DirectionalLight(&BaseLight(glm::vec3(1, 1, 1), 0.0f), glm::vec3(0, 0, 0)); //DirectionalLight(&BaseLight(glm::fvec3(1, 1, 1), 0.2f), glm::fvec3(0.0f, 0.2f, -0.5f));
+
 }
 
 
@@ -49,9 +57,14 @@ void Shader::Update(Transform& transform, Camera& camera, Material& material)
 	//	camera.InitTranslation(-camera.GetPos().x, -camera.GetPos().y, -camera.GetPos().z) * transform.GetModel();
 
 	//glm::mat4 model = transform.GetModel();
-	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
+	glUniformMatrix4fv(m_uniforms[TRANSFORM_P_U], 1, GL_FALSE, &model[0][0]);
+	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &transform.GetModel()[0][0]);
 	glUniform3fv(m_uniforms[BASIC_COLOR_U], 1, &material.basic_color[0]);//, (GLfloat)material.GetColor().y, (GLfloat)material.GetColor().z);
 	glUniform3fv(m_uniforms[L_AMBIENT_U],1,&ambientLight[0]);
+	glUniform3fv(m_uniforms[L_DIRECTIONAL_BASE_COLOR_U], 1, &directionalLight.base.color[0]);
+	glUniform1f(m_uniforms[L_DIRECTIONAL_BASE_INTENSITY_U], directionalLight.base.intensity);
+	glUniform3fv(m_uniforms[L_DIRECTIONAL_DIRECTION_U], 1, &directionalLight.direction[0]);
+
 }
 
 //void Shader::Update(float value)

@@ -32,7 +32,7 @@ public:
 
 	void Input(Input input)
 	{
-		float snsitivity = 0.5f;
+		float snsitivity = 0.1f;
 
 		float movAmt = (float)(10 * Time::getDelta());
 		float rotAmt = (float)(100 * Time::getDelta());
@@ -49,9 +49,9 @@ public:
 			bool rotY = deltaPos.x != 0;
 			bool rotX = deltaPos.y != 0;
 			if (rotY)
-				RotateY(deltaPos.x * snsitivity);
+				RotateY(-deltaPos.x * snsitivity);
 			if (rotX)
-				RotateX(-deltaPos.y * snsitivity);
+				RotateX(deltaPos.y * snsitivity);
 			if (rotX || rotY)
 			{
 				input.SetMousePosition(glm::vec2(WindowParameter::width / 2, WindowParameter::height / 2));
@@ -79,7 +79,10 @@ public:
 		if (input.GetKey(input.KEY_D))
 			move(GetRight(), movAmt);
 
-
+		if (input.GetKey(input.KEY_CAPSLOCK))
+			move(m_up, movAmt);
+		if (input.GetKey(input.KEY_LSHIFT))
+			move(m_up, -movAmt);
 
 		/*if (input.GetKey(input.KEY_UP))
 		RotateX(-rotAmt);

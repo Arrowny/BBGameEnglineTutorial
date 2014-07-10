@@ -12,7 +12,6 @@
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timing.cpp" />
-    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -32,6 +31,8 @@
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="Material.h" />
+    <ClInclude Include="BaseLight.h" />
+    <ClInclude Include="DirectionalLight.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3DGameEngine.rc" />
