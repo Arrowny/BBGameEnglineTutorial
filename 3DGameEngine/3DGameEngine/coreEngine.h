@@ -6,7 +6,7 @@
 #include "Game.h"
 #include "Input.h"
 #include "RenderUtil.h"
-
+#include "renderingEngine.h"
 
 class coreEngine
 {
@@ -22,11 +22,13 @@ public:
 
 protected:
 private:
-	bool		m_isRunning;
-	Game*		m_game;
-	Window*		m_window;
-	RenderUtil*	m_renderUtil;
-	double		m_frameTime;
+	bool			  m_isRunning;
+	Game*			  m_game;
+	Window*			  m_window;
+	RenderUtil*		  m_renderUtil;
+	double			  m_frameTime;
+	renderingEngine*  m_renderingEngine;
+
 
 };
 

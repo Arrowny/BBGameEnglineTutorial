@@ -22,6 +22,8 @@ public:
 	void update();
 	void render();
 
+	inline gameObject& GetRoot() { return m_root; }
+
 	float counter = 0.0f;
 
 protected:

@@ -9,7 +9,8 @@ coreEngine::coreEngine(Game* game, RenderUtil* renderUtil, Window* window, doubl
 m_game(game),
 m_renderUtil(renderUtil),
 m_window(window),
-m_frameTime(1.0 / frameRate)
+m_frameTime(1.0 / frameRate),
+m_renderingEngine(NULL)
 {
 	m_isRunning = false;
 	renderUtil->initGraphics();
@@ -17,6 +18,8 @@ m_frameTime(1.0 / frameRate)
 
 coreEngine::~coreEngine()
 {
+	m_window->Dispose();
+	if (m_renderingEngine) delete m_renderingEngine;
 }
 
 void coreEngine::Start()
@@ -91,7 +94,9 @@ void coreEngine::Run(){
 
 		if (render){
 
-			Render();
+			//Render();
+			m_renderingEngine->Render(&m_game->GetRoot());
+			m_window->swapBuffers();
 			frames++;
 		}
 
