@@ -19,7 +19,7 @@ public:
 	virtual ~TestGame();
 
 	virtual void Init(Window* window) override;
-	virtual void ProcessInput(Input* &m_input) override;
+	virtual void ProcessInput(Input* &input) override;
 	virtual void Update() override;
 	virtual void Render() override;
 

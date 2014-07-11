@@ -9,7 +9,7 @@ public:
 	virtual ~Game(){}
 
 	virtual void Init(Window* window) = 0;
-	virtual void ProcessInput(Input* &m_input) = 0;
+	virtual void ProcessInput(Input* &input) = 0;
 	virtual void Update() = 0;
 	virtual void Render() = 0;
 

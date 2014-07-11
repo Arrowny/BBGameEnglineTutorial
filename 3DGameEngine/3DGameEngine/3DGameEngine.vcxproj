@@ -80,10 +80,13 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="coreEngine.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="gameComponent.h" />
+    <ClInclude Include="gameObject.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="Lights.h" />
     <ClInclude Include="material.h" />
     <ClInclude Include="mesh.h" />
+    <ClInclude Include="meshRenderer.h" />
     <ClInclude Include="phongShader.h" />
     <ClInclude Include="resourceLoader.h" />
     <ClInclude Include="shader.h" />
@@ -99,10 +102,13 @@
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="coreEngine.cpp" />
+    <ClCompile Include="gameComponent.cpp" />
+    <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="material.cpp" />
     <ClCompile Include="mesh.cpp" />
+    <ClCompile Include="meshRenderer.cpp" />
     <ClCompile Include="phongShader.cpp" />
     <ClCompile Include="resourceLoader.cpp" />
     <ClCompile Include="shader.cpp" />

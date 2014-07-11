@@ -36,8 +36,6 @@ public:
 	glm::vec3 m_rot;
 	glm::vec3 m_scale;
 private:
-	Transform(const Transform& other) {}
-	void operator=(const Transform& other) {}
 
 	double zNear;
 	double zFar;

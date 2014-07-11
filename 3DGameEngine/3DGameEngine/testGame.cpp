@@ -47,7 +47,6 @@ void TestGame::Init(Window* window)
 	//TestMaterial = new Material(glm::vec3(0.0, 1.0, 1.0));
 
 	m_shader = new PhongShader("./res/shaders/phongShader", glm::vec3(0.2, 0.2, 0.2));
-
 	m_shader->m_dLight = DirectionalLight(BaseLight(glm::vec3(1, 1, 1), .8), glm::vec3(0, 1, 0));
 
 	//m_shader->m_pointLights.push_back(TestPointLight1);
@@ -59,9 +58,9 @@ void TestGame::Init(Window* window)
 	m_worldTransform = new Transform();
 }
 
-void TestGame::ProcessInput(Input* &m_input)
+void TestGame::ProcessInput(Input* &input)
 {
-	m_camera->input(*m_input);
+	m_camera->input(*input);
 }
 
 void TestGame::Update()
@@ -84,5 +83,4 @@ void TestGame::Render()
 {
 	m_shader->Bind();
 	m_shader->updateBasicUniformsAndTexture(*m_camera, m_worldTransform->getTransformation(), *TestMaterial);
-	TestMesh->Draw();
 }

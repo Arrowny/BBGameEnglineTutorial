@@ -20,7 +20,7 @@ int main(int argc, char** argv)
 	std::cout << "Start 3D game engine" << std::endl;
 
 	Window window(WIDTH, HEIGHT, TITLE);
-	TestGame* game = new TestGame();
+	TestGame* game = new TestGame(); //games must be initialized in this way or this will not work! Annoying bug that has to do with scoping problems and polymorphism.... or something.
 	CoreEngine core(&window, game);
 	core.start();
 	return 0;
