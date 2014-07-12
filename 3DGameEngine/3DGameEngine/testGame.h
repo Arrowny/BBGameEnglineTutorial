@@ -10,6 +10,8 @@
 #include "timing.h"
 #include "resourceLoader.h"
 #include "camera.h"
+#include "gameObject.h"
+#include "meshRenderer.h"
 
 class TestGame :
 	public Game

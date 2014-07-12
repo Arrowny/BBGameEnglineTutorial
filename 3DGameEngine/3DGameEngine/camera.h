@@ -30,8 +30,6 @@ public:
 	
 	glm::vec3 m_pos;
 private:
-	Camera(const Camera& other) {}
-	void operator=(const Camera& other) {}
 
 	glm::vec3 findDirectionOfLookAt(glm::vec3 lookAt);
 	glm::vec3 calculateTrueUp(glm::vec3 up, glm::vec3 center);

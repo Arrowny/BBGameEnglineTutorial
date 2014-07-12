@@ -36,7 +36,6 @@ public:
 	glm::vec3 m_rot;
 	glm::vec3 m_scale;
 private:
-
 	double zNear;
 	double zFar;
 	double fov;
