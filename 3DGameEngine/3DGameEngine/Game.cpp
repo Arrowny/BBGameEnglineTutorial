@@ -22,7 +22,7 @@ Game::Game()
 
 
 	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
-	m_mesh = new Mesh("./res/lala.obj");
+	m_mesh = new Mesh("./res/plane.obj");
 	m_shader = new Shader("./res/phongShader");
 	m_transform = new Transform();
 	m_camera = new Camera(glm::vec3(0,0,-4), 70.0f, (float)WindowParameter::width/ (float)WindowParameter::height, 1.0f, 1000.0f);
@@ -40,8 +40,8 @@ Game::Game()
 	//m_pl[0] = pl[0];
 	//m_pl[1] = pl[1];
 
-	PointLight* m_pl = &pl[0];
-	m_shader->SetPointLights(m_pl, 2);
+	//PointLight* m_pl = &pl[0];
+	//m_shader->SetPointLights(m_pl, 2);
 }
 
 Game::~Game()
@@ -59,15 +59,15 @@ void Game::update(){
 
 	//m_shader->Update(glm::abs(sin(temp))+0.5);
 
-	m_transform->SetPos(glm::vec3(0 , -1 , 5));
+	m_transform->SetPos(glm::vec3(7 , -1 , 7));
 	//m_transform->SetPos(glm::vec3(sin(temp), 0, cos(temp)));
 	//m_transform->SetRot(glm::vec3(temp * 100, temp * 100, temp * 100));
 
-	//pl[0].SetPosition(glm::fvec3(3.0,0.0, 8.0* (float)(sin(temp) + 1.0 / 2.0) + 10));
-	//pl[1].SetPosition(glm::fvec3(7.0,0.0, 8.0* (float)(cos(temp) + 1.0 / 2.0) + 10));
+	pl[0].SetPosition(glm::fvec3(3.0,0.0, 8.0* (float)(sin(temp) + 1.0 / 2.0) + 10));
+	pl[1].SetPosition(glm::fvec3(7.0,0.0, 8.0* (float)(cos(temp) + 1.0 / 2.0) + 10));
 
-	//PointLight* m_pl = &pl[0];
-	//m_shader->SetPointLights(m_pl, 2);
+	PointLight* m_pl = &pl[0];
+	m_shader->SetPointLights(m_pl, 2);
 }
 
 void Game::render(){
