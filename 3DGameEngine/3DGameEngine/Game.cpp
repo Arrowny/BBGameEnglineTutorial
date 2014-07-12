@@ -1,6 +1,10 @@
 #include "Game.h"
 #include "Input.h"
 
+PointLight pl[] = { PointLight(BaseLight(glm::fvec3(1.0, 0.5, 0.0), 1.0f), Attenuation(0.0, 0.0, 1.0), glm::fvec3(2.0, 0.0, 3.0)),
+					PointLight(BaseLight(glm::fvec3(0.0, 0.5, 1.0), 1.0f), Attenuation(0.0, 0.0, 1.0), glm::fvec3(-2.0, 0.0, 3.0))
+					};
+
 Game::Game() 
 {
 	Vertex vertices[] = { Vertex(glm::vec3(-1.0, -1.0, 0.0), glm::vec2(0.0, 0.5)),
@@ -18,14 +22,26 @@ Game::Game()
 
 
 	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
-	m_mesh = new Mesh("./res/cube.obj");
+	m_mesh = new Mesh("./res/lala.obj");
 	m_shader = new Shader("./res/phongShader");
 	m_transform = new Transform();
-	m_camera = new Camera(glm::vec3(0, 0, -4), 70.0f, (float)WindowParameter::width/ (float)WindowParameter::height, 1.0f, 1000.0f);
-	m_material = new Material( new Texture("./res/bricks.jpg"), glm::fvec3(0.0,1.0,1.0));
+	m_camera = new Camera(glm::vec3(0,0,-4), 70.0f, (float)WindowParameter::width/ (float)WindowParameter::height, 1.0f, 1000.0f);
+	m_material = new Material( new Texture("./res/bricks.jpg"), glm::fvec3(1.0,1.0,1.0), 1, 8);
 
 	m_shader->SetAmbient(glm::fvec3(0.3, 0.3, 0.3));
-	m_shader->SetDirectionalLight(DirectionalLight(BaseLight(glm::vec3(1, 1, 1), 0.8f), glm::vec3(0, 0, -1)));
+	m_shader->SetDirectionalLight(DirectionalLight(BaseLight(glm::vec3(1, 1, 1), 0.5f), glm::vec3(0, 0, -1)));
+
+
+	//PointLight* m_pl = new PointLight[]
+	//	{
+	//	PointLight(BaseLight(glm::fvec3(1.0, 0.8, 0.0), 1.0f), Attenuation(0.0, 0.0, 1.0), glm::fvec3(2.0, 0.0, 3.0)),
+	//		PointLight(BaseLight(glm::fvec3(0.0, 0.0, 1.0), 1.0f), Attenuation(0.0, 0.0, 1.0), glm::fvec3(-2.0, 0.0, 3.0))
+	//	};
+	//m_pl[0] = pl[0];
+	//m_pl[1] = pl[1];
+
+	PointLight* m_pl = &pl[0];
+	m_shader->SetPointLights(m_pl, 2);
 }
 
 Game::~Game()
@@ -43,9 +59,15 @@ void Game::update(){
 
 	//m_shader->Update(glm::abs(sin(temp))+0.5);
 
-	m_transform->SetPos(glm::vec3(sin(temp), 0, cos(temp)));
-	m_transform->SetRot(glm::vec3(temp * 100, temp * 100, temp * 100));
+	m_transform->SetPos(glm::vec3(0 , -1 , 5));
+	//m_transform->SetPos(glm::vec3(sin(temp), 0, cos(temp)));
+	//m_transform->SetRot(glm::vec3(temp * 100, temp * 100, temp * 100));
 
+	//pl[0].SetPosition(glm::fvec3(3.0,0.0, 8.0* (float)(sin(temp) + 1.0 / 2.0) + 10));
+	//pl[1].SetPosition(glm::fvec3(7.0,0.0, 8.0* (float)(cos(temp) + 1.0 / 2.0) + 10));
+
+	//PointLight* m_pl = &pl[0];
+	//m_shader->SetPointLights(m_pl, 2);
 }
 
 void Game::render(){

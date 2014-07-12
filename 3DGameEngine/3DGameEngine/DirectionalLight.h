@@ -41,4 +41,6 @@ struct PointLight
 		atten(attenu),
 		position(position)
 	{}
+
+	void SetPosition(glm::vec3 pos) { position = pos; }
 };

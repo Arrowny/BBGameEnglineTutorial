@@ -84,14 +84,14 @@ public:
 		if (input.GetKey(input.KEY_LSHIFT))
 			move(m_up, -movAmt);
 
-		/*if (input.GetKey(input.KEY_UP))
+		if (input.GetKey(input.KEY_UP))
 		RotateX(-rotAmt);
 		if (input.GetKey(input.KEY_DOWN))
 		RotateX(rotAmt);
 		if (input.GetKey(input.KEY_LEFT))
 		RotateY(rotAmt);
 		if (input.GetKey(input.KEY_RIGHT))
-		RotateY(-rotAmt);*/
+		RotateY(-rotAmt);
 	}
 
 	inline void move(glm::fvec3 dir, float amt)
