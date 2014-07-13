@@ -30,7 +30,7 @@ public:
 
 	void Bind();
 	void CompileShader();
-    virtual void Update(const Transform& transform, const Material& material, renderingEngine* renderE);
+    virtual void Update(const Transform& transform, const Material& material, renderingEngine* renderingEngine);
 	static void SetPointLights(pointLight* pointLights, int arraySize);
 	static void SetSpotLights(spotLight* spotLights, int arraySize);
 

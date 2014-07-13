@@ -4,6 +4,8 @@
 #include "Camera.h"
 #include "Input.h"
 #include "directionalLight.h"
+#include "pointLight.h"
+#include "spotLight.h"
 #include <glm\glm.hpp>
 #include <glm\gtx\transform.hpp>
 
@@ -23,6 +25,8 @@ public:
 	inline glm::fvec3& GetMainCameraForward() { return m_mainCamera.getForward(); }
 	inline glm::fvec3& GetAmbientLight() { return m_ambientLight; }
 	inline directionalLight& GetDirectionalLight() { return m_directionalLight; }
+	inline pointLight& GetPointLight() { return m_pointLight; }
+	inline spotLight& GetSpotLight() { return m_spotLight; }
 	//inline void SetMainCamera(const Camera& camera) { m_mainCamera = camera; }
 
 	virtual ~renderingEngine();
@@ -36,5 +40,9 @@ private:
 	glm::fvec3 m_ambientLight;
 	directionalLight m_directionalLight;
 	directionalLight m_directionalLight2;
+	pointLight m_pointLight;
+	pointLight m_pointLight2;
+	spotLight m_spotLight;
+
 };
 

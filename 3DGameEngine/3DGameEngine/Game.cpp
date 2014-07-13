@@ -72,14 +72,11 @@ void Game::update(float delta){
 	//transform.GetRot().y = counter * 10;
 	//transform.SetScale(glm::vec3(0.1f , 0.1f, 0.1f));
 
-	m_pLights[0].position = (glm::fvec3(sinCounter * 2.5, 0, -0.5));
-	m_pLights[1].position = (glm::fvec3(0.0, sinCounter * 2.5, -0.5));
+	/*m_pLights[0].position = (glm::fvec3(sinCounter * 2.5, 0, -0.5));
+	m_pLights[1].position = (glm::fvec3(0.0, sinCounter * 2.5, -0.5));*/
 
 	/*m_sLights[0].pointL.position = m_camera->getPos();
 	m_sLights[0].direction = m_camera->getForward();*/
-
-	m_sLights[0].pointL.position = (glm::fvec3(sinCounter * 5, 1, -1.5));
-	m_sLights[0].direction = glm::fvec3(0,0,1);
 
 	planeObject.GetTransform().GetRot().y = sinCounter * 30;
 	m_root.update(delta);

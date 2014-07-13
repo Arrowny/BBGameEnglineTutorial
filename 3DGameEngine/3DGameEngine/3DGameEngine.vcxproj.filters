@@ -63,6 +63,12 @@
     <ClCompile Include="forwardDirectional.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="forwardPoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="forwardSpot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -143,6 +149,12 @@
     <ClInclude Include="forwardDirectional.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="forwardPoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="forwardSpot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\basicShader.fs">
@@ -167,6 +179,18 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\forwardDirectional.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\forwardPoint.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\forwardPoint.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\forwardSpot.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\forwardSpot.vs">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

@@ -80,6 +80,8 @@
     <ClCompile Include="coreEngine.cpp" />
     <ClCompile Include="forwardAmbient.cpp" />
     <ClCompile Include="forwardDirectional.cpp" />
+    <ClCompile Include="forwardPoint.cpp" />
+    <ClCompile Include="forwardSpot.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -102,6 +104,8 @@
     <ClInclude Include="directionalLight.h" />
     <ClInclude Include="forwardAmbient.h" />
     <ClInclude Include="forwardDirectional.h" />
+    <ClInclude Include="forwardPoint.h" />
+    <ClInclude Include="forwardSpot.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="gameComponent.h" />
     <ClInclude Include="gameObject.h" />
@@ -129,6 +133,10 @@
     <None Include="res\forwardAmbient.vs" />
     <None Include="res\forwardDirectional.fs" />
     <None Include="res\forwardDirectional.vs" />
+    <None Include="res\forwardPoint.fs" />
+    <None Include="res\forwardPoint.vs" />
+    <None Include="res\forwardSpot.fs" />
+    <None Include="res\forwardSpot.vs" />
     <None Include="res\phongShader.fs" />
     <None Include="res\phongShader.vs" />
   </ItemGroup>

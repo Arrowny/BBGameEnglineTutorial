@@ -101,36 +101,41 @@ void Shader::CompileShader()
 
 float temp = 0.0f;
 
-void Shader::Update(const Transform& transform, const Material& material, renderingEngine* renderE)
+void Shader::Update(const Transform& transform, const Material& material, renderingEngine* renderingEngine)
 {
 	//temp += Time::getDelta();
-	glm::mat4 model = transform.GetProjection(renderE->GetMainCamera());
+	glm::mat4 model = transform.GetProjection(renderingEngine->GetMainCamera());
 	glm::mat4 Normal = transform.GetModel();
-	glm::vec3 eyePos = transform.GetCameraPos(renderE->GetMainCamera());
-	glm::vec3 ambient = renderE->GetAmbientLight();
-	glm::vec3 dirColor = renderE->GetDirectionalLight().m_base.m_color;
-	glm::vec3 dirDirection = renderE->GetDirectionalLight().m_direction;
+	glm::vec3 eyePos = transform.GetCameraPos(renderingEngine->GetMainCamera());
+	glm::vec3 ambient = renderingEngine->GetAmbientLight();
+	glm::vec3 dirColor = renderingEngine->GetDirectionalLight().m_base.m_color;
+	glm::vec3 dirDirection = renderingEngine->GetDirectionalLight().m_direction;
+	glm::vec3 pointColor = renderingEngine->GetPointLight().base.m_color;
+	glm::vec3 pointPos = renderingEngine->GetPointLight().position;
+	glm::vec3 spotColor = renderingEngine->GetSpotLight().pointL.base.m_color;
+	glm::vec3 spotPos = renderingEngine->GetSpotLight().pointL.position;
+	glm::vec3 spotDir = renderingEngine->GetSpotLight().direction;
 
 	glUniform1f(m_uniforms[UNIFORM_U], (float)glm::abs(glm::sin(temp)));
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
 	glUniformMatrix4fv(m_uniforms[NORMAL_U], 1, GL_FALSE, &Normal[0][0]);
 	glUniform3f(m_uniforms[LIGHTDIR_U], 0.0f, 1.0f, 1.0f);
-	glUniform3f(m_uniforms[AMBIENTL_U], (float)renderE->GetAmbientLight()[0], (float)renderE->GetAmbientLight()[1], (float)renderE->GetAmbientLight()[2]);
+	glUniform3f(m_uniforms[AMBIENTL_U], (float)renderingEngine->GetAmbientLight()[0], (float)renderingEngine->GetAmbientLight()[1], (float)renderingEngine->GetAmbientLight()[2]);
 	glUniform4fv(m_uniforms[COLOR_U], 1, &material.color[0]);
 	glUniform3fv(m_uniforms[DIRLIGHTC_U], 1, &dirColor[0]);
-	glUniform1f(m_uniforms[DIRLIGHTI_U], (float)renderE->GetDirectionalLight().m_base.m_intensity);
+	glUniform1f(m_uniforms[DIRLIGHTI_U], (float)renderingEngine->GetDirectionalLight().m_base.m_intensity);
 	glUniform3fv(m_uniforms[DIRLIGHTD_U], 1, &dirDirection[0]);
 	glUniform1f(m_uniforms[SPECI_U], (float)material.specularIntensity);
 	glUniform1f(m_uniforms[SPECP_U], (float)material.specularPower);
 	glUniform3fv(m_uniforms[EYEPOS_U], 1, &eyePos[0]);
 
-	glUniform3f(m_uniforms[POINTLBC_1], (float)m_pointLights[0].base.m_color[0], (float)m_pointLights[0].base.m_color[1], (float)m_pointLights[0].base.m_color[2]);
-	glUniform1f(m_uniforms[POINTLBI_1], (float)m_pointLights[0].base.m_intensity);
-	glUniform1f(m_uniforms[POINTLAC_1], (float)m_pointLights[0].atten.m_constant);
-	glUniform1f(m_uniforms[POINTLAE_1], (float)m_pointLights[0].atten.m_exponent);
-	glUniform1f(m_uniforms[POINTLAL_1], (float)m_pointLights[0].atten.m_linear);
-	glUniform3f(m_uniforms[POINTLP_1], (float)m_pointLights[0].position[0], (float)m_pointLights[0].position[1], (float)m_pointLights[0].position[2]);
-	glUniform1f(m_uniforms[POINTLR_1], (float)m_pointLights[0].range);
+	glUniform3fv(m_uniforms[POINTLBC_1], 1, &pointColor[0]);
+	glUniform1f(m_uniforms[POINTLBI_1], (float)renderingEngine->GetPointLight().base.m_intensity);
+	glUniform1f(m_uniforms[POINTLAC_1], (float)renderingEngine->GetPointLight().atten.m_constant);
+	glUniform1f(m_uniforms[POINTLAE_1], (float)renderingEngine->GetPointLight().atten.m_exponent);
+	glUniform1f(m_uniforms[POINTLAL_1], (float)renderingEngine->GetPointLight().atten.m_linear);
+	glUniform3fv(m_uniforms[POINTLP_1], 1, &pointPos[0]);
+	glUniform1f(m_uniforms[POINTLR_1], (float)renderingEngine->GetPointLight().range);
 
 	glUniform3f(m_uniforms[POINTLBC_2], (float)m_pointLights[1].base.m_color[0], (float)m_pointLights[1].base.m_color[1], (float)m_pointLights[1].base.m_color[2]);
 	glUniform1f(m_uniforms[POINTLBI_2], (float)m_pointLights[1].base.m_intensity);
@@ -140,15 +145,15 @@ void Shader::Update(const Transform& transform, const Material& material, render
 	glUniform3f(m_uniforms[POINTLP_2], (float)m_pointLights[1].position[0], (float)m_pointLights[1].position[1], (float)m_pointLights[1].position[2]);
 	glUniform1f(m_uniforms[POINTLR_2], (float)m_pointLights[1].range);
 
-	glUniform3f(m_uniforms[SPOTLBC_1], (float)m_spotLights[0].pointL.base.m_color[0], (float)m_spotLights[0].pointL.base.m_color[1], (float)m_spotLights[0].pointL.base.m_color[2]);
-	glUniform1f(m_uniforms[SPOTLBI_1], (float)m_spotLights[0].pointL.base.m_intensity);
-	glUniform1f(m_uniforms[SPOTLAC_1], (float)m_spotLights[0].pointL.atten.m_constant);
-	glUniform1f(m_uniforms[SPOTLAE_1], (float)m_spotLights[0].pointL.atten.m_exponent);
-	glUniform1f(m_uniforms[SPOTLAL_1], (float)m_spotLights[0].pointL.atten.m_linear);
-	glUniform3f(m_uniforms[SPOTLP_1], (float)m_spotLights[0].pointL.position[0], (float)m_spotLights[0].pointL.position[1], (float)m_spotLights[0].pointL.position[2]);
-	glUniform1f(m_uniforms[SPOTLR_1], (float)m_spotLights[0].pointL.range);
-	glUniform3f(m_uniforms[SPOTLD_1], (float)m_spotLights[0].direction[0], (float)m_spotLights[0].direction[1], (float)m_spotLights[0].direction[2]);
-	glUniform1f(m_uniforms[SPOTLC_1], (float)m_spotLights[0].cutoff);
+	glUniform3fv(m_uniforms[SPOTLBC_1], 1, &spotColor[0]);
+	glUniform1f(m_uniforms[SPOTLBI_1], (float)renderingEngine->GetSpotLight().pointL.base.m_intensity);
+	glUniform1f(m_uniforms[SPOTLAC_1], (float)renderingEngine->GetSpotLight().pointL.atten.m_constant);
+	glUniform1f(m_uniforms[SPOTLAE_1], (float)renderingEngine->GetSpotLight().pointL.atten.m_exponent);
+	glUniform1f(m_uniforms[SPOTLAL_1], (float)renderingEngine->GetSpotLight().pointL.atten.m_linear);
+	glUniform3fv(m_uniforms[SPOTLP_1], 1, &spotPos[0]);
+	glUniform1f(m_uniforms[SPOTLR_1], (float)renderingEngine->GetSpotLight().pointL.range);
+	glUniform3fv(m_uniforms[SPOTLD_1], 1, &spotDir[0]);
+	glUniform1f(m_uniforms[SPOTLC_1], (float)renderingEngine->GetSpotLight().cutoff);
 
 }
 

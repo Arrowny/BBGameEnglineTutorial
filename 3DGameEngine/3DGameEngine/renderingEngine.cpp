@@ -4,14 +4,18 @@
 #include "forwardAmbient.h"
 #include "baseLight.h"
 #include "forwardDirectional.h"
-
+#include "forwardPoint.h"
+#include "forwardSpot.h"
 #include <GL/glew.h>
 
 renderingEngine::renderingEngine():
 m_mainCamera(glm::vec3(0.0f, 0.0f, -10.0f), 70.0f, (float)Window::getWidth() / (float)Window::getHeight(), 0.1f, 1000.0f),
 m_ambientLight(0.2f, 0.2f, 0.2f),
 m_directionalLight(baseLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.2f), glm::fvec3(0.5f, 0.0f, -0.5f)),
-m_directionalLight2(baseLight(glm::fvec3(0.0f, 0.0f, 1.0f), 0.2f), glm::fvec3(0.0f, 0.0f, -0.5f))
+m_directionalLight2(baseLight(glm::fvec3(0.0f, 0.0f, 1.0f), 0.2f), glm::fvec3(0.0f, 0.0f, -0.5f)),
+m_pointLight(baseLight(glm::fvec3(0.0f, 1.0f, 0.0f), 0.4f), Attenuation(0, 0, 1), glm::fvec3(0.0f, 1.0f, -0.5f), 10),
+m_pointLight2(baseLight(glm::fvec3(0.0f, 1.0f, 1.0f), 0.4f), Attenuation(0, 0, 1), glm::fvec3(0.0f, 2.0f, -0.5f), 10),
+m_spotLight(pointLight(baseLight(glm::fvec3(1, 1, 0), 0.8f), Attenuation(0, 0, 0.5f), glm::fvec3(-0.5, -0.8, -0.5), 30), glm::normalize(glm::fvec3(0, 1, 0)), 0.8f)
 {
 	std::cout << getOpenGLVersion() << std::endl;
 
@@ -58,6 +62,20 @@ void renderingEngine::Render(gameObject* object)
     temp = m_directionalLight;
 	m_directionalLight = m_directionalLight2;
 	m_directionalLight2 = temp;
+
+	object->render(ForwardPoint::GetInstance(), this);
+
+	pointLight pemp = m_pointLight;
+	m_pointLight = m_pointLight2;
+	m_pointLight2 = pemp;
+
+	object->render(ForwardPoint::GetInstance(), this);
+
+	pemp = m_pointLight;
+	m_pointLight = m_pointLight2;
+	m_pointLight2 = pemp;
+
+	object->render(ForwardSpot::GetInstance(), this);
 
 	glDepthFunc(GL_LESS);
 	glDepthMask(GL_TRUE);
