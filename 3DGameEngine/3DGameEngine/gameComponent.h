@@ -9,8 +9,8 @@ class Shader;
 class gameComponent
 {
 public:
-	virtual void input(const Transform& transform) {}
-	virtual void update(const Transform& transform) {}
+	virtual void input(const Transform& transform, float delta) {}
+	virtual void update(const Transform& transform, float delta) {}
 	virtual void render(const Transform& transform, Shader* shader, renderingEngine* renderingEngine) {}
 };
 

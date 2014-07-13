@@ -145,5 +145,11 @@
     <None Include="res\phongShader.vs">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\forwardShader.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\forwardShader.vs">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

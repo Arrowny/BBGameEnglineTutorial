@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "Input.h"
 #include <glm\glm.hpp>
+#include <glm\gtx\transform.hpp>
 
 class gameObject;
 
@@ -15,11 +16,12 @@ public:
 	
 	void Render(gameObject* object);
 	char* getOpenGLVersion();
-	void input(const Input& input);
+	void input(const Input& input, float delta);
 
 	inline Camera& GetMainCamera() { return m_mainCamera; }
 	inline glm::fvec3& GetMainCameraPos() { return m_mainCamera.getPos(); }
 	inline glm::fvec3& GetMainCameraForward() { return m_mainCamera.getForward(); }
+	inline glm::fvec3& GetAmbientLight() { return m_ambientLight; }
 	//inline void SetMainCamera(const Camera& camera) { m_mainCamera = camera; }
 
 	virtual ~renderingEngine();
@@ -30,5 +32,6 @@ private:
 	void operator=(const renderingEngine& other) {}
 
 	Camera m_mainCamera;
+	glm::fvec3 m_ambientLight;
 };
 

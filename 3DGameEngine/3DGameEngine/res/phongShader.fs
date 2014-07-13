@@ -41,6 +41,7 @@ struct SpotLight
     PointLight pointLight;
     vec3 direction;
     float cutoff;
+     
 };
 
 uniform sampler2D diffuse;

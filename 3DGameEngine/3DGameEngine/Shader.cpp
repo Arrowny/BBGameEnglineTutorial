@@ -5,7 +5,6 @@
 #include <cassert>
 #include <cstdlib>
 
-glm::fvec3 ambientLight(0.2f, 0.2f, 0.2f);
 directionalLight Shader::m_directionalLight = directionalLight(baseLight(glm::fvec3(1, 1, 1), 0.2f), glm::fvec3(0.0f, 0.2f, -0.5f));
 pointLight* Shader::m_pointLights = NULL;
 spotLight* Shader::m_spotLights = NULL;
@@ -22,15 +21,7 @@ Shader::Shader(const std::string& fileName)
 		glAttachShader(m_program, m_shaders[i]);
 	}
 
-	glBindAttribLocation(m_program, 0, "position");
-	glBindAttribLocation(m_program, 1, "texCoord");
-	glBindAttribLocation(m_program, 2, "normal");
-
-	glLinkProgram(m_program);
-	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error linking shader program");
-
-	glValidateProgram(m_program);
-	CheckShaderError(m_program, GL_LINK_STATUS, true, "Invalid shader program");
+	CompileShader();
 
 	m_uniforms[UNIFORM_U] = glGetUniformLocation(m_program, "uniformFloat");
 	m_uniforms[TRANSFORM_U] = glGetUniformLocation(m_program, "transform");
@@ -38,7 +29,7 @@ Shader::Shader(const std::string& fileName)
 	m_uniforms[LIGHTDIR_U] = glGetUniformLocation(m_program, "lightDirection");
 	m_uniforms[COLOR_U] = glGetUniformLocation(m_program, "baseColor");
 	m_uniforms[AMBIENTL_U] = glGetUniformLocation(m_program, "ambientLight");
-	m_uniforms[DIRLIGHTC_U] = glGetUniformLocation(m_program, "directionalLight.base.color");
+	/*m_uniforms[DIRLIGHTC_U] = glGetUniformLocation(m_program, "directionalLight.base.color");
 	m_uniforms[DIRLIGHTI_U] = glGetUniformLocation(m_program, "directionalLight.base.intensity");
 	m_uniforms[DIRLIGHTD_U] = glGetUniformLocation(m_program, "directionalLight.direction");
 	m_uniforms[SPECI_U] = glGetUniformLocation(m_program, "specularIntensity");
@@ -69,7 +60,7 @@ Shader::Shader(const std::string& fileName)
 	m_uniforms[SPOTLP_1] = glGetUniformLocation(m_program, "spotLights[0].pointLight.position");
 	m_uniforms[SPOTLR_1] = glGetUniformLocation(m_program, "spotLights[0].pointLight.range");
 	m_uniforms[SPOTLD_1] = glGetUniformLocation(m_program, "spotLights[0].direction");
-	m_uniforms[SPOTLC_1] = glGetUniformLocation(m_program, "spotLights[0].cutoff");
+	m_uniforms[SPOTLC_1] = glGetUniformLocation(m_program, "spotLights[0].cutoff");*/
 
 }
 
@@ -89,11 +80,23 @@ void Shader::Bind()
 	glUseProgram(m_program);
 }
 
+void Shader::CompileShader()
+{
+	glBindAttribLocation(m_program, 0, "position");
+	glBindAttribLocation(m_program, 1, "texCoord");
+	glBindAttribLocation(m_program, 2, "normal");
+
+	glLinkProgram(m_program);
+	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error linking shader program");
+
+	glValidateProgram(m_program);
+	CheckShaderError(m_program, GL_LINK_STATUS, true, "Invalid shader program");
+}
 float temp = 0.0f;
 
 void Shader::Update(const Transform& transform, const Material& material, renderingEngine* renderE)
 {
-	temp += Time::getDelta();
+	//temp += Time::getDelta();
 	glm::mat4 model = transform.GetProjection(renderE->GetMainCamera());
 	glm::mat4 Normal = transform.GetModel();
 	glm::vec3 eyePos = transform.GetCameraPos(renderE->GetMainCamera());
@@ -102,9 +105,9 @@ void Shader::Update(const Transform& transform, const Material& material, render
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
 	glUniformMatrix4fv(m_uniforms[NORMAL_U], 1, GL_FALSE, &Normal[0][0]);
 	glUniform3f(m_uniforms[LIGHTDIR_U], 0.0f, 1.0f, 1.0f);
-	glUniform3f(m_uniforms[AMBIENTL_U], (float)ambientLight[0], (float)ambientLight[1], (float)ambientLight[2]);
+	glUniform3f(m_uniforms[AMBIENTL_U], (float)renderE->GetAmbientLight()[0], (float)renderE->GetAmbientLight()[1], (float)renderE->GetAmbientLight()[2]);
 	glUniform4fv(m_uniforms[COLOR_U], 1, &material.color[0]);
-	glUniform3f(m_uniforms[DIRLIGHTC_U], (float)m_directionalLight.m_base.m_color[0], (float)m_directionalLight.m_base.m_color[1], (float)m_directionalLight.m_base.m_color[2]);
+	/*glUniform3f(m_uniforms[DIRLIGHTC_U], (float)m_directionalLight.m_base.m_color[0], (float)m_directionalLight.m_base.m_color[1], (float)m_directionalLight.m_base.m_color[2]);
 	glUniform1f(m_uniforms[DIRLIGHTI_U], (float)m_directionalLight.m_base.m_intensity);
 	glUniform3f(m_uniforms[DIRLIGHTD_U], (float)m_directionalLight.m_direction[0], (float)m_directionalLight.m_direction[1], (float)m_directionalLight.m_direction[2]);
 	glUniform1f(m_uniforms[SPECI_U], (float)material.specularIntensity);
@@ -135,7 +138,7 @@ void Shader::Update(const Transform& transform, const Material& material, render
 	glUniform3f(m_uniforms[SPOTLP_1], (float)m_spotLights[0].pointL.position[0], (float)m_spotLights[0].pointL.position[1], (float)m_spotLights[0].pointL.position[2]);
 	glUniform1f(m_uniforms[SPOTLR_1], (float)m_spotLights[0].pointL.range);
 	glUniform3f(m_uniforms[SPOTLD_1], (float)m_spotLights[0].direction[0], (float)m_spotLights[0].direction[1], (float)m_spotLights[0].direction[2]);
-	glUniform1f(m_uniforms[SPOTLC_1], (float)m_spotLights[0].cutoff);
+	glUniform1f(m_uniforms[SPOTLC_1], (float)m_spotLights[0].cutoff);*/
 
 }
 

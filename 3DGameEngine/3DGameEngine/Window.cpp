@@ -4,12 +4,14 @@
 
 int Window::m_width = 0;
 int Window::m_height = 0;
+std::string Window::m_title = "Title";
 
 Window::Window(int width, int height, const std::string& title):
 m_input(this)
 {
 	Window::m_width = width;
 	Window::m_height = height;
+	Window::m_title = title;
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 
@@ -145,4 +147,20 @@ int Window::getWidth(){
 int Window::getHeight(){
 
 	return m_height;
+}
+
+float Window::getAspect()
+{
+	return (float)getWidth() / (float)getHeight();
+}
+
+const std::string& Window::getTitle()
+{
+	return m_title;
+}
+
+glm::fvec2 Window::getCenter()
+{
+	return glm::fvec2(getWidth() / 2, getHeight() / 2);
+
 }

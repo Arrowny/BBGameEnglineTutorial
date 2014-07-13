@@ -4,8 +4,6 @@
 namespace Time
 {
 	double	getTime();
-	double	getDelta();
-	void	setDelta(double delta);
 };
 
 #endif // TIME_H

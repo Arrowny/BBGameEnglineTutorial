@@ -22,11 +22,12 @@ public:
 
 	static Shader* GetInstance()
 	{
-		static Shader instance("./res/phongShader");
+		static Shader instance("./res/forwardShader");
 		return &instance;
 	}
 
 	void Bind();
+	void CompileShader();
 	virtual void Update(const Transform& transform, const Material& material, renderingEngine* renderE);
 	static void SetPointLights(pointLight* pointLights, int arraySize);
 	static void SetSpotLights(spotLight* spotLights, int arraySize);

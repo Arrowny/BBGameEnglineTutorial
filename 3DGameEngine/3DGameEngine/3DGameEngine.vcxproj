@@ -121,6 +121,8 @@
   <ItemGroup>
     <None Include="res\basicShader.fs" />
     <None Include="res\basicShader.vs" />
+    <None Include="res\forwardShader.fs" />
+    <None Include="res\forwardShader.vs" />
     <None Include="res\phongShader.fs" />
     <None Include="res\phongShader.vs" />
   </ItemGroup>

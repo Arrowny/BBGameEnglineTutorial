@@ -69,24 +69,22 @@ void coreEngine::Run(){
 			frameCounter = 0;
 
 		}
-
+		
 		while (unprocessedTime > m_frameTime){
 
 			render = true;
 			m_window->Update();
-
-			unprocessedTime -= m_frameTime;
 			
 			if (m_window->isClosed())
 			{
 				Stop();
 			}
 
-			m_game->input();
-			m_renderingEngine->input(m_window->GetInput());
-			m_game->update();
+			m_game->input(m_frameTime);
+			m_renderingEngine->input(m_window->GetInput(), m_frameTime);
+			m_game->update(m_frameTime);
 
-			Time::setDelta(m_frameTime);
+			unprocessedTime -= m_frameTime;
 
 		}
 

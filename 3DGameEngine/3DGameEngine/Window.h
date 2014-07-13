@@ -24,13 +24,17 @@ public:
 	bool m_isClosed;
 	static int getWidth();
 	static int getHeight();
+	static float getAspect();
+	static const std::string& getTitle();
+	static glm::fvec2 getCenter();
 
 private:
-	SDL_Window*		m_window;
-	SDL_GLContext	m_glContext;
-	Input			m_input;
-	static int		m_width;
-	static int		m_height;
+	SDL_Window*			m_window;
+	SDL_GLContext		m_glContext;
+	Input				m_input;
+	static int			m_width;
+	static int			m_height;
+	static std::string	m_title;
 
 	//Check if window is 'X'ed
 	//bool m_isClosed;

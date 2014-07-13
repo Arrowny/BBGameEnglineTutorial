@@ -67,14 +67,3 @@ double Time::getTime()
 	return (double)SDL_GetTicks() / 1000.0;
 #endif
 }
-
-
-double Time::getDelta(){
-
-	return m_delta;
-}
-
-void Time::setDelta(double delta){
-
-	m_delta = delta;
-}

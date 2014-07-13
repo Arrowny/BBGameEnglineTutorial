@@ -35,11 +35,11 @@ public:
 
 	bool mouseLocked = false;
 
-	void input(const Input& input)
+	void input(const Input& input, float delta)
 	{
 		
 		float sensitivity = 3.0f;
-		float movAmt = (float)(10 * Time::getDelta());
+		float movAmt = (float)(10 * delta);
 		//float rotAmt = (float)(200 * Time::getDelta());
 
 		if (input.GetKey(input.KEY_ESCAPE))

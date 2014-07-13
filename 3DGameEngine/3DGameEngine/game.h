@@ -18,8 +18,8 @@ public:
 	~Game();
 
 	void init();
-	void input();
-	void update();
+	void input(float delta);
+	void update(float delta);
 	void render();
 
 	inline gameObject& GetRoot() { return m_root; }

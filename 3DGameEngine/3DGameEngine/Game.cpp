@@ -29,8 +29,6 @@ void Game::init(){
 
 	glm::fvec4 baseColor(1.0f, 1.0f, 1.0f, 1.0f);
 
-	m_camera = new Camera(glm::vec3(0.0f, 0.0f, -10.0f), 70.0f, (float)Window::getWidth() / (float)Window::getHeight(), 0.1f, 1000.0f);
-
 	planeObject = gameObject();
 	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
 	m_mesh = new Mesh("./res/triforce.obj");
@@ -54,18 +52,17 @@ void Game::init(){
 
 }
 
-void Game::input(/*const Input& input*/){
+void Game::input(float delta){
 	
-	//m_camera->input(input);
-	m_root.input();
+	m_root.input(delta);
 
 }
 
 float tem = 0.0f;
 
-void Game::update(){
+void Game::update(float delta){
 
-	tem += Time::getDelta();
+	tem += delta;
 
 	float sinCounter = sinf(counter);
 	float cosCounter = cosf(counter);
@@ -84,8 +81,8 @@ void Game::update(){
 	m_sLights[0].pointL.position = (glm::fvec3(sinCounter * 5, 1, -1.5));
 	m_sLights[0].direction = glm::fvec3(0,0,1);
 
-	planeObject.GetTransform().GetRot().y = counter * 10;
-	m_root.update();
+	planeObject.GetTransform().GetRot().y = sinCounter * 30;
+	m_root.update(delta);
 
 	counter += 0.0003f;
 }
