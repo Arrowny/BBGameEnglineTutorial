@@ -1,12 +1,8 @@
 #version 330
 
-in vec4 color;
-
 varying vec2 texCoord0;
-varying vec3 normal0;
 
 uniform sampler2D diffuse;
-uniform vec3 lightDirection;
 uniform vec3 ambientLight;
 
 void main()

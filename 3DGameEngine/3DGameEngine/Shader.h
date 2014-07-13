@@ -18,28 +18,27 @@ class renderingEngine;
 class Shader
 {
 public:
+	Shader();
+
 	Shader(const std::string& fileName);
 
 	static Shader* GetInstance()
 	{
-		static Shader instance("./res/forwardShader");
+		static Shader instance("./res/forwardAmbient");
 		return &instance;
 	}
 
 	void Bind();
 	void CompileShader();
-	virtual void Update(const Transform& transform, const Material& material, renderingEngine* renderE);
+    virtual void Update(const Transform& transform, const Material& material, renderingEngine* renderE);
 	static void SetPointLights(pointLight* pointLights, int arraySize);
 	static void SetSpotLights(spotLight* spotLights, int arraySize);
 
 	virtual ~Shader();
 protected:
-private:
 	static const unsigned int NUM_SHADERS = 2;
 	static const unsigned int MAX_POINT_LIGHTS = 4;
 	static const unsigned int MAX_SPOT_LIGHTS = 4;
-	Shader(const Shader& other) {}
-	void operator=(const Shader& other) {}
 
 	enum
 	{
@@ -85,18 +84,22 @@ private:
 		NUM_UNIFORMS
 	};
 
+	GLuint m_program;
+	GLuint m_shaders[NUM_SHADERS];
+	GLuint m_uniforms[NUM_UNIFORMS];
+
 	std::string LoadShader(const std::string& fileName);
 	void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
 	GLuint CreateShader(const std::string& text, unsigned int type);
 
-	GLuint m_program;
-	GLuint m_shaders[NUM_SHADERS];
-	GLuint m_uniforms[NUM_UNIFORMS];
-	std::map<std::string, int> n_uniforms;
-	static directionalLight m_directionalLight;
 	static pointLight* m_pointLights;
 	static spotLight* m_spotLights;
 	static int m_numPointLights;
 	static int m_numSpotLights;
+
+private:
+	Shader(const Shader& other) {}
+	void operator=(const Shader& other) {}
+
 
 };

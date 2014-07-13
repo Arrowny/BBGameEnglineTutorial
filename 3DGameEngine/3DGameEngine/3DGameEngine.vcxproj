@@ -78,6 +78,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="coreEngine.cpp" />
+    <ClCompile Include="forwardAmbient.cpp" />
+    <ClCompile Include="forwardDirectional.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -98,6 +100,8 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="coreEngine.h" />
     <ClInclude Include="directionalLight.h" />
+    <ClInclude Include="forwardAmbient.h" />
+    <ClInclude Include="forwardDirectional.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="gameComponent.h" />
     <ClInclude Include="gameObject.h" />
@@ -121,8 +125,10 @@
   <ItemGroup>
     <None Include="res\basicShader.fs" />
     <None Include="res\basicShader.vs" />
-    <None Include="res\forwardShader.fs" />
-    <None Include="res\forwardShader.vs" />
+    <None Include="res\forwardAmbient.fs" />
+    <None Include="res\forwardAmbient.vs" />
+    <None Include="res\forwardDirectional.fs" />
+    <None Include="res\forwardDirectional.vs" />
     <None Include="res\phongShader.fs" />
     <None Include="res\phongShader.vs" />
   </ItemGroup>

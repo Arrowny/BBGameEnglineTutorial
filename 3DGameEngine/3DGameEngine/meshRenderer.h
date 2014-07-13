@@ -25,5 +25,4 @@ protected:
 private:
 	Mesh*	  m_mesh;
 	Material* m_material;
-	Camera*	  m_camera;
 };

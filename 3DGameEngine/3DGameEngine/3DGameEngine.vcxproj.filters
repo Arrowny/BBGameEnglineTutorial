@@ -57,6 +57,12 @@
     <ClCompile Include="renderingEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="forwardAmbient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="forwardDirectional.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -131,6 +137,12 @@
     <ClInclude Include="renderingEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="forwardAmbient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="forwardDirectional.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\basicShader.fs">
@@ -145,10 +157,16 @@
     <None Include="res\phongShader.vs">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\forwardShader.fs">
+    <None Include="res\forwardAmbient.fs">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\forwardShader.vs">
+    <None Include="res\forwardAmbient.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\forwardDirectional.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\forwardDirectional.vs">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
