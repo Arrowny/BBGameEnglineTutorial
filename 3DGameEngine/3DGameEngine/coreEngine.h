@@ -4,6 +4,7 @@
 #include "input.h"
 #include "shader.h"
 #include "timing.h"
+#include "renderingEngine.h"
 
 class CoreEngine
 {
@@ -23,7 +24,9 @@ private:
 	Input* m_input;
 	Window* m_window;
 	Game* m_game;
+	PhongShader* m_shader;
 	double m_frameTime;
 
+	RenderingEngine m_renderingEngine;
 };
 

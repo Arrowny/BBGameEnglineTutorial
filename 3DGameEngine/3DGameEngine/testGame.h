@@ -21,16 +21,16 @@ public:
 	virtual ~TestGame();
 
 	virtual void Init(Window* window) override;
-	virtual void ProcessInput(Input* &input) override;
-	virtual void Update() override;
-	virtual void Render() override;
 
 private:
 	TestGame(const TestGame& other) {}
 	void operator=(const TestGame& other) {}
 
-	PhongShader* m_shader;
 	Transform* m_worldTransform;
 	Camera* m_camera;
+
+	GameObject pyrimidGameObject;
+	MeshRenderer* meshComponent;
+
 };
 

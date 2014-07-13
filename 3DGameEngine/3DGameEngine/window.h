@@ -15,8 +15,6 @@ public:
 	SDL_Window* GetSDLWindow() { return m_window; }
 
 	void Render();
-	void Clear() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
-	void SwapBuffers();
 	void Update(SDL_Event e);
 	bool isClosed() { return m_isClosed; }
 
@@ -24,8 +22,6 @@ protected:
 private:
 	Window(const Window& other) {}
 	void operator=(const Window& other){}
-
-	void InitGraphics();
 
 	SDL_Window* m_window;
 	SDL_GLContext m_glContext;

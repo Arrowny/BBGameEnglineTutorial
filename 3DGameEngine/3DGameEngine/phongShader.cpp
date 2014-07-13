@@ -156,28 +156,6 @@ void PhongShader::updateBasicUniformsAndTexture(Camera& camera, const glm::mat4&
 	}
 }
 
-//void PhongShader::setPointLights(std::vector<PointLight>* pointLights)
-//{
-//	if (pointLights->size() >= MAX_POINT_LIGHTS)
-//	{
-//		std::cerr << "Error: too many PointLights to be initialized.\n Max number of PointLights: " << MAX_POINT_LIGHTS << ".\n Number of PointLights sent in: " << pointLights->size() << "." << std::endl;
-//		exit(1);
-//	}
-//
-//	m_pointLights = pointLights;
-//}
-//
-//void PhongShader::setSpotLights(std::vector<SpotLight>* spotLights)
-//{
-//	if (spotLights->size() >= MAX_SPOT_LIGHTS)
-//	{
-//		std::cerr << "Error: too many SpotLights to be initialized.\n Max number of PointLights: " << MAX_SPOT_LIGHTS << ".\n Number of SpotLights sent in: " << spotLights->size() << "." << std::endl;
-//		exit(1);
-//	}
-//
-//	m_spotLights = spotLights;
-//}
-
 
 
 

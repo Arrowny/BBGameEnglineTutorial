@@ -3,7 +3,6 @@
 #include <iostream>
 
 
-
 Window::Window(int width, int height, std::string title)
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -27,8 +26,6 @@ Window::Window(int width, int height, std::string title)
 	}
 
 	m_isClosed = false;
-
-	InitGraphics();
 }
 
 
@@ -39,11 +36,6 @@ Window::~Window()
 	SDL_Quit();
 }
 
-void Window::Render()
-{
-	Clear();
-	SwapBuffers();
-}
 
 int Window::GetWidth()
 {
@@ -65,20 +57,9 @@ int Window::GetHeight()
 	return height;
 }
 
-void Window::InitGraphics()
+void Window::Render()
 {
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-
-	glFrontFace(GL_CCW);
-	glCullFace(GL_BACK);
-	glEnable(GL_CULL_FACE);
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_DEPTH_CLAMP);
-	glEnable(GL_TEXTURE_2D);
-}
-
-void Window::SwapBuffers()
-{
+	//swap buffers to render the newly created image to screen
 	SDL_GL_SwapWindow(m_window);
 }
 

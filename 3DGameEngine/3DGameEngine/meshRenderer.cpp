@@ -1,10 +1,9 @@
 #include "meshRenderer.h"
 
 
-MeshRenderer::MeshRenderer(Mesh* mesh, Material material, Shader* shader) :
+MeshRenderer::MeshRenderer(Mesh* mesh, Material material) :
 m_mesh(mesh),
-m_material(material),
-m_shader(shader)
+m_material(material)
 {
 }
 
@@ -13,9 +12,9 @@ MeshRenderer::~MeshRenderer()
 {
 }
 
-void MeshRenderer::Render(Transform* transform, Camera* camera)
+void MeshRenderer::Render(Transform* transform, Camera* camera, Shader* shader)
 {
-	m_shader->Bind();
-	m_shader->updateBasicUniformsAndTexture(*camera, transform->getTransformation(), m_material);
+	shader->Bind();
+	shader->updateBasicUniformsAndTexture(*camera, transform->getTransformation(), m_material);
 	m_mesh->Draw();
 }

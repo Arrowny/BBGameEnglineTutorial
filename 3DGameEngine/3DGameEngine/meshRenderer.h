@@ -9,13 +9,13 @@ class MeshRenderer :
 	public GameComponent
 {
 public:
-	MeshRenderer(Mesh* mesh, Material material, Shader* shader);
+	MeshRenderer(Mesh* mesh, Material material);
 	virtual ~MeshRenderer();
 
 	virtual void Init(Window* window, Transform* transform) {}
 	virtual void ProcessInput(Input* input, Transform* transform) {}
 	virtual void Update(Transform* transform) {}
-	virtual void Render(Transform* transform, Camera* camera);
+	virtual void Render(Transform* transform, Camera* camera, Shader* shader);
 
 private:
 	MeshRenderer(const MeshRenderer& other) {}
@@ -23,6 +23,5 @@ private:
 
 	Mesh* m_mesh;
 	Material m_material;
-	Shader* m_shader;
 };
 

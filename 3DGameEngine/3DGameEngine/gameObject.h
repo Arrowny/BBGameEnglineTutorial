@@ -4,6 +4,7 @@
 #include "gameComponent.h"
 #include "transform.h"
 #include "camera.h"
+#include "shader.h"
 
 class GameObject
 {
@@ -13,7 +14,7 @@ public:
 
 	void ProcessInput(Input* input);
 	void Update();
-	void Render();
+	void Render(Shader* shader);
 
 	std::vector<GameObject*> m_children;
 	std::vector<GameComponent*> m_components;
