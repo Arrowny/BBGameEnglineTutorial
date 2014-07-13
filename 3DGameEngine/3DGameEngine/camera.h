@@ -3,7 +3,6 @@
 #include <glm\gtx\transform.hpp>
 #include "transform.h"
 #include "Input.h"
-#include "timing.h"
 
 class Camera
 {
@@ -12,7 +11,7 @@ public:
 	Camera(glm::vec3 pos, glm::vec3 lookAtPoint, glm::vec3 up, double zNear, double zFar, double fov, double screenWidth, double screenHeight);
 	virtual ~Camera();
 
-	void input(const Input& input);
+	void input(const Input& input, double delta);
 
 	void reinitPerspectiveMatrix(double zNear, double zFar, double fov, double screenWidth, double screenHeight);
 	void lookAt(const glm::vec3& lookAt, const glm::vec3& up);

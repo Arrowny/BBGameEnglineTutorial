@@ -11,31 +11,31 @@ GameObject::~GameObject()
 {
 }
 
-void GameObject::ProcessInput(Input* input)
+void GameObject::ProcessInput(Input* input, double delta)
 {
 	for (int ii = 0; ii < m_components.size(); ii++)
 	{
-		m_components[ii]->ProcessInput(input, m_transform);
+		m_components[ii]->ProcessInput(input, m_transform, delta);
 	}
 
 	for (int ii = 0; ii < m_children.size(); ii++)
 	{
-		m_children[ii]->ProcessInput(input);
+		m_children[ii]->ProcessInput(input, delta);
 	}
 }
 
-void GameObject::Update()
+void GameObject::Update(double delta)
 {
 	if (m_transform != NULL)
 	{ 
 		for (int ii = 0; ii < m_components.size(); ii++)
 		{
-			m_components[ii]->Update(m_transform);
+			m_components[ii]->Update(m_transform, delta);
 		}
 
 		for (int ii = 0; ii < m_children.size(); ii++)
 		{
-			m_children[ii]->Update();
+			m_children[ii]->Update(delta);
 		}
 	}
 	else
@@ -46,18 +46,18 @@ void GameObject::Update()
 	
 }
 
-void GameObject::Render(Shader* shader)
+void GameObject::Render(Shader* shader, Camera* camera)
 {
-	if (m_transform != NULL && m_camera != NULL)
+	if (m_transform != NULL && camera != NULL)
 	{
 		for (int ii = 0; ii < m_components.size(); ii++)
 		{
-			m_components[ii]->Render(m_transform, m_camera, shader);
+			m_components[ii]->Render(m_transform, camera, shader);
 		}
 
 		for (int ii = 0; ii < m_children.size(); ii++)
 		{
-			m_children[ii]->Render(shader);
+			m_children[ii]->Render(shader, camera);
 		}
 	}
 	else

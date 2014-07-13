@@ -10,14 +10,14 @@ public:
 	virtual ~Game(){}
 
 	virtual void Init(Window* window) = 0;
-	virtual void ProcessInput(Input* &input)
+	virtual void ProcessInput(Input* &input, double delta)
 	{
-		m_root.ProcessInput(input);
+		m_root.ProcessInput(input, delta);
 	}
 
-	virtual void Update()
+	virtual void Update(double delta)
 	{
-		m_root.Update();
+		m_root.Update(delta);
 	}
 
 	GameObject m_root;

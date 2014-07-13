@@ -57,6 +57,16 @@ int Window::GetHeight()
 	return height;
 }
 
+glm::vec2 Window::GetCenter()
+{
+	int width;
+	int height;
+
+	SDL_GetWindowSize(m_window, &width, &height);
+
+	return glm::vec2(width / 2.0, height / 2.0);
+}
+
 void Window::Render()
 {
 	//swap buffers to render the newly created image to screen

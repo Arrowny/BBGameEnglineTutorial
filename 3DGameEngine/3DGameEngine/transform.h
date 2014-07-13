@@ -30,6 +30,7 @@ public:
 
 	glm::mat4 getTransformation() const;
 	glm::mat4 getPerspectiveMatrix();
+	glm::mat4 getOrthogonalMatrix(float left, float right, float top, float bottom, float near, float far);
 	void initPerspectiveMatrix(const double& zNear, const double& zFar, const double& fov, const double& screenWidth, const double& screenHeight);
 		
 	glm::vec3 m_trans;

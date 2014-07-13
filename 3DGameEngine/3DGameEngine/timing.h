@@ -4,7 +4,6 @@
 namespace Time
 {
 	double GetTime();
-	extern double DELTA;
 };
 
 #endif

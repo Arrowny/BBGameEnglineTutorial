@@ -2,6 +2,7 @@
 #include <string>
 #include <SDL\SDL.h>
 #include <GL\glew.h>
+#include <glm\common.hpp>
 
 class Window
 {
@@ -11,6 +12,7 @@ public:
 
 	int GetWidth();
 	int GetHeight();
+	glm::vec2 GetCenter();
 	std::string GetTitle() { return SDL_GetWindowTitle(m_window); }
 	SDL_Window* GetSDLWindow() { return m_window; }
 

@@ -26,49 +26,49 @@ Camera::~Camera()
 {
 }
 
-void Camera::input(const Input& input)
+void Camera::input(const Input& input, double delta)
 {
 	float movAmt = 500.0f;
 	float rotAmt = 20000.0;
 
 	if (input.GetKeyDown(Input::KEY_W))
 	{
-		move(m_center, movAmt*Time::DELTA);
+		move(m_center, movAmt*delta);
 	}
 
 	if (input.GetKeyDown(Input::KEY_S))
 	{
-		move(m_center, -movAmt*Time::DELTA);
+		move(m_center, -movAmt*delta);
 	}
 
 	if (input.GetKeyDown(Input::KEY_A))
 	{
-		move(getLeft(), movAmt*Time::DELTA);
+		move(getLeft(), movAmt*delta);
 	}
 
 	if (input.GetKeyDown(Input::KEY_D))
 	{
-		move(getRight(), movAmt*Time::DELTA);
+		move(getRight(), movAmt*delta);
 	}
 
 	if (input.GetKeyDown(Input::KEY_UP))
 	{
-		rotateX(-rotAmt*Time::DELTA);
+		rotateX(-rotAmt*delta);
 	}
 
 	if (input.GetKeyDown(Input::KEY_DOWN))
 	{
-		rotateX(rotAmt*Time::DELTA);
+		rotateX(rotAmt*delta);
 	}
 
 	if (input.GetKeyDown(Input::KEY_LEFT))
 	{
-		rotateY(rotAmt*Time::DELTA);
+		rotateY(rotAmt*delta);
 	}
 
 	if (input.GetKeyDown(Input::KEY_RIGHT))
 	{
-		rotateY(-rotAmt*Time::DELTA);
+		rotateY(-rotAmt*delta);
 	}
 
 }

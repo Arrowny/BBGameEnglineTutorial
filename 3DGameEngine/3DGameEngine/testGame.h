@@ -27,7 +27,6 @@ private:
 	void operator=(const TestGame& other) {}
 
 	Transform* m_worldTransform;
-	Camera* m_camera;
 
 	GameObject pyrimidGameObject;
 	MeshRenderer* meshComponent;

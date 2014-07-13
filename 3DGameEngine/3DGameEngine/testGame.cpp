@@ -14,9 +14,6 @@ void TestGame::Init(Window* window)
 	std::vector<unsigned int> indices;
 	std::vector<glm::vec2> textCoords;
 
-	m_camera = new Camera();
-	m_camera->reinitPerspectiveMatrix(.01f, 1000.0f, 70.0f, window->GetWidth(), window->GetHeight());
-
 	vertices.push_back(glm::vec3(-1.0, -1.0, -1.0));
 	vertices.push_back(glm::vec3(0.0, 1.0, 0.0));
 	vertices.push_back(glm::vec3(1.0, -1.0, 0.0));
@@ -39,7 +36,6 @@ void TestGame::Init(Window* window)
 	meshComponent = new MeshRenderer(new Mesh(vertices, indices, textCoords),
 										 Material("./res/texture_files/bricks.jpg",glm::vec3(1.0, 1.0, 1.0), 1, 8));
 
-	pyrimidGameObject.m_camera = m_camera;
 	pyrimidGameObject.m_transform = m_worldTransform;
 	pyrimidGameObject.m_components.push_back(meshComponent);
 

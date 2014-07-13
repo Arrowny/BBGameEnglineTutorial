@@ -79,6 +79,8 @@
   <ItemGroup>
     <ClInclude Include="camera.h" />
     <ClInclude Include="coreEngine.h" />
+    <ClInclude Include="forwardAmbient.h" />
+    <ClInclude Include="forwardDirectional.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gameComponent.h" />
     <ClInclude Include="gameObject.h" />
@@ -103,6 +105,8 @@
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="coreEngine.cpp" />
+    <ClCompile Include="forwardAmbient.cpp" />
+    <ClCompile Include="forwardDirectional.cpp" />
     <ClCompile Include="gameComponent.cpp" />
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="input.cpp" />
@@ -123,6 +127,10 @@
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\shaders\forward_ambient.frag" />
+    <None Include="res\shaders\forward_ambient.vert" />
+    <None Include="res\shaders\forward_Directional.frag" />
+    <None Include="res\shaders\forward_Directional.vert" />
     <None Include="res\shaders\phongShader.frag" />
     <None Include="res\shaders\phongShader.vert" />
     <None Include="res\shaders\shader.frag" />

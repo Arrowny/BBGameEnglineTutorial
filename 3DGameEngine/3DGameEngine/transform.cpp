@@ -31,6 +31,11 @@ glm::mat4 Transform::getPerspectiveMatrix()
 	}
 }
 
+glm::mat4 Transform::getOrthogonalMatrix(float left, float right, float top, float bottom, float near, float far)
+{
+	return glm::ortho(left, right, bottom, top, near, far);
+}
+
 void Transform::initPerspectiveMatrix(const double& zNear, const double& zFar, const double& fov, const double& screenWidth, const double& screenHeight)
 {
 	perspectiveInitialized = true;
