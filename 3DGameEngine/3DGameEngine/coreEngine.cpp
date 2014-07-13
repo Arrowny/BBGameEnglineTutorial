@@ -69,7 +69,7 @@ void coreEngine::Run(){
 
 		if (frameCounter >= 1.0){
 
-			//std::cout << "Frames/sec:" << frames << std::endl;
+			std::cout << "Frames/sec:" << frames << std::endl;
 			frames = 0;
 			frameCounter = 0;
 

@@ -1,8 +1,8 @@
 #include "Game.h"
 #include "Input.h"
 
-PointLight pl[] = { PointLight(BaseLight(glm::fvec3(1.0, 0.5, 0.0), 1.0f), Attenuation(0.0, 0.0, 1.0), glm::fvec3(2.0, 0.0, 3.0)),
-					PointLight(BaseLight(glm::fvec3(0.0, 0.5, 1.0), 1.0f), Attenuation(0.0, 0.0, 1.0), glm::fvec3(-2.0, 0.0, 3.0))
+PointLight pl[] = { PointLight(BaseLight(glm::fvec3(1.0, 0.5, 0.0), 1.0f), Attenuation(0.0, 0.0, 1.0), glm::fvec3(2.0, 0.0, 3.0),2),
+					PointLight(BaseLight(glm::fvec3(0.0, 0.5, 1.0), 1.0f), Attenuation(0.0, 0.0, 1.0), glm::fvec3(-2.0, 0.0, 3.0),2)
 					};
 
 Game::Game() 

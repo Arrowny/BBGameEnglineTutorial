@@ -28,19 +28,23 @@ struct PointLight
 	BaseLight base;
 	Attenuation atten;
 	glm::fvec3 position;
+	//float range;
 
 	PointLight() :
 		base(BaseLight()),
 		atten(Attenuation()),
 		position(glm::fvec3(0.0,0.0,0.0))
+		//range(50.0)
 	{}
 
 
-	PointLight(BaseLight baselight, Attenuation attenu, glm::fvec3 position) :
+	PointLight(BaseLight baselight, Attenuation attenu, glm::fvec3 position, float range) :
 		base(baselight),
 		atten(attenu),
 		position(position)
+	//	range(range)
 	{}
 
 	void SetPosition(glm::vec3 pos) { position = pos; }
+	//void SetRange(float ran) { range = ran; }
 };
