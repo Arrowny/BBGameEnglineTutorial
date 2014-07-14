@@ -1,13 +1,7 @@
 #include "baseLight.h"
+#include "renderingEngine.h"
 
-
-baseLight::baseLight(glm::fvec3 color, float intensity) :
-m_color(color),
-m_intensity(intensity)
+void baseLight::AddToRenderingEngine(renderingEngine* renderingEngine)
 {
-}
-
-
-baseLight::~baseLight()
-{
+	renderingEngine->AddLight(this);
 }

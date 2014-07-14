@@ -4,16 +4,10 @@
 #include "baseLight.h"
 #include "gameComponent.h"
 
-struct directionalLight : public gameComponent
+struct directionalLight : public baseLight
 {
-	baseLight	m_base;
-	glm::fvec3	m_direction;
+	glm::fvec3 direction;
 
-	directionalLight(const baseLight& base = baseLight(), glm::fvec3 direction = glm::fvec3(0, 0, 0)):
-		m_base(base),
-		m_direction(glm::normalize(direction))
-	{}
-
-	virtual void AddToRenderingEngine(renderingEngine* renderingEngine);
+	directionalLight(const glm::fvec3& color = glm::fvec3(0, 0, 0), float intensity = 0, const glm::fvec3& direction = glm::fvec3(0, 0, 0));
 
 };

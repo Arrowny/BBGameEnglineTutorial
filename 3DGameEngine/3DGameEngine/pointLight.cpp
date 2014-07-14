@@ -1,7 +1,12 @@
 #include "pointLight.h"
 #include "renderingEngine.h"
+#include "forwardPoint.h"
 
-void pointLight::AddToRenderingEngine(renderingEngine* renderingEngine)
+pointLight::pointLight(const glm::fvec3& color, float intensity, const Attenuation& atten, const glm::fvec3& position, float range) :
+baseLight(color, intensity),
+atten(atten),
+position(position),
+range(range)
 {
-	renderingEngine->AddPointLight(this);
+	SetShader(ForwardPoint::GetInstance());
 }

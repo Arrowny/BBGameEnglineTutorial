@@ -5,29 +5,12 @@
 #include <glm\glm.hpp>
 #include "gameComponent.h"
 
-struct pointLight : public gameComponent
+struct pointLight : public baseLight
 {
-	baseLight base;
 	Attenuation atten;
 	glm::fvec3 position;
 	float range;
 
-	pointLight(const baseLight& base = baseLight(), const Attenuation& atten = Attenuation(), glm::fvec3& position = glm::fvec3(), float range = 0) :
-		base(base),
-		atten(atten),
-		position(position),
-		range(range) {}
-
-	virtual void AddToRenderingEngine(renderingEngine* renderingEngine);
-	
-	void setPos(glm::fvec3 position)
-	{
-		this->position = position;
-	}
-
-	glm::fvec3 getPos()
-	{
-		return position;
-	}
+	pointLight(const glm::fvec3& color = glm::fvec3(0, 0, 0), float intensity = 0, const Attenuation& atten = Attenuation(), const glm::fvec3& position = glm::fvec3(), float range = 0);
 
 };

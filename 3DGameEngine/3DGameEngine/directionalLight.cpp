@@ -1,7 +1,15 @@
 #include "directionalLight.h"
 #include "renderingEngine.h"
+#include "forwardDirectional.h"
 
-void directionalLight::AddToRenderingEngine(renderingEngine* renderingEngine)
+directionalLight::directionalLight(const glm::fvec3& color, float intensity, const  glm::fvec3& direction):
+baseLight(color, intensity),
+direction(glm::normalize(direction))
 {
-	renderingEngine->AddDirectionalLight(this);
+	SetShader(ForwardDirectional::GetInstance());
 }
+
+//void directionalLight::AddToRenderingEngine(renderingEngine* renderingEngine)
+//{
+//	renderingEngine->AddDirectionalLight(this);
+//}

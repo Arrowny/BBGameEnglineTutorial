@@ -42,11 +42,15 @@ void ForwardPoint::UpdateUniforms(const Transform& transform, const Material& ma
 	glm::mat4 Normal = transform.GetModel();
 	glm::vec3 eyePos = transform.GetCameraPos(renderingEngine->GetMainCamera());
 	glm::vec3 ambient = renderingEngine->GetAmbientLight();
-	glm::vec3 dirColor = renderingEngine->GetDirectionalLight().m_base.m_color;
-	glm::vec3 dirDirection = renderingEngine->GetDirectionalLight().m_direction;
-	glm::vec3 pointColor = renderingEngine->GetPointLight().base.m_color;
-	glm::vec3 pointPos = renderingEngine->GetPointLight().position;
 
+	pointLight pLight = *(pointLight*)renderingEngine->GetActiveLight();
+
+	/*glm::vec3 pointColor = renderingEngine->GetPointLight().base.m_color;
+	glm::vec3 pointPos = renderingEngine->GetPointLight().position;*/
+
+	glm::vec3 pointColor = pLight.m_color;
+	glm::vec3 pointPos = pLight.position;
+	
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
 	glUniformMatrix4fv(m_uniforms[NORMAL_U], 1, GL_FALSE, &Normal[0][0]);
 
@@ -55,12 +59,17 @@ void ForwardPoint::UpdateUniforms(const Transform& transform, const Material& ma
 	glUniform3fv(m_uniforms[EYEPOS_U], 1, &eyePos[0]);
 
 	glUniform3fv(m_uniforms[POINTLBC_1], 1, &pointColor[0]);
-	glUniform1f(m_uniforms[POINTLBI_1], (float)renderingEngine->GetPointLight().base.m_intensity);
+	glUniform3fv(m_uniforms[POINTLP_1], 1, &pointPos[0]);
+	/*glUniform1f(m_uniforms[POINTLBI_1], (float)renderingEngine->GetPointLight().base.m_intensity);
 	glUniform1f(m_uniforms[POINTLAC_1], (float)renderingEngine->GetPointLight().atten.m_constant);
 	glUniform1f(m_uniforms[POINTLAE_1], (float)renderingEngine->GetPointLight().atten.m_exponent);
 	glUniform1f(m_uniforms[POINTLAL_1], (float)renderingEngine->GetPointLight().atten.m_linear);
-	glUniform3fv(m_uniforms[POINTLP_1], 1, &pointPos[0]);
-	glUniform1f(m_uniforms[POINTLR_1], (float)renderingEngine->GetPointLight().range);
+	glUniform1f(m_uniforms[POINTLR_1], (float)renderingEngine->GetPointLight().range);*/
+	glUniform1f(m_uniforms[POINTLBI_1], (float)pLight.m_intensity);
+	glUniform1f(m_uniforms[POINTLAC_1], (float)pLight.atten.m_constant);
+	glUniform1f(m_uniforms[POINTLAE_1], (float)pLight.atten.m_exponent);
+	glUniform1f(m_uniforms[POINTLAL_1], (float)pLight.atten.m_linear);
+	glUniform1f(m_uniforms[POINTLR_1], (float)pLight.range);
 
 }
 
