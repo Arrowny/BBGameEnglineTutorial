@@ -4,7 +4,7 @@
 PointLight pl[] = { PointLight(BaseLight(glm::fvec3(1.0, 0.5, 0.0), 0.8f), Attenuation(0.0, 0.0, 1.0), glm::fvec3(0.0, 0.0, 7.0), 4),
 					PointLight(BaseLight(glm::fvec3(1.0, 0.0, 0.5), 0.8f), Attenuation(0.0, 0.0, 1.0), glm::fvec3(2.0, 0.0, 7.0), 4)
 };
-SpotLight sl[] = { SpotLight(PointLight(BaseLight(glm::fvec3(0.0, 1.0, 1.0), 1.0f), Attenuation(0.0, 0.0, 0.1), glm::fvec3(-2.0, 0.0, 0.0), 10), glm::fvec3(1.0,1.0,1.0), 0.1f)
+SpotLight sl[] = { SpotLight(PointLight(BaseLight(glm::fvec3(0.0, 1.0, 1.0), 1.0f), Attenuation(0.0, 0.0, 0.1), glm::fvec3(-2.0, 0.0, 0.0), 30), glm::fvec3(1.0,1.0,1.0), 0.1f)
 
 
 };
@@ -27,13 +27,14 @@ Game::Game()
 
 	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
 	m_mesh = new Mesh("./res/plane.obj");
+	
 	m_shader = new Shader("./res/phongShader");
 	m_transform = new Transform();
 	m_camera = new Camera(glm::vec3(0,1,-4), 70.0f, (float)WindowParameter::width/ (float)WindowParameter::height, 1.0f, 1000.0f);
 	m_material = new Material( new Texture("./res/bricks.jpg"), glm::fvec3(1.0,1.0,1.0), 2, 16);
 
 	m_shader->SetAmbient(glm::fvec3(0.3, 0.3, 0.3));
-	//m_shader->SetDirectionalLight(DirectionalLight(BaseLight(glm::vec3(1, 1, 1), 0.5f), glm::vec3(0, 0, -1)));
+	m_shader->SetDirectionalLight(DirectionalLight(BaseLight(glm::vec3(1, 0, 0), 0.5f), glm::vec3(0, 0, -1)));
 
 
 	//PointLight* m_pl = new PointLight[]
