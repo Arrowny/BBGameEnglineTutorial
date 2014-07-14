@@ -20,6 +20,10 @@ private:
 	directionalLight dirLight1;
 	directionalLight dirLight2;
 	directionalLight dirLight3;
+	gameObject m_pLightObj1;
+	pointLight pLight1;
+	pointLight pLight2;
+	pointLight pLight3;
 
 	Mesh* m_mesh;
 	Material m_material;

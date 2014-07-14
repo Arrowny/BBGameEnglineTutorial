@@ -3,8 +3,9 @@
 #include "baseLight.h"
 #include "Attenuation.h"
 #include <glm\glm.hpp>
+#include "gameComponent.h"
 
-struct pointLight
+struct pointLight : public gameComponent
 {
 	baseLight base;
 	Attenuation atten;
@@ -17,6 +18,8 @@ struct pointLight
 		position(position),
 		range(range) {}
 
+	virtual void AddToRenderingEngine(renderingEngine* renderingEngine);
+	
 	void setPos(glm::fvec3 position)
 	{
 		this->position = position;

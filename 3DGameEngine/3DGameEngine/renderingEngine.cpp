@@ -9,7 +9,8 @@
 renderingEngine::renderingEngine():
 m_mainCamera(glm::vec3(0.0f, 0.0f, -10.0f), 70.0f, (float)Window::getWidth() / (float)Window::getHeight(), 0.1f, 1000.0f),
 m_ambientLight(0.2f, 0.2f, 0.2f),
-m_activeDirectionalLight(baseLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.2f), glm::fvec3(0.5f, 0.0f, -0.5f))
+m_activeDirectionalLight(baseLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.2f), glm::fvec3(0.5f, 0.0f, -0.5f)),
+m_pointLight(baseLight(glm::fvec3(0.0f, 1.0f, 0.0f), 0.4f), Attenuation(0, 0, 1), glm::fvec3(0.0f, 1.0f, -0.5f), 10)
 //m_directionalLight2(baseLight(glm::fvec3(0.0f, 0.0f, 1.0f), 0.2f), glm::fvec3(0.0f, 0.0f, -0.5f)),
 //m_pointLight(baseLight(glm::fvec3(0.0f, 1.0f, 0.0f), 0.4f), Attenuation(0, 0, 1), glm::fvec3(0.0f, 1.0f, -0.5f), 10),
 //m_pointLight2(baseLight(glm::fvec3(0.0f, 1.0f, 1.0f), 0.4f), Attenuation(0, 0, 1), glm::fvec3(0.0f, 2.0f, -0.5f), 10),
@@ -42,6 +43,7 @@ void renderingEngine::Render(gameObject* object)
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	m_directionalLights.clear();
+	m_pointLights.clear();
 
 	object->AddToRenderingEngine(this);
 
@@ -57,6 +59,12 @@ void renderingEngine::Render(gameObject* object)
 	{
 		m_activeDirectionalLight = *m_directionalLights[i];
 		object->render(ForwardDirectional::GetInstance(), this);
+	}
+
+	for (unsigned int i = 0; i < m_pointLights.size(); i++)
+	{
+		m_activePointLight = *m_pointLights[i];
+		object->render(ForwardPoint::GetInstance(), this);
 	}
 
 	/*object->render(ForwardDirectional::GetInstance(), this);

@@ -28,6 +28,7 @@ void TestGame::init(){
 
 	m_planeObject = gameObject();
 	m_dirLightObj1 = gameObject();
+	m_pLightObj1 = gameObject();
 	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
 	m_mesh = new Mesh("./res/triforce.obj");
 	m_texture = new Texture("./res/colour.jpg");
@@ -43,7 +44,15 @@ void TestGame::init(){
 	m_dirLightObj1.AddComponent(&dirLight2);
 	m_dirLightObj1.AddComponent(&dirLight3);
 
+	pLight1 = pointLight(baseLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.4f), Attenuation(0, 0, 1), glm::fvec3(0.0f, 1.0f, -0.5f), 10);
+	pLight2 = pointLight(baseLight(glm::fvec3(0.0f, 1.0f, 0.0f), 0.4f), Attenuation(0, 0, 1), glm::fvec3(0.5f, 0.0f, -0.5f), 10);
+	pLight3 = pointLight(baseLight(glm::fvec3(0.0f, 0.0f, 1.0f), 0.4f), Attenuation(0, 0, 1), glm::fvec3(-0.5f, 0.0f, -0.5f), 10);
+	m_pLightObj1.AddComponent(&pLight1);
+	m_pLightObj1.AddComponent(&pLight2);
+	m_pLightObj1.AddComponent(&pLight3);
+
 	m_root.AddChild(m_planeObject);
 	m_root.AddChild(m_dirLightObj1);
+	m_root.AddChild(m_pLightObj1);
 
 }

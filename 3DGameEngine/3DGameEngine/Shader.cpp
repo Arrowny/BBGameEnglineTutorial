@@ -121,7 +121,7 @@ void Shader::Update(const Transform& transform, const Material& material, render
 	glUniform1f(m_uniforms[SPECP_U], (float)material.specularPower);
 	glUniform3fv(m_uniforms[EYEPOS_U], 1, &eyePos[0]);
 
-	/*glUniform3fv(m_uniforms[POINTLBC_1], 1, &pointColor[0]);
+	glUniform3fv(m_uniforms[POINTLBC_1], 1, &pointColor[0]);
 	glUniform1f(m_uniforms[POINTLBI_1], (float)renderingEngine->GetPointLight().base.m_intensity);
 	glUniform1f(m_uniforms[POINTLAC_1], (float)renderingEngine->GetPointLight().atten.m_constant);
 	glUniform1f(m_uniforms[POINTLAE_1], (float)renderingEngine->GetPointLight().atten.m_exponent);
@@ -137,7 +137,7 @@ void Shader::Update(const Transform& transform, const Material& material, render
 	glUniform3fv(m_uniforms[SPOTLP_1], 1, &spotPos[0]);
 	glUniform1f(m_uniforms[SPOTLR_1], (float)renderingEngine->GetSpotLight().pointL.range);
 	glUniform3fv(m_uniforms[SPOTLD_1], 1, &spotDir[0]);
-	glUniform1f(m_uniforms[SPOTLC_1], (float)renderingEngine->GetSpotLight().cutoff);*/
+	glUniform1f(m_uniforms[SPOTLC_1], (float)renderingEngine->GetSpotLight().cutoff);
 
 }
 

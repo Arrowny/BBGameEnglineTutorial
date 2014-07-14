@@ -24,11 +24,12 @@ public:
 	inline glm::fvec3& GetMainCameraForward() { return m_mainCamera.getForward(); }
 	inline glm::fvec3& GetAmbientLight() { return m_ambientLight; }
 	inline directionalLight& GetDirectionalLight() { return m_activeDirectionalLight; }
-	inline pointLight& GetPointLight() { return m_pointLight; }
+	inline pointLight& GetPointLight() { return m_activePointLight; }
 	inline spotLight& GetSpotLight() { return m_spotLight; }
 	//inline void SetMainCamera(const Camera& camera) { m_mainCamera = camera; }
 
 	inline void AddDirectionalLight(directionalLight* directionalLight) { m_directionalLights.push_back(directionalLight); }
+	inline void AddPointLight(pointLight* pointLight) { m_pointLights.push_back(pointLight); }
 
 	virtual ~renderingEngine();
 protected:
@@ -46,7 +47,9 @@ private:
 	spotLight m_spotLight;
 
 	directionalLight m_activeDirectionalLight;
+	pointLight m_activePointLight;
 	std::vector<directionalLight*> m_directionalLights;
+	std::vector<pointLight*> m_pointLights;
 
 };
 
