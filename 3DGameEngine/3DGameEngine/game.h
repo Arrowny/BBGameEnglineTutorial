@@ -15,9 +15,8 @@ class Game
 {
 public:
 	Game() {}
-	~Game();
 
-	void init();
+	virtual void init() {};
 	void input(float delta);
 	void update(float delta);
 	void render();
@@ -27,7 +26,6 @@ public:
 	float counter = 0.0f;
 
 protected:
-private:
 
 	Mesh*			m_mesh;
 	Shader*			m_shader;
@@ -38,9 +36,11 @@ private:
 	Material		m_material;
 	pointLight*		m_pLights;
 	spotLight*		m_sLights;
-	meshRenderer*	m_meshRenderer;
 	gameObject		m_root;
-	gameObject		planeObject;
+
+private:
+
+	
 
 };
 

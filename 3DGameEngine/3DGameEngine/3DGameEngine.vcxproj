@@ -78,6 +78,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="coreEngine.cpp" />
+    <ClCompile Include="directionalLight.cpp" />
     <ClCompile Include="forwardAmbient.cpp" />
     <ClCompile Include="forwardDirectional.cpp" />
     <ClCompile Include="forwardPoint.cpp" />
@@ -91,6 +92,7 @@
     <ClCompile Include="renderingEngine.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stb_image.c" />
+    <ClCompile Include="testGame.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timing.cpp" />
     <ClCompile Include="Util.cpp" />
@@ -120,6 +122,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="spotLight.h" />
     <ClInclude Include="stb_image.h" />
+    <ClInclude Include="testGame.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timing.h" />
     <ClInclude Include="Transform.h" />

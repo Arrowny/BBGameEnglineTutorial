@@ -4,6 +4,7 @@
 #include "Window.h"
 #include "coreEngine.h"
 #include "Game.h"
+#include "testGame.h"
 #include "renderingEngine.h"
 
 #define WIDTH 1000
@@ -15,7 +16,7 @@ int main(int argc, char** argv)
 {
 	Window window(WIDTH, HEIGHT, TITLE);
 	renderingEngine renderingEngine;
-	Game game;
+	TestGame game;
 
 	coreEngine core(&game, &renderingEngine, &window, FRAME_CAP);
 

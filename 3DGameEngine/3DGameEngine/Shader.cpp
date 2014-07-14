@@ -54,14 +54,6 @@ Shader::Shader(const std::string& fileName)
 	m_uniforms[POINTLP_1] = glGetUniformLocation(m_program, "pointLights[0].position");
 	m_uniforms[POINTLR_1] = glGetUniformLocation(m_program, "pointLights[0].range");
 
-	m_uniforms[POINTLBC_2] = glGetUniformLocation(m_program, "pointLights[1].base.color");
-	m_uniforms[POINTLBI_2] = glGetUniformLocation(m_program, "pointLights[1].base.intensity");
-	m_uniforms[POINTLAC_2] = glGetUniformLocation(m_program, "pointLights[1].atten.constant");
-	m_uniforms[POINTLAL_2] = glGetUniformLocation(m_program, "pointLights[1].atten.linear");
-	m_uniforms[POINTLAE_2] = glGetUniformLocation(m_program, "pointLights[1].atten.exponent");
-	m_uniforms[POINTLP_2] = glGetUniformLocation(m_program, "pointLights[1].position");
-	m_uniforms[POINTLR_2] = glGetUniformLocation(m_program, "pointLights[1].range");
-
 	m_uniforms[SPOTLBC_1] = glGetUniformLocation(m_program, "spotLights[0].pointLight.base.color");
 	m_uniforms[SPOTLBI_1] = glGetUniformLocation(m_program, "spotLights[0].pointLight.base.intensity");
 	m_uniforms[SPOTLAC_1] = glGetUniformLocation(m_program, "spotLights[0].pointLight.atten.constant");
@@ -136,14 +128,6 @@ void Shader::Update(const Transform& transform, const Material& material, render
 	glUniform1f(m_uniforms[POINTLAL_1], (float)renderingEngine->GetPointLight().atten.m_linear);
 	glUniform3fv(m_uniforms[POINTLP_1], 1, &pointPos[0]);
 	glUniform1f(m_uniforms[POINTLR_1], (float)renderingEngine->GetPointLight().range);
-
-	glUniform3f(m_uniforms[POINTLBC_2], (float)m_pointLights[1].base.m_color[0], (float)m_pointLights[1].base.m_color[1], (float)m_pointLights[1].base.m_color[2]);
-	glUniform1f(m_uniforms[POINTLBI_2], (float)m_pointLights[1].base.m_intensity);
-	glUniform1f(m_uniforms[POINTLAC_2], (float)m_pointLights[1].atten.m_constant);
-	glUniform1f(m_uniforms[POINTLAE_2], (float)m_pointLights[1].atten.m_exponent);
-	glUniform1f(m_uniforms[POINTLAL_2], (float)m_pointLights[1].atten.m_linear);
-	glUniform3f(m_uniforms[POINTLP_2], (float)m_pointLights[1].position[0], (float)m_pointLights[1].position[1], (float)m_pointLights[1].position[2]);
-	glUniform1f(m_uniforms[POINTLR_2], (float)m_pointLights[1].range);
 
 	glUniform3fv(m_uniforms[SPOTLBC_1], 1, &spotColor[0]);
 	glUniform1f(m_uniforms[SPOTLBI_1], (float)renderingEngine->GetSpotLight().pointL.base.m_intensity);
