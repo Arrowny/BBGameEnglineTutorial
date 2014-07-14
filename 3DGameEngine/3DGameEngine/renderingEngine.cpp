@@ -18,21 +18,22 @@ RenderingEngine::~RenderingEngine()
 {
 }
 
-void RenderingEngine::RenderGameObject(GameObject* gameObject, Shader* shader)
+void RenderingEngine::RenderGameObject(GameObject* gameObject, std::vector<Shader*> shaders)
 {
-	if (gameObject != NULL) 
+	if ( (gameObject != NULL) && (shaders.size() > 0) ) 
 	{ 
-		gameObject->Render(shader, m_camera);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_ONE, GL_ONE);
-		glDepthMask(false);
-		glDepthFunc(GL_EQUAL);
+		gameObject->Render(shaders[0], m_camera);
 
-		glDepthFunc(GL_LESS);
-		glDepthMask(true);
-		glDisable(GL_BLEND);
+		for (int ii = 1; ii < shaders.size(); ii++)
+		{
+			glEnable(GL_BLEND); glBlendFunc(GL_ONE, GL_ONE);
+			glDepthMask(false); glDepthFunc(GL_EQUAL);
+			gameObject->Render(shaders[ii], m_camera);
+			glDepthFunc(GL_LESS); glDepthMask(true);
+			glDisable(GL_BLEND);
+		}
 	}
-	else
+	else if (gameObject == NULL)
 	{
 		std::cerr << "Error: gameObject not initialized in RenderGameObject method of RenderingEngine." << std::endl;
 		exit(1);

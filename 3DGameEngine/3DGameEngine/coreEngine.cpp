@@ -20,21 +20,11 @@ m_game(game)
 	m_renderingEngine.setCamera(coreCamera);
 
 	//TODO:: create shader somewhere more sensible
-	//set up lighting
-	//PointLight TestPointLight1(BaseLight(glm::vec3(0, 1, 0), .8), Attenuation(0, 0, .01), glm::vec3(3.0, 0.0, 0.0), 10.0);
-	//PointLight TestPointLight2(BaseLight(glm::vec3(1, 0, 0), .8), Attenuation(0, 0, .01), glm::vec3(-3.0, 0.0, 0.0), 10.0);
-	//std::vector<PointLight> TestPointLights;
-	//SpotLight TestSpotLight1(PointLight(BaseLight(glm::vec3(0, 1, 0), .8), Attenuation(0, 0, .1), glm::vec3(0.0, 0.0, 0.0), 10.0), glm::vec3(0, 0, 1), 0.7);
-	//SpotLight TestSpotLight2(PointLight(BaseLight(glm::vec3(1, 0, 0), .8), Attenuation(0, 0, .1), glm::vec3(-3.0, 0.0, 0.0), 10.0), glm::vec3(0, 0, 1), 0.7);
-	//std::vector<SpotLight> TestSpotLights;
-	m_shader = new ForwardAmbient("forward_ambient", glm::vec3(0.2, 0.2, 0.2));
-	//m_shader->m_dLight = DirectionalLight(BaseLight(glm::vec3(1, 1, 1), .8), glm::vec3(0, 1, 0));
-
-	//m_shader->m_pointLights.push_back(TestPointLight1);
-	//m_shader->m_pointLights.push_back(TestPointLight2);
-
-	//m_shader->m_spotLights.push_back(TestSpotLight1);
-	//m_shader->m_spotLights.push_back(TestSpotLight2);
+	m_shaders.push_back(new ForwardAmbient("forward_ambient", glm::vec3(0.2, 0.2, 0.2)));
+	m_shaders.push_back(new ForwardDirectional("forward_Directional", DirectionalLight(BaseLight(glm::vec3(1, 1, 1), .8), glm::vec3(0, 1, 0))));
+	m_shaders.push_back(new ForwardPointLight("forward_PointLight", PointLight(BaseLight(glm::vec3(0, 1, 0), .8), Attenuation(0, 0, .01), glm::vec3(3.0, 0.0, 0.0), 20.0)));
+	m_shaders.push_back(new ForwardPointLight("forward_PointLight", PointLight(BaseLight(glm::vec3(1, 0, 0), .8), Attenuation(0, 0, .01), glm::vec3(-3.0, 0.0, 0.0), 20.0)));
+	m_shaders.push_back(new ForwardSpotLight("forward_SpotLight", SpotLight(PointLight(BaseLight(glm::vec3(0, 0, 1), .8), Attenuation(0, 0, .001), glm::vec3(0.0, 0.0, 0.0), 10.0), glm::vec3(0, 0, 1), 0.7)));
 }
 
 void CoreEngine::start()
@@ -85,7 +75,7 @@ void CoreEngine::start()
 		{ 
 
 			m_renderingEngine.Clear();
-			m_renderingEngine.RenderGameObject(&m_game->m_root, m_shader);
+			m_renderingEngine.RenderGameObject(&m_game->m_root, m_shaders);
 			m_window->Render();
 			frames++;
 		}

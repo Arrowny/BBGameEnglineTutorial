@@ -1,6 +1,7 @@
 #pragma once
 #include "gameObject.h"
 #include <string>
+#include <vector>
 #include <glm\glm.hpp>
 #include <GL\glew.h>
 #include "shader.h"
@@ -13,7 +14,7 @@ public:
 	RenderingEngine();
 	virtual ~RenderingEngine();
 
-	void RenderGameObject(GameObject* gameObject, Shader* shader);
+	void RenderGameObject(GameObject* gameObject, std::vector<Shader*> shaders);
 	void ProcessInput(Input* &input, double delta) { m_camera->input(*input, delta); }
 	void Clear() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
 	void setTextures(bool enabled);

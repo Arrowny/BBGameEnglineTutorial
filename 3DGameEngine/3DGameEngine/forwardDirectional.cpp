@@ -16,6 +16,21 @@ Shader(fileName)
 	
 }
 
+ForwardDirectional::ForwardDirectional(std::string fileName, DirectionalLight dLight) :
+Shader(fileName),
+m_dLight(dLight)
+{
+	addUniform("MVP");
+	addUniform("model");
+	addUniform("eyePos");
+	addUniform("specularIntensity");
+	addUniform("specularPower");
+
+	addUniform("dLight.base.color");
+	addUniform("dLight.base.intensity");
+	addUniform("dLight.direction");
+}
+
 
 ForwardDirectional::~ForwardDirectional()
 {

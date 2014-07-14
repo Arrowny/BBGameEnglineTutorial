@@ -4,6 +4,9 @@
 #include "input.h"
 #include "shader.h"
 #include "forwardAmbient.h"
+#include "forwardDirectional.h"
+#include "forwardPointLight.h"
+#include "forwardSpotLight.h"
 #include "timing.h"
 #include "renderingEngine.h"
 
@@ -25,7 +28,7 @@ private:
 	Input* m_input;
 	Window* m_window;
 	Game* m_game;
-	Shader* m_shader;
+	std::vector<Shader*> m_shaders; //TODO: make temporary vector of shaderPointers.
 	double m_frameTime;
 
 	RenderingEngine m_renderingEngine;

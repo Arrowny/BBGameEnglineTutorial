@@ -22,6 +22,8 @@ public:
 	void setUniform(std::string uniformName, glm::vec4 value);
 	void setUniform(std::string uniformName, glm::mat4 value);
 
+	virtual std::string getShaderType() = 0;
+
 	virtual void updateBasicUniformsAndTexture(Camera& camera, const glm::mat4& worldMatrix, const Material& mat) = 0;
 
 private:

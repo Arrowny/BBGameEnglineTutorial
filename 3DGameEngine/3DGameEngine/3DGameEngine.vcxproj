@@ -81,6 +81,8 @@
     <ClInclude Include="coreEngine.h" />
     <ClInclude Include="forwardAmbient.h" />
     <ClInclude Include="forwardDirectional.h" />
+    <ClInclude Include="forwardPointLight.h" />
+    <ClInclude Include="forwardSpotLight.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gameComponent.h" />
     <ClInclude Include="gameObject.h" />
@@ -107,6 +109,8 @@
     <ClCompile Include="coreEngine.cpp" />
     <ClCompile Include="forwardAmbient.cpp" />
     <ClCompile Include="forwardDirectional.cpp" />
+    <ClCompile Include="forwardPointLight.cpp" />
+    <ClCompile Include="forwardSpotLight.cpp" />
     <ClCompile Include="gameComponent.cpp" />
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="input.cpp" />
@@ -131,6 +135,10 @@
     <None Include="res\shaders\forward_ambient.vert" />
     <None Include="res\shaders\forward_Directional.frag" />
     <None Include="res\shaders\forward_Directional.vert" />
+    <None Include="res\shaders\forward_PointLight.frag" />
+    <None Include="res\shaders\forward_PointLight.vert" />
+    <None Include="res\shaders\forward_SpotLight.frag" />
+    <None Include="res\shaders\forward_SpotLight.vert" />
     <None Include="res\shaders\phongShader.frag" />
     <None Include="res\shaders\phongShader.vert" />
     <None Include="res\shaders\shader.frag" />
