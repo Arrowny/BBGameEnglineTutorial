@@ -8,19 +8,31 @@
 #include "Shader.h"
 #include "Mesh.h"
 
-coreEngine::coreEngine(Game* game, RenderUtil* renderUtil, Window* window, double frameRate) :
+coreEngine::coreEngine(TestGame* game, int width, int height, double frameRate) :
 m_game(game),
-m_renderUtil(renderUtil),
-m_window(window),
+//m_renderUtil(renderUtil),
+width(width),
+height(height),
 m_frameTime(1.0 / frameRate)
 {	
-	//m_renderUtil->initGraphics();
-	std::cout << m_renderUtil->getOpenGLVersion() << std::endl;
 	m_isRunning = false;
 }
 
 coreEngine::~coreEngine()
 {
+}
+
+void coreEngine::InitializeRenderingSystem()
+{
+	std::cout << m_renderUtil->getOpenGLVersion() << std::endl;
+	m_renderUtil = new RenderUtil();
+	m_renderUtil->initGraphics();
+}
+
+void coreEngine::CreateWindow(std::string title)
+{
+	m_window = new Window(width, height, title);
+	InitializeRenderingSystem();
 }
 
 void coreEngine::Start()
@@ -52,6 +64,8 @@ void coreEngine::Run(){
 
 	int frames = 0;
 	double frameCounter = 0;
+
+	m_game->init();
 
 	double lastTime = Time::getTime();
 	double unprocessedTime = 0;

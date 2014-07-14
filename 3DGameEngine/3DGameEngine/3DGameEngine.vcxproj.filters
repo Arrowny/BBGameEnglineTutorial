@@ -13,6 +13,8 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timing.cpp" />
     <ClCompile Include="Window.cpp" />
+    <ClCompile Include="TestGame.cpp" />
+    <ClCompile Include="PhongShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\VS_test\MonkeyHead[final]\MonkeyHead[final]\obj_loader.h" />
@@ -34,6 +36,8 @@
     <ClInclude Include="BaseLight.h" />
     <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="Attenuation.h" />
+    <ClInclude Include="TestGame.h" />
+    <ClInclude Include="PhongShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3DGameEngine.rc" />
@@ -41,6 +45,15 @@
   <ItemGroup>
     <Filter Include="res">
       <UniqueIdentifier>{c83df154-7df4-4aa4-8e8f-be041985fde2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{0982dabd-966f-4564-a27b-889fa1fb367c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="physics">
+      <UniqueIdentifier>{3c9a2468-509c-45af-9ab0-fc6e2114cb70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rendering">
+      <UniqueIdentifier>{f0a6ac8f-ab3d-4f38-ad96-f2f3fa656840}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

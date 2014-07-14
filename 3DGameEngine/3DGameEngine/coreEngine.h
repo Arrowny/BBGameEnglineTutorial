@@ -3,14 +3,14 @@
 
 #include <string>
 #include "Window.h"
-#include "Game.h"
+#include "TestGame.h"
 #include "Input.h"
 #include "RenderUtil.h"
 
 class coreEngine
 {
 public:
-	coreEngine(Game* game, RenderUtil* renderUtil, Window* window, double frameRate);
+	coreEngine(TestGame* game, int width, int height, double frameRate);
 	~coreEngine();
 
 	void Start(); //Starts running the game; contains central game loop.
@@ -19,13 +19,20 @@ public:
 	void Run();
 	void Render();
 
+	void CreateWindow(std::string title);
 protected:
 private:
+
+	void InitializeRenderingSystem();
+
 	bool		m_isRunning;
-	Game*		m_game;
+	TestGame*		m_game;
 	Window*		m_window;
 	RenderUtil*	m_renderUtil;
 	double		m_frameTime;
+
+	int width;
+	int height;
 	
 
 };

@@ -15,32 +15,6 @@ public:
 	void Update(Transform& transform,Camera& camera, Material& material);//, DirectionalLight& directionalLight
 	//void Update(float value);
 
-	inline void SetAmbient(glm::fvec3 ambient) { ambientLight = ambient; }
-	inline void SetDirectionalLight(DirectionalLight directionallight) { directionalLight = directionallight; }
-	inline void SetPointLights(PointLight* pointLights, GLint numPointLights)
-	{
-		if (numPointLights > MAX_POINT_LIGHTS)
-		{
-			std::cerr << "Error: Too many point lights. Max allowed:" << MAX_POINT_LIGHTS << " is smaller than:" << numPointLights << std::endl;
-		}
-		else
-		{
-			this->numPointLights = numPointLights;
-			this->pointLights = pointLights;
-		}
-	}
-	inline void SetSpotLights(SpotLight* spotLights, GLint numSpotLights)
-	{
-		if (numSpotLights > MAX_SPOT_LIGHTS)
-		{
-			std::cerr << "Error: Too many SPOT lights. Max allowed:" << MAX_SPOT_LIGHTS << " is smaller than:" << numSpotLights << std::endl;
-		}
-		else
-		{
-			this->numSpotLights = numSpotLights;
-			this->spotLights = spotLights;
-		}
-	}
 	~Shader();
 
 private:
@@ -57,50 +31,6 @@ private:
 		EYEPOS_U,
 		TRANSFORM_P_U,
 		TRANSFORM_U,
-		BASIC_COLOR_U,
-
-		L_AMBIENT_U,
-		L_DIRECTIONAL_BASE_COLOR_U,
-		L_DIRECTIONAL_BASE_INTENSITY_U,
-		L_DIRECTIONAL_DIRECTION_U,
-		L_SPECULARINTENSITY_U,
-		L_SPECULARPOWER_U,
-
-		L_POINT_BASE_COLOR_1U,
-		L_POINT_BASE_INTENS_1U,
-		L_POINT_ATTEN_CONS_1U,
-		L_POINT_ATTEN_LINE_1U,
-		L_POINT_ATTEN_EXPO_1U,
-		L_POINT_POSITION_1U,
-		L_POINT_RANGE_1U,
-
-		L_POINT_BASE_COLOR_2U,
-		L_POINT_BASE_INTENS_2U,
-		L_POINT_ATTEN_CONS_2U,
-		L_POINT_ATTEN_LINE_2U,
-		L_POINT_ATTEN_EXPO_2U,
-		L_POINT_POSITION_2U,
-		L_POINT_RANGE_2U,
-
-		L_SPOT_POINT_BASE_COLOR_1U,
-		L_SPOT_POINT_BASE_INTENS_1U,
-		L_SPOT_POINT_ATTEN_CONS_1U,
-		L_SPOT_POINT_ATTEN_LINE_1U,
-		L_SPOT_POINT_ATTEN_EXPO_1U,
-		L_SPOT_POINT_POSITION_1U,
-		L_SPOT_POINT_RANGE_1U,
-		L_SPOT_DIRECTION_1U,
-		L_SPOT_CUTOFF_1U,
-
-		L_SPOT_POINT_BASE_COLOR_2U,
-		L_SPOT_POINT_BASE_INTENS_2U,
-		L_SPOT_POINT_ATTEN_CONS_2U,
-		L_SPOT_POINT_ATTEN_LINE_2U,
-		L_SPOT_POINT_ATTEN_EXPO_2U,
-		L_SPOT_POINT_POSITION_2U,
-		L_SPOT_POINT_RANGE_2U,
-		L_SPOT_DIRECTION_2U,
-		L_SPOT_CUTOFF_2U,
 
 		FLOAT_U,
 
@@ -110,14 +40,6 @@ private:
 	GLuint m_program;
 	GLuint m_shaders[NUM_SHADERS];
 	GLuint m_uniforms[NUM_UNIFORMS];
-
-	glm::vec3 ambientLight;
-	DirectionalLight directionalLight;
-	//std::vector<PointLight> pointLights;
-	PointLight* pointLights;
-	GLint numPointLights;
-	SpotLight* spotLights;
-	GLint numSpotLights;
 	
 };
 

@@ -3,7 +3,7 @@
 #include <iostream>
 #include "Window.h"
 #include "coreEngine.h"
-#include "Game.h"
+#include "TestGame.h"
 #include "RenderUtil.h"
 
 #define WIDTH 600
@@ -13,17 +13,15 @@
 
 int main(int argc, char** argv)
 {
-	Window window(WIDTH, HEIGHT, TITLE);
+	//Window window(WIDTH, HEIGHT, TITLE);
 
 	WindowParameter::width = WIDTH;
 	WindowParameter::height = HEIGHT;
 
-	Game game;
-	RenderUtil renderUtil;
-	renderUtil.initGraphics();
-	coreEngine core(&game, &renderUtil, &window, FRAME_CAP);
-
-	core.Start();
+	TestGame game;
+	coreEngine engine(&game, WIDTH, HEIGHT ,FRAME_CAP);
+	engine.CreateWindow(TITLE);
+	engine.Start();
 
 	return 0;
 }
