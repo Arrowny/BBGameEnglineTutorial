@@ -46,23 +46,23 @@ Shader::Shader(const std::string& fileName)
 	m_uniforms[SPECP_U] = glGetUniformLocation(m_program, "specularPower");
 	m_uniforms[EYEPOS_U] = glGetUniformLocation(m_program, "eyePos");
 
-	m_uniforms[POINTLBC_1] = glGetUniformLocation(m_program, "pointLights[0].base.color");
-	m_uniforms[POINTLBI_1] = glGetUniformLocation(m_program, "pointLights[0].base.intensity");
-	m_uniforms[POINTLAC_1] = glGetUniformLocation(m_program, "pointLights[0].atten.constant");
-	m_uniforms[POINTLAL_1] = glGetUniformLocation(m_program, "pointLights[0].atten.linear");
-	m_uniforms[POINTLAE_1] = glGetUniformLocation(m_program, "pointLights[0].atten.exponent");
-	m_uniforms[POINTLP_1] = glGetUniformLocation(m_program, "pointLights[0].position");
-	m_uniforms[POINTLR_1] = glGetUniformLocation(m_program, "pointLights[0].range");
+	m_uniforms[POINTLBC_1] = glGetUniformLocation(m_program, "pointLight.base.color");
+	m_uniforms[POINTLBI_1] = glGetUniformLocation(m_program, "pointLight.base.intensity");
+	m_uniforms[POINTLAC_1] = glGetUniformLocation(m_program, "pointLight.atten.constant");
+	m_uniforms[POINTLAL_1] = glGetUniformLocation(m_program, "pointLight.atten.linear");
+	m_uniforms[POINTLAE_1] = glGetUniformLocation(m_program, "pointLight.atten.exponent");
+	m_uniforms[POINTLP_1] = glGetUniformLocation(m_program, "pointLight.position");
+	m_uniforms[POINTLR_1] = glGetUniformLocation(m_program, "pointLight.range");
 
-	m_uniforms[SPOTLBC_1] = glGetUniformLocation(m_program, "spotLights[0].pointLight.base.color");
-	m_uniforms[SPOTLBI_1] = glGetUniformLocation(m_program, "spotLights[0].pointLight.base.intensity");
-	m_uniforms[SPOTLAC_1] = glGetUniformLocation(m_program, "spotLights[0].pointLight.atten.constant");
-	m_uniforms[SPOTLAL_1] = glGetUniformLocation(m_program, "spotLights[0].pointLight.atten.linear");
-	m_uniforms[SPOTLAE_1] = glGetUniformLocation(m_program, "spotLights[0].pointLight.atten.exponent");
-	m_uniforms[SPOTLP_1] = glGetUniformLocation(m_program, "spotLights[0].pointLight.position");
-	m_uniforms[SPOTLR_1] = glGetUniformLocation(m_program, "spotLights[0].pointLight.range");
-	m_uniforms[SPOTLD_1] = glGetUniformLocation(m_program, "spotLights[0].direction");
-	m_uniforms[SPOTLC_1] = glGetUniformLocation(m_program, "spotLights[0].cutoff");
+	m_uniforms[SPOTLBC_1] = glGetUniformLocation(m_program, "spotLight.pointLight.base.color");
+	m_uniforms[SPOTLBI_1] = glGetUniformLocation(m_program, "spotLights.pointLight.base.intensity");
+	m_uniforms[SPOTLAC_1] = glGetUniformLocation(m_program, "spotLights.pointLight.atten.constant");
+	m_uniforms[SPOTLAL_1] = glGetUniformLocation(m_program, "spotLights.pointLight.atten.linear");
+	m_uniforms[SPOTLAE_1] = glGetUniformLocation(m_program, "spotLights.pointLight.atten.exponent");
+	m_uniforms[SPOTLP_1] = glGetUniformLocation(m_program, "spotLights.pointLight.position");
+	m_uniforms[SPOTLR_1] = glGetUniformLocation(m_program, "spotLights.pointLight.range");
+	m_uniforms[SPOTLD_1] = glGetUniformLocation(m_program, "spotLights.direction");
+	m_uniforms[SPOTLC_1] = glGetUniformLocation(m_program, "spotLights.cutoff");
 
 }
 
@@ -121,7 +121,7 @@ void Shader::Update(const Transform& transform, const Material& material, render
 	glUniform1f(m_uniforms[SPECP_U], (float)material.specularPower);
 	glUniform3fv(m_uniforms[EYEPOS_U], 1, &eyePos[0]);
 
-	glUniform3fv(m_uniforms[POINTLBC_1], 1, &pointColor[0]);
+	/*glUniform3fv(m_uniforms[POINTLBC_1], 1, &pointColor[0]);
 	glUniform1f(m_uniforms[POINTLBI_1], (float)renderingEngine->GetPointLight().base.m_intensity);
 	glUniform1f(m_uniforms[POINTLAC_1], (float)renderingEngine->GetPointLight().atten.m_constant);
 	glUniform1f(m_uniforms[POINTLAE_1], (float)renderingEngine->GetPointLight().atten.m_exponent);
@@ -137,7 +137,7 @@ void Shader::Update(const Transform& transform, const Material& material, render
 	glUniform3fv(m_uniforms[SPOTLP_1], 1, &spotPos[0]);
 	glUniform1f(m_uniforms[SPOTLR_1], (float)renderingEngine->GetSpotLight().pointL.range);
 	glUniform3fv(m_uniforms[SPOTLD_1], 1, &spotDir[0]);
-	glUniform1f(m_uniforms[SPOTLC_1], (float)renderingEngine->GetSpotLight().cutoff);
+	glUniform1f(m_uniforms[SPOTLC_1], (float)renderingEngine->GetSpotLight().cutoff);*/
 
 }
 

@@ -18,6 +18,8 @@ private:
 	gameObject m_planeObject;
 	gameObject m_dirLightObj1;
 	directionalLight dirLight1;
+	directionalLight dirLight2;
+	directionalLight dirLight3;
 
 	Mesh* m_mesh;
 	Material m_material;

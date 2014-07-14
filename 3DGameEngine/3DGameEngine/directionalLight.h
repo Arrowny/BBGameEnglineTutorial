@@ -2,10 +2,10 @@
 
 #include <glm\glm.hpp>
 #include "baseLight.h"
+#include "gameComponent.h"
 
-struct directionalLight
+struct directionalLight : public gameComponent
 {
-public:
 	baseLight	m_base;
 	glm::fvec3	m_direction;
 
@@ -14,7 +14,6 @@ public:
 		m_direction(glm::normalize(direction))
 	{}
 
-protected:
-private:
+	virtual void AddToRenderingEngine(renderingEngine* renderingEngine);
 
 };

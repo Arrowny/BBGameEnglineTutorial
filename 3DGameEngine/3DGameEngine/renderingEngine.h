@@ -1,13 +1,12 @@
 #pragma once
 
-#include "gameObject.h"
 #include "Camera.h"
 #include "Input.h"
 #include "directionalLight.h"
 #include "pointLight.h"
 #include "spotLight.h"
 #include <glm\glm.hpp>
-#include <glm\gtx\transform.hpp>
+#include <vector>
 
 class gameObject;
 
@@ -24,10 +23,12 @@ public:
 	inline glm::fvec3& GetMainCameraPos() { return m_mainCamera.getPos(); }
 	inline glm::fvec3& GetMainCameraForward() { return m_mainCamera.getForward(); }
 	inline glm::fvec3& GetAmbientLight() { return m_ambientLight; }
-	inline directionalLight& GetDirectionalLight() { return m_directionalLight; }
+	inline directionalLight& GetDirectionalLight() { return m_activeDirectionalLight; }
 	inline pointLight& GetPointLight() { return m_pointLight; }
 	inline spotLight& GetSpotLight() { return m_spotLight; }
 	//inline void SetMainCamera(const Camera& camera) { m_mainCamera = camera; }
+
+	inline void AddDirectionalLight(directionalLight* directionalLight) { m_directionalLights.push_back(directionalLight); }
 
 	virtual ~renderingEngine();
 protected:
@@ -43,6 +44,9 @@ private:
 	pointLight m_pointLight;
 	pointLight m_pointLight2;
 	spotLight m_spotLight;
+
+	directionalLight m_activeDirectionalLight;
+	std::vector<directionalLight*> m_directionalLights;
 
 };
 

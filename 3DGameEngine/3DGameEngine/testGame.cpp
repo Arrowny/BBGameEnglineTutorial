@@ -1,5 +1,7 @@
 #include "testGame.h"
 
+//directionalLight TestGame::dirLight1 = directionalLight(baseLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.2f), glm::fvec3(0.5f, 0.0f, -0.5f));
+
 TestGame::~TestGame()
 {
 	if (m_texture) delete m_texture;
@@ -25,7 +27,7 @@ void TestGame::init(){
 	glm::fvec4 baseColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 	m_planeObject = gameObject();
-	//m_dirLightObj1 = gameObject();
+	m_dirLightObj1 = gameObject();
 	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
 	m_mesh = new Mesh("./res/triforce.obj");
 	m_texture = new Texture("./res/colour.jpg");
@@ -34,10 +36,14 @@ void TestGame::init(){
 	m_meshRenderer = new meshRenderer(*m_mesh, m_material);
 	m_planeObject.AddComponent(m_meshRenderer);
 
-	//dirLight1 = directionalLight(baseLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.2f), glm::fvec3(0.5f, 0.0f, -0.5f));
-	//m_dirLightObj1.AddComponent(&dirLight1);
+	dirLight1 = directionalLight(baseLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.2f), glm::fvec3(0.1f, 0.0f, -0.5f));
+	dirLight2 = directionalLight(baseLight(glm::fvec3(0.0f, 0.0f, 1.0f), 0.2f), glm::fvec3(-0.1f, 0.0f, -0.5f));
+	dirLight3 = directionalLight(baseLight(glm::fvec3(0.0f, 1.0f, 0.0f), 0.2f), glm::fvec3(0.0f, 0.1f, -0.5f));
+	m_dirLightObj1.AddComponent(&dirLight1);
+	m_dirLightObj1.AddComponent(&dirLight2);
+	m_dirLightObj1.AddComponent(&dirLight3);
 
 	m_root.AddChild(m_planeObject);
-	//m_root.AddChild(m_dirLightObj1);
+	m_root.AddChild(m_dirLightObj1);
 
 }

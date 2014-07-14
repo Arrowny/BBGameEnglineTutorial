@@ -3,8 +3,8 @@
 #include <vector>
 #include "gameComponent.h"
 #include "Transform.h"
-#include "Shader.h"
-#include "renderingEngine.h"
+
+class renderingEngine;
 
 class gameObject
 {
@@ -17,6 +17,7 @@ public:
 	void input(float delta);
 	void update(float delta);
 	void render(Shader* shader, renderingEngine* renderingEngine);
+	void AddToRenderingEngine(renderingEngine* renderingEngine);
 
 	inline Transform& GetTransform() { return m_transform; }
 protected:
