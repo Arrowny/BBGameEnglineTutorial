@@ -8,8 +8,3 @@ direction(glm::normalize(direction))
 {
 	SetShader(ForwardDirectional::GetInstance());
 }
-
-//void directionalLight::AddToRenderingEngine(renderingEngine* renderingEngine)
-//{
-//	renderingEngine->AddDirectionalLight(this);
-//}

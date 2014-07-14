@@ -1,7 +1,5 @@
 #include "testGame.h"
 
-//directionalLight TestGame::dirLight1 = directionalLight(baseLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.2f), glm::fvec3(0.5f, 0.0f, -0.5f));
-
 TestGame::~TestGame()
 {
 	if (m_texture) delete m_texture;

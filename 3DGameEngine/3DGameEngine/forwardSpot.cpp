@@ -47,9 +47,6 @@ void ForwardSpot::UpdateUniforms(const Transform& transform, const Material& mat
 
 	spotLight sLight = *(spotLight*)renderingEngine->GetActiveLight();
 
-	/*glm::vec3 spotColor = renderingEngine->GetSpotLight().pointL.base.m_color;
-	glm::vec3 spotPos = renderingEngine->GetSpotLight().pointL.position;
-	glm::vec3 spotDir = renderingEngine->GetSpotLight().direction;*/
 	glm::vec3 spotColor = sLight.m_color;
 	glm::vec3 spotPos = sLight.position;
 	glm::vec3 spotDir = sLight.direction;
@@ -65,12 +62,6 @@ void ForwardSpot::UpdateUniforms(const Transform& transform, const Material& mat
 	glUniform3fv(m_uniforms[SPOTLP_1], 1, &spotPos[0]);
 	glUniform3fv(m_uniforms[SPOTLD_1], 1, &spotDir[0]);
 
-	/*glUniform1f(m_uniforms[SPOTLBI_1], (float)renderingEngine->GetSpotLight().pointL.base.m_intensity);
-	glUniform1f(m_uniforms[SPOTLAC_1], (float)renderingEngine->GetSpotLight().pointL.atten.m_constant);
-	glUniform1f(m_uniforms[SPOTLAE_1], (float)renderingEngine->GetSpotLight().pointL.atten.m_exponent);
-	glUniform1f(m_uniforms[SPOTLAL_1], (float)renderingEngine->GetSpotLight().pointL.atten.m_linear);
-	glUniform1f(m_uniforms[SPOTLR_1], (float)renderingEngine->GetSpotLight().pointL.range);
-	glUniform1f(m_uniforms[SPOTLC_1], (float)renderingEngine->GetSpotLight().cutoff);*/
 	glUniform1f(m_uniforms[SPOTLBI_1], (float)sLight.m_intensity);
 	glUniform1f(m_uniforms[SPOTLAC_1], (float)sLight.atten.m_constant);
 	glUniform1f(m_uniforms[SPOTLAE_1], (float)sLight.atten.m_exponent);

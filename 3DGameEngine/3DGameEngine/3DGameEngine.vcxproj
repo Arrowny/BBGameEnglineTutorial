@@ -98,7 +98,6 @@
     <ClCompile Include="testGame.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timing.cpp" />
-    <ClCompile Include="Util.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -129,7 +128,6 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timing.h" />
     <ClInclude Include="Transform.h" />
-    <ClInclude Include="Util.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
