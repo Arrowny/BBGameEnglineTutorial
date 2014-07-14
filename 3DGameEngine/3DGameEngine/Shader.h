@@ -29,6 +29,18 @@ public:
 			this->pointLights = pointLights;
 		}
 	}
+	inline void SetSpotLights(SpotLight* spotLights, GLint numSpotLights)
+	{
+		if (numSpotLights > MAX_SPOT_LIGHTS)
+		{
+			std::cerr << "Error: Too many SPOT lights. Max allowed:" << MAX_SPOT_LIGHTS << " is smaller than:" << numSpotLights << std::endl;
+		}
+		else
+		{
+			this->numSpotLights = numSpotLights;
+			this->spotLights = spotLights;
+		}
+	}
 	~Shader();
 
 private:
@@ -38,6 +50,7 @@ private:
 	GLuint CreateShader(const std::string& text, GLenum shaderType);
 
 	static const int MAX_POINT_LIGHTS = 4;
+	static const int MAX_SPOT_LIGHTS = 4;
 
 	enum
 	{
@@ -69,6 +82,26 @@ private:
 		L_POINT_POSITION_2U,
 		L_POINT_RANGE_2U,
 
+		L_SPOT_POINT_BASE_COLOR_1U,
+		L_SPOT_POINT_BASE_INTENS_1U,
+		L_SPOT_POINT_ATTEN_CONS_1U,
+		L_SPOT_POINT_ATTEN_LINE_1U,
+		L_SPOT_POINT_ATTEN_EXPO_1U,
+		L_SPOT_POINT_POSITION_1U,
+		L_SPOT_POINT_RANGE_1U,
+		L_SPOT_DIRECTION_1U,
+		L_SPOT_CUTOFF_1U,
+
+		L_SPOT_POINT_BASE_COLOR_2U,
+		L_SPOT_POINT_BASE_INTENS_2U,
+		L_SPOT_POINT_ATTEN_CONS_2U,
+		L_SPOT_POINT_ATTEN_LINE_2U,
+		L_SPOT_POINT_ATTEN_EXPO_2U,
+		L_SPOT_POINT_POSITION_2U,
+		L_SPOT_POINT_RANGE_2U,
+		L_SPOT_DIRECTION_2U,
+		L_SPOT_CUTOFF_2U,
+
 		FLOAT_U,
 
 		NUM_UNIFORMS
@@ -83,6 +116,8 @@ private:
 	//std::vector<PointLight> pointLights;
 	PointLight* pointLights;
 	GLint numPointLights;
+	SpotLight* spotLights;
+	GLint numSpotLights;
 	
 };
 

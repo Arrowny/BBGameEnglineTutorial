@@ -14,7 +14,7 @@ public:
 	{
 		m_perspective = glm::perspective(fov, aspect, zNear, zFar);
 		m_position = pos;
-		m_forward = glm::vec3(0, 0, 1);
+		m_forward = glm::vec3(0, 0, 2);
 		m_up = glm::vec3(0, 1, 0);
 
 		m_up = glm::normalize(m_up);
@@ -96,7 +96,7 @@ public:
 
 	inline void move(glm::fvec3 dir, float amt)
 	{
-		m_position = m_position + (dir * amt);
+		m_position += (dir * amt);
 	}
 
 	inline void RotateX(float angle)

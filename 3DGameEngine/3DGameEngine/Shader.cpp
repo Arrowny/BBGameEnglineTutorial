@@ -38,7 +38,7 @@ Shader::Shader(const std::string& fileName)
 	m_uniforms[L_POINT_ATTEN_LINE_1U] = glGetUniformLocation(m_program, "pointLights[0].atten.linear");
 	m_uniforms[L_POINT_ATTEN_EXPO_1U] = glGetUniformLocation(m_program, "pointLights[0].atten.exponent");
 	m_uniforms[L_POINT_POSITION_1U] = glGetUniformLocation(m_program, "pointLights[0].position");
-	//m_uniforms[L_POINT_RANGE_1U] = glGetUniformLocation(m_program, "pointLights[0].range");
+	m_uniforms[L_POINT_RANGE_1U] = glGetUniformLocation(m_program, "pointLights[0].range");
 
 	m_uniforms[L_POINT_BASE_COLOR_2U] = glGetUniformLocation(m_program, "pointLights[1].base.color");
 	m_uniforms[L_POINT_BASE_INTENS_2U] = glGetUniformLocation(m_program, "pointLights[1].base.intensity");
@@ -46,7 +46,28 @@ Shader::Shader(const std::string& fileName)
 	m_uniforms[L_POINT_ATTEN_LINE_2U] = glGetUniformLocation(m_program, "pointLights[1].atten.linear");
 	m_uniforms[L_POINT_ATTEN_EXPO_2U] = glGetUniformLocation(m_program, "pointLights[1].atten.exponent");
 	m_uniforms[L_POINT_POSITION_2U] = glGetUniformLocation(m_program, "pointLights[1].position");
-	//m_uniforms[L_POINT_RANGE_2U] = glGetUniformLocation(m_program, "pointLights[1].range");
+	m_uniforms[L_POINT_RANGE_2U] = glGetUniformLocation(m_program, "pointLights[1].range");
+
+	m_uniforms[L_SPOT_POINT_BASE_COLOR_1U] = glGetUniformLocation(m_program, "spotLights[0].pointLight.base.color");
+	m_uniforms[L_SPOT_POINT_BASE_INTENS_1U] = glGetUniformLocation(m_program, "spotLights[0].pointLight.base.intensity");
+	m_uniforms[L_SPOT_POINT_ATTEN_CONS_1U] = glGetUniformLocation(m_program, "spotLights[0].pointLight.atten.constant");
+	m_uniforms[L_SPOT_POINT_ATTEN_LINE_1U] = glGetUniformLocation(m_program, "spotLights[0].pointLight.atten.linear");
+	m_uniforms[L_SPOT_POINT_ATTEN_EXPO_1U] = glGetUniformLocation(m_program, "spotLights[0].pointLight.atten.exponent");
+	m_uniforms[L_SPOT_POINT_POSITION_1U] = glGetUniformLocation(m_program, "spotLights[0].pointLight.position");
+	m_uniforms[L_SPOT_POINT_RANGE_1U] = glGetUniformLocation(m_program, "spotLights[0].pointLight.range");
+	m_uniforms[L_SPOT_DIRECTION_1U] = glGetUniformLocation(m_program, "spotLights[0].direction");
+	m_uniforms[L_SPOT_CUTOFF_1U] = glGetUniformLocation(m_program, "spotLights[0].cutoff");
+
+	//m_uniforms[L_SPOT_POINT_BASE_COLOR_2U] = glGetUniformLocation(m_program, "spotLights[1].pointLight.base.color");
+	//m_uniforms[L_SPOT_POINT_BASE_INTENS_2U] = glGetUniformLocation(m_program, "spotLights[1].pointLight.base.intensity");
+	//m_uniforms[L_SPOT_POINT_ATTEN_CONS_2U] = glGetUniformLocation(m_program, "spotLights[1].pointLight.atten.constant");
+	//m_uniforms[L_SPOT_POINT_ATTEN_LINE_2U] = glGetUniformLocation(m_program, "spotLights[1].pointLight.atten.linear");
+	//m_uniforms[L_SPOT_POINT_ATTEN_EXPO_2U] = glGetUniformLocation(m_program, "spotLights[1].pointLight.atten.exponent");
+	//m_uniforms[L_SPOT_POINT_POSITION_2U] = glGetUniformLocation(m_program, "spotLights[1].pointLight.position");
+	////m_uniforms[L_SPOT_POINT_RANGE_2U] = glGetUniformLocation(m_program, "spotLights[1].pointLight.range");
+	//m_uniforms[L_SPOT_DIRECTION_2U] = glGetUniformLocation(m_program, "spotLights[1].direction");
+	//m_uniforms[L_SPOT_CUTOFF_2U] = glGetUniformLocation(m_program, "spotLights[1].cutoff");
+
 
 	//m_uniforms[EYEPOS_U] = glGetUniformLocation(m_program, "eyePos");
 	//m_uniforms[EYEPOS_U] = glGetUniformLocation(m_program, "eyePos");
@@ -98,7 +119,7 @@ void Shader::Update(Transform& transform, Camera& camera, Material& material)
 	glUniform1f(m_uniforms[L_POINT_ATTEN_LINE_1U], pointLights[0].atten.linear);
 	glUniform1f(m_uniforms[L_POINT_ATTEN_EXPO_1U], pointLights[0].atten.exponent);
 	glUniform3fv(m_uniforms[L_POINT_POSITION_1U],1, &pointLights[0].position[0]);
-//	glUniform1f(m_uniforms[L_POINT_RANGE_1U], pointLights[0].range);
+	glUniform1f(m_uniforms[L_POINT_RANGE_1U], pointLights[0].range);
 
 	glUniform3fv(m_uniforms[L_POINT_BASE_COLOR_2U],1, &pointLights[1].base.color[0]);
 	glUniform1f(m_uniforms[L_POINT_BASE_INTENS_2U], pointLights[1].base.intensity);
@@ -106,7 +127,28 @@ void Shader::Update(Transform& transform, Camera& camera, Material& material)
 	glUniform1f(m_uniforms[L_POINT_ATTEN_LINE_2U], pointLights[1].atten.linear);
 	glUniform1f(m_uniforms[L_POINT_ATTEN_EXPO_2U], pointLights[1].atten.exponent);
 	glUniform3fv(m_uniforms[L_POINT_POSITION_2U],1, &pointLights[1].position[0]);
-//	glUniform1f(m_uniforms[L_POINT_RANGE_2U], pointLights[1].range);
+	glUniform1f(m_uniforms[L_POINT_RANGE_2U], pointLights[1].range);
+
+	glUniform3fv(m_uniforms[L_SPOT_POINT_BASE_COLOR_1U], 1, &spotLights[0].pointLight.base.color[0]);
+	glUniform1f(m_uniforms[L_SPOT_POINT_BASE_INTENS_1U], spotLights[0].pointLight.base.intensity);
+	glUniform1f(m_uniforms[L_SPOT_POINT_ATTEN_CONS_1U], spotLights[0].pointLight.atten.constant);
+	glUniform1f(m_uniforms[L_SPOT_POINT_ATTEN_LINE_1U], spotLights[0].pointLight.atten.linear);
+	glUniform1f(m_uniforms[L_SPOT_POINT_ATTEN_EXPO_1U], spotLights[0].pointLight.atten.exponent);
+	glUniform3fv(m_uniforms[L_SPOT_POINT_POSITION_1U], 1, &spotLights[0].pointLight.position[0]);
+	glUniform1f(m_uniforms[L_SPOT_POINT_RANGE_1U], spotLights[0].pointLight.range);
+	glUniform3fv(m_uniforms[L_SPOT_DIRECTION_1U], 1,&spotLights[0].direction[0]);
+	glUniform1f(m_uniforms[L_SPOT_CUTOFF_1U], spotLights[0].cutoff);
+
+
+	//glUniform3fv(m_uniforms[L_POINT_BASE_COLOR_2U], 1, &spotLights[1].pointLight.base.color[0]);
+	//glUniform1f(m_uniforms[L_POINT_BASE_INTENS_2U], spotLights[1].pointLight.base.intensity);
+	//glUniform1f(m_uniforms[L_POINT_ATTEN_CONS_2U], spotLights[1].pointLight.atten.constant);
+	//glUniform1f(m_uniforms[L_POINT_ATTEN_LINE_2U], spotLights[1].pointLight.atten.linear);
+	//glUniform1f(m_uniforms[L_POINT_ATTEN_EXPO_2U], spotLights[1].pointLight.atten.exponent);
+	//glUniform3fv(m_uniforms[L_POINT_POSITION_2U], 1, &spotLights[1].pointLight.position[0]);
+	//glUniform1f(m_uniforms[L_POINT_RANGE_2U], pointLights[1].range);
+	//glUniform3fv(m_uniforms[L_SPOT_DIRECTION_2U], 1, &spotLights[1].direction[0]);
+	//glUniform1f(m_uniforms[L_SPOT_CUTOFF_2U], spotLights[1].cutoff);
 }
 
 //void Shader::Update(float value)
