@@ -4,6 +4,8 @@
 #include <glm\glm.hpp>
 #include "gameComponent.h"
 
+#define COLOR_DEPTH 256
+
 struct Attenuation
 {
 	Attenuation() :
@@ -11,7 +13,7 @@ struct Attenuation
 		m_linear(0.0),
 		m_exponent(1.0) {}
 
-	Attenuation(float constant, float linear, float exponent) :
+	Attenuation(const float& constant, const float& linear, const float& exponent) :
 		m_constant(constant),
 		m_linear(linear),
 		m_exponent(exponent) {}
@@ -30,7 +32,7 @@ public:
 		m_color(glm::vec3(1, 1, 1)),
 		m_intensity(0.0) {}
 
-	BaseLight(glm::vec3 color, float intensity) :
+	BaseLight(const glm::vec3& color, const float& intensity) :
 		m_color(color),
 		m_intensity(intensity) {}
 
@@ -47,7 +49,7 @@ struct DirectionalLight : public BaseLight
 {
 public:
 	DirectionalLight();
-	DirectionalLight(glm::vec3 color, float intensity, glm::vec3 direction);
+	DirectionalLight(const glm::vec3& color, const float& intensity, const glm::vec3& direction);
 	virtual ~DirectionalLight() {}
 
 	glm::vec3 m_direction;
@@ -56,7 +58,7 @@ public:
 struct PointLight : public BaseLight
 {
 	PointLight();
-	PointLight(glm::vec3 color, float intensity, Attenuation atten, glm::vec3 position = glm::vec3(1, 1, 1), float range = 20);
+	PointLight::PointLight(const glm::vec3& color, const float& intensity, const Attenuation& atten);
 	virtual ~PointLight() {}
 
 	Attenuation m_atten;
@@ -67,7 +69,7 @@ struct PointLight : public BaseLight
 struct SpotLight : public PointLight
 {
 	SpotLight();
-	SpotLight(glm::vec3 color, float intensity, Attenuation atten, glm::vec3 position = glm::vec3(1, 1, 1), float range = 20, glm::vec3 direction = glm::vec3(0,0,1), float cutoff = 0.5);
+	SpotLight(const glm::vec3& color, const float& intensity, const Attenuation& atten, const glm::vec3& direction = glm::vec3(0,0,1), const float& cutoff = 0.5);
 	virtual ~SpotLight() {}
 
 	glm::vec3 m_direction;

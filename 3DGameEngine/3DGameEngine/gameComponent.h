@@ -3,9 +3,11 @@
 #include "window.h"
 #include "transform.h"
 #include "camera.h"
+//#include "gameObject.h"
 
 class RenderingEngine;
 class Shader;
+class GameObject;
 
 class GameComponent
 {
@@ -13,10 +15,13 @@ public:
 	GameComponent();
 	virtual ~GameComponent();
 
-	virtual void Init(Window* window, Transform* transform) {}
-	virtual void ProcessInput(Input* input, Transform* transform, double delta) {}
-	virtual void Update(Transform* transform, double delta) {}
-	virtual void Render(Transform* transform, Shader* shader, RenderingEngine* renderingEngine) {}
+	virtual void Init(Window* window) {}
+	virtual void ProcessInput(Input* input, double delta) {}
+	virtual void Update( double delta) {}
+	virtual void Render( Shader* shader, RenderingEngine* renderingEngine) {}
 	virtual void addToRenderingEngine(RenderingEngine* renderingEngine) {}
+	Transform* getTransform();  //convienence method
+
+	GameObject* m_parent;
 };
 

@@ -36,7 +36,7 @@ void ForwardPointLight::setUniform(std::string uniformName, PointLight* pLight)
 	setUniform(uniformName + ".atten", pLight->m_atten);
 	setUniform(uniformName + ".base.color", pLight->m_color);
 	setUniform(uniformName + ".base.intensity", pLight->m_intensity);
-	setUniform(uniformName + ".position", pLight->m_position);
+	setUniform(uniformName + ".position", pLight->getTransform()->m_trans);
 	setUniform(uniformName + ".range", pLight->m_range);
 
 }

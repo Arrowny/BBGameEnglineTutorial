@@ -5,11 +5,11 @@ class Transform
 {
 public:
 	Transform() :
-		m_trans(glm::vec3(0.0,0.0,0.0)),
+		m_trans(glm::vec3(0.0, 0.0, 0.0)),
 		m_rot(glm::vec3(0.0, 0.0, 0.0)),
 		m_scale(glm::vec3(1.0, 1.0, 1.0)) {}
 
-	Transform(const glm::vec3& translation, const glm::vec3& rotation, const glm::vec3& scale = glm::vec3(1.0f, 1.0f, 1.0f)) :
+	Transform(const glm::vec3& translation, const glm::vec3& rotation = glm::vec3(0.0, 0.0, 0.0), const glm::vec3& scale = glm::vec3(1.0f, 1.0f, 1.0f)) :
 		m_trans(translation),
 		m_rot(rotation),
 		m_scale(scale) {}

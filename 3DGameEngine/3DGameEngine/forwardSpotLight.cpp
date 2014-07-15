@@ -37,7 +37,7 @@ void ForwardSpotLight::setUniform(std::string uniformName, SpotLight* sLight)
 	setUniform(uniformName + ".pLight.atten", sLight->m_atten);
 	setUniform(uniformName + ".pLight.base.color", sLight->m_color);
 	setUniform(uniformName + ".pLight.base.intensity", sLight->m_intensity);
-	setUniform(uniformName + ".pLight.position", sLight->m_position);
+	setUniform(uniformName + ".pLight.position", sLight->getTransform()->m_trans);
 	setUniform(uniformName + ".pLight.range", sLight->m_range);
 	setUniform(uniformName + ".direction", sLight->m_direction);
 	setUniform(uniformName + ".cutoff", sLight->m_cutoff);

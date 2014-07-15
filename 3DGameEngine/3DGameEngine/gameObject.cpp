@@ -1,5 +1,6 @@
 #include "gameObject.h"
 #include <iostream>
+#include "gameComponent.h"
 
 
 GameObject::GameObject()
@@ -15,7 +16,7 @@ void GameObject::ProcessInput(Input* input, double delta)
 {
 	for (unsigned int ii = 0; ii < m_components.size(); ii++)
 	{
-		m_components[ii]->ProcessInput(input, m_transform, delta);
+		m_components[ii]->ProcessInput(input, delta);
 	}
 
 	for (unsigned int ii = 0; ii < m_children.size(); ii++)
@@ -30,7 +31,7 @@ void GameObject::Update(double delta)
 	{ 
 		for (unsigned int ii = 0; ii < m_components.size(); ii++)
 		{
-			m_components[ii]->Update(m_transform, delta);
+			m_components[ii]->Update(delta);
 		}
 
 		for (unsigned int ii = 0; ii < m_children.size(); ii++)
@@ -52,7 +53,7 @@ void GameObject::Render(Shader* shader, RenderingEngine* renderingEngine)
 	{
 		for (unsigned int ii = 0; ii < m_components.size(); ii++)
 		{
-			m_components[ii]->Render(m_transform, shader, renderingEngine);
+			m_components[ii]->Render(shader, renderingEngine);
 		}
 
 		for (unsigned int ii = 0; ii < m_children.size(); ii++)
@@ -74,4 +75,10 @@ void GameObject::addToRenderingEngine(RenderingEngine* renderingEngine)
 
 	for (unsigned int ii = 0; ii < m_children.size(); ii++)
 	{ m_children[ii]->addToRenderingEngine(renderingEngine); }
+}
+
+void GameObject::addComponent(GameComponent* component)
+{ 
+	component->m_parent = this;
+	m_components.push_back(component); 
 }

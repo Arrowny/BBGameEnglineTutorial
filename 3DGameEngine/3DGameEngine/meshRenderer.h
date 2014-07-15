@@ -12,7 +12,7 @@ public:
 	MeshRenderer(Mesh* mesh, Material material);
 	virtual ~MeshRenderer();
 
-	void Render(Transform* transform, Shader* shader, RenderingEngine* renderingEngine);
+	void Render(Shader* shader, RenderingEngine* renderingEngine);
 
 private:
 	MeshRenderer(const MeshRenderer& other) {}

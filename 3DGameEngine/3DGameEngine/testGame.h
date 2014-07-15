@@ -29,9 +29,13 @@ private:
 
 	GameObject pyrimidGameObject;
 	DirectionalLight* dLight;
+	GameObject dLightObj;
 	PointLight* pLight1;
+	GameObject pLight1Obj;
 	PointLight* pLight2;
+	GameObject pLight2Obj;
 	SpotLight* sLight;
+	GameObject sLightObj;
 	MeshRenderer* meshComponent;
 
 };

@@ -37,19 +37,28 @@ void TestGame::Init(Window* window)
 										 Material("./res/texture_files/bricks.jpg",glm::vec3(1.0, 1.0, 1.0), 1, 8));
 
 	pyrimidGameObject.m_transform = m_worldTransform;
-	pyrimidGameObject.m_components.push_back(meshComponent);
+	pyrimidGameObject.addComponent(meshComponent);
 
 	dLight = new DirectionalLight(glm::vec3(1, 1, 1), 0.8, glm::vec3(0, 1, 0));
-	pLight1 = new PointLight(glm::vec3(0, 1, 0), .8, Attenuation(0, 0, .01), glm::vec3(3.0, 0.0, 0.0), 20.0);
-	pLight2 = new PointLight(glm::vec3(1, 0, 0), .8, Attenuation(0, 0, .01), glm::vec3(-3.0, 0.0, 0.0), 20.0);
-	sLight = new SpotLight(glm::vec3(0, 0, 1), .8, Attenuation(0, 0, .001), glm::vec3(0.0, 0.0, 0.0), 10.0, glm::vec3(0, 0, 1), 0.7);
+	dLightObj.addComponent(dLight);
+	pLight1 = new PointLight(glm::vec3(0, 1, 0), .8, Attenuation(0, 0, 0.01));
+	pLight1Obj.addComponent(pLight1);
+	pLight1Obj.m_transform = new Transform(glm::vec3(3.0, 0.0, 0.0));
 
+	pLight2 = new PointLight(glm::vec3(1, 0, 0), .8, Attenuation(0, 0, 0.01));
+	pLight2Obj.addComponent(pLight2);
+	pLight2Obj.m_transform = new Transform(glm::vec3(-3.0, 0.0, 0.0));
 
-	m_root.m_children.push_back(&pyrimidGameObject);
-	m_root.m_components.push_back(dLight);
-	m_root.m_components.push_back(pLight1);
-	m_root.m_components.push_back(pLight2);
-	m_root.m_components.push_back(sLight);
+	sLight = new SpotLight(glm::vec3(0, 0, 1.0), .8, Attenuation(0, 0, 0.01), glm::vec3(0, 0, 1.0), 0.7);
+	sLightObj.addComponent(sLight);
+	sLightObj.m_transform = new Transform();
+	
+	pyrimidGameObject.addChild(&dLightObj);
+	pyrimidGameObject.addChild(&pLight1Obj);
+	pyrimidGameObject.addChild(&pLight2Obj);
+	pyrimidGameObject.addChild(&sLightObj);
+	m_root.addChild(&pyrimidGameObject);
+
 
 	m_worldTransform->setTranslationExplicit(0.0, 0.0, 5.0);
 }
