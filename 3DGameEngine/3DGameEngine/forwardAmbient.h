@@ -8,7 +8,7 @@ public:
 	virtual ~ForwardAmbient();
 
 	virtual std::string getShaderType() { return "FORWARD_AMBIENT_SHADER"; }
-	virtual void updateBasicUniformsAndTexture(Camera& camera, const glm::mat4& worldMatrix, const Material& mat);
+	virtual void updateBasicUniformsAndTexture(const glm::mat4& worldMatrix, const Material& mat, RenderingEngine* renderingEngine);
 
 	glm::vec3 m_ambientIntensity;
 };

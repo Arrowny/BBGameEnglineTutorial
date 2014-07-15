@@ -13,22 +13,6 @@ Shader(fileName)
 	addUniform("dLight.base.color");
 	addUniform("dLight.base.intensity");
 	addUniform("dLight.direction");
-	
-}
-
-ForwardDirectional::ForwardDirectional(std::string fileName, DirectionalLight dLight) :
-Shader(fileName),
-m_dLight(dLight)
-{
-	addUniform("MVP");
-	addUniform("model");
-	addUniform("eyePos");
-	addUniform("specularIntensity");
-	addUniform("specularPower");
-
-	addUniform("dLight.base.color");
-	addUniform("dLight.base.intensity");
-	addUniform("dLight.direction");
 }
 
 
@@ -36,24 +20,19 @@ ForwardDirectional::~ForwardDirectional()
 {
 }
 
-void ForwardDirectional::setUniform(std::string uniformName, BaseLight base)
+void ForwardDirectional::setUniform(std::string uniformName, DirectionalLight* dLight)
 {
-	setUniform(uniformName + ".color", base.m_color);
-	setUniform(uniformName + ".intensity", base.m_intensity);
+	setUniform(uniformName + ".base.color", dLight->m_color);
+	setUniform(uniformName + ".base.intensity", dLight->m_intensity);
+	setUniform(uniformName + ".direction", dLight->m_direction);
 }
 
-void ForwardDirectional::setUniform(std::string uniformName, DirectionalLight dLight)
+void ForwardDirectional::updateBasicUniformsAndTexture(const glm::mat4& worldMatrix, const Material& mat, RenderingEngine* renderingEngine)
 {
-	setUniform(uniformName + ".base", dLight.m_base);
-	setUniform(uniformName + ".direction", dLight.m_direction);
-}
-
-void ForwardDirectional::updateBasicUniformsAndTexture(Camera& camera, const glm::mat4& worldMatrix, const Material& mat)
-{
-	setUniform("MVP", camera.getProjectionTransform()*worldMatrix);
+	setUniform("MVP", renderingEngine->getCamera()->getProjectionTransform()*worldMatrix);
 	setUniform("model", worldMatrix);
-	setUniform("eyePos", camera.m_pos);
+	setUniform("eyePos", renderingEngine->getCamera()->m_pos);
 	setUniform("specularIntensity", mat.m_specularIntensity);
 	setUniform("specularPower", mat.m_specularPower);
-	setUniform("dLight", m_dLight);
+	setUniform("dLight", (DirectionalLight*)renderingEngine->activeLight);
 }

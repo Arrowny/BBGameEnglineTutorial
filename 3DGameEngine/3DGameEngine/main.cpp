@@ -1,12 +1,11 @@
 #include <iostream>
-#include "window.h"
 #include <SDL\SDL.h>
 #include <GL\glew.h>
 #include <glm\glm.hpp>
+#include "window.h"
 #include "coreEngine.h"
 #include "testGame.h"
-#include "phongShader.h"
-#include "Lights.h"
+
 
 
 #define WIDTH 800

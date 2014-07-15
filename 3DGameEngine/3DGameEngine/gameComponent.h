@@ -3,7 +3,9 @@
 #include "window.h"
 #include "transform.h"
 #include "camera.h"
-#include "shader.h"
+
+class RenderingEngine;
+class Shader;
 
 class GameComponent
 {
@@ -11,13 +13,10 @@ public:
 	GameComponent();
 	virtual ~GameComponent();
 
-	virtual void Init(Window* window, Transform* transform) = 0;
-	virtual void ProcessInput(Input* input, Transform* transform, double delta) = 0;
-	virtual void Update(Transform* transform, double delta) = 0;
-	virtual void Render(Transform* transform, Camera* camera, Shader* shader) = 0;
-
-private:
-	GameComponent(const GameComponent& other) {}
-	void operator=(const GameComponent& other) {}
+	virtual void Init(Window* window, Transform* transform) {}
+	virtual void ProcessInput(Input* input, Transform* transform, double delta) {}
+	virtual void Update(Transform* transform, double delta) {}
+	virtual void Render(Transform* transform, Shader* shader, RenderingEngine* renderingEngine) {}
+	virtual void addToRenderingEngine(RenderingEngine* renderingEngine) {}
 };
 

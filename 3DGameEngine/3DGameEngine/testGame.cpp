@@ -39,7 +39,18 @@ void TestGame::Init(Window* window)
 	pyrimidGameObject.m_transform = m_worldTransform;
 	pyrimidGameObject.m_components.push_back(meshComponent);
 
+	dLight = new DirectionalLight(glm::vec3(1, 1, 1), 0.8, glm::vec3(0, 1, 0));
+	pLight1 = new PointLight(glm::vec3(0, 1, 0), .8, Attenuation(0, 0, .01), glm::vec3(3.0, 0.0, 0.0), 20.0);
+	pLight2 = new PointLight(glm::vec3(1, 0, 0), .8, Attenuation(0, 0, .01), glm::vec3(-3.0, 0.0, 0.0), 20.0);
+	sLight = new SpotLight(glm::vec3(0, 0, 1), .8, Attenuation(0, 0, .001), glm::vec3(0.0, 0.0, 0.0), 10.0, glm::vec3(0, 0, 1), 0.7);
+
+
 	m_root.m_children.push_back(&pyrimidGameObject);
+	m_root.m_components.push_back(dLight);
+	m_root.m_components.push_back(pLight1);
+	m_root.m_components.push_back(pLight2);
+	m_root.m_components.push_back(sLight);
+
 	m_worldTransform->setTranslationExplicit(0.0, 0.0, 5.0);
 }
 

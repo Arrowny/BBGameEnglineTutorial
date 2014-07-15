@@ -2,6 +2,7 @@
 
 #include <GL\glew.h>
 #include <glm\glm.hpp>
+#include "gameComponent.h"
 
 struct Attenuation
 {
@@ -22,7 +23,7 @@ struct Attenuation
 	float m_exponent;
 };
 
-struct BaseLight
+struct BaseLight : public GameComponent
 {
 public:
 	BaseLight() :
@@ -35,58 +36,40 @@ public:
 
 	virtual ~BaseLight() {}
 
+	void addToRenderingEngine(RenderingEngine* renderingEngine);
+
 	glm::vec3 m_color;
 	GLfloat m_intensity;
+	Shader* m_shader;
 };
 
-struct DirectionalLight
+struct DirectionalLight : public BaseLight
 {
 public:
-	DirectionalLight() :
-		m_base(BaseLight()),
-		m_direction(glm::vec3(0, 0, 0)) {}
-
-	DirectionalLight(BaseLight base, glm::vec3 direction) :
-		m_base(base),
-		m_direction(glm::normalize(direction)) {}
-
+	DirectionalLight();
+	DirectionalLight(glm::vec3 color, float intensity, glm::vec3 direction);
 	virtual ~DirectionalLight() {}
 
-	BaseLight m_base;
 	glm::vec3 m_direction;
 };
 
-struct PointLight
+struct PointLight : public BaseLight
 {
-	PointLight() :
-		m_position(glm::vec3(0.0, 0.0, 0.0)) {}
-
-	PointLight(BaseLight base, Attenuation atten, glm::vec3 position = glm::vec3(1,1,1), float range = 20) :
-		m_base(base),
-		m_atten(atten),
-		m_position(position),
-		m_range(range) {}
-
+	PointLight();
+	PointLight(glm::vec3 color, float intensity, Attenuation atten, glm::vec3 position = glm::vec3(1, 1, 1), float range = 20);
 	virtual ~PointLight() {}
 
-	BaseLight m_base;
 	Attenuation m_atten;
 	glm::vec3 m_position;
 	float m_range;
 };
 
-struct SpotLight
+struct SpotLight : public PointLight
 {
-	SpotLight() :
-		m_direction(glm::vec3(0,0,0)),
-		m_cutoff(1.0f) {}
+	SpotLight();
+	SpotLight(glm::vec3 color, float intensity, Attenuation atten, glm::vec3 position = glm::vec3(1, 1, 1), float range = 20, glm::vec3 direction = glm::vec3(0,0,1), float cutoff = 0.5);
+	virtual ~SpotLight() {}
 
-	SpotLight(PointLight pLight, glm::vec3 direction, float cutoff) :
-		m_pLight(pLight),
-		m_direction(direction),
-		m_cutoff(cutoff) {}
-
-	PointLight m_pLight;
 	glm::vec3 m_direction;
 	float m_cutoff;
 };

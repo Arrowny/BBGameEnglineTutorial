@@ -1,4 +1,5 @@
 #include "forwardAmbient.h"
+#include "renderingEngine.h"
 
 
 ForwardAmbient::ForwardAmbient(const std::string& fileName, glm::vec3 ambientLight) :
@@ -15,8 +16,8 @@ ForwardAmbient::~ForwardAmbient()
 {
 }
 
-void ForwardAmbient::updateBasicUniformsAndTexture(Camera& camera, const glm::mat4& worldMatrix, const Material& mat)
+void ForwardAmbient::updateBasicUniformsAndTexture(const glm::mat4& worldMatrix, const Material& mat, RenderingEngine* renderingEngine)
 {
-	setUniform("MVP", camera.getProjectionTransform()*worldMatrix);
+	setUniform("MVP", renderingEngine->getCamera()->getProjectionTransform()*worldMatrix);
 	setUniform("ambientIntensity", m_ambientIntensity);
 }

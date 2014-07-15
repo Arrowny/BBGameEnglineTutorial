@@ -12,9 +12,9 @@ MeshRenderer::~MeshRenderer()
 {
 }
 
-void MeshRenderer::Render(Transform* transform, Camera* camera, Shader* shader)
+void MeshRenderer::Render(Transform* transform, Shader* shader, RenderingEngine* renderingEngine)
 {
 	shader->Bind();
-	shader->updateBasicUniformsAndTexture(*camera, transform->getTransformation(), m_material);
+	shader->updateBasicUniformsAndTexture(transform->getTransformation(), m_material, renderingEngine);
 	m_mesh->Draw();
 }

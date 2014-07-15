@@ -12,10 +12,7 @@ public:
 	MeshRenderer(Mesh* mesh, Material material);
 	virtual ~MeshRenderer();
 
-	virtual void Init(Window* window, Transform* transform) {}
-	virtual void ProcessInput(Input* input, Transform* transform, double delta) {}
-	virtual void Update(Transform* transform, double delta) {}
-	virtual void Render(Transform* transform, Camera* camera, Shader* shader);
+	void Render(Transform* transform, Shader* shader, RenderingEngine* renderingEngine);
 
 private:
 	MeshRenderer(const MeshRenderer& other) {}

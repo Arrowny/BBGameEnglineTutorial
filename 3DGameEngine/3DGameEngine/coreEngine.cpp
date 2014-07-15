@@ -18,13 +18,6 @@ m_game(game)
 	Camera coreCamera;
 	coreCamera.reinitPerspectiveMatrix(.01f, 1000.0f, 70.0f, window->GetWidth(), window->GetHeight());
 	m_renderingEngine.setCamera(coreCamera);
-
-	//TODO:: create shader somewhere more sensible
-	m_shaders.push_back(new ForwardAmbient("forward_ambient", glm::vec3(0.2, 0.2, 0.2)));
-	m_shaders.push_back(new ForwardDirectional("forward_Directional", DirectionalLight(BaseLight(glm::vec3(1, 1, 1), .8), glm::vec3(0, 1, 0))));
-	m_shaders.push_back(new ForwardPointLight("forward_PointLight", PointLight(BaseLight(glm::vec3(0, 1, 0), .8), Attenuation(0, 0, .01), glm::vec3(3.0, 0.0, 0.0), 20.0)));
-	m_shaders.push_back(new ForwardPointLight("forward_PointLight", PointLight(BaseLight(glm::vec3(1, 0, 0), .8), Attenuation(0, 0, .01), glm::vec3(-3.0, 0.0, 0.0), 20.0)));
-	m_shaders.push_back(new ForwardSpotLight("forward_SpotLight", SpotLight(PointLight(BaseLight(glm::vec3(0, 0, 1), .8), Attenuation(0, 0, .001), glm::vec3(0.0, 0.0, 0.0), 10.0), glm::vec3(0, 0, 1), 0.7)));
 }
 
 void CoreEngine::start()
@@ -75,7 +68,7 @@ void CoreEngine::start()
 		{ 
 
 			m_renderingEngine.Clear();
-			m_renderingEngine.RenderGameObject(&m_game->m_root, m_shaders);
+			m_renderingEngine.RenderGameObject(&m_game->m_root);
 			m_window->Render();
 			frames++;
 		}

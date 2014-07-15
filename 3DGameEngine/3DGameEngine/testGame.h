@@ -1,7 +1,6 @@
 #pragma once
 #include "game.h"
 #include "shader.h"
-#include "phongShader.h"
 #include "transform.h"
 #include "mesh.h"
 #include "material.h"
@@ -29,6 +28,10 @@ private:
 	Transform* m_worldTransform;
 
 	GameObject pyrimidGameObject;
+	DirectionalLight* dLight;
+	PointLight* pLight1;
+	PointLight* pLight2;
+	SpotLight* sLight;
 	MeshRenderer* meshComponent;
 
 };

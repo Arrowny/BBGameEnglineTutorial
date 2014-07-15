@@ -91,7 +91,6 @@
     <ClInclude Include="material.h" />
     <ClInclude Include="mesh.h" />
     <ClInclude Include="meshRenderer.h" />
-    <ClInclude Include="phongShader.h" />
     <ClInclude Include="renderingEngine.h" />
     <ClInclude Include="resourceLoader.h" />
     <ClInclude Include="shader.h" />
@@ -114,11 +113,11 @@
     <ClCompile Include="gameComponent.cpp" />
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="input.cpp" />
+    <ClCompile Include="Lights.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="material.cpp" />
     <ClCompile Include="mesh.cpp" />
     <ClCompile Include="meshRenderer.cpp" />
-    <ClCompile Include="phongShader.cpp" />
     <ClCompile Include="renderingEngine.cpp" />
     <ClCompile Include="resourceLoader.cpp" />
     <ClCompile Include="shader.cpp" />
