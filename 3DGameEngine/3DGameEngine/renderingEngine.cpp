@@ -7,7 +7,7 @@
 #include <GL/glew.h>
 
 renderingEngine::renderingEngine():
-m_mainCamera(glm::vec3(0.0f, 0.0f, -10.0f), 70.0f, (float)Window::getWidth() / (float)Window::getHeight(), 0.1f, 1000.0f),
+//m_mainCamera(glm::vec3(0.0f, 0.0f, -10.0f), 70.0f, (float)Window::getWidth() / (float)Window::getHeight(), 0.1f, 1000.0f),
 m_ambientLight(0.2f, 0.2f, 0.2f)
 //m_activeLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.2f)
 //m_activeDirectionalLight(baseLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.2f), glm::fvec3(0.5f, 0.0f, -0.5f)),
@@ -26,6 +26,7 @@ m_ambientLight(0.2f, 0.2f, 0.2f)
 	glEnable(GL_TEXTURE_2D);
 
 	m_activeLight = new baseLight();
+	m_mainCamera = new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f);
 }
 
 renderingEngine::~renderingEngine()
@@ -35,7 +36,7 @@ renderingEngine::~renderingEngine()
 
 void renderingEngine::input(const Input& input, float delta)
 {
-	m_mainCamera.input(input, delta);
+	m_mainCamera->input(input, delta);
 }
 
 void renderingEngine::Render(gameObject* object)

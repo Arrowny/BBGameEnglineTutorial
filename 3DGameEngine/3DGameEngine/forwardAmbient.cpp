@@ -24,9 +24,11 @@ ForwardAmbient::ForwardAmbient(const std::string& fileName)
 
 void ForwardAmbient::UpdateUniforms(const Transform& transform, const Material& material, renderingEngine* renderingEngine)
 {
-	glm::mat4 model = transform.GetProjection(renderingEngine->GetMainCamera());
+	//glm::mat4 model = transform.GetProjection(renderingEngine->GetMainCamera());
 	glm::mat4 Normal = transform.GetModel();
-	glm::vec3 eyePos = transform.GetCameraPos(renderingEngine->GetMainCamera());
+	glm::mat4 model = renderingEngine->GetMainCamera().GetViewProjection() * Normal;
+	//glm::vec3 eyePos = transform.GetCameraPos(renderingEngine->GetMainCamera());
+	glm::vec3 eyePos = renderingEngine->GetMainCamera().GetTransform().GetPos();
 
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
 	glUniform3f(m_uniforms[AMBIENTL_U], (float)renderingEngine->GetAmbientLight()[0], (float)renderingEngine->GetAmbientLight()[1], (float)renderingEngine->GetAmbientLight()[2]);

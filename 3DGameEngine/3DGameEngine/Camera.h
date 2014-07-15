@@ -5,20 +5,21 @@
 #include "Timing.h"
 #include "Input.h"
 #include "Window.h"
+#include "gameComponent.h"
 
-struct Camera
+struct Camera : public gameComponent
 {
 public:
-	Camera(const glm::vec3& pos, float fov, float aspect, float zNear, float zFar)
+	Camera(/*const glm::vec3& pos, */float fov, float aspect, float zNear, float zFar)
 	{
-		this->pos = pos;
+		/*this->pos = pos;
 		this->forward = glm::vec3(0.0f, 0.0f, 1.0f);
-		this->up = glm::vec3(0.0f, 1.0f, 0.0f);
+		this->up = glm::vec3(0.0f, 1.0f, 0.0f);*/
 		this->projection = glm::perspective(fov, aspect, zNear, zFar);
 
 	}
 
-	inline glm::vec3 getForward() const
+	/*inline glm::vec3 getForward() const
 	{
 		return forward;
 	}
@@ -27,10 +28,11 @@ public:
 	{
 		return pos;
 	}
-
+*/
 	inline glm::mat4 GetViewProjection() const
 	{
-		return projection * glm::lookAt(pos, pos + forward, up);
+		return projection * glm::lookAt(GetTransform().GetPos(), GetTransform().GetPos() + GetTransform().GetForward(), GetTransform().GetUp());
+		//return projection * glm::lookAt(pos, pos + forward, up);
 	} 
 
 	bool mouseLocked = false;
@@ -38,13 +40,14 @@ public:
 	void input(const Input& input, float delta)
 	{
 		
-		float sensitivity = 3.0f;
+		float sensitivity = -5.0f;
 		float movAmt = (float)(10 * delta);
 		//float rotAmt = (float)(200 * Time::getDelta());
 
 		if (input.GetKey(input.KEY_ESCAPE))
 		{
 			input.SetCursor(true);
+
 			mouseLocked = false;
 		}
 
@@ -58,14 +61,14 @@ public:
 
 			if (rotY)
 			{
-
-				rotateY(glm::radians(-deltaPos.x * sensitivity));
+				GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(-deltaPos.x * sensitivity), yAxis)));
+				//rotateY(glm::radians(-deltaPos.x * sensitivity));
 			}
 				
 			if (rotX)
 			{
-
-				rotateX(glm::radians(deltaPos.y * sensitivity * 1.5f));
+				GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(deltaPos.y * sensitivity), GetTransform().GetRight())));
+				//rotateX(glm::radians(deltaPos.y * sensitivity * 1.5f));
 			}
 				
 
@@ -85,17 +88,17 @@ public:
 		}
 
 		if (input.GetKey(input.KEY_W))
-			move(forward, movAmt);
+			move(GetTransform().GetForward(), movAmt);
 		if (input.GetKey(input.KEY_S))
-			move(forward, -movAmt);
+			move(GetTransform().GetForward(), -movAmt);
 		if (input.GetKey(input.KEY_A))
-			move(getLeft(), movAmt);
+			move(GetTransform().GetLeft(), -movAmt);
 		if (input.GetKey(input.KEY_D))
-			move(getRight(), movAmt);
+			move(GetTransform().GetRight(), -movAmt);
 		if (input.GetKey(input.KEY_SPACE))
-			move(up, movAmt);
+			move(GetTransform().GetUp(), movAmt);
 		if (input.GetKey(input.KEY_LCTRL))
-			move(up, -movAmt);
+			move(GetTransform().GetUp(), -movAmt);
 
 		/*if (input.GetKey(input.KEY_UP))
 			rotateX(-rotAmt);
@@ -111,11 +114,12 @@ public:
 
 	void move(glm::fvec3 dir, float amt){
 
-		pos = pos + (dir*amt);
+		GetTransform().SetPos(GetTransform().GetPos() + (dir * amt));
+		//pos = pos + (dir*amt);
 
 	}
 	
-	glm::fvec3 getLeft(){
+	/*glm::fvec3 getLeft(){
 
 		glm::fvec3 left = glm::cross(up, forward);
 		glm::normalize(left);
@@ -155,15 +159,18 @@ public:
 		up = glm::cross(forward, hAxis);
 		glm::normalize(up);
 
-	}
-
+		}
+*/
+	
 	const glm::fvec3 yAxis = glm::fvec3(0, 1, 0);
+
+	virtual void AddToRenderingEngine(renderingEngine* renderingEngine);
 
 protected:
 private:
 	glm::mat4 projection;
-	glm::vec3 pos;
-	glm::vec3 forward;
-	glm::vec3 up;
+	//glm::vec3 pos;
+	//glm::vec3 forward;
+	//glm::vec3 up;
 };
 

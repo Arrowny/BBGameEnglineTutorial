@@ -20,6 +20,7 @@ public:
 
 	inline void SetParent(gameObject* parent) { m_parent = parent; }
 	inline Transform& GetTransform() { return m_parent->GetTransform(); }
+	inline const Transform& GetTransform() const { return m_parent->GetTransform(); }
 
 private:
 	gameObject* m_parent = new gameObject();

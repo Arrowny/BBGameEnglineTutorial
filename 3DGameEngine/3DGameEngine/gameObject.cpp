@@ -21,6 +21,7 @@ void gameObject::input(float delta)
 
 	for (unsigned int i = 0; i < m_children.size(); i++)
 		m_children[i]->input(delta);
+
 }
 
 void gameObject::update(float delta)

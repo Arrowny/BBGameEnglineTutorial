@@ -2,6 +2,7 @@
 #include "Window.h"
 #include "Timing.h"
 #include "Game.h"
+#include "Input.h"
 #include <stdio.h>
 
 coreEngine::coreEngine(Game* game, renderingEngine* renderingEngine, Window* window, double frameRate) :

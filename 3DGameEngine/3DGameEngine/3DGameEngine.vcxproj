@@ -78,6 +78,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="baseLight.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="coreEngine.cpp" />
     <ClCompile Include="directionalLight.cpp" />
     <ClCompile Include="forwardAmbient.cpp" />

@@ -33,9 +33,11 @@ ForwardDirectional::ForwardDirectional(const std::string& fileName)
 
 void ForwardDirectional::UpdateUniforms(const Transform& transform, const Material& material, renderingEngine* renderingEngine)
 {
-	glm::mat4 model = transform.GetProjection(renderingEngine->GetMainCamera());
+	//glm::mat4 model = transform.GetProjection(renderingEngine->GetMainCamera());
 	glm::mat4 Normal = transform.GetModel();
-	glm::vec3 eyePos = transform.GetCameraPos(renderingEngine->GetMainCamera());
+	glm::mat4 model = renderingEngine->GetMainCamera().GetViewProjection() * Normal;
+//	glm::vec3 eyePos = transform.GetCameraPos(renderingEngine->GetMainCamera());
+	glm::vec3 eyePos = renderingEngine->GetMainCamera().GetTransform().GetPos();
 	glm::vec3 ambient = renderingEngine->GetAmbientLight();
 
 	directionalLight dirLight = *(directionalLight*)renderingEngine->GetActiveLight();
