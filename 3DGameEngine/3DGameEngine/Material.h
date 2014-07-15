@@ -9,7 +9,8 @@ public:
 	glm::fvec3 basic_color;
 	float specularIntensity;
 	float specularPower;
-
+	Material::Material()
+	{}
 	Material::Material(Texture* texture) :
 		m_texture(texture) 
 	{

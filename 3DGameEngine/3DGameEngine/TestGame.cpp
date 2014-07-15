@@ -14,17 +14,24 @@ TestGame::TestGame()
 
 TestGame::~TestGame()
 {
+	if (m_mesh) delete m_mesh;
+	if (m_meshRenderer) delete m_meshRenderer;
 }
 
 void TestGame::init()
 {
-	m_mesh = new Mesh("./res/plane.obj");
-	m_shader = new Shader("./res/btShader");
-	m_transform = new Transform();
-	m_camera = new Camera(glm::vec3(0, 1, -4), 70.0f, (float)WindowParameter::width / (float)WindowParameter::height, 1.0f, 1000.0f);
-	m_material = new Material(new Texture("./res/bricks.jpg"), glm::fvec3(1.0, 1.0, 1.0), 2, 16);
+	m_root = GameObject();
 
-	//MeshRenderer meshRenderer(m_mesh, m_material);
+	m_shader = new Shader("./res/btShader");
+	//m_transform = Transform();
+	m_camera = Camera();
+	m_camera = Camera(glm::vec3(0, 1, -4), 70.0f, (float)WindowParameter::width / (float)WindowParameter::height, 1.0f, 1000.0f);
+
+	m_mesh = new Mesh("./res/plane.obj");
+	m_material = Material(new Texture("./res/bricks.jpg"), glm::fvec3(1.0, 1.0, 1.0), 2, 16);
+
+	m_meshRenderer = new MeshRenderer(*m_mesh, m_material);
+	m_root.AddComponent(m_meshRenderer);
 
 	/* -------------------------------Light Part----------------------------------------
 	m_shader->SetAmbient(glm::fvec3(0.3, 0.3, 0.3));
@@ -47,7 +54,8 @@ void TestGame::init()
 }
 
 void TestGame::input(Input& input){
-	m_camera->Input(input);
+	m_camera.Input(input);
+	m_root.input();
 }
 
 float temp = 0.0f;
@@ -55,8 +63,8 @@ float temp = 0.0f;
 void TestGame::update(){
 	//temp += Time::getDelta();
 
-	m_transform->SetPos(glm::vec3(0, -1, 7));
-
+	m_root.GetTransform().SetPos(glm::vec3(0, -1, 7));
+	m_root.update();
 
 	/*-----------------------------------Light----------------------------------------------
 	m_transform->SetPos(glm::vec3(sin(temp), 0, cos(temp)));
@@ -76,9 +84,5 @@ void TestGame::update(){
 }
 
 void TestGame::render(){
-	m_shader->Bind();
-	m_shader->Update(*m_transform, *m_camera, *m_material);
-
-	m_material->m_texture->Bind(0);
-	m_mesh->Draw();
+	m_root.render(m_shader,&m_camera);
 }

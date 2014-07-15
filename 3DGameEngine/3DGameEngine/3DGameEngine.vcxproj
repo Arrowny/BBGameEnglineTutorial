@@ -80,6 +80,8 @@
     <ClCompile Include="..\..\..\VS_test\MonkeyHead[final]\MonkeyHead[final]\obj_loader.cpp" />
     <ClCompile Include="coreEngine.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameComponent.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -100,9 +102,12 @@
     <ClInclude Include="coreEngine.h" />
     <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameComponent.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="PhongShader.h" />
     <ClInclude Include="RenderUtil.h" />
     <ClInclude Include="resource.h" />

@@ -1,16 +1,20 @@
 #pragma once
 #include "transform.h"
+#include "Shader.h"
+#include "Camera.h"
+
 class GameComponent
 {
 public:
-	GameComponent();
-	//virtual void init();
-	virtual void input(Transform transform) { ; }
-	virtual void update(Transform transform) {; }
-	virtual void render(Transform transform) = 0;// {; }
+
+	virtual void input(Transform transform) {}
+	virtual void update(Transform transform) {}
+	virtual void render(Shader* m_shader, Transform* m_transform, Camera* m_camera) {}
+//	virtual ~GameComponent() {};
+
 	//void input(Transform transform);
 	//void update(Transform transform);
 	//void render(Transform transform);
-	virtual ~GameComponent() {};
+
 };
 

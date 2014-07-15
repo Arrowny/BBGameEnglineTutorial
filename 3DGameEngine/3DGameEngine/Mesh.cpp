@@ -1,7 +1,11 @@
 #include "Mesh.h"
 #include <vector>
 
-
+Mesh::Mesh()
+{
+	IndexedModel model = OBJModel("./res/plane.obj").ToIndexedModel();
+	InitMesh(model);
+}
 Mesh::Mesh(const std::string& fileName)
 {
 	IndexedModel model = OBJModel(fileName).ToIndexedModel();

@@ -9,7 +9,7 @@
 class Shader
 {
 public:
-
+	Shader();
 	Shader(const std::string& fileName);
 	void Bind();//bind the shader, set the GPU in a state using vertex shader and frag shader in this class
 	void Update(Transform& transform,Camera& camera, Material& material);//, DirectionalLight& directionalLight

@@ -2,6 +2,9 @@
 #include <fstream>
 #include <iostream>
 
+Shader::Shader()
+{}
+
 Shader::Shader(const std::string& fileName)
 {
 	m_program = glCreateProgram();

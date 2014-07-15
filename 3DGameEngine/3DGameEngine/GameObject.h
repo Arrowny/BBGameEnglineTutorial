@@ -13,18 +13,16 @@ public:
 
 	void input();
 	void update();
-	void render();
+	void render(Shader* m_shader, Camera* m_camera);
 
-	void AddChild(GameObject child);
+	void AddChild(GameObject& child);
 	void AddComponent(GameComponent* component);
 
-	Transform GetTransform();
+	inline Transform& GetTransform() { return m_transform; }
 private:
-	std::vector<GameObject> children;
+	std::vector<GameObject*> children;
 	std::vector<GameComponent*> components;
 
-	//GameComponent* m_componnet;
-	//GameObject* m_gameObject;
-	Transform transform;
+	Transform m_transform;
 };
 
