@@ -10,29 +10,14 @@
 struct Camera : public gameComponent
 {
 public:
-	Camera(/*const glm::vec3& pos, */float fov, float aspect, float zNear, float zFar)
+	Camera(float fov, float aspect, float zNear, float zFar)
 	{
-		/*this->pos = pos;
-		this->forward = glm::vec3(0.0f, 0.0f, 1.0f);
-		this->up = glm::vec3(0.0f, 1.0f, 0.0f);*/
 		this->projection = glm::perspective(fov, aspect, zNear, zFar);
-
 	}
 
-	/*inline glm::vec3 getForward() const
-	{
-		return forward;
-	}
-
-	inline glm::vec3 getPos() const
-	{
-		return pos;
-	}
-*/
 	inline glm::mat4 GetViewProjection() const
 	{
 		return projection * glm::lookAt(GetTransform().GetPos(), GetTransform().GetPos() + GetTransform().GetForward(), GetTransform().GetUp());
-		//return projection * glm::lookAt(pos, pos + forward, up);
 	} 
 
 	bool mouseLocked = false;
@@ -62,13 +47,11 @@ public:
 			if (rotY)
 			{
 				GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(-deltaPos.x * sensitivity), yAxis)));
-				//rotateY(glm::radians(-deltaPos.x * sensitivity));
 			}
 				
 			if (rotX)
 			{
 				GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(deltaPos.y * sensitivity), GetTransform().GetRight())));
-				//rotateX(glm::radians(deltaPos.y * sensitivity * 1.5f));
 			}
 				
 
@@ -109,58 +92,12 @@ public:
 		if (input.GetKey(input.KEY_RIGHT))
 			rotateY(-rotAmt);*/
 
-
 	}
 
-	void move(glm::fvec3 dir, float amt){
-
+	void move(glm::fvec3 dir, float amt)
+	{
 		GetTransform().SetPos(GetTransform().GetPos() + (dir * amt));
-		//pos = pos + (dir*amt);
-
 	}
-	
-	/*glm::fvec3 getLeft(){
-
-		glm::fvec3 left = glm::cross(up, forward);
-		glm::normalize(left);
-		return left;
-
-	}
-
-	glm::fvec3 getRight(){
-
-		glm::fvec3 right = glm::cross(forward, up);
-		glm::normalize(right);
-		return right;
-
-	}
-
-	void Camera::rotateX(float angle){
-
-		glm::fvec3 hAxis = glm::cross(yAxis, forward);
-		glm::normalize(hAxis);
-
-		forward = glm::vec3((glm::rotate(angle, hAxis) * glm::fvec4(forward, 1.0)));
-		glm::normalize(forward);
-
-		up = glm::cross(forward, hAxis);
-		glm::normalize(up);
-
-	}
-
-	void Camera::rotateY(float angle){
-
-		glm::fvec3 hAxis = glm::cross(yAxis, forward);
-		glm::normalize(hAxis);
-
-		forward = glm::vec3((glm::rotate(angle, yAxis) * glm::fvec4(forward, 1.0)));
-		glm::normalize(forward);
-
-		up = glm::cross(forward, hAxis);
-		glm::normalize(up);
-
-		}
-*/
 	
 	const glm::fvec3 yAxis = glm::fvec3(0, 1, 0);
 
@@ -169,8 +106,5 @@ public:
 protected:
 private:
 	glm::mat4 projection;
-	//glm::vec3 pos;
-	//glm::vec3 forward;
-	//glm::vec3 up;
 };
 

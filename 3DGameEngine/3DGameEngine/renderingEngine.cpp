@@ -7,12 +7,7 @@
 #include <GL/glew.h>
 
 renderingEngine::renderingEngine():
-//m_mainCamera(glm::vec3(0.0f, 0.0f, -10.0f), 70.0f, (float)Window::getWidth() / (float)Window::getHeight(), 0.1f, 1000.0f),
 m_ambientLight(0.2f, 0.2f, 0.2f)
-//m_activeLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.2f)
-//m_activeDirectionalLight(baseLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.2f), glm::fvec3(0.5f, 0.0f, -0.5f)),
-//m_activePointLight(baseLight(glm::fvec3(0.0f, 1.0f, 0.0f), 0.4f), Attenuation(0, 0, 1), glm::fvec3(0.0f, 1.0f, -0.5f), 10)
-//m_spotLight(pointLight(baseLight(glm::fvec3(1, 1, 0), 0.8f), Attenuation(0, 0, 0.5f), glm::fvec3(-0.5, -0.8, -0.5), 30), glm::normalize(glm::fvec3(0, 1, 0)), 0.8f)
 {
 	std::cout << getOpenGLVersion() << std::endl;
 

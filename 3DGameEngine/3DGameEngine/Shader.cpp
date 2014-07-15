@@ -99,8 +99,6 @@ void Shader::Update(const Transform& transform, const Material& material, render
 	
 	glm::mat4 Normal = transform.GetModel();
 	glm::mat4 model = renderingEngine->GetMainCamera().GetViewProjection() * Normal;
-	//glm::mat4 model = transform.GetProjection(renderingEngine->GetMainCamera());
-	//glm::vec3 eyePos = transform.GetCameraPos(renderingEngine->GetMainCamera());
 	glm::vec3 eyePos = renderingEngine->GetMainCamera().GetTransform().GetPos();
 	glm::vec3 ambient = renderingEngine->GetAmbientLight();
 

@@ -20,11 +20,8 @@ public:
 	void input(const Input& input, float delta);
 
 	inline Camera& GetMainCamera() { return *m_mainCamera; }
-	/*inline glm::fvec3& GetMainCameraPos() { return m_mainCamera->getPos(); }
-	inline glm::fvec3& GetMainCameraForward() { return m_mainCamera->getForward(); }*/
 	inline glm::fvec3& GetAmbientLight() { return m_ambientLight; }
 	inline baseLight* GetActiveLight() { return m_activeLight; }
-	//inline void SetMainCamera(const Camera& camera) { m_mainCamera = camera; }
 
 	inline void AddLight(baseLight* light) { m_lights.push_back(light); }
 	inline void AddCamera(Camera* camera) { m_mainCamera = camera; }

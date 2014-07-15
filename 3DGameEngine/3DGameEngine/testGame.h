@@ -16,6 +16,7 @@ private:
 	void operator=(const TestGame& other) {}
 
 	gameObject* m_planeObject;
+	gameObject* m_planeObject2;
 	gameObject* m_dirLightObj1;
 	directionalLight* dirLight1;
 	directionalLight* dirLight2;
@@ -32,5 +33,6 @@ private:
 	Material m_material;
 	Texture* m_texture;
 	meshRenderer* m_meshRenderer;
+	meshRenderer* m_meshRenderer2;
 };
 

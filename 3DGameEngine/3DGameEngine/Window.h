@@ -36,8 +36,6 @@ private:
 	static int			m_height;
 	static std::string	m_title;
 
-	//Check if window is 'X'ed
-	//bool m_isClosed;
 };
 
 
