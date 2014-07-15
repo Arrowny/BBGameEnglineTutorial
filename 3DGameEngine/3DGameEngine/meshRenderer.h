@@ -13,10 +13,10 @@ public:
 		m_material = &material;
 	}
 
-	virtual void render(const Transform& transform, Shader* shader, renderingEngine* renderingEngine)
+	virtual void render(Shader* shader, renderingEngine* renderingEngine)
 	{
 		shader->Bind();
-		shader->Update(transform, *m_material, renderingEngine);
+		shader->Update(GetTransform(), *m_material, renderingEngine);
 		m_material->texture->Bind(0);
 		m_mesh->Draw();
 	}

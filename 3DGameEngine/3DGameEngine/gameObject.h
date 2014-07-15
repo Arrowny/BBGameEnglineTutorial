@@ -1,9 +1,10 @@
 #pragma once
 
 #include <vector>
-#include "gameComponent.h"
 #include "Transform.h"
 
+class gameComponent;
+class Shader;
 class renderingEngine;
 
 class gameObject
@@ -11,8 +12,8 @@ class gameObject
 public:
 	gameObject() {};
 
-	void AddChild(gameObject& child);
-	void AddComponent(gameComponent* component);
+	gameObject* AddChild(gameObject* child);
+	gameObject* AddComponent(gameComponent* component);
 
 	void input(float delta);
 	void update(float delta);

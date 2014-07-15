@@ -24,40 +24,42 @@ void TestGame::init(){
 
 	glm::fvec4 baseColor(1.0f, 1.0f, 1.0f, 1.0f);
 
-	m_planeObject = gameObject();
-	m_dirLightObj1 = gameObject();
-	m_pLightObj1 = gameObject();
-	m_sLightObj1 = gameObject();
+	m_planeObject = new gameObject();
+	m_dirLightObj1 = new gameObject();
+	m_pLightObj1 = new gameObject();
+	m_sLightObj1 = new gameObject();
 	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
 	m_mesh = new Mesh("./res/triforce.obj");
 	m_texture = new Texture("./res/colour.jpg");
 	m_material = Material(m_texture, baseColor, 1, 36);
 
 	m_meshRenderer = new meshRenderer(*m_mesh, m_material);
-	m_planeObject.AddComponent(m_meshRenderer);
+	m_planeObject->AddComponent(m_meshRenderer);
 
 	dirLight1 = new directionalLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.2f, glm::fvec3(0.1f, 0.0f, -0.5f));
 	dirLight2 = new directionalLight(glm::fvec3(0.0f, 0.0f, 1.0f), 0.2f, glm::fvec3(-0.1f, 0.0f, -0.5f));
 	dirLight3 = new directionalLight(glm::fvec3(0.0f, 1.0f, 0.0f), 0.2f, glm::fvec3(0.0f, 0.1f, -0.5f));
-	m_dirLightObj1.AddComponent(dirLight1);
-	m_dirLightObj1.AddComponent(dirLight2);
-	m_dirLightObj1.AddComponent(dirLight3);
+	m_dirLightObj1->AddComponent(dirLight1);
+	m_dirLightObj1->AddComponent(dirLight2);
+	m_dirLightObj1->AddComponent(dirLight3);
 
-	pLight1 = new pointLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.4f, Attenuation(0, 0, 1), glm::fvec3(0.0f, 1.0f, -0.5f), 10);
-	pLight2 = new pointLight(glm::fvec3(0.0f, 1.0f, 0.0f), 0.4f, Attenuation(0, 0, 1), glm::fvec3(0.5f, 0.0f, -0.5f), 10);
-	pLight3 = new pointLight(glm::fvec3(0.0f, 0.0f, 1.0f), 0.4f, Attenuation(0, 0, 1), glm::fvec3(-0.5f, 0.0f, -0.5f), 10);
-	m_pLightObj1.AddComponent(pLight1);
-	m_pLightObj1.AddComponent(pLight2);
-	m_pLightObj1.AddComponent(pLight3);
+	pLight1 = new pointLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.4f, Attenuation(0, 0, 1));
+	pLight2 = new pointLight(glm::fvec3(0.0f, 1.0f, 0.0f), 0.4f, Attenuation(0, 0, 1));
+	pLight3 = new pointLight(glm::fvec3(0.0f, 0.0f, 1.0f), 0.4f, Attenuation(0, 0, 1));
+	m_pLightObj1->AddComponent(pLight1);
+	m_pLightObj1->AddComponent(pLight2);
+	m_pLightObj1->AddComponent(pLight3);
+	m_pLightObj1->GetTransform().SetPos(glm::fvec3(0, 1.5, -0.5));
 
-	sLight1 = new spotLight(glm::fvec3(1, 1, 1), 0.8f, Attenuation(0, 0, 0.5f), glm::fvec3(-1.0, -1.2, -0.5), 30, glm::normalize(glm::fvec3(0, 1, 0)), 0.8f);
-	sLight2 = new spotLight(glm::fvec3(1, 1, 1), 0.8f, Attenuation(0, 0, 0.5f), glm::fvec3(1.0, -1.2, -0.5), 30, glm::normalize(glm::fvec3(0, 1, 0)), 0.8f);
-	m_pLightObj1.AddComponent(sLight1);
-	m_pLightObj1.AddComponent(sLight2);
+	sLight1 = new spotLight(glm::fvec3(1, 1, 1), 0.8f, Attenuation(0, 0, 0.5f), glm::normalize(glm::fvec3(0, 1, 0)), 0.8f);
+	sLight2 = new spotLight(glm::fvec3(1, 1, 1), 0.8f, Attenuation(0, 0, 0.5f), glm::normalize(glm::fvec3(0, 1, 0)), 0.8f);
+	m_sLightObj1->AddComponent(sLight1);
+	m_sLightObj1->AddComponent(sLight2);
+	m_sLightObj1->GetTransform().SetPos(glm::fvec3(1, -1, -0.5));
 
-	m_root.AddChild(m_planeObject);
-	m_root.AddChild(m_dirLightObj1);
-	m_root.AddChild(m_pLightObj1);
-	m_root.AddChild(m_sLightObj1);
+	GetRoot().AddChild(m_planeObject);
+	GetRoot().AddChild(m_dirLightObj1);
+	GetRoot().AddChild(m_pLightObj1);
+	GetRoot().AddChild(m_sLightObj1);
 
 }

@@ -48,7 +48,7 @@ void ForwardSpot::UpdateUniforms(const Transform& transform, const Material& mat
 	spotLight sLight = *(spotLight*)renderingEngine->GetActiveLight();
 
 	glm::vec3 spotColor = sLight.m_color;
-	glm::vec3 spotPos = sLight.position;
+	glm::vec3 spotPos = sLight.GetTransform().GetPos();
 	glm::vec3 spotDir = sLight.direction;
 
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
