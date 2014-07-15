@@ -21,7 +21,7 @@ public:
 protected:
 private:
 	Mesh* m_mesh;
-	Shader* m_shader;
+	//Shader* m_shader;
 	//Transform m_transform;
 	Camera m_camera;
 	Material m_material;

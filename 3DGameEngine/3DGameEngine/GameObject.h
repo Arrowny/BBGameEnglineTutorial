@@ -13,7 +13,7 @@ public:
 
 	void input();
 	void update();
-	void render(Shader* m_shader, Camera* m_camera);
+	void render(Camera* m_camera);
 
 	void AddChild(GameObject& child);
 	void AddComponent(GameComponent* component);
