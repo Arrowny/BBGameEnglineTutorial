@@ -13,7 +13,7 @@ atten(atten)
 	float b = atten.m_linear;
 	float c = atten.m_constant - COLOR_DEPTH * intensity * glm::max(color.x, glm::max(color.y, color.z));
 
-	range = (float)((-b + sqrtf(b*b - 4 * a*c)) / (2 * a));
+	range = (float)((-b + sqrtf(b*b - 4.0f * a*c)) / (2.0f * a));
 
 	SetShader(ForwardPoint::GetInstance());
 }

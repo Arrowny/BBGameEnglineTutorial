@@ -111,7 +111,7 @@ void Shader::Update(const Transform& transform, const Material& material, render
 	glm::vec3 pointPos = pLight.GetTransform().GetPos();
 	glm::vec3 spotColor = sLight.m_color;
 	glm::vec3 spotPos = sLight.GetTransform().GetPos();
-	glm::vec3 spotDir = sLight.direction;
+	glm::vec3 spotDir = sLight.GetTransform().GetForward();
 
 	glUniform1f(m_uniforms[UNIFORM_U], (float)glm::abs(glm::sin(temp)));
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);

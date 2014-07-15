@@ -8,8 +8,7 @@ struct spotLight : public pointLight
 	glm::fvec3 direction;
 	float cutoff;
 
-	spotLight(const glm::fvec3& color = glm::fvec3(0, 0, 0), float intensity = 0, const Attenuation& atten = Attenuation(),
-			  const glm::fvec3& direction = glm::fvec3(), float cutoff = 0);
+	spotLight(const glm::fvec3& color = glm::fvec3(0, 0, 0), float intensity = 0, const Attenuation& atten = Attenuation(), float cutoff = 0);
 
 };
 
