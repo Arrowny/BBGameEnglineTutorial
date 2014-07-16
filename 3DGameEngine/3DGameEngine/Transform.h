@@ -27,29 +27,12 @@ public:
 		glm::mat4 scaleMat = glm::scale(m_scale);
 		glm::mat4 rotMat = glm::mat4_cast(m_rot);
 
-		/*if (m_initializedOld)
-		{
-			m_oldPos = m_pos;
-			m_oldRot = m_rot;
-			m_oldScale = m_scale;
-		}
-		*/
 		return GetParentMatrix() * posMat * rotMat * scaleMat;
 	}
 
 	inline bool HasChanged()
 	{
 
-		/*if (!m_initializedOld)
-		{
-		m_oldPos = m_pos;
-		m_oldRot = m_rot;
-		m_oldScale = m_scale;
-		m_initializedOld = true;
-
-		return true;
-		}
-		*/
 		if (m_parent != 0 && m_parent->HasChanged())
 		{
 			return true;

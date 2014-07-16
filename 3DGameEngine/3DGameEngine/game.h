@@ -18,7 +18,7 @@ public:
 
 	virtual void init() {};
 	void input(float delta);
-	void update(float delta);
+	virtual void update(float delta);
 	void render(renderingEngine* renderingEngine);
 	
 	inline gameObject& GetRoot() { return m_root; }

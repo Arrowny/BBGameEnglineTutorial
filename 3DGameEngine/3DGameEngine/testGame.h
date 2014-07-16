@@ -8,6 +8,7 @@ public:
 	TestGame() {}
 
 	virtual void init();
+	virtual void update(float delta);
 
 	virtual ~TestGame();
 protected:
@@ -17,6 +18,7 @@ private:
 
 	gameObject* m_planeObject;
 	gameObject* m_planeObject2;
+	gameObject* m_planeObject3;
 	gameObject* m_dirLightObj1;
 	directionalLight* dirLight1;
 	directionalLight* dirLight2;
@@ -34,5 +36,6 @@ private:
 	Texture* m_texture;
 	meshRenderer* m_meshRenderer;
 	meshRenderer* m_meshRenderer2;
+	meshRenderer* m_meshRenderer3;
 };
 

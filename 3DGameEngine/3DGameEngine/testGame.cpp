@@ -26,6 +26,7 @@ void TestGame::init(){
 
 	m_planeObject = new gameObject();
 	m_planeObject2 = new gameObject();
+	m_planeObject3 = new gameObject();
 	m_dirLightObj1 = new gameObject();
 	m_pLightObj1 = new gameObject();
 	m_sLightObj1 = new gameObject();
@@ -39,33 +40,37 @@ void TestGame::init(){
 
 	m_meshRenderer = new meshRenderer(*m_mesh, m_material);
 	m_meshRenderer2 = new meshRenderer(*m_mesh, m_material);
+	m_meshRenderer3 = new meshRenderer(*m_mesh, m_material);
 	m_planeObject->AddComponent(m_meshRenderer);
 	m_planeObject2->AddComponent(m_meshRenderer2);
+	m_planeObject3->AddComponent(m_meshRenderer3);
+	m_planeObject->AddChild(m_planeObject2);
+	m_planeObject->AddChild(m_planeObject3);
 	m_planeObject->GetTransform().SetPos(glm::fvec3(0, 0, 5));
 	m_planeObject2->GetTransform().SetPos(glm::fvec3(-4, 0, 0));
-	m_planeObject->AddChild(m_planeObject2);
+	m_planeObject3->GetTransform().SetPos(glm::fvec3(-2, 4, 0));
 
-	dirLight1 = new directionalLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.2f);
+	dirLight1 = new directionalLight(glm::fvec3(1.0f, 1.0f, 1.0f), 0.2f);
 	dirLight2 = new directionalLight(glm::fvec3(0.0f, 0.0f, 1.0f), 0.2f);
 	dirLight3 = new directionalLight(glm::fvec3(0.0f, 1.0f, 0.0f), 0.2f);
 	m_dirLightObj1->AddComponent(dirLight1);
-	m_dirLightObj1->AddComponent(dirLight2);
-	m_dirLightObj1->AddComponent(dirLight3);
+	//m_dirLightObj1->AddComponent(dirLight2);
+	//m_dirLightObj1->AddComponent(dirLight3);
 	m_dirLightObj1->GetTransform().SetRot(glm::normalize(glm::quat((float)-0.1f, 0.0f, 1.0f, 0.0f)));
 
-	pLight1 = new pointLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.2f, Attenuation(0, 0, 1));
+	pLight1 = new pointLight(glm::fvec3(1.0f, 1.0f, 1.0f), 0.2f, Attenuation(0, 0, 1));
 	pLight2 = new pointLight(glm::fvec3(0.0f, 1.0f, 0.0f), 0.2f, Attenuation(0, 0, 1));
 	pLight3 = new pointLight(glm::fvec3(0.0f, 0.0f, 1.0f), 0.2f, Attenuation(0, 0, 1));
 	m_pLightObj1->AddComponent(pLight1);
-	m_pLightObj1->AddComponent(pLight2);
-	m_pLightObj1->AddComponent(pLight3);
+	//m_pLightObj1->AddComponent(pLight2);
+	//m_pLightObj1->AddComponent(pLight3);
 	m_pLightObj1->GetTransform().SetPos(glm::fvec3(0, 1.5, 4.5));
 
 	sLight1 = new spotLight(glm::fvec3(1, 1, 1), 0.4f, Attenuation(0, 0, 0.5f), 0.8f);
 	sLight2 = new spotLight(glm::fvec3(1, 1, 1), 0.4f, Attenuation(0, 0, 0.5f), 0.8f);
 	m_sLightObj1->AddComponent(sLight1);
-	m_sLightObj1->AddComponent(sLight2);
-	m_sLightObj1->GetTransform().SetPos(glm::fvec3(1, -1.0, 4.7));
+	//m_sLightObj1->AddComponent(sLight2);
+	m_sLightObj1->GetTransform().SetPos(glm::fvec3(0, -1.0, 4.7));
 	m_sLightObj1->GetTransform().SetRot(glm::quat(glm::radians(90.0f), 0.5, 0, 0));
 
 	AddToScene(m_planeObject);
@@ -77,4 +82,16 @@ void TestGame::init(){
 	//m_planeObject2->AddChild((new gameObject())->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f)));
 	AddToScene((new gameObject())->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f)));
 
+}
+
+void TestGame::update(float delta){
+
+	float sinCounter = sinf(counter);
+	float cosCounter = cosf(counter);
+
+	m_pLightObj1->GetTransform().SetPos(glm::vec3(sinCounter, 1.5, 4.5));
+	m_sLightObj1->GetTransform().SetPos(glm::vec3(sinCounter * 2 - 2, -1.0, 4.7));
+	m_root.update(delta);
+
+	counter += 0.0003f;
 }

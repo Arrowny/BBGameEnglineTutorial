@@ -17,12 +17,6 @@ public:
 
 	inline glm::mat4 GetViewProjection() const
 	{
-		/*glm::mat4 cameraRotation = glm::mat4_cast(glm::conjugate(GetTransform().GetTransformedRot()));
-		glm::mat4 cameraTranslation;
-
-		cameraTranslation = glm::translate(GetTransform().GetTransformedPos());
-
-		return projection * cameraRotation * cameraTranslation;*/
 		return projection * glm::lookAt(GetTransform().GetTransformedPos(), GetTransform().GetTransformedPos() + GetTransform().GetForward(), GetTransform().GetUp());
 	} 
 
