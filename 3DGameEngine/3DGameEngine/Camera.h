@@ -30,8 +30,7 @@ public:
 
 	void input(const Input& input, float delta)
 	{
-		
-		float sensitivity = -5.0f;
+		float sensitivity = 5.0f;
 		float movAmt = (float)(10 * delta);
 		//float rotAmt = (float)(200 * Time::getDelta());
 
@@ -52,12 +51,12 @@ public:
 
 			if (rotY)
 			{
-				GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(-deltaPos.x * sensitivity), yAxis)));
+				GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(deltaPos.x * sensitivity), yAxis)));
 			}
 				
 			if (rotX)
 			{
-				GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(deltaPos.y * sensitivity), GetTransform().GetRight())));
+				GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(-deltaPos.y * sensitivity), GetTransform().GetRight())));
 			}
 				
 

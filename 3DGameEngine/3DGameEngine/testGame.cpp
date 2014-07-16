@@ -38,7 +38,6 @@ void TestGame::init(){
 	m_meshRenderer2 = new meshRenderer(*m_mesh, m_material);
 	m_planeObject->AddComponent(m_meshRenderer);
 	m_planeObject2->AddComponent(m_meshRenderer2);
-	//m_planeObject->GetTransform().SetRot(glm::normalize(glm::quat(glm::radians(-90.0f), 0.0f, 1.0f, 0.0f)));
 	m_planeObject->GetTransform().SetPos(glm::fvec3(0, 0, 5));
 	m_planeObject2->GetTransform().SetPos(glm::fvec3(-4, 0, 0));
 
@@ -49,7 +48,6 @@ void TestGame::init(){
 	m_dirLightObj1->AddComponent(dirLight2);
 	m_dirLightObj1->AddComponent(dirLight3);
 	m_dirLightObj1->GetTransform().SetRot(glm::normalize(glm::quat((float)-0.1f, 0.0f, 1.0f, 0.0f)));
-	
 
 	pLight1 = new pointLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.2f, Attenuation(0, 0, 1));
 	pLight2 = new pointLight(glm::fvec3(0.0f, 1.0f, 0.0f), 0.2f, Attenuation(0, 0, 1));
@@ -67,12 +65,13 @@ void TestGame::init(){
 	m_sLightObj1->GetTransform().SetRot(glm::quat(glm::radians(90.0f), 0.5, 0, 0));
 
 	m_planeObject->AddChild(m_planeObject2);
-	m_planeObject2->AddChild((new gameObject())->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f)));
 	GetRoot().AddChild(m_planeObject);
 	GetRoot().AddChild(m_dirLightObj1);
 	GetRoot().AddChild(m_pLightObj1);
 	GetRoot().AddChild(m_sLightObj1);
 
-	//GetRoot().AddChild((new gameObject())->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f)));
+	//m_planeObject->GetTransform().SetRot(glm::normalize(glm::quat(glm::radians(-90.0f), 0.0f, 1.0f, 0.0f)));
+	//m_planeObject2->AddChild((new gameObject())->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f)));
+	GetRoot().AddChild((new gameObject())->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f)));
 
 }

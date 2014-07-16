@@ -27,14 +27,67 @@ public:
 		glm::mat4 scaleMat = glm::scale(m_scale);
 		glm::mat4 rotMat = glm::mat4_cast(m_rot);
 
-		if (m_initializedOld)
+		/*if (m_initializedOld)
 		{
 			m_oldPos = m_pos;
 			m_oldRot = m_rot;
 			m_oldScale = m_scale;
 		}
-		
+		*/
 		return GetParentMatrix() * posMat * rotMat * scaleMat;
+	}
+
+	inline bool HasChanged()
+	{
+
+		/*if (!m_initializedOld)
+		{
+		m_oldPos = m_pos;
+		m_oldRot = m_rot;
+		m_oldScale = m_scale;
+		m_initializedOld = true;
+
+		return true;
+		}
+		*/
+		if (m_parent != 0 && m_parent->HasChanged())
+		{
+			return true;
+		}
+
+		if (m_pos != m_oldPos)
+		{
+			return true;
+		}
+
+		if (m_rot != m_oldRot)
+		{
+			return true;
+		}
+
+		if (m_scale != m_scale)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	inline void Update()
+	{
+		if (m_initializedOld)
+		{
+			m_oldPos = m_pos;
+			m_oldRot = -m_rot;
+			m_oldScale = m_scale;
+		}
+		else
+		{
+			m_oldPos = m_pos + glm::fvec3(1.0f, 1.0f, 1.0f);
+			m_oldRot = m_rot * 0.5f;
+			m_oldScale = glm::vec3(m_scale.x + 1.0f, m_scale.y + 1.0f, m_scale.z + 1.0f);
+			m_initializedOld = true;
+		}
 	}
 
 	inline glm::vec3& GetPos() { return m_pos; }
@@ -68,26 +121,9 @@ public:
 		return parentRot * m_rot;
 	}
 
-	inline void Update()
-	{
-		if (m_initializedOld)
-		{
-			m_oldPos = m_pos;
-			m_oldRot = m_rot;
-			m_oldScale = m_scale;
-		}
-		else
-		{
-			m_oldPos = m_pos + glm::fvec3(1, 1, 1);
-			m_oldRot = m_rot * 0.5f;
-			m_oldScale = glm::vec3(m_scale.x + 1, m_scale.y + 1, m_scale.z + 1);
-			m_initializedOld = true;
-		}
-	}
-
 	inline glm::fvec3 GetForward() const
 	{
-		/*glm::quat f_rot = GetTransformedRot();
+		/*glm::quat f_rot = glm::normalize(glm::conjugate(m_rot));
 
 		return glm::fvec3(2.0f * (f_rot.x * f_rot.z - f_rot.w * f_rot.y),
 			2.0f * (f_rot.y * f_rot.z + f_rot.w * f_rot.x),
@@ -117,7 +153,7 @@ public:
 
 	inline glm::fvec3 GetRight() const
 	{
-		/*glm::quat r_rot = GetTransformedRot();
+		/*glm::quat r_rot = glm::normalize(glm::conjugate(m_rot));
 
 		return glm::fvec3(1.0f - 2.0f * (r_rot.y*r_rot.y + r_rot.z*r_rot.z),
 						  2.0f * (r_rot.x*r_rot.y - r_rot.w*r_rot.z),
@@ -128,21 +164,6 @@ public:
 						  2.0f * (m_rot.x*m_rot.z + m_rot.w*m_rot.y));
 
 		/*return glm::rotate(m_rot, glm::vec3(1, 0, 0));*/
-	}
-
-	inline glm::fvec3 GetTransformedRight() const
-	{
-		/*glm::quat r_rot = GetTransformedRot();
-
-		return glm::fvec3(1.0f - 2.0f * (r_rot.y*r_rot.y + r_rot.z*r_rot.z),
-		2.0f * (r_rot.x*r_rot.y - r_rot.w*r_rot.z),
-		2.0f * (r_rot.x*r_rot.z + r_rot.w*r_rot.y));*/
-
-		return glm::fvec3(1.0f - 2.0f * (m_rot.y*m_rot.y + m_rot.z*m_rot.z),
-		2.0f * (m_rot.x*m_rot.y - m_rot.w*m_rot.z),
-		2.0f * (m_rot.x*m_rot.z + m_rot.w*m_rot.y));
-
-		/*return glm::rotate(GetTransformedRot(), glm::vec3(1, 0, 0));*/
 	}
 
 	inline glm::fvec3 GetUp() const
@@ -169,42 +190,6 @@ public:
 
 	//return ret;
 	//}
-
-	inline bool Transform::HasChanged()
-	{
-
-		if (!m_initializedOld)
-		{
-			m_oldPos = m_pos;
-			m_oldRot = m_rot;
-			m_oldScale = m_scale;
-			m_initializedOld = true;
-
-			return true;
-		}
-
-		if (m_parent != 0 && m_parent->HasChanged())
-		{
-			return true;
-		}
-
-		if (m_pos != m_oldPos)
-		{
-			return true;
-		}
-
-		if (m_rot != m_oldRot)
-		{
-			return true;
-		}
-			
-		if (m_scale != m_scale)
-		{
-			return true;
-		}
-			
-		return false;
-	}
 
 protected:
 private:

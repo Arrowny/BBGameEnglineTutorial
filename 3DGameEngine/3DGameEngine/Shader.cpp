@@ -118,7 +118,7 @@ void Shader::Update(const Transform& transform, const Material& material, render
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
 	glUniformMatrix4fv(m_uniforms[NORMAL_U], 1, GL_FALSE, &Normal[0][0]);
 	glUniform3f(m_uniforms[LIGHTDIR_U], 0.0f, 1.0f, 1.0f);
-	glUniform3f(m_uniforms[AMBIENTL_U], (float)renderingEngine->GetAmbientLight()[0], (float)renderingEngine->GetAmbientLight()[1], (float)renderingEngine->GetAmbientLight()[2]);
+	glUniform3fv(m_uniforms[AMBIENTL_U], 1, &ambient[0]);
 	glUniform4fv(m_uniforms[COLOR_U], 1, &material.color[0]);
 	glUniform1f(m_uniforms[SPECI_U], (float)material.specularIntensity);
 	glUniform1f(m_uniforms[SPECP_U], (float)material.specularPower);

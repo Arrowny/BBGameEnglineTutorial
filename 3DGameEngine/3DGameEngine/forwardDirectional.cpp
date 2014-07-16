@@ -36,7 +36,6 @@ void ForwardDirectional::UpdateUniforms(const Transform& transform, const Materi
 	glm::mat4 Normal = transform.GetModel();
 	glm::mat4 model = renderingEngine->GetMainCamera().GetViewProjection() * Normal;
 	glm::vec3 eyePos = renderingEngine->GetMainCamera().GetTransform().GetTransformedPos();
-	glm::vec3 ambient = renderingEngine->GetAmbientLight();
 
 	directionalLight dirLight = *(directionalLight*)renderingEngine->GetActiveLight();
 
