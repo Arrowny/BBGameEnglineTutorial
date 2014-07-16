@@ -19,13 +19,14 @@ public:
 	virtual void init() {};
 	void input(float delta);
 	void update(float delta);
-	void render();
-
+	void render(renderingEngine* renderingEngine);
+	
 	inline gameObject& GetRoot() { return m_root; }
 
 	float counter = 0.0f;
 
 protected:
+	void AddToScene(gameObject* child) { m_root.AddChild(child); }
 
 	Mesh*			m_mesh;
 	Shader*			m_shader;

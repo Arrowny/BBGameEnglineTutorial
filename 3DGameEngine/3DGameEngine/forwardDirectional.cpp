@@ -36,6 +36,7 @@ void ForwardDirectional::UpdateUniforms(const Transform& transform, const Materi
 	glm::mat4 Normal = transform.GetModel();
 	glm::mat4 model = renderingEngine->GetMainCamera().GetViewProjection() * Normal;
 	glm::vec3 eyePos = renderingEngine->GetMainCamera().GetTransform().GetTransformedPos();
+	material.GetTexture("diffuse")->Bind(0);
 
 	directionalLight dirLight = *(directionalLight*)renderingEngine->GetActiveLight();
 
@@ -45,8 +46,8 @@ void ForwardDirectional::UpdateUniforms(const Transform& transform, const Materi
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
 	glUniformMatrix4fv(m_uniforms[NORMAL_U], 1, GL_FALSE, &Normal[0][0]);
 
-	glUniform1f(m_uniforms[SPECI_U], (float)material.specularIntensity);
-	glUniform1f(m_uniforms[SPECP_U], (float)material.specularPower);
+	glUniform1f(m_uniforms[SPECI_U], (float)material.GetFloat("specularIntensity"));
+	glUniform1f(m_uniforms[SPECP_U], (float)material.GetFloat("specularPower"));
 	glUniform3fv(m_uniforms[EYEPOS_U], 1, &eyePos[0]);
 	glUniform3fv(m_uniforms[DIRLIGHTC_U], 1, &dirColor[0]);
 	glUniform1f(m_uniforms[DIRLIGHTI_U], (float)dirLight.m_intensity);

@@ -107,7 +107,7 @@ void coreEngine::Run(){
 
 void coreEngine::Render()
 {
-	m_renderingEngine->Render(&m_game->GetRoot());
+	m_game->render(m_renderingEngine);
 	m_window->swapBuffers();
 }
 

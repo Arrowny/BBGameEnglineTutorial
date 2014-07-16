@@ -2,7 +2,6 @@
 
 #include "gameComponent.h"
 #include "Mesh.h"
-#include "Shader.h"
 
 class meshRenderer : public gameComponent
 {
@@ -17,7 +16,6 @@ public:
 	{
 		shader->Bind();
 		shader->Update(GetTransform(), *m_material, renderingEngine);
-		m_material->texture->Bind(0);
 		m_mesh->Draw();
 	}
 

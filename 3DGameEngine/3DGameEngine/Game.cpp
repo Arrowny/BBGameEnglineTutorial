@@ -32,3 +32,8 @@ void Game::update(float delta){
 
 	counter += 0.0003f;
 }
+
+void Game::render(renderingEngine* renderingEngine)
+{
+	renderingEngine->Render(&m_root);
+}

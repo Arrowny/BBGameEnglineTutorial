@@ -26,13 +26,13 @@ ForwardPoint::ForwardPoint(const std::string& fileName)
 	m_uniforms[SPECP_U] = glGetUniformLocation(m_program, "specularPower");
 	m_uniforms[EYEPOS_U] = glGetUniformLocation(m_program, "eyePos");
 
-	m_uniforms[POINTLBC_1] = glGetUniformLocation(m_program, "pointLight.base.color");
-	m_uniforms[POINTLBI_1] = glGetUniformLocation(m_program, "pointLight.base.intensity");
-	m_uniforms[POINTLAC_1] = glGetUniformLocation(m_program, "pointLight.atten.constant");
-	m_uniforms[POINTLAL_1] = glGetUniformLocation(m_program, "pointLight.atten.linear");
-	m_uniforms[POINTLAE_1] = glGetUniformLocation(m_program, "pointLight.atten.exponent");
-	m_uniforms[POINTLP_1] = glGetUniformLocation(m_program, "pointLight.position");
-	m_uniforms[POINTLR_1] = glGetUniformLocation(m_program, "pointLight.range");
+	m_uniforms[POINTLBC_U] = glGetUniformLocation(m_program, "pointLight.base.color");
+	m_uniforms[POINTLBI_U] = glGetUniformLocation(m_program, "pointLight.base.intensity");
+	m_uniforms[POINTLAC_U] = glGetUniformLocation(m_program, "pointLight.atten.constant");
+	m_uniforms[POINTLAL_U] = glGetUniformLocation(m_program, "pointLight.atten.linear");
+	m_uniforms[POINTLAE_U] = glGetUniformLocation(m_program, "pointLight.atten.exponent");
+	m_uniforms[POINTLP_U] = glGetUniformLocation(m_program, "pointLight.position");
+	m_uniforms[POINTLR_U] = glGetUniformLocation(m_program, "pointLight.range");
 
 }
 
@@ -42,6 +42,7 @@ void ForwardPoint::UpdateUniforms(const Transform& transform, const Material& ma
 	glm::mat4 model = renderingEngine->GetMainCamera().GetViewProjection() * Normal;
 	glm::vec3 eyePos = renderingEngine->GetMainCamera().GetTransform().GetTransformedPos();
 	glm::vec3 ambient = renderingEngine->GetAmbientLight();
+	material.GetTexture("diffuse")->Bind(0);
 
 	pointLight pLight = *(pointLight*)renderingEngine->GetActiveLight();
 
@@ -51,17 +52,17 @@ void ForwardPoint::UpdateUniforms(const Transform& transform, const Material& ma
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
 	glUniformMatrix4fv(m_uniforms[NORMAL_U], 1, GL_FALSE, &Normal[0][0]);
 
-	glUniform1f(m_uniforms[SPECI_U], (float)material.specularIntensity);
-	glUniform1f(m_uniforms[SPECP_U], (float)material.specularPower);
+	glUniform1f(m_uniforms[SPECI_U], (float)material.GetFloat("specularIntensity"));
+	glUniform1f(m_uniforms[SPECP_U], (float)material.GetFloat("specularPower"));
 	glUniform3fv(m_uniforms[EYEPOS_U], 1, &eyePos[0]);
 
-	glUniform3fv(m_uniforms[POINTLBC_1], 1, &pointColor[0]);
-	glUniform3fv(m_uniforms[POINTLP_1], 1, &pointPos[0]);
-	glUniform1f(m_uniforms[POINTLBI_1], (float)pLight.m_intensity);
-	glUniform1f(m_uniforms[POINTLAC_1], (float)pLight.atten.m_constant);
-	glUniform1f(m_uniforms[POINTLAE_1], (float)pLight.atten.m_exponent);
-	glUniform1f(m_uniforms[POINTLAL_1], (float)pLight.atten.m_linear);
-	glUniform1f(m_uniforms[POINTLR_1], (float)pLight.range);
+	glUniform3fv(m_uniforms[POINTLBC_U], 1, &pointColor[0]);
+	glUniform3fv(m_uniforms[POINTLP_U], 1, &pointPos[0]);
+	glUniform1f(m_uniforms[POINTLBI_U], (float)pLight.m_intensity);
+	glUniform1f(m_uniforms[POINTLAC_U], (float)pLight.atten.m_constant);
+	glUniform1f(m_uniforms[POINTLAE_U], (float)pLight.atten.m_exponent);
+	glUniform1f(m_uniforms[POINTLAL_U], (float)pLight.atten.m_linear);
+	glUniform1f(m_uniforms[POINTLR_U], (float)pLight.range);
 
 }
 

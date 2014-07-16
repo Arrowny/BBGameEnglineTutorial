@@ -26,8 +26,10 @@ void ForwardAmbient::UpdateUniforms(const Transform& transform, const Material& 
 {
 	glm::mat4 Normal = transform.GetModel();
 	glm::mat4 model = renderingEngine->GetMainCamera().GetViewProjection() * Normal;
-	glm::vec3 eyePos = renderingEngine->GetMainCamera().GetTransform().GetPos();
+	glm::vec3 eyePos = renderingEngine->GetMainCamera().GetTransform().GetTransformedPos();
+	glm::vec3 ambient = renderingEngine->GetAmbientLight();
+	material.GetTexture("diffuse")->Bind(0);
 
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
-	glUniform3f(m_uniforms[AMBIENTL_U], (float)renderingEngine->GetAmbientLight()[0], (float)renderingEngine->GetAmbientLight()[1], (float)renderingEngine->GetAmbientLight()[2]);
+	glUniform3fv(m_uniforms[AMBIENTL_U], 1, &ambient[0]);
 }

@@ -13,8 +13,6 @@
 #include "spotLight.h"
 #include "renderingEngine.h"
 
-class renderingEngine;
-
 class Shader
 {
 public:
@@ -37,8 +35,6 @@ public:
 	virtual ~Shader();
 protected:
 	static const unsigned int NUM_SHADERS = 2;
-	static const unsigned int MAX_POINT_LIGHTS = 4;
-	static const unsigned int MAX_SPOT_LIGHTS = 4;
 
 	enum
 	{
@@ -48,38 +44,31 @@ protected:
 		LIGHTDIR_U,
 		COLOR_U,
 		AMBIENTL_U,
-		DIRLIGHTC_U,
-		DIRLIGHTI_U,
-		DIRLIGHTD_U,
 		SPECI_U,
 		SPECP_U,
 		EYEPOS_U,
 
-		POINTLBC_1,
-		POINTLBI_1,
-		POINTLAC_1,
-		POINTLAL_1,
-		POINTLAE_1,
-		POINTLP_1,
-		POINTLR_1,
+		DIRLIGHTC_U,
+		DIRLIGHTI_U,
+		DIRLIGHTD_U,
 
-		POINTLBC_2,
-		POINTLBI_2,
-		POINTLAC_2,
-		POINTLAL_2,
-		POINTLAE_2,
-		POINTLP_2,
-		POINTLR_2,
+		POINTLBC_U,
+		POINTLBI_U,
+		POINTLAC_U,
+		POINTLAL_U,
+		POINTLAE_U,
+		POINTLP_U,
+		POINTLR_U,
 
-		SPOTLBC_1,
-		SPOTLBI_1,
-		SPOTLAC_1,
-		SPOTLAL_1,
-		SPOTLAE_1,
-		SPOTLP_1,
-		SPOTLR_1,
-		SPOTLD_1,
-		SPOTLC_1,
+		SPOTLBC_U,
+		SPOTLBI_U,
+		SPOTLAC_U,
+		SPOTLAL_U,
+		SPOTLAE_U,
+		SPOTLP_U,
+		SPOTLR_U,
+		SPOTLD_U,
+		SPOTLC_U,
 
 		NUM_UNIFORMS
 	};
@@ -91,11 +80,6 @@ protected:
 	std::string LoadShader(const std::string& fileName);
 	void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
 	GLuint CreateShader(const std::string& text, unsigned int type);
-
-	static pointLight* m_pointLights;
-	static spotLight* m_spotLights;
-	static int m_numPointLights;
-	static int m_numSpotLights;
 
 private:
 	Shader(const Shader& other) {}

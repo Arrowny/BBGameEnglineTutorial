@@ -32,7 +32,10 @@ void TestGame::init(){
 	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
 	m_mesh = new Mesh("./res/triforce.obj");
 	m_texture = new Texture("./res/colour.jpg");
-	m_material = Material(m_texture, baseColor, 1, 36);
+	m_material = Material();
+	m_material.AddTexture("diffuse", m_texture);
+	m_material.AddFloat("specularIntensity", 1);
+	m_material.AddFloat("specularPower", 36);
 
 	m_meshRenderer = new meshRenderer(*m_mesh, m_material);
 	m_meshRenderer2 = new meshRenderer(*m_mesh, m_material);
@@ -40,6 +43,7 @@ void TestGame::init(){
 	m_planeObject2->AddComponent(m_meshRenderer2);
 	m_planeObject->GetTransform().SetPos(glm::fvec3(0, 0, 5));
 	m_planeObject2->GetTransform().SetPos(glm::fvec3(-4, 0, 0));
+	m_planeObject->AddChild(m_planeObject2);
 
 	dirLight1 = new directionalLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.2f);
 	dirLight2 = new directionalLight(glm::fvec3(0.0f, 0.0f, 1.0f), 0.2f);
@@ -64,14 +68,13 @@ void TestGame::init(){
 	m_sLightObj1->GetTransform().SetPos(glm::fvec3(1, -1.0, 4.7));
 	m_sLightObj1->GetTransform().SetRot(glm::quat(glm::radians(90.0f), 0.5, 0, 0));
 
-	m_planeObject->AddChild(m_planeObject2);
-	GetRoot().AddChild(m_planeObject);
-	GetRoot().AddChild(m_dirLightObj1);
-	GetRoot().AddChild(m_pLightObj1);
-	GetRoot().AddChild(m_sLightObj1);
+	AddToScene(m_planeObject);
+	AddToScene(m_dirLightObj1);
+	AddToScene(m_pLightObj1);
+	AddToScene(m_sLightObj1);
 
 	//m_planeObject->GetTransform().SetRot(glm::normalize(glm::quat(glm::radians(-90.0f), 0.0f, 1.0f, 0.0f)));
 	//m_planeObject2->AddChild((new gameObject())->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f)));
-	GetRoot().AddChild((new gameObject())->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f)));
+	AddToScene((new gameObject())->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f)));
 
 }
