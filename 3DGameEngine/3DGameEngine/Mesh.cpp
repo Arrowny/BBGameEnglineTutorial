@@ -45,7 +45,7 @@ Mesh::Mesh(Vertex* vertices, unsigned int numVertices, unsigned int* indices, un
 }
 void Mesh::CalcNormals(Vertex* vertices, unsigned int numVertices, IndexedModel& model)
 {
-	for (int i = 0; i < model.indices.size(); i += 3)
+	for (unsigned int i = 0; i < model.indices.size(); i += 3)
 	{
 		int i0 = model.indices[i];
 		int i1 = model.indices[i + 1];
@@ -61,7 +61,7 @@ void Mesh::CalcNormals(Vertex* vertices, unsigned int numVertices, IndexedModel&
 		vertices[i2].SetNormal(*vertices[i2].GetNormal() + normal);
 	}
 
-	for (int i = 0; i < numVertices; i++)
+	for (unsigned int i = 0; i < numVertices; i++)
 	{
 		vertices[i].SetNormal(glm::normalize(*vertices[i].GetNormal()));
 	}

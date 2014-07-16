@@ -2,7 +2,7 @@
 
 
 RenderingEngine::RenderingEngine():
-m_mainCamera(glm::vec3(0, 1, -4), 70.0f, (float)WindowParameter::width / (float)WindowParameter::height, 1.0f, 1000.0f)
+mainCamera(glm::vec3(0, 1, -4), 70.0f, (float)WindowParameter::width / (float)WindowParameter::height, 1.0f, 1000.0f)
 {
 
 	//glClearColor(2.0f, 1.5f, 0.0f, 0.5f);
@@ -14,8 +14,8 @@ m_mainCamera(glm::vec3(0, 1, -4), 70.0f, (float)WindowParameter::width / (float)
 	glEnable(GL_DEPTH_CLAMP);
 
 	//	glEnable(GL_FRAMEBUFFER_SRGB);// it is already rgb colors so we do not need to do sth to it
-	//Shader* basicShader = new Shader("./res/basicShader");
-	//m_camera = Camera(glm::vec3(0, 1, -4), 70.0f, (float)WindowParameter::width / (float)WindowParameter::height, 1.0f, 1000.0f);
+
+	//mainCamera = Camera(glm::vec3(0, 1, -4), 70.0f, (float)WindowParameter::width / (float)WindowParameter::height, 1.0f, 1000.0f);
 
 }
 
@@ -27,16 +27,11 @@ RenderingEngine::~RenderingEngine()
 void RenderingEngine::render(GameObject* object)
 {
 	
-	object->render(BasicShader::GetInstance(),&m_mainCamera);
+	object->render(BasicShader::GetInstance(),&mainCamera);
 }
 
-//void RenderingEngine::clearScreen(){
-//
-//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//
+
+//const GLubyte* RenderingEngine::getOpenGLVersion()
+//{
+//	return glGetString(GL_VERSION);
 //}
-
-const GLubyte* RenderingEngine::getOpenGLVersion()
-{
-	return glGetString(GL_VERSION);
-}

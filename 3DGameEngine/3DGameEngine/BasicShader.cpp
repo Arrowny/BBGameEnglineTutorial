@@ -35,11 +35,15 @@ BasicShader::~BasicShader()
 	glDeleteProgram(m_program);
 }
 
+
+
 void BasicShader::Update(Transform& transform, Camera& camera, Material& material)
 {
-	glm::mat4 model = camera.GetViewProjection() * transform.GetModel();
+	glm::mat4 worldMatrix = transform.GetModel();
+	glm::mat4 projectedMatrix = camera.GetViewProjection()* worldMatrix;
+	//glm::mat4 model = projectedMatrix * worldMatrix;
 
-	glUniformMatrix4fv(m_uniforms[TRANSFORM_P_U], 1, GL_FALSE, &model[0][0]);
-	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &transform.GetModel()[0][0]);
+	glUniformMatrix4fv(m_uniforms[TRANSFORM_P_U], 1, GL_FALSE, &projectedMatrix[0][0]);
+	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &worldMatrix[0][0]);
 
 }

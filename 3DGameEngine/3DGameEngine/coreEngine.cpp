@@ -1,12 +1,12 @@
 #include "coreEngine.h"
-#include "Window.h"
-#include "Timing.h"
-#include "Game.h"
-#include <stdio.h>
-#include <glm/glm.hpp>
-#include "Shader.h"
-#include "Mesh.h"
-#include "RenderingEngine.h"
+//#include "Window.h"
+//#include "Timing.h"
+//#include "Game.h"
+//#include <stdio.h>
+//#include <glm/glm.hpp>
+//#include "Shader.h"
+//#include "Mesh.h"
+//#include "RenderingEngine.h"
 
 coreEngine::coreEngine(Game* game, int width, int height, double frameRate) :
 m_game(game),
@@ -27,7 +27,7 @@ void coreEngine::CreateWindow(std::string title)
 {
 	m_window = new Window(width, height, title);
 	renderingEngine = new RenderingEngine();
-	std::cout << renderingEngine->getOpenGLVersion() << std::endl;
+	//std::cout << renderingEngine->getOpenGLVersion() << std::endl;
 }
 
 void coreEngine::Start()
@@ -97,7 +97,7 @@ void coreEngine::Run(){
 				Stop();
 			}
 
-			m_game->input(m_window->GetInput());
+			m_game->input(); //m_window->GetInput()
 			m_game->update();//m_frameTime
 
 			Time::setDelta(m_frameTime);		

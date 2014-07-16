@@ -1,9 +1,11 @@
 #pragma once
 #include <glm/glm.hpp>
 #include <vector>
-#include <algorithm> 
 #include "GameComponent.h"
 #include "transform.h"
+
+class RenderingEngine;
+class Shader;
 
 class GameObject
 {

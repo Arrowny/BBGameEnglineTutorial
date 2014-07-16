@@ -2,10 +2,17 @@
 #include <fstream>
 #include <iostream>
 
+//Class RenderdingEnginge;
+
 Shader::Shader()
 {
 	m_program = glCreateProgram();
-	fprintf(stderr, "m_program is created\n");
+	if (m_program == 0)
+	{
+		fprintf(stderr, "m_program is not created\n");
+		exit(1);
+	}
+	
 }
 
 

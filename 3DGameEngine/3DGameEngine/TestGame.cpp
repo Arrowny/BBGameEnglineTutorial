@@ -1,5 +1,5 @@
 #include "TestGame.h"
-#include "Input.h"
+
 
 //PointLight pl[] = { PointLight(BaseLight(glm::fvec3(1.0, 0.5, 0.0), 0.8f), Attenuation(0.0, 0.0, 1.0), glm::fvec3(0.0, 0.0, 7.0), 4),
 //PointLight(BaseLight(glm::fvec3(1.0, 0.0, 0.5), 0.8f), Attenuation(0.0, 0.0, 1.0), glm::fvec3(2.0, 0.0, 7.0), 4)

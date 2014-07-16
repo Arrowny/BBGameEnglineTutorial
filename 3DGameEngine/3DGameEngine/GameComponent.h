@@ -3,6 +3,8 @@
 #include "BasicShader.h"
 #include "Camera.h"
 
+class Shader;
+
 class GameComponent
 {
 public:

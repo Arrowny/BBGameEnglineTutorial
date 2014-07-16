@@ -10,6 +10,7 @@
 class Camera
 {
 public:
+
 	Camera(const glm::vec3& pos, float fov, float aspect, float zNear, float zFar)
 	{
 		m_perspective = glm::perspective(fov, aspect, zNear, zFar);
@@ -20,6 +21,17 @@ public:
 		m_up = glm::normalize(m_up);
 		m_forward = glm::normalize(m_forward);
 	}
+
+	//Camera(float fov, float aspect, float zNear, float zFar)
+	//{
+	//	m_perspective = glm::perspective(fov, aspect, zNear, zFar);
+	//	m_position = glm::vec3(0, 0, 0);
+	//	m_forward = glm::vec3(0, 0, 1);
+	//	m_up = glm::vec3(0, 1, 0);
+
+	//	m_up = glm::normalize(m_up);
+	//	m_forward = glm::normalize(m_forward);
+	//}
 
 	inline glm::mat4 GetViewProjection() const
 	{
@@ -152,37 +164,7 @@ public:
 		return m_forward;
 	}
 
-	//inline glm::mat4 InitCamera(glm::fvec3& forward, glm::fvec3& up) const
-	//{	
-	//	glm::mat4 m;
 
-	//	glm::fvec3 f = forward;
-	//	f = glm::normalize(f);
-
-	//	glm::fvec3 r = up;
-	//	r = glm::normalize(r);
-	//	r = glm::cross(r, f);
-
-	//	glm::fvec3 u = glm::cross(f, r);
-
-	//	m[0][0] = r.x;	m[0][1] = r.y;	m[0][2] = r.z;	m[0][3] = 0;
-	//	m[1][0] = u.x;	m[1][1] = u.y;	m[1][2] = u.z;	m[1][3] = 0;
-	//	m[2][0] = f.x;	m[2][1] = f.y;	m[2][2] = f.z;	m[2][3] = 0;
-	//	m[3][0] = 0;	m[3][1] = 0;	m[3][2] = 0;	m[3][3] = 1;
-	//	
-	//	return m;
-	//}
-
-	//inline glm::mat4 InitTranslation(float x, float y, float z) const
-	//{
-	//	glm::mat4 m;
-	//	m[0][0] = 1;	m[0][1] = 0;	m[0][2] = 0;	m[0][3] = x;
-	//	m[1][0] = 0;	m[1][1] = 1;	m[1][2] = 0;	m[1][3] = y;
-	//	m[2][0] = 0;	m[2][1] = 0;	m[2][2] = 1;	m[2][3] = z;
-	//	m[3][0] = 0;	m[3][1] = 0;	m[3][2] = 0;	m[3][3] = 1;
-
-	//	return m;
-	//}
 
 private:
 	glm::mat4 m_perspective;

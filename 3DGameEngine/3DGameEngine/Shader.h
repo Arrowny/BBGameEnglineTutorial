@@ -1,10 +1,14 @@
+
 #pragma once
 #include <string>
 #include <GL/glew.h>
 #include "Transform.h"	
 #include "Camera.h"
 #include "Material.h"
-#include "DirectionalLight.h"
+//#include "DirectionalLight.h"
+//#include "RenderingEngine.h"
+
+class RenderingEngine;
 
 class Shader
 {
@@ -23,8 +27,8 @@ protected:
 
 	GLuint m_program;
 
+	//RenderingEngine renderingEngine;
 
 };
-
 
 

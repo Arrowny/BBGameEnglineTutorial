@@ -1,8 +1,5 @@
 #pragma once
 #include "GameComponent.h"
-#include "Mesh.h"
-#include "Material.h"
-#include "Shader.h"
 
 
 class MeshRenderer :public GameComponent
