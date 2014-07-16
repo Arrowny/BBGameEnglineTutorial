@@ -1,41 +1,40 @@
 #pragma once
 #include <glm\glm.hpp>
 #include <glm\gtx\transform.hpp>
+#include <glm\gtx\quaternion.hpp>
 #include "transform.h"
 #include "Input.h"
+#include "ExtraVecMath.h"
+#include "gameComponent.h"
 
-class Camera
+class RenderingEngine;
+
+class Camera : 
+	public GameComponent
 {
 public:
 	Camera();
 	Camera(glm::vec3 pos, glm::vec3 lookAtPoint, glm::vec3 up, double zNear, double zFar, double fov, double screenWidth, double screenHeight);
 	virtual ~Camera();
 
-	void input(const Input& input, double delta);
+	virtual void ProcessInput(Input* input, double delta);
+	virtual void addToRenderingEngine(RenderingEngine* renderingEngine);
 
 	void reinitPerspectiveMatrix(double zNear, double zFar, double fov, double screenWidth, double screenHeight);
-	void lookAt(const glm::vec3& lookAt, const glm::vec3& up);
+	void Camera::lookAt(glm::vec3 destPoint, glm::vec3 up)
+	//void lookAt(const glm::vec3& lookAt, const glm::vec3& up);
 	void move(const glm::vec3& dir, const float& amt);
-	void rotateX(float angle);
-	void rotateY(float angle);
 
-	glm::vec3 getLeft();
-	glm::vec3 getRight();
-	glm::vec3 getCenter() { return m_center; }
-	glm::vec3 getUp() { return m_up; }
 	glm::mat4 getPerspectiveTransform() { return m_perspectiveTransform.getPerspectiveMatrix(); }
-	glm::mat4 getCameraTransform() { return glm::lookAt(m_pos, m_pos + m_center, m_up); }
-	glm::mat4 getProjectionTransform() { return m_perspectiveTransform.getPerspectiveMatrix() * glm::lookAt(m_pos, m_pos + m_center, m_up); }
+	glm::mat4 getCameraTransform() { return getTransform()->getLookAt(); }
+	glm::mat4 getProjectionTransform() { return m_perspectiveTransform.getPerspectiveMatrix() * getCameraTransform(); }
 	
-	glm::vec3 m_pos;
 private:
 
 	glm::vec3 findDirectionOfLookAt(glm::vec3 lookAt);
 	glm::vec3 calculateTrueUp(glm::vec3 up, glm::vec3 center);
 
 	Transform m_perspectiveTransform;
-	
-	glm::vec3 m_center;
-	glm::vec3 m_up;
+	float totalYRotation;
 };
 

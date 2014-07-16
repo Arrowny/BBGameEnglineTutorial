@@ -46,6 +46,12 @@ void RenderingEngine::RenderGameObject(GameObject* gameObject)
 	glDisable(GL_BLEND);
 }
 
+void RenderingEngine::ProcessInput(Input* &input, double delta, GameObject* gameObject) 
+{ 
+	//m_camera->ProcessInput(input, delta);
+	gameObject->ProcessInput(input, delta); 
+}
+
 void RenderingEngine::setTextures(bool enabled)
 {
 	if (enabled) { glEnable(GL_TEXTURE_2D);}
@@ -57,12 +63,12 @@ std::string RenderingEngine::getOpenGLVersion()
 	return (const char*)glGetString(GL_VERSION);
 }
 
-void RenderingEngine::updateCameraPerspective(double zNear, double zFar, double fov, double screenWidth, double screenHeight)
-{
-	if (m_camera != NULL) { m_camera->reinitPerspectiveMatrix(zNear, zFar, fov, screenWidth, screenHeight); }
-	else
-	{
-		std::cerr << "Error: RenderingEngine was not initialized before perspective update in updateCameraPerspective of RenderingEngine." << std::endl;
-		exit(1);
-	}
-}
+//void RenderingEngine::updateCameraPerspective(double zNear, double zFar, double fov, double screenWidth, double screenHeight)
+//{
+//	if (m_camera != NULL) { m_camera->reinitPerspectiveMatrix(zNear, zFar, fov, screenWidth, screenHeight); }
+//	else
+//	{
+//		std::cerr << "Error: RenderingEngine was not initialized before perspective update in updateCameraPerspective of RenderingEngine." << std::endl;
+//		exit(1);
+//	}
+//}

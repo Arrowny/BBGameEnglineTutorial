@@ -96,6 +96,9 @@
     <ClInclude Include="forwardSpotLight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ExtraVecMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="window.cpp">

@@ -8,9 +8,10 @@
 #include "vertex.h"
 #include "timing.h"
 #include "resourceLoader.h"
-#include "camera.h"
 #include "gameObject.h"
 #include "meshRenderer.h"
+#include "camera.h"
+
 
 class TestGame :
 	public Game
@@ -28,14 +29,11 @@ private:
 	Transform* m_worldTransform;
 
 	GameObject pyrimidGameObject;
-	DirectionalLight* dLight;
-	GameObject dLightObj;
-	PointLight* pLight1;
-	GameObject pLight1Obj;
-	PointLight* pLight2;
-	GameObject pLight2Obj;
-	SpotLight* sLight;
-	GameObject sLightObj;
+	DirectionalLight* dLight; GameObject dLightObj;
+	PointLight* pLight1; GameObject pLight1Obj;
+	PointLight* pLight2; GameObject pLight2Obj;
+	SpotLight* sLight; GameObject sLightObj;
+	Camera* camera; GameObject cameraObj;
 	MeshRenderer* meshComponent;
 
 };

@@ -49,10 +49,9 @@ struct DirectionalLight : public BaseLight
 {
 public:
 	DirectionalLight();
-	DirectionalLight(const glm::vec3& color, const float& intensity, const glm::vec3& direction);
+	DirectionalLight(const glm::vec3& color, const float& intensity);
 	virtual ~DirectionalLight() {}
-
-	glm::vec3 m_direction;
+	glm::vec3 getDirection();
 };
 
 struct PointLight : public BaseLight
@@ -60,6 +59,7 @@ struct PointLight : public BaseLight
 	PointLight();
 	PointLight::PointLight(const glm::vec3& color, const float& intensity, const Attenuation& atten);
 	virtual ~PointLight() {}
+	glm::vec3 getPosition() { return getTransform()->m_trans; }
 
 	Attenuation m_atten;
 	glm::vec3 m_position;
@@ -69,9 +69,9 @@ struct PointLight : public BaseLight
 struct SpotLight : public PointLight
 {
 	SpotLight();
-	SpotLight(const glm::vec3& color, const float& intensity, const Attenuation& atten, const glm::vec3& direction = glm::vec3(0,0,1), const float& cutoff = 0.5);
+	SpotLight(const glm::vec3& color, const float& intensity, const Attenuation& atten, const float& cutoff = 0.5);
 	virtual ~SpotLight() {}
+	glm::vec3 getDirection();
 
-	glm::vec3 m_direction;
 	float m_cutoff;
 };

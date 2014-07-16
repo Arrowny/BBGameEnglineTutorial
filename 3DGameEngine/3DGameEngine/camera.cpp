@@ -1,74 +1,94 @@
 #include "camera.h"
 #include <iostream>
+#include "renderingEngine.h"
 
 Camera::Camera()
 {
-	m_pos = glm::vec3(0.0, 0.0, 0.0);
-	m_center = glm::vec3(0.0, 0.0, 1.0);
-	m_up = glm::vec3(0.0, 1.0, 0.0);
+	//getTransform()->m_trans = glm::vec3(0.0, 0.0, 0.0);
+	//getTransform()->m_rot = glm::quat(1, 0, 0, 0);
+	totalYRotation = 0.0;
 }
 
 Camera::Camera(glm::vec3 pos, glm::vec3 lookAtPoint, glm::vec3 up, double zNear, double zFar, double fov, double screenWidth, double screenHeight)
 {
-	this->m_pos = pos;
+	getTransform()->m_trans = pos;
 	m_perspectiveTransform.initPerspectiveMatrix(zNear, zFar, fov, screenWidth, screenHeight);
 	lookAt(lookAtPoint, up);
 }
 
-
-void Camera::lookAt(const glm::vec3& lookAt, const glm::vec3& up)
+void Camera::lookAt(glm::vec3 destPoint, glm::vec3 up)
 {
-	this->m_center = findDirectionOfLookAt(lookAt);
-	this->m_up = calculateTrueUp(up, m_center);
+	glm::vec3 forward = findDirectionOfLookAt(destPoint);
+	up = calculateTrueUp(up, forward);
+	glm::vec3 right = glm::cross(up, forward);
+
+	//nonesense quaternion math
+	glm::quat lookAt;
+	lookAt.w = sqrtf(1.0f + right.x + up.y + forward.z) * 0.5f;
+	float w4_recip = 1.0f / (4.0f * lookAt.w);
+	lookAt.x = (forward.y - up.z) * w4_recip;
+	lookAt.y = (right.z - forward.x) * w4_recip;
+	lookAt.z = (up.x - right.y) * w4_recip;
+	lookAt = glm::normalize(lookAt);
+
+	getTransform()->m_rot = lookAt;
 }
 
 Camera::~Camera()
 {
 }
 
-void Camera::input(const Input& input, double delta)
+void Camera::ProcessInput(Input* input, double delta)
 {
 	float movAmt = 500.0f;
-	float rotAmt = 20000.0;
+	float rotAmt = -500000.0;
 
-	if (input.GetKeyDown(Input::KEY_W))
+	glm::vec3 center = EXQM::GetForward(getTransform()->m_rot);
+	glm::vec3 right = EXQM::GetRight(getTransform()->m_rot);
+	glm::vec3 left = EXQM::GetLeft(getTransform()->m_rot);
+
+	glm::vec3 yAxis( 0.0, 1.0, 0);
+	glm::vec3 xAxis = EXQM::GetRight(getTransform()->m_rot);
+
+
+	if (input->GetKeyDown(Input::KEY_W))
 	{
-		move(m_center, movAmt*delta);
+		getTransform()->translate(center, movAmt*delta);
 	}
 
-	if (input.GetKeyDown(Input::KEY_S))
+	if (input->GetKeyDown(Input::KEY_S))
 	{
-		move(m_center, -movAmt*delta);
+		getTransform()->translate(center, -movAmt*delta);
 	}
 
-	if (input.GetKeyDown(Input::KEY_A))
+	if (input->GetKeyDown(Input::KEY_A))
 	{
-		move(getLeft(), movAmt*delta);
+		getTransform()->translate(left, movAmt*delta);
 	}
 
-	if (input.GetKeyDown(Input::KEY_D))
+	if (input->GetKeyDown(Input::KEY_D))
 	{
-		move(getRight(), movAmt*delta);
+		getTransform()->translate(right, movAmt*delta);
 	}
 
-	if (input.GetKeyDown(Input::KEY_UP))
+	if (input->GetKeyDown(Input::KEY_UP))
 	{
-		rotateX(-rotAmt*delta);
+			getTransform()->rotate(-rotAmt*delta, xAxis);
 	}
 
-	if (input.GetKeyDown(Input::KEY_DOWN))
+	if (input->GetKeyDown(Input::KEY_DOWN))
 	{
-		rotateX(rotAmt*delta);
+		getTransform()->rotate(rotAmt*delta, xAxis);
 	}
 
-	if (input.GetKeyDown(Input::KEY_LEFT))
+	if (input->GetKeyDown(Input::KEY_LEFT))
 	{
-		rotateY(rotAmt*delta);
+		getTransform()->rotate(rotAmt*delta, yAxis);
 	}
 
-	if (input.GetKeyDown(Input::KEY_RIGHT))
+	if (input->GetKeyDown(Input::KEY_RIGHT))
 	{
-		rotateY(-rotAmt*delta);
+		getTransform()->rotate(-rotAmt*delta, yAxis);
 	}
 
 }
@@ -78,49 +98,10 @@ void Camera::reinitPerspectiveMatrix(double zNear, double zFar, double fov, doub
 	m_perspectiveTransform.initPerspectiveMatrix(zNear, zFar, fov, screenWidth, screenHeight);
 }
 
-void Camera::move(const glm::vec3& dir, const float& amt)
-{
-	m_pos += (dir*amt);
-}
-
-void Camera::rotateX(float angle)
-{
-	glm::vec3 yAxis(0.0, 1.0, 0.0);
-	glm::vec3 hAxis = glm::cross(yAxis, m_center);
-	hAxis = glm::normalize(hAxis);
-
-	m_center = glm::vec3(glm::rotate(angle, hAxis)*glm::vec4(m_center, 1.0));
-	m_center = glm::normalize(m_center);
-
-	m_up = glm::normalize(glm::cross(m_center, hAxis));
-}
-
-void Camera::rotateY(float angle)
-{
-	glm::vec3 yAxis(0.0, 1.0, 0.0);
-	glm::vec3 hAxis = glm::cross(yAxis, m_center);
-	hAxis = glm::normalize(hAxis);
-
-	m_center = glm::vec3(glm::rotate(angle, yAxis)*glm::vec4(m_center, 1.0));
-	m_center = glm::normalize(m_center);
-
-	m_up = glm::normalize(glm::cross(m_center, hAxis));
-}
-
-glm::vec3 Camera::getLeft()
-{
-	return glm::normalize(glm::cross(m_up, m_center));
-}
-
-glm::vec3 Camera::getRight()
-{
-	return glm::normalize(glm::cross(m_center, m_up));
-}
-
 glm::vec3 Camera::findDirectionOfLookAt(glm::vec3 lookAt)
 {
 	glm::vec3 center(lookAt);
-	center = center - m_pos;
+	center = center - getTransform()->m_trans;
 	center = glm::normalize(center);
 	return center;
 }
@@ -139,6 +120,11 @@ glm::vec3 Camera::calculateTrueUp(glm::vec3 up, glm::vec3 center)
 
 	glm::vec3 trueUp = glm::normalize(up - projection);
 	return trueUp;
+}
+
+void Camera::addToRenderingEngine(RenderingEngine* renderingEngine)
+{
+	renderingEngine->addCamera(this);
 }
 
 

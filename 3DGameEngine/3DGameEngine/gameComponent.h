@@ -2,8 +2,6 @@
 #include "Input.h"
 #include "window.h"
 #include "transform.h"
-#include "camera.h"
-//#include "gameObject.h"
 
 class RenderingEngine;
 class Shader;

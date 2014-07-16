@@ -79,6 +79,7 @@
   <ItemGroup>
     <ClInclude Include="camera.h" />
     <ClInclude Include="coreEngine.h" />
+    <ClInclude Include="ExtraVecMath.h" />
     <ClInclude Include="forwardAmbient.h" />
     <ClInclude Include="forwardDirectional.h" />
     <ClInclude Include="forwardPointLight.h" />

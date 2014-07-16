@@ -3,7 +3,7 @@
 #include "forwardDirectional.h"
 #include "forwardPointLight.h"
 #include "forwardSpotLight.h"
-
+#include "ExtraVecMath.h"
 
 namespace 
 {
@@ -18,18 +18,18 @@ void BaseLight::addToRenderingEngine(RenderingEngine* renderingEngine)
 	renderingEngine->addLight(this);
 }
 
-DirectionalLight::DirectionalLight() :
-m_direction(glm::vec3(0, 0, 0))
+DirectionalLight::DirectionalLight()
 {
 	m_shader = new ForwardDirectional("forward_Directional");
 }
 
-DirectionalLight::DirectionalLight( const glm::vec3& color, const float& intensity, const glm::vec3& direction) :
-BaseLight(color, intensity),
-m_direction(glm::normalize(direction)) 
+DirectionalLight::DirectionalLight( const glm::vec3& color, const float& intensity) :
+BaseLight(color, intensity)
 {
 	m_shader = new ForwardDirectional("forward_Directional");
 }
+
+glm::vec3 DirectionalLight::getDirection() { return EXQM::GetForward(getTransform()->m_rot); }
 
 PointLight::PointLight()
 {
@@ -51,17 +51,17 @@ m_atten(atten)
 }
 
 SpotLight::SpotLight() :
-m_direction(glm::vec3(0, 0, 0)),
 m_cutoff(1.0f) 
 {
 	m_shader = new ForwardSpotLight("forward_SpotLight");
 }
 
-SpotLight::SpotLight(const glm::vec3& color, const float& intensity, const Attenuation& atten, const glm::vec3& direction, const float& cutoff) :
+SpotLight::SpotLight(const glm::vec3& color, const float& intensity, const Attenuation& atten, const float& cutoff) :
 PointLight(color, intensity, atten),
-m_direction(direction),
 m_cutoff(cutoff) 
 {
 	m_shader = new ForwardSpotLight("forward_SpotLight");
 }
+
+glm::vec3 SpotLight::getDirection() { return EXQM::GetForward(getTransform()->m_rot); }
 

@@ -36,7 +36,7 @@ void ForwardPointLight::setUniform(std::string uniformName, PointLight* pLight)
 	setUniform(uniformName + ".atten", pLight->m_atten);
 	setUniform(uniformName + ".base.color", pLight->m_color);
 	setUniform(uniformName + ".base.intensity", pLight->m_intensity);
-	setUniform(uniformName + ".position", pLight->getTransform()->m_trans);
+	setUniform(uniformName + ".position", pLight->getPosition());
 	setUniform(uniformName + ".range", pLight->m_range);
 
 }
@@ -45,7 +45,7 @@ void ForwardPointLight::updateBasicUniformsAndTexture(const glm::mat4& worldMatr
 {
 	setUniform("MVP", renderingEngine->getCamera()->getProjectionTransform()*worldMatrix);
 	setUniform("model", worldMatrix);
-	setUniform("eyePos", renderingEngine->getCamera()->m_pos);
+	setUniform("eyePos", renderingEngine->getCamera()->getTransform()->m_trans);
 	setUniform("specularIntensity", mat.m_specularIntensity);
 	setUniform("specularPower", mat.m_specularPower);
 	setUniform("pLight", (PointLight*)renderingEngine->activeLight);

@@ -1,6 +1,9 @@
 #include "testGame.h"
 #include <iostream>
 #include <vector>
+#include <glm\glm.hpp>
+#include <glm\gtx\quaternion.hpp>
+
 
 
 TestGame::~TestGame()
@@ -39,21 +42,32 @@ void TestGame::Init(Window* window)
 	pyrimidGameObject.m_transform = m_worldTransform;
 	pyrimidGameObject.addComponent(meshComponent);
 
-	dLight = new DirectionalLight(glm::vec3(1, 1, 1), 0.8, glm::vec3(0, 1, 0));
+	dLight = new DirectionalLight(glm::vec3(1, 1, 1), 0.8);
 	dLightObj.addComponent(dLight);
+	dLightObj.m_transform = new Transform();
+	dLightObj.m_transform->m_rot = glm::angleAxis(90.0f, glm::vec3(1.0, 1.0, 1.0));
+
 	pLight1 = new PointLight(glm::vec3(0, 1, 0), .8, Attenuation(0, 0, 0.01));
 	pLight1Obj.addComponent(pLight1);
-	pLight1Obj.m_transform = new Transform(glm::vec3(3.0, 0.0, 0.0));
+	pLight1Obj.m_transform = new Transform(glm::vec3(3.0, 0.0, -3.0));
 
 	pLight2 = new PointLight(glm::vec3(1, 0, 0), .8, Attenuation(0, 0, 0.01));
 	pLight2Obj.addComponent(pLight2);
 	pLight2Obj.m_transform = new Transform(glm::vec3(-3.0, 0.0, 0.0));
 
-	sLight = new SpotLight(glm::vec3(0, 0, 1.0), .8, Attenuation(0, 0, 0.01), glm::vec3(0, 0, 1.0), 0.7);
+	sLight = new SpotLight(glm::vec3(0, 0.0, 5.0), .8, Attenuation(0, 0, 0.01), 0.7);
 	sLightObj.addComponent(sLight);
 	sLightObj.m_transform = new Transform();
+	//sLightObj.m_transform->m_rot = glm::angleAxis(90.0f, glm::vec3(0.0, 1.0, 0.0));
+	sLightObj.m_transform->m_trans = glm::vec3(0.0, 0.0, 0.0);
+
+	camera = new Camera();
+	camera->reinitPerspectiveMatrix(.01f, 1000.0f, 70.0f, window->GetWidth(), window->GetHeight());
+	cameraObj.addComponent(camera);
+	cameraObj.m_transform = new Transform();
 	
-	pyrimidGameObject.addChild(&dLightObj);
+	//pyrimidGameObject.addChild(&dLightObj);
+	pyrimidGameObject.addChild(&cameraObj);
 	pyrimidGameObject.addChild(&pLight1Obj);
 	pyrimidGameObject.addChild(&pLight2Obj);
 	pyrimidGameObject.addChild(&sLightObj);
