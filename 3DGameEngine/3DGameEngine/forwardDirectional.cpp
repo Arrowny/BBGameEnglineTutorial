@@ -35,13 +35,13 @@ void ForwardDirectional::UpdateUniforms(const Transform& transform, const Materi
 {
 	glm::mat4 Normal = transform.GetModel();
 	glm::mat4 model = renderingEngine->GetMainCamera().GetViewProjection() * Normal;
-	glm::vec3 eyePos = renderingEngine->GetMainCamera().GetTransform().GetPos();
+	glm::vec3 eyePos = renderingEngine->GetMainCamera().GetTransform().GetTransformedPos();
 	glm::vec3 ambient = renderingEngine->GetAmbientLight();
 
 	directionalLight dirLight = *(directionalLight*)renderingEngine->GetActiveLight();
 
 	glm::vec3 dirColor = dirLight.m_color;
-	glm::vec3 dirDirection = dirLight.direction;
+	glm::vec3 dirDirection = dirLight.GetTransform().GetForward();;
 
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
 	glUniformMatrix4fv(m_uniforms[NORMAL_U], 1, GL_FALSE, &Normal[0][0]);

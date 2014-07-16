@@ -17,7 +17,13 @@ public:
 
 	inline glm::mat4 GetViewProjection() const
 	{
-		return projection * glm::lookAt(GetTransform().GetPos(), GetTransform().GetPos() + GetTransform().GetForward(), GetTransform().GetUp());
+		/*glm::mat4 cameraRotation = glm::mat4_cast(glm::conjugate(GetTransform().GetTransformedRot()));
+		glm::mat4 cameraTranslation;
+
+		cameraTranslation = glm::translate(GetTransform().GetTransformedPos());
+
+		return projection * cameraRotation * cameraTranslation;*/
+		return projection * glm::lookAt(GetTransform().GetTransformedPos(), GetTransform().GetTransformedPos() + GetTransform().GetForward(), GetTransform().GetUp());
 	} 
 
 	bool mouseLocked = false;

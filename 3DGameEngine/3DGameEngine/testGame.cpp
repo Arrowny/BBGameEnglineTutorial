@@ -42,12 +42,14 @@ void TestGame::init(){
 	m_planeObject->GetTransform().SetPos(glm::fvec3(0, 0, 5));
 	m_planeObject2->GetTransform().SetPos(glm::fvec3(-4, 0, 0));
 
-	dirLight1 = new directionalLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.2f, glm::fvec3(0.1f, 0.0f, -0.5f));
-	dirLight2 = new directionalLight(glm::fvec3(0.0f, 0.0f, 1.0f), 0.2f, glm::fvec3(-0.1f, 0.0f, -0.5f));
-	dirLight3 = new directionalLight(glm::fvec3(0.0f, 1.0f, 0.0f), 0.2f, glm::fvec3(0.0f, 0.1f, -0.5f));
+	dirLight1 = new directionalLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.2f);
+	dirLight2 = new directionalLight(glm::fvec3(0.0f, 0.0f, 1.0f), 0.2f);
+	dirLight3 = new directionalLight(glm::fvec3(0.0f, 1.0f, 0.0f), 0.2f);
 	m_dirLightObj1->AddComponent(dirLight1);
 	m_dirLightObj1->AddComponent(dirLight2);
 	m_dirLightObj1->AddComponent(dirLight3);
+	m_dirLightObj1->GetTransform().SetRot(glm::normalize(glm::quat((float)-0.1f, 0.0f, 1.0f, 0.0f)));
+	
 
 	pLight1 = new pointLight(glm::fvec3(1.0f, 0.0f, 0.0f), 0.2f, Attenuation(0, 0, 1));
 	pLight2 = new pointLight(glm::fvec3(0.0f, 1.0f, 0.0f), 0.2f, Attenuation(0, 0, 1));

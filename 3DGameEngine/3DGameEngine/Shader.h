@@ -101,5 +101,4 @@ private:
 	Shader(const Shader& other) {}
 	void operator=(const Shader& other) {}
 
-
 };

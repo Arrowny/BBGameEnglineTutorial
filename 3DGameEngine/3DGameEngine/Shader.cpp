@@ -99,7 +99,7 @@ void Shader::Update(const Transform& transform, const Material& material, render
 	
 	glm::mat4 Normal = transform.GetModel();
 	glm::mat4 model = renderingEngine->GetMainCamera().GetViewProjection() * Normal;
-	glm::vec3 eyePos = renderingEngine->GetMainCamera().GetTransform().GetPos();
+	glm::vec3 eyePos = renderingEngine->GetMainCamera().GetTransform().GetTransformedPos();
 	glm::vec3 ambient = renderingEngine->GetAmbientLight();
 
 	directionalLight dirLight = *(directionalLight*)renderingEngine->GetActiveLight();
@@ -107,7 +107,7 @@ void Shader::Update(const Transform& transform, const Material& material, render
 	pointLight pLight = *(pointLight*)renderingEngine->GetActiveLight();
 
 	glm::vec3 dirColor = dirLight.m_color;
-	glm::vec3 dirDirection = dirLight.direction;
+	glm::vec3 dirDirection = dirLight.GetTransform().GetForward();
 	glm::vec3 pointColor = pLight.m_color;
 	glm::vec3 pointPos = pLight.GetTransform().GetPos();
 	glm::vec3 spotColor = sLight.m_color;

@@ -40,7 +40,7 @@ void ForwardPoint::UpdateUniforms(const Transform& transform, const Material& ma
 {
 	glm::mat4 Normal = transform.GetModel();
 	glm::mat4 model = renderingEngine->GetMainCamera().GetViewProjection() * Normal;
-	glm::vec3 eyePos = renderingEngine->GetMainCamera().GetTransform().GetPos();
+	glm::vec3 eyePos = renderingEngine->GetMainCamera().GetTransform().GetTransformedPos();
 	glm::vec3 ambient = renderingEngine->GetAmbientLight();
 
 	pointLight pLight = *(pointLight*)renderingEngine->GetActiveLight();
