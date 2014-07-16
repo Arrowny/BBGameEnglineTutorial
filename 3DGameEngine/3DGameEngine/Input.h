@@ -373,7 +373,7 @@ public:
 	
 	void Update();
 
-	inline bool GetKey(int keyCode)            const { return m_inputs[keyCode]; }
+	inline bool GetKey(int keyCode)            { return m_inputs[keyCode]; }
 	inline bool GetKeyDown(int keyCode)        const { return m_downKeys[keyCode]; }
 	inline bool GetKeyUp(int keyCode)          const { return m_upKeys[keyCode]; }
 	inline bool GetMouse(int keyCode)          const { return m_mouseInput[keyCode]; }

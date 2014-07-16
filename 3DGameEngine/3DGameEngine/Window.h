@@ -21,7 +21,7 @@ public:
 	//Swap buffers to show latest image
 	void Update();
 	bool isClosed();
-	void Render();
+	void ClearScreen();
 	void Dispose();
 	void SwapBuffers();
 	inline SDL_Window* GetSDLWindow() { return m_window; }

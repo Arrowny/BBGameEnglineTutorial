@@ -13,21 +13,15 @@ public:
 	~TestGame();
 
 	void init();
-
-	void input(Input& input);
-	void update();
-	void render();
+	//void input(Input& input);
+	//void update();
+	//void render();
 
 protected:
 private:
 	Mesh* m_mesh;
-	//Shader* m_shader;
-	//Transform m_transform;
-	Camera m_camera;
 	Material m_material;
 	MeshRenderer* m_meshRenderer;
-
-	GameObject m_root;
 };
 
 #endif // TestGame_H

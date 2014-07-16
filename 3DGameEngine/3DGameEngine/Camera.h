@@ -10,10 +10,6 @@
 class Camera
 {
 public:
-	Camera()
-	{
-	}
-
 	Camera(const glm::vec3& pos, float fov, float aspect, float zNear, float zFar)
 	{
 		m_perspective = glm::perspective(fov, aspect, zNear, zFar);

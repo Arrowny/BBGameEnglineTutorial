@@ -116,7 +116,7 @@ void Window::Update()
 	}
 }
 
-void Window::Render(){
+void Window::ClearScreen(){
 
 	Color(0.0f, 0.0f, 0.0f, 0.5f);
 

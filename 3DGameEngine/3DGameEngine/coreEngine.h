@@ -5,7 +5,6 @@
 #include "Window.h"
 #include "TestGame.h"
 #include "Input.h"
-#include "RenderUtil.h"
 #include "RenderingEngine.h"
 
 class coreEngine
@@ -29,7 +28,6 @@ private:
 	bool		m_isRunning;
 	Game*		m_game;
 	Window*		m_window;
-	//RenderUtil*	m_renderUtil;
 	double		m_frameTime;
 
 	int width;

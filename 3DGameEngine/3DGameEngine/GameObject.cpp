@@ -40,11 +40,11 @@ void GameObject::update()
 		child->update();
 }
 
-void GameObject::render(Camera* m_camera)
+void GameObject::render(Shader* m_shader, Camera* m_camera)
 {
 	for each (GameComponent* comp in components)
-		comp->render(&m_transform, m_camera);
+		comp->render(m_shader, &m_transform, m_camera);
 
 	for each (GameObject* child in children)
-		child->render(m_camera);
+		child->render(m_shader,m_camera);
 }

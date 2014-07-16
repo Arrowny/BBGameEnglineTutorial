@@ -78,6 +78,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\VS_test\MonkeyHead[final]\MonkeyHead[final]\obj_loader.cpp" />
+    <ClCompile Include="BasicShader.cpp" />
     <ClCompile Include="coreEngine.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameComponent.cpp" />
@@ -86,7 +87,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="PhongShader.cpp" />
-    <ClCompile Include="RenderUtil.cpp" />
+    <ClCompile Include="RenderingEngine.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="TestGame.cpp" />
@@ -98,6 +99,7 @@
     <ClInclude Include="..\..\..\VS_test\MonkeyHead[final]\MonkeyHead[final]\obj_loader.h" />
     <ClInclude Include="Attenuation.h" />
     <ClInclude Include="BaseLight.h" />
+    <ClInclude Include="BasicShader.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="coreEngine.h" />
     <ClInclude Include="DirectionalLight.h" />
@@ -109,7 +111,7 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="PhongShader.h" />
-    <ClInclude Include="RenderUtil.h" />
+    <ClInclude Include="RenderingEngine.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stb_image.h" />

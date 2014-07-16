@@ -38,11 +38,11 @@ protected:
 private:
 
 	GameObject m_root;
-	//Mesh* m_mesh;
-	//Shader* m_shader;
-	//Transform* m_transform;
+	Mesh* m_mesh;
+	Shader* m_shader;
+	Transform* m_transform;
 	Camera* m_camera;
-	//Material* m_material;
+	Material* m_material;
 };
 
 #endif // GAME_H

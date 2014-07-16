@@ -2,15 +2,15 @@
 #include "Window.h"
 #include "Timing.h"
 #include "Game.h"
-#include "RenderUtil.h"
 #include <stdio.h>
 #include <glm/glm.hpp>
 #include "Shader.h"
 #include "Mesh.h"
+#include "RenderingEngine.h"
 
-coreEngine::coreEngine(TestGame* game, int width, int height, double frameRate) :
+coreEngine::coreEngine(Game* game, int width, int height, double frameRate) :
 m_game(game),
-//m_renderUtil(renderUtil),
+renderingEngine(NULL),
 width(width),
 height(height),
 m_frameTime(1.0 / frameRate)
@@ -20,19 +20,14 @@ m_frameTime(1.0 / frameRate)
 
 coreEngine::~coreEngine()
 {
-}
-
-void coreEngine::InitializeRenderingSystem()
-{
-	std::cout << m_renderUtil->getOpenGLVersion() << std::endl;
-	m_renderUtil = new RenderUtil();
-	m_renderUtil->initGraphics();
+	cleanUp();
 }
 
 void coreEngine::CreateWindow(std::string title)
 {
 	m_window = new Window(width, height, title);
-	InitializeRenderingSystem();
+	renderingEngine = new RenderingEngine();
+	std::cout << renderingEngine->getOpenGLVersion() << std::endl;
 }
 
 void coreEngine::Start()
@@ -103,14 +98,18 @@ void coreEngine::Run(){
 			}
 
 			m_game->input(m_window->GetInput());
-			m_game->update();
+			m_game->update();//m_frameTime
 
 			Time::setDelta(m_frameTime);		
 		}
 
-		if (render){
-
-			Render();
+		if (render)
+		{
+			m_window->ClearScreen();
+			renderingEngine->render(&m_game->GetRootObject());
+	
+			m_window->SwapBuffers();
+			//Render();
 			frames++;
 		}
 
@@ -124,16 +123,16 @@ void coreEngine::Run(){
 	cleanUp();
 }
 
-void coreEngine::Render()
-{
-	//std::cout << "In the coreRender" << std::endl;
-	
-	//m_renderUtil->clearScreen();
-	m_window->Render();
-	m_game->render();
-
-	m_window->SwapBuffers();
-}
+//void coreEngine::Render()
+//{
+//	////std::cout << "In the coreRender" << std::endl;
+//	//
+//	////m_renderUtil->clearScreen();
+//	//m_window->Render();
+//	//m_game->render();
+//
+//	//m_window->SwapBuffers();
+//}
 
 void coreEngine::cleanUp()
 {
