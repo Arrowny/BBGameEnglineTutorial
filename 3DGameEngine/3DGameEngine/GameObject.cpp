@@ -21,6 +21,15 @@ void GameObject::AddComponent(GameComponent* comp)
 	components.push_back(comp);
 }
 
+void GameObject::AddToRenderingEngine(RenderingEngine* renderingEngine)
+{
+	for each (GameComponent* comp in components)
+		comp->AddToRenderingEngine(renderingEngine);
+
+	for each (GameObject* child in children)
+		child->AddToRenderingEngine(renderingEngine);
+}
+
 void GameObject::input(float delta)
 {
 	for each (GameComponent* comp in components)
@@ -48,3 +57,4 @@ void GameObject::render(Shader* m_shader, RenderingEngine* renderingEngine)
 	for each (GameObject* child in children)
 		child->render(m_shader, renderingEngine);
 }
+

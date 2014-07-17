@@ -1,6 +1,6 @@
 #pragma once
 #include <glm/glm.hpp>
-#include "Attenuation.h"
+#include "GameComponent.h"
 
 struct BaseLight
 {
@@ -20,7 +20,7 @@ public:
 
 };
 
-struct DirectionalLight
+struct DirectionalLight :public GameComponent
 {
 public:
 	BaseLight base;
@@ -35,9 +35,33 @@ public:
 		direction(glm::normalize(direction))
 	{}
 
+	void AddToRenderingEngine(RenderingEngine* renderingEngine);
+
 };
 
-struct PointLight
+struct Attenuation
+{
+public:
+	float constant;
+	float linear;
+	float exponent;
+	Attenuation()
+	{
+		constant = 0.0;
+		linear = 0.0;
+		exponent = 1.0;
+	}
+	Attenuation(float constant, float linear, float exponent)
+	{
+		this->constant = constant;
+		this->linear = linear;
+		this->exponent = exponent;
+	}
+
+};
+
+
+struct PointLight :public GameComponent
 {
 	BaseLight base;
 	Attenuation atten;
@@ -61,9 +85,11 @@ struct PointLight
 
 	void SetPosition(glm::vec3 pos) { position = pos; }
 	void SetRange(float ran) { range = ran; }
+
+	void AddToRenderingEngine(RenderingEngine* renderingEngine);
 };
 
-struct SpotLight
+struct SpotLight :public GameComponent
 {
 public:
 	PointLight pointLight;
@@ -85,6 +111,8 @@ public:
 
 	inline void SetDirection(glm::fvec3 direct) { direction = glm::normalize(direct); }
 	inline void SetCutoff(float cutoff) { this->cutoff = cutoff; }
+
+	void AddToRenderingEngine(RenderingEngine* renderingEngine);
 };
 
 

@@ -35,10 +35,16 @@ void RenderingEngine::input(Input input, float delta)
 
 void RenderingEngine::render(GameObject* object)
 {
-	directionalLight = DirectionalLight(BaseLight(glm::vec3(1, 0, 0), 0.2f), glm::vec3(1, 1, 1));
+	ClearLightList();
+
+	object->AddToRenderingEngine(this);
+
+	/*activeDirectionalLight = DirectionalLight(BaseLight(glm::vec3(1, 0, 0), 0.2f), glm::vec3(1, 1, 1));
 	directionalLight2 = DirectionalLight(BaseLight(glm::vec3(1, 1, 0), 0.4f), glm::vec3(-1, 1, -1));
-	pointLight = PointLight(BaseLight(glm::vec3(0, 1, 1), 0.4f), Attenuation(0.0, 0.0, 0.1), glm::vec3(0, 0, 7), 30);
-	spotLight = SpotLight(PointLight(BaseLight(glm::fvec3(0.0, 0.0, 1.0), 0.6f), Attenuation(0.0, 0.0, 0.1), glm::fvec3(-2.0, 0.0, 0.0), 30), glm::fvec3(1.0, 1.0, 1.0), 0.1f);
+	activePointLight = PointLight(BaseLight(glm::vec3(0, 1, 1), 0.4f), Attenuation(0.0, 0.0, 0.1), glm::vec3(0, 0, 7), 30);
+	activeSpotLight = SpotLight(PointLight(BaseLight(glm::fvec3(0.0, 0.0, 1.0), 0.6f), Attenuation(0.0, 0.0, 0.1), glm::fvec3(-2.0, 0.0, 0.0), 30), glm::fvec3(1.0, 1.0, 1.0), 0.1f);*/
+
+
 	object->render(ForwardAmbient::GetInstance(),this);
 
 	glEnable(GL_BLEND);
@@ -46,21 +52,25 @@ void RenderingEngine::render(GameObject* object)
 	glDepthMask(false);
 	glDepthFunc(GL_EQUAL); //only do pixel lighting calculation
 
-	object->render(ForwardDirectional::GetInstance(), this);
+	for each (DirectionalLight light in directionalLights)
+	{
+		activeDirectionalLight = light;
+		object->render(ForwardDirectional::GetInstance(), this);
+	}
 
-	DirectionalLight temp = directionalLight;
-	directionalLight = directionalLight2;
-	directionalLight2 = temp;
+	for each (PointLight light in pointLights)
+	{
+		activePointLight = light;
+		object->render(ForwardPoint::GetInstance(), this);
+	}
 
-	object->render(ForwardDirectional::GetInstance(), this);
+	//for each (SpotLight light in spotLights)
+	//{
+	//	activeSpotLight = light;
+	//	object->render(ForwardSpot::GetInstance(), this);
+	//}
 
-	temp = directionalLight;
-	directionalLight = directionalLight2;
-	directionalLight2 = temp;
 
-	object->render(ForwardPoint::GetInstance(), this);
-
-	object->render(ForwardSpot::GetInstance(), this);
 	glDepthFunc(GL_LESS);
 	glDepthMask(true); 
 	glDisable(GL_BLEND);
@@ -71,3 +81,22 @@ void RenderingEngine::render(GameObject* object)
 //{
 //	return glGetString(GL_VERSION);
 //}
+
+void RenderingEngine::AddDirectionalLight(DirectionalLight directionalLight)
+{
+	directionalLights.push_back(directionalLight);
+}
+void RenderingEngine::AddPointLight(PointLight pointLight)
+{
+	pointLights.push_back(pointLight);
+}
+void RenderingEngine::AddSpotLight(SpotLight spotLight)
+{
+	spotLights.push_back(spotLight);
+}
+
+void RenderingEngine::ClearLightList()
+{
+	directionalLights.clear();
+	pointLights.clear();
+}

@@ -1,13 +1,11 @@
 #pragma once
 #include <glm/glm.hpp>
 #include <vector>
-#include "GameComponent.h"
-#include "transform.h"
-
-#include <vector>
 #include "Transform.h"
 #include "GameComponent.h"
 class RenderingEngine;
+
+
 class GameObject
 {
 public:
@@ -20,6 +18,9 @@ public:
 
 	void AddChild(GameObject& child);
 	void AddComponent(GameComponent* component);
+
+	void AddToRenderingEngine(RenderingEngine* renderingEngine);
+
 
 	inline Transform& GetTransform() { return m_transform; }
 private:

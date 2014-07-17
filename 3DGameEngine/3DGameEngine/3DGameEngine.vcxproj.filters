@@ -7,20 +7,35 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timing.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="TestGame.cpp" />
-    <ClCompile Include="PhongShader.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="RenderingEngine.cpp" />
-    <ClCompile Include="BasicShader.cpp" />
-    <ClCompile Include="ForwardAmbient.cpp" />
-    <ClCompile Include="ForwardDirectional.cpp" />
-    <ClCompile Include="ForwardPoint.cpp" />
-    <ClCompile Include="ForwardSpot.cpp" />
+    <ClCompile Include="ForwardAmbient.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="ForwardDirectional.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="ForwardPoint.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="ForwardSpot.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="PhongShader.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicShader.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Lights.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\VS_test\MonkeyHead[final]\MonkeyHead[final]\obj_loader.h" />
@@ -30,7 +45,6 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Shader.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timing.h" />
@@ -38,19 +52,37 @@
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="Material.h" />
-    <ClInclude Include="Attenuation.h" />
     <ClInclude Include="TestGame.h" />
-    <ClInclude Include="PhongShader.h" />
-    <ClInclude Include="GameComponent.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="RenderingEngine.h" />
-    <ClInclude Include="BasicShader.h" />
-    <ClInclude Include="ForwardAmbient.h" />
-    <ClInclude Include="ForwardDirectional.h" />
     <ClInclude Include="Lights.h" />
-    <ClInclude Include="ForwardPoint.h" />
-    <ClInclude Include="ForwardSpot.h" />
+    <ClInclude Include="GameComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshRenderer.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardAmbient.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardDirectional.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardPoint.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardSpot.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="PhongShader.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicShader.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3DGameEngine.rc" />
@@ -67,6 +99,12 @@
     </Filter>
     <Filter Include="rendering">
       <UniqueIdentifier>{f0a6ac8f-ab3d-4f38-ad96-f2f3fa656840}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{9dda2188-28c9-40ce-878d-ad3f9736961a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{7e251f38-14cc-4a68-8a78-b6c2ac6265f5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
