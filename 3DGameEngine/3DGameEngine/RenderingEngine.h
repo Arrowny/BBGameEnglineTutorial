@@ -14,7 +14,7 @@ class RenderingEngine
 public:
 	RenderingEngine();
 	
-	void input(Input input);
+	void input(Input input, float delta);
 	void render(GameObject* object);
 	void clearScreen();
 	const GLubyte* getOpenGLVersion();

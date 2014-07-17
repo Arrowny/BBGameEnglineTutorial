@@ -9,14 +9,9 @@ class GameComponent
 {
 public:
 
-	virtual void input(Transform transform) {}
-	virtual void update(Transform transform) {}
+	virtual void input(Transform transform, float delta) {}
+	virtual void update(Transform transform, float delta) {}
 	virtual void render(Shader* m_shader, Transform* m_transform, RenderingEngine* renderingEngine) {}
-//	virtual ~GameComponent() {};
-
-	//void input(Transform transform);
-	//void update(Transform transform);
-	//void render(Transform transform);
-
+	virtual ~GameComponent() {};
 };
 

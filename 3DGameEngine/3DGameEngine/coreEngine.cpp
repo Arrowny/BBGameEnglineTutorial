@@ -83,7 +83,7 @@ void coreEngine::Run(){
 			frameCounter = 0;
 
 		}
-
+		
 		while (unprocessedTime > m_frameTime){
 
 			render = true;
@@ -97,11 +97,10 @@ void coreEngine::Run(){
 				Stop();
 			}
 
-			m_game->input(); //m_window->GetInput()
-			renderingEngine->input(m_window->GetInput());
-			m_game->update();//m_frameTime
+			m_game->input((float)m_frameTime); //m_window->GetInput()
+			renderingEngine->input(m_window->GetInput(),(float)m_frameTime);
+			m_game->update((float)m_frameTime);//m_frameTime
 
-			Time::setDelta(m_frameTime);		
 		}
 
 		if (render)
@@ -123,17 +122,6 @@ void coreEngine::Run(){
 
 	cleanUp();
 }
-
-//void coreEngine::Render()
-//{
-//	////std::cout << "In the coreRender" << std::endl;
-//	//
-//	////m_renderUtil->clearScreen();
-//	//m_window->Render();
-//	//m_game->render();
-//
-//	//m_window->SwapBuffers();
-//}
 
 void coreEngine::cleanUp()
 {

@@ -16,9 +16,6 @@ mainCamera(glm::vec3(0, 1, -4), 70.0f, (float)WindowParameter::width / (float)Wi
 	glEnable(GL_DEPTH_CLAMP);
 
 	//	glEnable(GL_FRAMEBUFFER_SRGB);// it is already rgb colors so we do not need to do sth to it
-
-	//mainCamera = Camera(glm::vec3(0, 1, -4), 70.0f, (float)WindowParameter::width / (float)WindowParameter::height, 1.0f, 1000.0f);
-
 }
 
 
@@ -26,14 +23,12 @@ RenderingEngine::~RenderingEngine()
 {
 }
 
-void RenderingEngine::input(Input input)
+void RenderingEngine::input(Input input, float delta)
 {
-	mainCamera.Input(input);
+	mainCamera.Input(input, delta);
 }
 void RenderingEngine::render(GameObject* object)
 {
-	//Shader* shader = BasicShader::GetInstance();
-	//shader->SetRenderingEngine(this);
 	object->render(BasicShader::GetInstance(),this);
 }
 

@@ -69,12 +69,12 @@ double Time::getTime()
 }
 
 
-double Time::getDelta(){
-
-	return m_delta;
-}
-
-void Time::setDelta(double delta){
-
-	m_delta = delta;
-}
+//double Time::getDelta(){
+//
+//	return m_delta;
+//}
+//
+//void Time::setDelta(double delta){
+//
+//	m_delta = delta;
+//}

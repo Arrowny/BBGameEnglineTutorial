@@ -35,18 +35,24 @@ public:
 	inline glm::mat4 GetViewProjection() const
 	{
 		return m_perspective * glm::lookAt(m_position, m_position + m_forward, m_up);
+		
+	}
+
+	inline glm::mat4 GetOrthographic(float left, float right, float bottom, float top, float near, float far) const
+	{
+		return glm::ortho(left, right, bottom, top, near, far);
 	}
 
 	bool mouselocked = false;
 
 	glm::vec2 centerPosition = glm::vec2(WindowParameter::width / 2, WindowParameter::height / 2);
 
-	void Input(Input input)
+	void Input(Input input, float delta)
 	{
 		float snsitivity = 0.1f;
 
-		float movAmt = (float)(10 * Time::getDelta());
-		float rotAmt = (float)(100 * Time::getDelta());
+		float movAmt = (float)(10 * delta);
+		float rotAmt = (float)(100 * delta);
 
 		if (input.GetKey(input.KEY_ESCAPE))
 		{

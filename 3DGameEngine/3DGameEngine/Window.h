@@ -29,6 +29,7 @@ public:
 	inline float GetWidth() { return WIDTH; }
 	inline float GetHeight() { return HEIGHT; }
 
+	inline glm::vec2 GetCenter() { return glm::vec2(WIDTH / 2, HEIGHT / 2); }
 	bool m_isClosed;
 
 private:

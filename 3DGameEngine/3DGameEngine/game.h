@@ -16,14 +16,13 @@ public:
 
 	virtual void init() = 0;
 
-	void input()  //Input& input,,,,,, use m_window to get input in the coreEngine
+	void input(float delta)  //Input& input,,,,,, use m_window to get input in the coreEngine
 	{
-		//m_camera->Input(input);
-		GetRootObject().input();
+		GetRootObject().input(delta);
 	}
-	void update()
+	void update(float delta)
 	{
-		GetRootObject().update();
+		GetRootObject().update(delta);
 	}
 	//void render()
 	//{

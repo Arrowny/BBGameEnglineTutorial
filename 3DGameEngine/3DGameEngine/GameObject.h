@@ -14,8 +14,8 @@ public:
 	GameObject();
 	~GameObject();
 
-	void input();
-	void update();
+	void input(float delta);
+	void update(float delta);
 	void render(Shader* m_shader, RenderingEngine* renderingEngine);
 
 	void AddChild(GameObject& child);

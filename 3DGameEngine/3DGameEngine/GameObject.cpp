@@ -21,23 +21,23 @@ void GameObject::AddComponent(GameComponent* comp)
 	components.push_back(comp);
 }
 
-void GameObject::input()
+void GameObject::input(float delta)
 {
 	for each (GameComponent* comp in components)
-		comp->input(m_transform);
+		comp->input(m_transform, delta);
 
 	for each (GameObject* child in children)
-		child->input();
+		child->input(delta);
 }
 
-void GameObject::update()
+void GameObject::update(float delta)
 {
 
 	for each (GameComponent* comp in components)
-		comp->update(m_transform);
+		comp->update(m_transform, delta);
 
 	for each (GameObject* child in children)
-		child->update();
+		child->update(delta);
 }
 
 void GameObject::render(Shader* m_shader, RenderingEngine* renderingEngine)
