@@ -20,6 +20,7 @@
     <ClCompile Include="ForwardAmbient.cpp" />
     <ClCompile Include="ForwardDirectional.cpp" />
     <ClCompile Include="ForwardPoint.cpp" />
+    <ClCompile Include="ForwardSpot.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\VS_test\MonkeyHead[final]\MonkeyHead[final]\obj_loader.h" />
@@ -49,6 +50,7 @@
     <ClInclude Include="ForwardDirectional.h" />
     <ClInclude Include="Lights.h" />
     <ClInclude Include="ForwardPoint.h" />
+    <ClInclude Include="ForwardSpot.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3DGameEngine.rc" />

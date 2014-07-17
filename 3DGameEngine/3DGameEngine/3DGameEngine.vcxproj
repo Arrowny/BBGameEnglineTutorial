@@ -83,6 +83,7 @@
     <ClCompile Include="ForwardAmbient.cpp" />
     <ClCompile Include="ForwardDirectional.cpp" />
     <ClCompile Include="ForwardPoint.cpp" />
+    <ClCompile Include="ForwardSpot.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -104,6 +105,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="coreEngine.h" />
     <ClInclude Include="ForwardPoint.h" />
+    <ClInclude Include="ForwardSpot.h" />
     <ClInclude Include="Lights.h" />
     <ClInclude Include="ForwardAmbient.h" />
     <ClInclude Include="ForwardDirectional.h" />

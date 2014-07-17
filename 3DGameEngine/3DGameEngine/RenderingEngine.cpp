@@ -3,6 +3,7 @@
 #include "ForwardAmbient.h"
 #include "ForwardDirectional.h"
 #include "ForwardPoint.h"
+#include "ForwardSpot.h"
 #include "Window.h"
 #include "GameObject.h"
 
@@ -36,8 +37,8 @@ void RenderingEngine::render(GameObject* object)
 {
 	directionalLight = DirectionalLight(BaseLight(glm::vec3(1, 0, 0), 0.2f), glm::vec3(1, 1, 1));
 	directionalLight2 = DirectionalLight(BaseLight(glm::vec3(1, 1, 0), 0.4f), glm::vec3(-1, 1, -1));
-	pointLight = PointLight(BaseLight(glm::vec3(0, 0, 1), 0.8f), Attenuation(0.0, 0.0, 0.1), glm::vec3(0, 0, 7), 100);
-
+	pointLight = PointLight(BaseLight(glm::vec3(0, 1, 1), 0.4f), Attenuation(0.0, 0.0, 0.1), glm::vec3(0, 0, 7), 30);
+	spotLight = SpotLight(PointLight(BaseLight(glm::fvec3(0.0, 0.0, 1.0), 0.6f), Attenuation(0.0, 0.0, 0.1), glm::fvec3(-2.0, 0.0, 0.0), 30), glm::fvec3(1.0, 1.0, 1.0), 0.1f);
 	object->render(ForwardAmbient::GetInstance(),this);
 
 	glEnable(GL_BLEND);
@@ -59,6 +60,7 @@ void RenderingEngine::render(GameObject* object)
 
 	object->render(ForwardPoint::GetInstance(), this);
 
+	object->render(ForwardSpot::GetInstance(), this);
 	glDepthFunc(GL_LESS);
 	glDepthMask(true); 
 	glDisable(GL_BLEND);

@@ -26,6 +26,7 @@ public:
 	inline glm::fvec3 GetAmbientLight() { return ambientLight; }
 	inline DirectionalLight GetDirectionalLight() { return directionalLight; }
 	inline PointLight GetPointLight() { return pointLight; }
+	inline SpotLight GetSpotLight() { return spotLight; }
 
 	inline void SetAmbient(glm::fvec3 ambient) { ambientLight = ambient; }
 	inline void SetDirectionalLight(DirectionalLight directionallight) { directionalLight = directionallight; }
@@ -43,6 +44,7 @@ private:
 	DirectionalLight directionalLight2;// = DirectionalLight(BaseLight(glm::vec3(1, 0.5, 0), 0.4f), glm::vec3(-1, 1, -1));
 
 	PointLight pointLight;// = PointLight(BaseLight(glm::vec3(0, 0, 1), 0.8f), Attenuation(0.0, 0.0, 0.1), glm::vec3(0, 0, 7), 100);
+	SpotLight spotLight;
 };
 
 
