@@ -4,7 +4,7 @@
 #include "Transform.h"	
 #include "Camera.h"
 #include "Material.h"
-#include "DirectionalLight.h"
+#include "Lights.h"
 
 class PhongShader
 {

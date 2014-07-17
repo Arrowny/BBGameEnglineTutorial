@@ -14,6 +14,10 @@ Shader::Shader()
 		fprintf(stderr, "m_program is not created\n");
 		exit(1);
 	}
+
+	glBindAttribLocation(m_program, 0, "position");    // because we are not using "attribute vec3 position;" in the vertex shader file
+	glBindAttribLocation(m_program, 1, "texCoord");
+	glBindAttribLocation(m_program, 2, "normal");
 	
 }
 

@@ -24,7 +24,7 @@ void TestGame::init()
 	m_camera = Camera(glm::vec3(0, 1, -4), 70.0f, (float)WindowParameter::width / (float)WindowParameter::height, 1.0f, 1000.0f);*/
 
 	m_mesh = new Mesh("./res/plane.obj");
-	m_material = Material(new Texture("./res/pikaqiu2.jpg"), glm::fvec3(1.0, 1.0, 1.0), 2, 16);
+	m_material = Material(new Texture("./res/pikaqiu2.jpg"), glm::fvec3(1.0, 1.0, 1.0), 2, 32);
 
 	m_meshRenderer = new MeshRenderer(*m_mesh, m_material);
 

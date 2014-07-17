@@ -16,9 +16,7 @@ BasicShader::BasicShader(const std::string& fileName)
 	glValidateProgram(m_program);
 	CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: Program is invalid");
 
-	glBindAttribLocation(m_program, 0, "position");    // because we are not using "attribute vec3 position;" in the vertex shader file
-	glBindAttribLocation(m_program, 1, "texCoord");
-	glBindAttribLocation(m_program, 2, "normal");
+
 
 	m_uniforms[TRANSFORM_P_U] = glGetUniformLocation(m_program, "transformProjected");
 	m_uniforms[TRANSFORM_U] = glGetUniformLocation(m_program, "transform");

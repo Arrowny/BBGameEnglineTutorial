@@ -1,14 +1,30 @@
 #pragma once
 #include <glm/glm.hpp>
-#include "BaseLight.h"
 #include "Attenuation.h"
 
+struct BaseLight
+{
+public:
+
+	glm::vec3 color;
+	float intensity;
+
+	BaseLight() :
+		color(glm::vec3(0, 0, 0)),
+		intensity(1)
+	{}
+	BaseLight(glm::vec3& color, float intensity) :
+		color(color),
+		intensity(intensity)
+	{}
+
+};
 
 struct DirectionalLight
 {
 public:
 	BaseLight base;
-	glm::fvec3 direction;
+	glm::vec3 direction;
 
 	DirectionalLight() :
 		base(BaseLight()),
@@ -25,7 +41,7 @@ struct PointLight
 {
 	BaseLight base;
 	Attenuation atten;
-	glm::fvec3 position;
+	glm::vec3 position;
 	float range;
 
 	PointLight() :
@@ -36,7 +52,7 @@ struct PointLight
 	{}
 
 
-	PointLight(BaseLight baselight, Attenuation attenu, glm::fvec3 position, float range) :     //, float range
+	PointLight(BaseLight baselight, Attenuation attenu, glm::vec3 position, float range) :     //, float range
 		base(baselight),
 		atten(attenu),
 		position(position),

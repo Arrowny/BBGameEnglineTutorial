@@ -80,6 +80,9 @@
     <ClCompile Include="..\..\..\VS_test\MonkeyHead[final]\MonkeyHead[final]\obj_loader.cpp" />
     <ClCompile Include="BasicShader.cpp" />
     <ClCompile Include="coreEngine.cpp" />
+    <ClCompile Include="ForwardAmbient.cpp" />
+    <ClCompile Include="ForwardDirectional.cpp" />
+    <ClCompile Include="ForwardPoint.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -97,11 +100,13 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\VS_test\MonkeyHead[final]\MonkeyHead[final]\obj_loader.h" />
     <ClInclude Include="Attenuation.h" />
-    <ClInclude Include="BaseLight.h" />
     <ClInclude Include="BasicShader.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="coreEngine.h" />
-    <ClInclude Include="DirectionalLight.h" />
+    <ClInclude Include="ForwardPoint.h" />
+    <ClInclude Include="Lights.h" />
+    <ClInclude Include="ForwardAmbient.h" />
+    <ClInclude Include="ForwardDirectional.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameComponent.h" />
     <ClInclude Include="GameObject.h" />

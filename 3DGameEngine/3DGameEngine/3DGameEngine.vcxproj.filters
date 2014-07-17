@@ -17,6 +17,9 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="RenderingEngine.cpp" />
     <ClCompile Include="BasicShader.cpp" />
+    <ClCompile Include="ForwardAmbient.cpp" />
+    <ClCompile Include="ForwardDirectional.cpp" />
+    <ClCompile Include="ForwardPoint.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\VS_test\MonkeyHead[final]\MonkeyHead[final]\obj_loader.h" />
@@ -34,8 +37,6 @@
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="Material.h" />
-    <ClInclude Include="BaseLight.h" />
-    <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="Attenuation.h" />
     <ClInclude Include="TestGame.h" />
     <ClInclude Include="PhongShader.h" />
@@ -44,6 +45,10 @@
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="RenderingEngine.h" />
     <ClInclude Include="BasicShader.h" />
+    <ClInclude Include="ForwardAmbient.h" />
+    <ClInclude Include="ForwardDirectional.h" />
+    <ClInclude Include="Lights.h" />
+    <ClInclude Include="ForwardPoint.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3DGameEngine.rc" />
