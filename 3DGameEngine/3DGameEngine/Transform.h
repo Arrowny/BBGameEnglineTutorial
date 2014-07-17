@@ -58,10 +58,10 @@ public:
 
 	inline void Update()
 	{
-		if (m_initializedOld)
+		if (!glm::isNull(m_oldPos, 0.0001f))
 		{
 			m_oldPos = m_pos;
-			m_oldRot = -m_rot;
+			m_oldRot = m_rot;
 			m_oldScale = m_scale;
 		}
 		else
@@ -69,7 +69,6 @@ public:
 			m_oldPos = m_pos + glm::fvec3(1.0f, 1.0f, 1.0f);
 			m_oldRot = m_rot * 0.5f;
 			m_oldScale = glm::vec3(m_scale.x + 1.0f, m_scale.y + 1.0f, m_scale.z + 1.0f);
-			m_initializedOld = true;
 		}
 	}
 
@@ -101,78 +100,77 @@ public:
 			parentRot = m_parent->GetTransformedRot();
 		}
 
-		return parentRot * m_rot;
+		return glm::cross(m_rot, parentRot);
 	}
 
 	inline glm::fvec3 GetForward() const
 	{
-		/*glm::quat f_rot = glm::normalize(glm::conjugate(m_rot));
-
-		return glm::fvec3(2.0f * (f_rot.x * f_rot.z - f_rot.w * f_rot.y),
-			2.0f * (f_rot.y * f_rot.z + f_rot.w * f_rot.x),
-			1.0f - 2.0f * (f_rot.x * f_rot.x + f_rot.y * f_rot.y));*/
-
+		
 		return glm::fvec3(2.0f * (m_rot.x * m_rot.z - m_rot.w * m_rot.y),
 			2.0f * (m_rot.y * m_rot.z + m_rot.w * m_rot.x),
 			1.0f - 2.0f * (m_rot.x * m_rot.x + m_rot.y * m_rot.y));
+	}
 
-		/*return glm::rotate(m_rot, glm::vec3(1, 0, 0));*/
+	inline glm::fvec3 GetTransformedForward() const
+	{
+		glm::quat f_rot = GetTransformedRot();
+
+		return glm::fvec3(2.0f * (f_rot.x * f_rot.z - f_rot.w * f_rot.y),
+		2.0f * (f_rot.y * f_rot.z + f_rot.w * f_rot.x),
+		1.0f - 2.0f * (f_rot.x * f_rot.x + f_rot.y * f_rot.y));
+
 	}
 
 	inline glm::fvec3 GetLeft() const
 	{
-		/*glm::quat l_rot = GetTransformedRot();
-
-		return glm::fvec3(-(1.0f - 2.0f * (l_rot.y*l_rot.y + l_rot.z*l_rot.z)),
-			-2.0f * (l_rot.x*l_rot.y - l_rot.w*l_rot.z),
-			-2.0f * (l_rot.x*l_rot.z + l_rot.w*l_rot.y));*/
-
 		return glm::fvec3(-(1.0f - 2.0f * (m_rot.y*m_rot.y + m_rot.z*m_rot.z)),
 			-2.0f * (m_rot.x*m_rot.y - m_rot.w*m_rot.z),
 			-2.0f * (m_rot.x*m_rot.z + m_rot.w*m_rot.y));
+	}
 
-		/*return glm::rotate(m_rot, glm::vec3(-1,0,0));*/
+	inline glm::fvec3 GetTransformedLeft() const
+	{
+		glm::quat l_rot = GetTransformedRot();
+
+		return glm::fvec3(-(1.0f - 2.0f * (l_rot.y*l_rot.y + l_rot.z*l_rot.z)),
+		-2.0f * (l_rot.x*l_rot.y - l_rot.w*l_rot.z),
+		-2.0f * (l_rot.x*l_rot.z + l_rot.w*l_rot.y));
+
 	}
 
 	inline glm::fvec3 GetRight() const
 	{
-		/*glm::quat r_rot = glm::normalize(glm::conjugate(m_rot));
-
-		return glm::fvec3(1.0f - 2.0f * (r_rot.y*r_rot.y + r_rot.z*r_rot.z),
-						  2.0f * (r_rot.x*r_rot.y - r_rot.w*r_rot.z),
-						  2.0f * (r_rot.x*r_rot.z + r_rot.w*r_rot.y));*/
-
 		return glm::fvec3(1.0f - 2.0f * (m_rot.y*m_rot.y + m_rot.z*m_rot.z),
 						  2.0f * (m_rot.x*m_rot.y - m_rot.w*m_rot.z),
 						  2.0f * (m_rot.x*m_rot.z + m_rot.w*m_rot.y));
+	}
 
-		/*return glm::rotate(m_rot, glm::vec3(1, 0, 0));*/
+	inline glm::fvec3 GetTransformedRight() const
+	{
+		glm::quat r_rot = GetTransformedRot();
+
+		return glm::fvec3(1.0f - 2.0f * (r_rot.y*r_rot.y + r_rot.z*r_rot.z),
+		2.0f * (r_rot.x*r_rot.y - r_rot.w*r_rot.z),
+		2.0f * (r_rot.x*r_rot.z + r_rot.w*r_rot.y));
+
 	}
 
 	inline glm::fvec3 GetUp() const
 	{
-		/*glm::quat u_rot = GetTransformedRot();
-
-		return glm::fvec3(2.0f * (u_rot.x*u_rot.y + u_rot.w*u_rot.z),
-			1.0f - 2.0f * (u_rot.x*u_rot.x + u_rot.z*u_rot.z),
-			2.0f * (u_rot.y*u_rot.z - u_rot.w*u_rot.x));*/
-
 		return glm::fvec3(2.0f * (m_rot.x*m_rot.y + m_rot.w*m_rot.z),
 			1.0f - 2.0f * (m_rot.x*m_rot.x + m_rot.z*m_rot.z),
 			2.0f * (m_rot.y*m_rot.z - m_rot.w*m_rot.x));
-
-		/*return glm::rotate(m_rot, glm::vec3(0, 1, 0));*/
 	}
 
-	//inline glm::fvec3 Rotate(const glm::quat& rotation) const
-	//{
-	//glm::quat conjugateQ = glm::conjugate(rotation);
-	//glm::quat w = rotation * (const glm::fvec3) * conjugateQ;
+	inline glm::fvec3 GetTransformedUp() const
+	{
+		glm::quat u_rot = GetTransformedRot();
 
-	//glm::fvec3 ret(w.x, w.y, w.z);
+		return glm::fvec3(2.0f * (u_rot.x*u_rot.y + u_rot.w*u_rot.z),
+			1.0f - 2.0f * (u_rot.x*u_rot.x + u_rot.z*u_rot.z),
+			2.0f * (u_rot.y*u_rot.z - u_rot.w*u_rot.x));
 
-	//return ret;
-	//}
+	}
 
 protected:
 private:

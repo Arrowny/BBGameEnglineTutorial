@@ -10,6 +10,11 @@
 struct Vertex
 {
 public:
+
+	glm::vec3 pos;
+	glm::vec2 texCoord;
+	glm::vec3 normal;
+
 	Vertex(const glm::vec3& pos, const glm::vec2& texCoord, const glm::vec3& normal)
 	{
 		this->pos = pos;
@@ -21,10 +26,6 @@ public:
 	inline glm::vec2* GetTexCoord()	 { return &texCoord; }
 	inline glm::vec3* GetNormal()	 { return &normal; }
 
-private:
-	glm::vec3 pos;
-	glm::vec2 texCoord;
-	glm::vec3 normal;
 
 };
 
@@ -52,6 +53,7 @@ private:
 		NUM_BUFFERS
 	};
 
+	void CalcNormals(const IndexedModel& model);
 	void InitMesh(const IndexedModel& model);
 
 	GLuint m_vertexArrayObject;

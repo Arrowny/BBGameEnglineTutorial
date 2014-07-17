@@ -41,7 +41,7 @@ void ForwardDirectional::UpdateUniforms(const Transform& transform, const Materi
 	directionalLight dirLight = *(directionalLight*)renderingEngine->GetActiveLight();
 
 	glm::vec3 dirColor = dirLight.m_color;
-	glm::vec3 dirDirection = dirLight.GetTransform().GetForward();;
+	glm::vec3 dirDirection = dirLight.GetTransform().GetTransformedForward();
 
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
 	glUniformMatrix4fv(m_uniforms[NORMAL_U], 1, GL_FALSE, &Normal[0][0]);

@@ -47,7 +47,7 @@ void ForwardPoint::UpdateUniforms(const Transform& transform, const Material& ma
 	pointLight pLight = *(pointLight*)renderingEngine->GetActiveLight();
 
 	glm::vec3 pointColor = pLight.m_color;
-	glm::vec3 pointPos = pLight.GetTransform().GetPos();
+	glm::vec3 pointPos = pLight.GetTransform().GetTransformedForward();
 	
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
 	glUniformMatrix4fv(m_uniforms[NORMAL_U], 1, GL_FALSE, &Normal[0][0]);

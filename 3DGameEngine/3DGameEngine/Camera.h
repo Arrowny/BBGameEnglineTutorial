@@ -70,17 +70,45 @@ public:
 		}
 
 		if (input.GetKey(input.KEY_W))
-			move(GetTransform().GetForward(), movAmt);
+		{
+			if (input.GetKey(input.KEY_LSHIFT))
+			{
+				move(GetTransform().GetTransformedForward(), movAmt * 3);
+			}
+
+			move(GetTransform().GetTransformedForward(), movAmt);
+		}
 		if (input.GetKey(input.KEY_S))
-			move(GetTransform().GetForward(), -movAmt);
+		{
+			if (input.GetKey(input.KEY_LSHIFT))
+			{
+				move(GetTransform().GetTransformedForward(), -movAmt * 3);
+			}
+
+			move(GetTransform().GetTransformedForward(), -movAmt);
+		}
 		if (input.GetKey(input.KEY_A))
-			move(GetTransform().GetLeft(), -movAmt);
+		{
+			if (input.GetKey(input.KEY_LSHIFT))
+			{
+				move(GetTransform().GetTransformedLeft(), -movAmt * 3);
+			}
+
+			move(GetTransform().GetTransformedLeft(), -movAmt);
+		}
 		if (input.GetKey(input.KEY_D))
-			move(GetTransform().GetRight(), -movAmt);
+		{
+			if (input.GetKey(input.KEY_LSHIFT))
+			{
+				move(GetTransform().GetTransformedRight(), -movAmt * 3);
+			}
+
+			move(GetTransform().GetTransformedRight(), -movAmt);
+		}
 		if (input.GetKey(input.KEY_SPACE))
-			move(GetTransform().GetUp(), movAmt);
+			move(GetTransform().GetTransformedUp(), movAmt);
 		if (input.GetKey(input.KEY_LCTRL))
-			move(GetTransform().GetUp(), -movAmt);
+			move(GetTransform().GetTransformedUp(), -movAmt);
 
 		/*if (input.GetKey(input.KEY_UP))
 			rotateX(-rotAmt);
