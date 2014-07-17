@@ -2,12 +2,13 @@
 #define GAME_H
 
 #include "Input.h"
-#include <iostream>
+#include "Window.h"
 #include "Mesh.h"
-////#include "BasicShader.h"
-//#include "Transform.h"
-#include "Timing.h"
+#include "BasicShader.h"
+#include "Transform.h"
+#include "Camera.h"
 #include "GameObject.h"
+#include "MeshRenderer.h"
 
 class Game
 {

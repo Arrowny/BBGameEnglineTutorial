@@ -1,14 +1,20 @@
 #ifndef _RENDERINGENGINE_H
 #define _RENDERINGENGINE_H
 #pragma once
-#include "GameObject.h"
+
+#include <GL/glew.h>
+#include <glm\glm.hpp>
+#include <vector>
+#include "Camera.h"
 class GameObject;
+
+
 class RenderingEngine
 {
 public:
 	RenderingEngine();
 	
-
+	void input(Input input);
 	void render(GameObject* object);
 	void clearScreen();
 	const GLubyte* getOpenGLVersion();

@@ -37,10 +37,11 @@ BasicShader::~BasicShader()
 
 
 
-void BasicShader::Update(Transform& transform, Camera& camera, Material& material)
+void BasicShader::Update(Transform& transform, RenderingEngine& renderingEngine, Material& material)
 {
-	glm::mat4 worldMatrix = transform.GetModel();
-	glm::mat4 projectedMatrix = camera.GetViewProjection()* worldMatrix;
+	glm::mat4 worldMatrix = transform.GetModel();		
+	glm::mat4 projectedMatrix = renderingEngine.GetMainCamera().GetViewProjection()* worldMatrix;
+	//glm::mat4 projectedMatrix =GetRenderingEngine()->GetMainCamera().GetViewProjection()* worldMatrix; // can not use GetRenderingEngine()->.........do not know why......
 	//glm::mat4 model = projectedMatrix * worldMatrix;
 
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_P_U], 1, GL_FALSE, &projectedMatrix[0][0]);

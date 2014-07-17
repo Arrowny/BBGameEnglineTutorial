@@ -4,9 +4,10 @@
 #include "GameComponent.h"
 #include "transform.h"
 
+#include <vector>
+#include "Transform.h"
+#include "GameComponent.h"
 class RenderingEngine;
-class Shader;
-
 class GameObject
 {
 public:
@@ -15,7 +16,7 @@ public:
 
 	void input();
 	void update();
-	void render(Shader* m_shader, Camera* m_camera);
+	void render(Shader* m_shader, RenderingEngine* renderingEngine);
 
 	void AddChild(GameObject& child);
 	void AddComponent(GameComponent* component);

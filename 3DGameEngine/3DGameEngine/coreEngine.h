@@ -2,9 +2,9 @@
 #define COREENGINE_H
 
 #include <string>
-#include "Window.h"
+//#include "Window.h"
 #include "TestGame.h"
-#include "Input.h"
+//#include "Input.h"
 #include "RenderingEngine.h"
 
 class coreEngine

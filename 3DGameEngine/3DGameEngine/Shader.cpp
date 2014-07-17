@@ -1,7 +1,9 @@
 #include "Shader.h"
 #include <fstream>
 #include <iostream>
-
+#include <cassert>
+#include <GL/glew.h>
+#include <cstdlib>
 //Class RenderdingEnginge;
 
 Shader::Shader()
@@ -88,4 +90,15 @@ void Shader::CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const 
 
 		std::cerr << errorMessage << ": '" << error << "'" << std::endl;
 	}
+}
+
+/*Actually not useful*/
+void Shader::SetRenderingEngine(RenderingEngine* renderingEngine)
+{
+	this->renderingEngine = renderingEngine;
+}
+
+RenderingEngine* Shader::GetRenderingEngine()
+{
+	return renderingEngine;
 }

@@ -8,7 +8,7 @@ class BasicShader : public Shader
 public:
 	BasicShader(const std::string& fileName);
 
-	void Update(Transform& transform, Camera& camera, Material& material);
+	void Update(Transform& transform, RenderingEngine& renderingEngine, Material& material);
 
 	static BasicShader* GetInstance()
 	{

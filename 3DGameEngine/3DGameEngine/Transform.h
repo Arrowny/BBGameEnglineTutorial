@@ -1,6 +1,7 @@
 #pragma once
 #include <glm\glm.hpp>
 #include <glm\gtx\transform.hpp>
+#include "Camera.h"
 #define PI 3.1415926
 
 class Transform

@@ -1,5 +1,7 @@
 #include "RenderingEngine.h"
-
+#include "BasicShader.h"
+#include "Window.h"
+#include "GameObject.h"
 
 RenderingEngine::RenderingEngine():
 mainCamera(glm::vec3(0, 1, -4), 70.0f, (float)WindowParameter::width / (float)WindowParameter::height, 1.0f, 1000.0f)
@@ -24,10 +26,15 @@ RenderingEngine::~RenderingEngine()
 {
 }
 
+void RenderingEngine::input(Input input)
+{
+	mainCamera.Input(input);
+}
 void RenderingEngine::render(GameObject* object)
 {
-	
-	object->render(BasicShader::GetInstance(),&mainCamera);
+	//Shader* shader = BasicShader::GetInstance();
+	//shader->SetRenderingEngine(this);
+	object->render(BasicShader::GetInstance(),this);
 }
 
 
