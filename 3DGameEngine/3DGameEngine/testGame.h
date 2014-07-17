@@ -26,15 +26,15 @@ private:
 	TestGame(const TestGame& other) {}
 	void operator=(const TestGame& other) {}
 
-	Transform* m_worldTransform;
-
-	GameObject pyrimidGameObject;
+	MeshRenderer* meshComponent; GameObject pyrimidGameObject;
+	MeshRenderer* meshComponent2; GameObject pyrimidGameObject2;
 	DirectionalLight* dLight; GameObject dLightObj;
 	PointLight* pLight1; GameObject pLight1Obj;
 	PointLight* pLight2; GameObject pLight2Obj;
 	SpotLight* sLight; GameObject sLightObj;
 	Camera* camera; GameObject cameraObj;
-	MeshRenderer* meshComponent;
+	
+	
 
 };
 

@@ -18,7 +18,7 @@ public:
 	void Update(double delta);
 	void Render(Shader* shader, RenderingEngine* renderingEngine);
 	void addToRenderingEngine(RenderingEngine* renderingEngine);
-	void addChild(GameObject* child) { m_children.push_back(child); }
+	void addChild(GameObject* child);
 	void addComponent(GameComponent* component);
 
 	Transform* m_transform;

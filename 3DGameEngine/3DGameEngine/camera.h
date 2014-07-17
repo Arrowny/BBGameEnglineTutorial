@@ -21,7 +21,7 @@ public:
 	virtual void addToRenderingEngine(RenderingEngine* renderingEngine);
 
 	void reinitPerspectiveMatrix(double zNear, double zFar, double fov, double screenWidth, double screenHeight);
-	void Camera::lookAt(glm::vec3 destPoint, glm::vec3 up)
+	void Camera::lookAt(glm::vec3 destPoint, glm::vec3 up);
 	//void lookAt(const glm::vec3& lookAt, const glm::vec3& up);
 	void move(const glm::vec3& dir, const float& amt);
 

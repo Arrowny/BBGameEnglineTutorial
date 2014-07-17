@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <glm\glm.hpp>
+#include <glm\gtx\transform.hpp>
 #include <glm\gtx\quaternion.hpp>
 
 
@@ -32,15 +33,21 @@ void TestGame::Init(Window* window)
 	textCoords.push_back(glm::vec2(1.0, 0.0));
 	textCoords.push_back(glm::vec2(0.5, 1.0));
 
-	m_worldTransform = new Transform();
-
 	//Set up mesh information.
 	//TestMesh = new Mesh("./res/object_files/box.obj");
 	meshComponent = new MeshRenderer(new Mesh(vertices, indices, textCoords),
 										 Material("./res/texture_files/bricks.jpg",glm::vec3(1.0, 1.0, 1.0), 1, 8));
+	meshComponent2 = new MeshRenderer(new Mesh(vertices, indices, textCoords),
+										Material("./res/texture_files/bricks.jpg", glm::vec3(1.0, 1.0, 1.0), 1, 8));
 
-	pyrimidGameObject.m_transform = m_worldTransform;
+	pyrimidGameObject.m_transform = new Transform(glm::vec3(0, 0, 5));
+	pyrimidGameObject.m_transform->m_rot = glm::normalize(glm::quat(glm::radians(90.0f), glm::vec3(1, 0, 0)));
+
 	pyrimidGameObject.addComponent(meshComponent);
+
+	pyrimidGameObject2.m_transform = new Transform(glm::vec3(0, 3, 0));
+	pyrimidGameObject2.addComponent(meshComponent2);
+
 
 	dLight = new DirectionalLight(glm::vec3(1, 1, 1), 0.8);
 	dLightObj.addComponent(dLight);
@@ -67,14 +74,13 @@ void TestGame::Init(Window* window)
 	cameraObj.m_transform = new Transform();
 	
 	//pyrimidGameObject.addChild(&dLightObj);
-	pyrimidGameObject.addChild(&cameraObj);
-	pyrimidGameObject.addChild(&pLight1Obj);
-	pyrimidGameObject.addChild(&pLight2Obj);
-	pyrimidGameObject.addChild(&sLightObj);
+	//m_root.addChild(&cameraObj);
+	m_root.addChild(&pLight1Obj);
+	m_root.addChild(&pLight2Obj);
+	m_root.addChild(&sLightObj);
+	pyrimidGameObject2.addChild(&cameraObj);
+	pyrimidGameObject.addChild(&pyrimidGameObject2);
 	m_root.addChild(&pyrimidGameObject);
-
-
-	m_worldTransform->setTranslationExplicit(0.0, 0.0, 5.0);
 }
 
 //void TestGame::ProcessInput(Input* &input)
