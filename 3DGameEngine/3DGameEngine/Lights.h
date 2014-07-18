@@ -2,7 +2,7 @@
 #include <glm/glm.hpp>
 #include "GameComponent.h"
 
-struct BaseLight
+struct BaseLight :public GameComponent
 {
 public:
 
@@ -13,30 +13,27 @@ public:
 		color(glm::vec3(0, 0, 0)),
 		intensity(1)
 	{}
-	BaseLight(glm::vec3& color, float intensity) :
+	BaseLight(glm::vec3 color, float intensity) :
 		color(color),
 		intensity(intensity)
 	{}
 
+	void AddToRenderingEngine(RenderingEngine* renderingEngine);
+	inline void SetShader(Shader* shader) { l_shader = shader; }
+	inline Shader* GetShader() { return l_shader; }
+
+private:
+	Shader* l_shader;
 };
 
-struct DirectionalLight :public GameComponent
+struct DirectionalLight :public BaseLight
 {
 public:
-	BaseLight base;
+	//glm::vec3 color;
+	//float intensity;
 	glm::vec3 direction;
 
-	DirectionalLight() :
-		base(BaseLight()),
-		direction(glm::vec3(0, 0, 0))
-	{}
-	DirectionalLight(BaseLight base, glm::vec3 direction) :
-		base(base),
-		direction(glm::normalize(direction))
-	{}
-
-	void AddToRenderingEngine(RenderingEngine* renderingEngine);
-
+	DirectionalLight( glm::vec3 color = glm::vec3(0, 0, 0), float intensity = 0,  glm::vec3 direction = glm::vec3(0, 0, 0));
 };
 
 struct Attenuation
@@ -86,7 +83,7 @@ struct PointLight :public GameComponent
 	void SetPosition(glm::vec3 pos) { position = pos; }
 	void SetRange(float ran) { range = ran; }
 
-	void AddToRenderingEngine(RenderingEngine* renderingEngine);
+	//void AddToRenderingEngine(RenderingEngine* renderingEngine);
 };
 
 struct SpotLight :public GameComponent
@@ -112,7 +109,7 @@ public:
 	inline void SetDirection(glm::fvec3 direct) { direction = glm::normalize(direct); }
 	inline void SetCutoff(float cutoff) { this->cutoff = cutoff; }
 
-	void AddToRenderingEngine(RenderingEngine* renderingEngine);
+	//void AddToRenderingEngine(RenderingEngine* renderingEngine);
 };
 
 

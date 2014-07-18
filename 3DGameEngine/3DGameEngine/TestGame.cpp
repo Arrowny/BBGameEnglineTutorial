@@ -33,21 +33,21 @@ void TestGame::init()
 	planeObject->GetTransform().SetPos(glm::vec3(0, -1, 7));
 
 	GameObject* directionalLightObject = new GameObject();
-	DirectionalLight* directionalLight = new DirectionalLight(BaseLight(glm::vec3(1, 0, 0), 0.2f), glm::vec3(1, 1, 1));
+	DirectionalLight* directionalLight = new DirectionalLight(glm::vec3(1, 0, 0), 0.2f, glm::vec3(1, 1, 1));
 	directionalLightObject->AddComponent(directionalLight);
 
-	GameObject* pointLightObject = new GameObject();
-	PointLight* pointLight = new PointLight(BaseLight(glm::vec3(0, 1, 1), 0.2f), Attenuation(0.0, 0.0, 0.5), glm::vec3(0, 0, 7), 30);
-	pointLightObject->AddComponent(pointLight);
+	//GameObject* pointLightObject = new GameObject();
+	//PointLight* pointLight = new PointLight(BaseLight(glm::vec3(0, 1, 1), 0.2f), Attenuation(0.0, 0.0, 0.5), glm::vec3(0, 0, 7), 30);
+	//pointLightObject->AddComponent(pointLight);
 
-	GameObject* spotLightObject = new GameObject();
-	SpotLight* spotLight = new SpotLight(PointLight(BaseLight(glm::fvec3(0.0, 0.0, 1.0), 0.2f), Attenuation(0.0, 0.0, 1.0), glm::fvec3(-2.0, 0.0, 0.0), 30), glm::fvec3(1.0, 1.0, 1.0), 0.1f);
-	spotLightObject->AddComponent(spotLight);
+	//GameObject* spotLightObject = new GameObject();
+	//SpotLight* spotLight = new SpotLight(PointLight(BaseLight(glm::fvec3(0.0, 0.0, 1.0), 0.2f), Attenuation(0.0, 0.0, 1.0), glm::fvec3(-2.0, 0.0, 0.0), 30), glm::fvec3(1.0, 1.0, 1.0), 0.1f);
+	//spotLightObject->AddComponent(spotLight);
 
 	GetRootObject().AddChild(*planeObject);
 	GetRootObject().AddChild(*directionalLightObject);
-	GetRootObject().AddChild(*pointLightObject);
-	GetRootObject().AddChild(*spotLightObject);
+	//GetRootObject().AddChild(*pointLightObject);
+	//GetRootObject().AddChild(*spotLightObject);
 	/* -------------------------------Light Part----------------------------------------
 	m_shader->SetAmbient(glm::fvec3(0.3, 0.3, 0.3));
 	m_shader->SetDirectionalLight(DirectionalLight(BaseLight(glm::vec3(1, 0, 0), 0.5f), glm::vec3(0, 0, -1)));

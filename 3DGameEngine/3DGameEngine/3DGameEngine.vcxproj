@@ -90,7 +90,6 @@
     <ClCompile Include="Lights.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="PhongShader.cpp" />
     <ClCompile Include="RenderingEngine.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stb_image.c" />
@@ -116,7 +115,6 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshRenderer.h" />
-    <ClInclude Include="PhongShader.h" />
     <ClInclude Include="RenderingEngine.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shader.h" />
@@ -130,10 +128,6 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3DGameEngine.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="res\basicShader.fs" />
-    <None Include="res\basicShader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -35,8 +35,8 @@ void RenderingEngine::input(Input input, float delta)
 
 void RenderingEngine::render(GameObject* object)
 {
-	ClearLightList();
-
+	//ClearLightList();
+	lights.clear();
 	object->AddToRenderingEngine(this);
 
 	/*activeDirectionalLight = DirectionalLight(BaseLight(glm::vec3(1, 0, 0), 0.2f), glm::vec3(1, 1, 1));
@@ -52,17 +52,25 @@ void RenderingEngine::render(GameObject* object)
 	glDepthMask(false);
 	glDepthFunc(GL_EQUAL); //only do pixel lighting calculation
 
-	for each (DirectionalLight light in directionalLights)
+	for each (BaseLight* light in lights)
 	{
-		activeDirectionalLight = light;
-		object->render(ForwardDirectional::GetInstance(), this);
+		light->GetShader()->SetRenderingEngine(this);
+		activeLight = light;
+		object->render(light->GetShader(), this);
 	}
 
-	for each (PointLight light in pointLights)
-	{
-		activePointLight = light;
-		object->render(ForwardPoint::GetInstance(), this);
-	}
+
+	//for each (DirectionalLight light in directionalLights)
+	//{
+	//	activeDirectionalLight = light;
+	//	object->render(ForwardDirectional::GetInstance(), this);
+	//}
+
+	//for each (PointLight light in pointLights)
+	//{
+	//	activePointLight = light;
+	//	object->render(ForwardPoint::GetInstance(), this);
+	//}
 
 	//for each (SpotLight light in spotLights)
 	//{
@@ -82,21 +90,31 @@ void RenderingEngine::render(GameObject* object)
 //	return glGetString(GL_VERSION);
 //}
 
-void RenderingEngine::AddDirectionalLight(DirectionalLight directionalLight)
+//void RenderingEngine::AddDirectionalLight(DirectionalLight directionalLight)
+//{
+//	directionalLights.push_back(directionalLight);
+//}
+//void RenderingEngine::AddPointLight(PointLight pointLight)
+//{
+//	pointLights.push_back(pointLight);
+//}
+//void RenderingEngine::AddSpotLight(SpotLight spotLight)
+//{
+//	spotLights.push_back(spotLight);
+//}
+//
+//void RenderingEngine::ClearLightList()
+//{
+//	directionalLights.clear();
+//	pointLights.clear();
+//}
+
+void RenderingEngine::AddLight(BaseLight* light)
 {
-	directionalLights.push_back(directionalLight);
-}
-void RenderingEngine::AddPointLight(PointLight pointLight)
-{
-	pointLights.push_back(pointLight);
-}
-void RenderingEngine::AddSpotLight(SpotLight spotLight)
-{
-	spotLights.push_back(spotLight);
+	lights.push_back(light);
 }
 
-void RenderingEngine::ClearLightList()
+BaseLight* RenderingEngine::GetActiveLight()
 {
-	directionalLights.clear();
-	pointLights.clear();
+	return activeLight;
 }
