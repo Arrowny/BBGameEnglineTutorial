@@ -20,12 +20,6 @@ public:
 
 	Shader(const std::string& fileName);
 
-	static Shader* GetInstance()
-	{
-		static Shader instance("./res/forwardAmbient");
-		return &instance;
-	}
-
 	void Bind();
 	void CompileShader();
     virtual void Update(const Transform& transform, const Material& material, renderingEngine* renderingEngine);
@@ -34,7 +28,7 @@ public:
 
 	virtual ~Shader();
 protected:
-	static const unsigned int NUM_SHADERS = 2;
+	static const unsigned int NUM_SHADERS = 3;
 
 	enum
 	{
@@ -77,8 +71,8 @@ protected:
 	GLuint m_shaders[NUM_SHADERS];
 	GLuint m_uniforms[NUM_UNIFORMS];
 
-	std::string LoadShader(const std::string& fileName);
-	void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
+	static std::string LoadShader(const std::string& fileName);
+	static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
 	GLuint CreateShader(const std::string& text, unsigned int type);
 
 private:

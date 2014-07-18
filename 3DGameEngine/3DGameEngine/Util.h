@@ -1,17 +1,23 @@
 #pragma once
 
-#include <glm\glm.hpp>
+#ifndef WIN32
+#include <unistd.h>
+#endif
 
-class Util
+#ifdef WIN32
+#define SNPRINTF _snprintf_s
+#else
+#define SNPRINTF snprintf
+#endif
+
+#define ARRAY_SIZE_IN_ELEMENTS(a) (sizeof(a)/sizeof(a[0]))
+#define INVALID_VALUE 0xFFFFFFFF
+
+#include <vector>
+#include <string>
+
+namespace Util
 {
-public:
-	Util();
-	~Util();
-
-	void createFlippedBuffer(const glm::fvec3 vertices);
-
-protected:
-private:
-
+	void Sleep(int milliseconds);
+	std::vector<std::string> Split(const std::string &s, char delim);
 };
-

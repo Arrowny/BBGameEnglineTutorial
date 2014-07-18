@@ -99,6 +99,7 @@
     <ClCompile Include="testGame.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timing.cpp" />
+    <ClCompile Include="Util.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -123,6 +124,7 @@
     <ClInclude Include="obj_loader.h" />
     <ClInclude Include="pointLight.h" />
     <ClInclude Include="renderingEngine.h" />
+    <ClInclude Include="res\lighting.glh" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="spotLight.h" />
     <ClInclude Include="stb_image.h" />
@@ -130,6 +132,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timing.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="Util.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>

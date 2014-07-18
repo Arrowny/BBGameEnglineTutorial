@@ -4,6 +4,7 @@
 #include <sstream>
 #include <cassert>
 #include <cstdlib>
+#include "Util.h"
 
 Shader::Shader()
 {
@@ -157,7 +158,19 @@ std::string Shader::LoadShader(const std::string& fileName)
 		while (file.good())
 		{
 			getline(file, line);
-			output.append(line + "\n");
+
+			if (line.find("#include") == std::string::npos)
+			{
+				output.append(line + "\n");
+			}
+			else
+			{
+				std::string includeFileName = Util::Split(line, ' ')[1];
+				includeFileName = includeFileName.substr(1, includeFileName.length() - 2);
+				
+				std::string toAppend = LoadShader(includeFileName);
+				output.append(toAppend + "\n");
+			}
 		}
 	}
 	else

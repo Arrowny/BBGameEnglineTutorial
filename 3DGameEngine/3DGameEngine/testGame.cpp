@@ -36,6 +36,7 @@ void TestGame::init(){
 	m_texture = new Texture("./res/colour.jpg");
 	m_texture2 = new Texture("./res/bricks2.jpg");
 	m_texture3 = new Texture("./res/bricks2_normal.jpg");
+
 	m_material = Material();
 	m_material.AddTexture("diffuse", m_texture);
 	m_material.AddFloat("specularIntensity", 1);
@@ -44,7 +45,7 @@ void TestGame::init(){
 	m_material2 = Material();
 	m_material2.AddTexture("diffuse", m_texture2);
 	m_material2.AddFloat("specularIntensity", 1);
-	m_material2.AddFloat("specularPower", 36);
+	m_material2.AddFloat("specularPower", 10);
 
 	m_material3 = Material();
 	m_material3.AddTexture("diffuse", m_texture3);
@@ -63,7 +64,7 @@ void TestGame::init(){
 	m_planeObject2->GetTransform().SetPos(glm::fvec3(-4, 0, 0));
 	m_planeObject3->GetTransform().SetPos(glm::fvec3(-2, 4, 0));
 
-	dirLight1 = new directionalLight(glm::fvec3(1.0f, 1.0f, 1.0f), 0.2f);
+	dirLight1 = new directionalLight(glm::fvec3(1.0f, 1.0f, 1.0f), 0.01f);
 	dirLight2 = new directionalLight(glm::fvec3(0.0f, 0.0f, 1.0f), 0.2f);
 	dirLight3 = new directionalLight(glm::fvec3(0.0f, 1.0f, 0.0f), 0.2f);
 	m_dirLightObj1->AddComponent(dirLight1);
@@ -89,7 +90,6 @@ void TestGame::init(){
 	m_sLightObj2->GetTransform().SetPos(glm::fvec3(1.0, 0.0, -0.5));
 	m_sLightObj1->GetTransform().SetRot(glm::normalize(glm::quat(glm::radians(90.0f), 1.0, 0, 0)));
 	
-
 	AddToScene(m_planeObject);
 	AddToScene(m_dirLightObj1);
 	AddToScene(m_pLightObj1);
