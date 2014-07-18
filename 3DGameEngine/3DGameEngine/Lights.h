@@ -58,27 +58,13 @@ public:
 };
 
 
-struct PointLight :public GameComponent
+struct PointLight : public BaseLight
 {
-	BaseLight base;
 	Attenuation atten;
 	glm::vec3 position;
 	float range;
 
-	PointLight() :
-		base(BaseLight()),
-		atten(Attenuation()),
-		position(glm::fvec3(0.0,0.0,0.0)),
-		range(4.0)
-	{}
-
-
-	PointLight(BaseLight baselight, Attenuation attenu, glm::vec3 position, float range) :     //, float range
-		base(baselight),
-		atten(attenu),
-		position(position),
-		range(range)
-	{}
+	PointLight(glm::vec3 color = glm::vec3(0, 0, 0), float intensity = 0, Attenuation attenu = Attenuation(), glm::vec3 position = glm::vec3(0, 0, 0), float range = 0);
 
 	void SetPosition(glm::vec3 pos) { position = pos; }
 	void SetRange(float ran) { range = ran; }

@@ -60,14 +60,16 @@ void ForwardPoint::Update(Transform& transform, RenderingEngine& renderingEngine
 	glUniform1f(m_uniforms[L_SPECULARINTENSITY_U], material.specularIntensity);
 	glUniform1f(m_uniforms[L_SPECULARPOWER_U], material.specularPower);
 
-	//glUniform3fv(m_uniforms[L_POINT_BASE_COLOR], 1, &renderingEngine.GetPointLight().base.color[0]);
-	//glUniform1f(m_uniforms[L_POINT_BASE_INTENS], renderingEngine.GetPointLight().base.intensity);
-	//glUniform1f(m_uniforms[L_POINT_ATTEN_CONS], renderingEngine.GetPointLight().atten.constant);
-	//glUniform1f(m_uniforms[L_POINT_ATTEN_LINE], renderingEngine.GetPointLight().atten.linear);
-	//glUniform1f(m_uniforms[L_POINT_ATTEN_EXPO], renderingEngine.GetPointLight().atten.exponent);
-	//glUniform3fv(m_uniforms[L_POINT_POSITION], 1, &renderingEngine.GetPointLight().position[0]);
-	////glUniform3fv(m_uniforms[L_POINT_POSITION], 1, &renderingEngine.GetMainCamera().GetPos()[0]);
-	//glUniform1f(m_uniforms[L_POINT_RANGE], renderingEngine.GetPointLight().range);
+	PointLight pointLight = *(PointLight*)renderingEngine.GetActiveLight();
+
+	glUniform3fv(m_uniforms[L_POINT_BASE_COLOR], 1, &pointLight.color[0]);
+	glUniform1f(m_uniforms[L_POINT_BASE_INTENS], pointLight.intensity);
+	glUniform1f(m_uniforms[L_POINT_ATTEN_CONS], pointLight.atten.constant);
+	glUniform1f(m_uniforms[L_POINT_ATTEN_LINE], pointLight.atten.linear);
+	glUniform1f(m_uniforms[L_POINT_ATTEN_EXPO], pointLight.atten.exponent);
+	glUniform3fv(m_uniforms[L_POINT_POSITION], 1, &pointLight.position[0]);
+	//glUniform3fv(m_uniforms[L_POINT_POSITION], 1, &renderingEngine.GetMainCamera().GetPos()[0]);
+	glUniform1f(m_uniforms[L_POINT_RANGE], pointLight.range);
 
 
  }

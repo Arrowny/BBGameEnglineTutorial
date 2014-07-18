@@ -26,8 +26,14 @@ void TestGame::init()
 	DirectionalLight* directionalLight = new DirectionalLight(glm::vec3(1, 0, 0), 0.2f, glm::vec3(1, 1, 1));
 	directionalLightObject->AddComponent(directionalLight);
 
+
+	GameObject* pointLightObject = new GameObject();
+	PointLight* pointLight = new PointLight(glm::vec3(0, 0, 1), 0.2f, Attenuation(0.0, 0.0, 0.1), glm::vec3(0, 0, 7), 30);
+	pointLightObject->AddComponent(pointLight);
+
 	GetRootObject().AddChild(*planeObject);
 	GetRootObject().AddChild(*directionalLightObject);
+	GetRootObject().AddChild(*pointLightObject);
 
 	/* -------------------------------Light Part----------------------------------------
 	m_shader->SetAmbient(glm::fvec3(0.3, 0.3, 0.3));
