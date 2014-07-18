@@ -64,9 +64,9 @@ struct PointLight : public BaseLight
 	glm::vec3 position;
 	float range;
 
-	PointLight(glm::vec3 color = glm::vec3(0, 0, 0), float intensity = 0, Attenuation attenu = Attenuation(), glm::vec3 position = glm::vec3(0, 0, 0), float range = 0);
+	PointLight(glm::vec3 color = glm::vec3(0, 0, 0), float intensity = 0, Attenuation attenu = Attenuation());
 
-	void SetPosition(glm::vec3 pos) { position = pos; }
+	
 	void SetRange(float ran) { range = ran; }
 
 };
@@ -77,7 +77,7 @@ public:
 	glm::vec3 direction;
 	float cutoff;
 
-	SpotLight(glm::vec3 color , float intensity, Attenuation attenu , glm::vec3 position, float range ,glm::fvec3 direct, float cutoff);
+	SpotLight(glm::vec3 color , float intensity, Attenuation attenu ,glm::fvec3 direct, float cutoff);
 
 	inline void SetDirection(glm::fvec3 direct) { direction = glm::normalize(direct); }
 	inline void SetCutoff(float cutoff) { this->cutoff = cutoff; }

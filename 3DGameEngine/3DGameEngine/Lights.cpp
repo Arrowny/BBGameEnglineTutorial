@@ -16,17 +16,17 @@ direction(glm::normalize(direction))
 	SetShader(ForwardDirectional::GetInstance());
 }
 
-PointLight::PointLight(glm::vec3 color, float intensity, Attenuation atten, glm::vec3 position, float range) :
+PointLight::PointLight(glm::vec3 color, float intensity, Attenuation atten) :
 BaseLight(color, intensity),
 atten(atten),
 position(position),
-range(range)
+range(100)
 {
 	SetShader(ForwardPoint::GetInstance());
 }
 
-SpotLight::SpotLight(glm::vec3 color, float intensity, const Attenuation atten, glm::vec3 position, float range, glm::vec3 direction, float cutoff) :
-PointLight(color, intensity, atten, position, range),
+SpotLight::SpotLight(glm::vec3 color, float intensity, const Attenuation atten,glm::vec3 direction, float cutoff) :
+PointLight(color, intensity, atten),
 direction(direction),
 cutoff(cutoff)
 {

@@ -1,5 +1,5 @@
 #include "GameObject.h"
-
+#include "GameComponent.h"
 
 GameObject::GameObject()
 {
@@ -19,6 +19,7 @@ void GameObject::AddChild(GameObject& child)
 void GameObject::AddComponent(GameComponent* comp)
 {
 	components.push_back(comp);
+	comp->SetParent(this);
 }
 
 void GameObject::AddToRenderingEngine(RenderingEngine* renderingEngine)
@@ -33,7 +34,7 @@ void GameObject::AddToRenderingEngine(RenderingEngine* renderingEngine)
 void GameObject::input(float delta)
 {
 	for each (GameComponent* comp in components)
-		comp->input(m_transform, delta);
+		comp->input(delta);
 
 	for each (GameObject* child in children)
 		child->input(delta);
@@ -43,7 +44,7 @@ void GameObject::update(float delta)
 {
 
 	for each (GameComponent* comp in components)
-		comp->update(m_transform, delta);
+		comp->update(delta);
 
 	for each (GameObject* child in children)
 		child->update(delta);
@@ -52,7 +53,7 @@ void GameObject::update(float delta)
 void GameObject::render(Shader* m_shader, RenderingEngine* renderingEngine)
 {
 	for each (GameComponent* comp in components)
-		comp->render(m_shader, &m_transform, renderingEngine);
+		comp->render(m_shader, renderingEngine);
 
 	for each (GameObject* child in children)
 		child->render(m_shader, renderingEngine);

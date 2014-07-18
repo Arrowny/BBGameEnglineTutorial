@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Transform.h"
+#include "GameObject.h"
 class RenderingEngine;
 class Shader;
 
@@ -9,12 +10,19 @@ class GameComponent
 {
 public:
 
-	virtual void input(Transform transform, float delta) {}
-	virtual void update(Transform transform, float delta) {}
-	virtual void render(Shader* m_shader, Transform* m_transform, RenderingEngine* renderingEngine) {}
+	virtual void input(float delta) {}
+	virtual void update(float delta) {}
+	virtual void render(Shader* m_shader,RenderingEngine* renderingEngine) {}
 
 	virtual void AddToRenderingEngine(RenderingEngine* renderingEnine){}
 
+	inline void SetParent(GameObject* parent) { m_parent = parent; }
+	inline Transform& GetTransform() { return m_parent->GetTransform(); }
+
+
 	virtual ~GameComponent() {};
+
+private:
+	GameObject* m_parent;
 };
 

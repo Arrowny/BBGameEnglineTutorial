@@ -2,7 +2,8 @@
 #include <glm/glm.hpp>
 #include <vector>
 #include "Transform.h"
-#include "GameComponent.h"
+class GameComponent;
+class Shader;
 class RenderingEngine;
 
 

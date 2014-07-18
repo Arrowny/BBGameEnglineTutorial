@@ -13,10 +13,10 @@ public:
 	}
 
 	
-	void render(Shader* m_shader, Transform* m_transform, RenderingEngine* renderingEngine)
+	void render(Shader* m_shader, RenderingEngine* renderingEngine)
 	{
 		m_shader->Bind();
-		m_shader->Update(*m_transform, *renderingEngine, *m_material);
+		m_shader->Update(GetTransform(), *renderingEngine, *m_material);
 		m_material->m_texture->Bind(0);
 		m_mesh->Draw();
 	}

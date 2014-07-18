@@ -67,7 +67,7 @@ void ForwardPoint::Update(Transform& transform, RenderingEngine& renderingEngine
 	glUniform1f(m_uniforms[L_POINT_ATTEN_CONS], pointLight.atten.constant);
 	glUniform1f(m_uniforms[L_POINT_ATTEN_LINE], pointLight.atten.linear);
 	glUniform1f(m_uniforms[L_POINT_ATTEN_EXPO], pointLight.atten.exponent);
-	glUniform3fv(m_uniforms[L_POINT_POSITION], 1, &pointLight.position[0]);
+	glUniform3fv(m_uniforms[L_POINT_POSITION], 1, &pointLight.GetTransform().GetPos()[0]);
 	//glUniform3fv(m_uniforms[L_POINT_POSITION], 1, &renderingEngine.GetMainCamera().GetPos()[0]);
 	glUniform1f(m_uniforms[L_POINT_RANGE], pointLight.range);
 

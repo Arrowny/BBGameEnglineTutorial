@@ -27,11 +27,11 @@ void TestGame::init()
 	directionalLightObject->AddComponent(directionalLight);
 
 	GameObject* pointLightObject = new GameObject();
-	PointLight* pointLight = new PointLight(glm::vec3(0, 1, 0), 0.2f, Attenuation(0.0, 0.0, 0.5), glm::vec3(0, 0, 7), 30);
+	PointLight* pointLight = new PointLight(glm::vec3(0, 1, 0), 0.2f, Attenuation(0.0, 0.0, 0.5));
 	pointLightObject->AddComponent(pointLight);
 
 	GameObject* spotLightObject = new GameObject();
-	PointLight* spotLight = new SpotLight(glm::fvec3(0.0, 0.0, 1.0), 0.6f, Attenuation(0.0, 0.0, 0.1), glm::fvec3(-2.0, 0.0, 0.0), 30, glm::fvec3(1.0, 1.0, 1.0), 0.1f);
+	PointLight* spotLight = new SpotLight(glm::fvec3(0.0, 0.0, 1.0), 0.6f, Attenuation(0.0, 0.0, 0.1), glm::fvec3(1.0, 1.0, 1.0), 0.1f);
 	spotLightObject->AddComponent(spotLight);
 
 	GetRootObject().AddChild(*planeObject);

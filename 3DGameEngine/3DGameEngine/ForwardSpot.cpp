@@ -69,7 +69,7 @@ void ForwardSpot::Update(Transform& transform, RenderingEngine& renderingEngine,
 	glUniform1f(m_uniforms[L_SPOT_POINT_ATTEN_CONS], spotLight.atten.constant);
 	glUniform1f(m_uniforms[L_SPOT_POINT_ATTEN_LINE], spotLight.atten.linear);
 	glUniform1f(m_uniforms[L_SPOT_POINT_ATTEN_EXPO], spotLight.atten.exponent);
-	glUniform3fv(m_uniforms[L_SPOT_POINT_POSITION], 1, &spotLight.position[0]);
+	glUniform3fv(m_uniforms[L_SPOT_POINT_POSITION], 1, &spotLight.GetTransform().GetPos()[0]);
 	glUniform1f(m_uniforms[L_SPOT_POINT_RANGE], spotLight.range);
 	glUniform3fv(m_uniforms[L_SPOT_DIRECTION], 1, &spotLight.direction[0]);
 	glUniform1f(m_uniforms[L_SPOT_CUTOFF], spotLight.cutoff);
