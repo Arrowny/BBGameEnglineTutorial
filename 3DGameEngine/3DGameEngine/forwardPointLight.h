@@ -16,6 +16,6 @@ public:
 	void setUniform(std::string uniformName, PointLight* pLight);
 
 	virtual std::string getShaderType() { return "FORWARD_POINTLIGHT_SHADER"; }
-	virtual void updateBasicUniformsAndTexture(const glm::mat4& worldMatrix, const Material& mat, RenderingEngine* renderingEngine);
+	virtual void updateBasicUniformsAndTexture(const glm::mat4& worldMatrix, Material& mat, RenderingEngine* renderingEngine);
 };
 

@@ -14,6 +14,6 @@ public:
 	void setUniform(std::string uniformName, DirectionalLight* dLight);
 
 	virtual std::string getShaderType() { return "FORWARD_DIRECTIONAL_LIGHT_SHADER"; }
-	virtual void updateBasicUniformsAndTexture(const glm::mat4& worldMatrix, const Material& mat, RenderingEngine* renderingEngine);
+	virtual void updateBasicUniformsAndTexture(const glm::mat4& worldMatrix, Material& mat, RenderingEngine* renderingEngine);
 };
 

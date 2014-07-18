@@ -35,6 +35,7 @@ private:
 	void operator=(const Mesh& other);
 
 	void initMesh(std::vector<glm::vec3> vertices, std::vector<unsigned int> indices, std::vector<glm::vec2> textCoords);
+	void initMesh(std::vector<glm::vec3> vertices, std::vector<unsigned int> indices, std::vector<glm::vec2> textCoords, std::vector<glm::vec3> normals);
 	std::vector<glm::vec3> calcNormals(const std::vector<glm::vec3>& vertices, const std::vector<unsigned int>& indices);
 };
 

@@ -90,9 +90,9 @@
     <ClInclude Include="input.h" />
     <ClInclude Include="Lights.h" />
     <ClInclude Include="material.h" />
-    <ClInclude Include="math3d.h" />
     <ClInclude Include="mesh.h" />
     <ClInclude Include="meshRenderer.h" />
+    <ClInclude Include="objectLoader.h" />
     <ClInclude Include="renderingEngine.h" />
     <ClInclude Include="resourceLoader.h" />
     <ClInclude Include="shader.h" />
@@ -118,9 +118,9 @@
     <ClCompile Include="Lights.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="material.cpp" />
-    <ClCompile Include="math3d.cpp" />
     <ClCompile Include="mesh.cpp" />
     <ClCompile Include="meshRenderer.cpp" />
+    <ClCompile Include="objectLoader.cpp" />
     <ClCompile Include="renderingEngine.cpp" />
     <ClCompile Include="resourceLoader.cpp" />
     <ClCompile Include="shader.cpp" />

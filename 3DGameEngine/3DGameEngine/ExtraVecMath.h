@@ -1,7 +1,6 @@
 #pragma once
 #include <glm\gtx\transform.hpp>
 #include <glm\gtx\quaternion.hpp>
-#include "math3d.h"
 
 
 namespace EXQM

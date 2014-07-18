@@ -13,7 +13,7 @@ public:
 
 	void start();
 	void stop();
-protected:
+
 private:
 	CoreEngine(const CoreEngine& other) {}
 	void operator=(const CoreEngine& other) {}

@@ -16,7 +16,7 @@ ForwardAmbient::~ForwardAmbient()
 {
 }
 
-void ForwardAmbient::updateBasicUniformsAndTexture(const glm::mat4& worldMatrix, const Material& mat, RenderingEngine* renderingEngine)
+void ForwardAmbient::updateBasicUniformsAndTexture(const glm::mat4& worldMatrix, Material& mat, RenderingEngine* renderingEngine)
 {
 	setUniform("MVP", renderingEngine->getCamera()->getProjectionTransform()*worldMatrix);
 	setUniform("ambientIntensity", m_ambientIntensity);

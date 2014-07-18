@@ -39,7 +39,7 @@ Camera::~Camera()
 void Camera::ProcessInput(Input* input, double delta)
 {
 	float movAmt = 500.0f;
-	float rotAmt = 900000.0;
+	float rotAmt = -900000.0;
 
 	glm::vec3 center = EXQM::GetForward(getTransform()->m_rot);
 	glm::vec3 right = EXQM::GetRight(getTransform()->m_rot);

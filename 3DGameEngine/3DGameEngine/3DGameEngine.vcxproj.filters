@@ -99,7 +99,7 @@
     <ClInclude Include="ExtraVecMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math3d.h">
+    <ClInclude Include="objectLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -176,7 +176,7 @@
     <ClCompile Include="Lights.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math3d.cpp">
+    <ClCompile Include="objectLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

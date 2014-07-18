@@ -1,23 +1,28 @@
 #pragma once
 
+#include <map>
+#include <string>
 #include <glm\glm.hpp>
 #include "texture.h"
 
 class Material
 {
 public:
-	Material() :
-		m_color(glm::vec3(0,0,0)),
-		m_specularIntensity(0),
-		m_specularPower(0) {}
-	Material(glm::vec3 color);
-	Material(const glm::vec3& color, const float& specularIntensity, const float& specularPower);
-	Material(const std::string& fileName, const glm::vec3& color, const float& specularIntensity, const float& specularPower);
+	Material(const float& specularIntensity = 1, const float& specularPower = 32);
+	Material(const std::string& fileName, const float& specularIntensity = 1, const float& specularPower = 32);
 	virtual ~Material();
 
-	Texture* m_texture;
-	glm::vec3 m_color;
-	float m_specularIntensity;
-	float m_specularPower;
+	void addTexture(std::string name, std::string fileName) { textureMap[name] = new Texture(fileName); }
+	void addVector(std::string name, glm::vec3 vector) { vecMap[name] = vector; }
+	void addFloat(std::string name, float Float) { floatMap[name] = Float; }
+
+	Texture* getTexture(std::string name);
+	glm::vec3 getVector(std::string name);
+	float getFloat(std::string name);
+
+private:
+	std::map<std::string, Texture*> textureMap;
+	std::map<std::string, glm::vec3> vecMap;
+	std::map<std::string, float> floatMap;
 };
 

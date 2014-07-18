@@ -27,12 +27,12 @@ void ForwardDirectional::setUniform(std::string uniformName, DirectionalLight* d
 	setUniform(uniformName + ".direction", dLight->getDirection());
 }
 
-void ForwardDirectional::updateBasicUniformsAndTexture(const glm::mat4& worldMatrix, const Material& mat, RenderingEngine* renderingEngine)
+void ForwardDirectional::updateBasicUniformsAndTexture(const glm::mat4& worldMatrix, Material& mat, RenderingEngine* renderingEngine)
 {
 	setUniform("MVP", renderingEngine->getCamera()->getProjectionTransform()*worldMatrix);
 	setUniform("model", worldMatrix);
 	setUniform("eyePos", renderingEngine->getCamera()->getTransform()->m_trans);
-	setUniform("specularIntensity", mat.m_specularIntensity);
-	setUniform("specularPower", mat.m_specularPower);
+	setUniform("specularIntensity", mat.getFloat("specularIntensity"));
+	setUniform("specularPower", mat.getFloat("specularPower"));
 	setUniform("dLight", (DirectionalLight*)renderingEngine->activeLight);
 }

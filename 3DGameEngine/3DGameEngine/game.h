@@ -2,6 +2,7 @@
 #include "input.h"
 #include "window.h"
 #include "gameObject.h"
+#include "renderingEngine.h"
 
 class Game
 {
@@ -19,11 +20,26 @@ public:
 	{
 		m_root.Update(delta);
 	}
+	
+	virtual void Render(RenderingEngine* renderingEngine)
+	{
+		renderingEngine->RenderGameObject(&m_root);
+	}
 
-	GameObject m_root;
+	virtual void addChild(GameObject* gameObject)
+	{
+		m_root.addChild(gameObject);
+	}
+
+	virtual void addComponent(GameComponent* gameCompenent)
+	{
+		m_root.addComponent(gameCompenent);
+	}
 
 private:
 	Game(const Game& other) {}
 	void operator=(const Game& other) {}
+
+	GameObject m_root;
 };
 

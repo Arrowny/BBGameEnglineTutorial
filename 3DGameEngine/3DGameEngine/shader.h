@@ -25,7 +25,7 @@ public:
 
 	virtual std::string getShaderType() = 0;
 
-	virtual void updateBasicUniformsAndTexture(const glm::mat4& worldMatrix, const Material& mat, RenderingEngine* renderingEngine) = 0;
+	virtual void updateBasicUniformsAndTexture(const glm::mat4& worldMatrix, Material& mat, RenderingEngine* renderingEngine) = 0;
 
 private:
 	Shader(const Shader& other) {}

@@ -14,10 +14,6 @@ m_game(game)
 	m_game->Init(window);
 	m_input = new Input(m_window);
 	isRunning = false;
-
-	//Camera coreCamera;
-	//coreCamera.reinitPerspectiveMatrix(.01f, 1000.0f, 70.0f, window->GetWidth(), window->GetHeight());
-	//m_renderingEngine.setCamera(coreCamera);
 }
 
 void CoreEngine::start()
@@ -50,12 +46,12 @@ void CoreEngine::start()
 			render = true;
 
 			UpdateWindowAndInput();
-			m_renderingEngine.ProcessInput(m_input, m_frameTime, &m_game->m_root);
+			m_game->ProcessInput(m_input, m_frameTime);
 			//m_game->Update();
 
 			unprocessedTime -= m_frameTime;
 
-			//DEBUG: Display information
+			//DEBUG: Display framerate information
 			if (frameCounter > 1.0)
 			{
 				std::cout << "Frames/Second: " << frames << std::endl;
@@ -66,9 +62,8 @@ void CoreEngine::start()
 
 		if (render) 
 		{ 
-
 			m_renderingEngine.Clear();
-			m_renderingEngine.RenderGameObject(&m_game->m_root);
+			m_game->Render(&m_renderingEngine);
 			m_window->Render();
 			frames++;
 		}
