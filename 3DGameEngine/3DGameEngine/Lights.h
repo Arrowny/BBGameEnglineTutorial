@@ -71,25 +71,13 @@ struct PointLight : public BaseLight
 
 };
 
-struct SpotLight :public GameComponent
+struct SpotLight :public PointLight
 {
 public:
-	PointLight pointLight;
 	glm::vec3 direction;
 	float cutoff;
 
-	SpotLight() :
-		pointLight(PointLight()),
-		direction(glm::fvec3(0.0, 0.0, 0.0)),
-		cutoff(0)
-	{}
-
-	SpotLight(PointLight pointlight, glm::fvec3 direct, float cutoff) :
-		pointLight(pointlight),
-		direction(glm::normalize(direct)),
-		cutoff(cutoff)
-	{}
-	inline PointLight* GetPointLight() { return &pointLight; }
+	SpotLight(glm::vec3 color , float intensity, Attenuation attenu , glm::vec3 position, float range ,glm::fvec3 direct, float cutoff);
 
 	inline void SetDirection(glm::fvec3 direct) { direction = glm::normalize(direct); }
 	inline void SetCutoff(float cutoff) { this->cutoff = cutoff; }

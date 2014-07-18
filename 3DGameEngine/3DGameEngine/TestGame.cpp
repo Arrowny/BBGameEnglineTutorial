@@ -14,7 +14,7 @@ TestGame::~TestGame()
 void TestGame::init()
 {
 	m_mesh = new Mesh("./res/plane.obj");
-	m_material = Material(new Texture("./res/pikaqiu2.jpg"), glm::fvec3(1.0, 1.0, 1.0), 2, 16);
+	m_material = Material(new Texture("./res/pikaqiu2.jpg"), glm::fvec3(1.0, 1.0, 1.0), 2, 32);
 
 	m_meshRenderer = new MeshRenderer(*m_mesh, m_material);
 
@@ -23,17 +23,21 @@ void TestGame::init()
 	planeObject->GetTransform().SetPos(glm::vec3(0, -1, 7));
 
 	GameObject* directionalLightObject = new GameObject();
-	DirectionalLight* directionalLight = new DirectionalLight(glm::vec3(1, 0, 0), 0.2f, glm::vec3(1, 1, 1));
+	DirectionalLight* directionalLight = new DirectionalLight(glm::vec3(1, 1, 0), 0.1f, glm::vec3(0, 1, 1));
 	directionalLightObject->AddComponent(directionalLight);
 
-
 	GameObject* pointLightObject = new GameObject();
-	PointLight* pointLight = new PointLight(glm::vec3(0, 0, 1), 0.2f, Attenuation(0.0, 0.0, 0.1), glm::vec3(0, 0, 7), 30);
+	PointLight* pointLight = new PointLight(glm::vec3(0, 1, 0), 0.2f, Attenuation(0.0, 0.0, 0.5), glm::vec3(0, 0, 7), 30);
 	pointLightObject->AddComponent(pointLight);
+
+	GameObject* spotLightObject = new GameObject();
+	PointLight* spotLight = new SpotLight(glm::fvec3(0.0, 0.0, 1.0), 0.6f, Attenuation(0.0, 0.0, 0.1), glm::fvec3(-2.0, 0.0, 0.0), 30, glm::fvec3(1.0, 1.0, 1.0), 0.1f);
+	spotLightObject->AddComponent(spotLight);
 
 	GetRootObject().AddChild(*planeObject);
 	GetRootObject().AddChild(*directionalLightObject);
 	GetRootObject().AddChild(*pointLightObject);
+	GetRootObject().AddChild(*spotLightObject);
 
 	/* -------------------------------Light Part----------------------------------------
 	m_shader->SetAmbient(glm::fvec3(0.3, 0.3, 0.3));

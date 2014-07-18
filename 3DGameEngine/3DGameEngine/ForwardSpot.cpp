@@ -62,15 +62,17 @@ void ForwardSpot::Update(Transform& transform, RenderingEngine& renderingEngine,
 	glUniform1f(m_uniforms[L_SPECULARINTENSITY_U], material.specularIntensity);
 	glUniform1f(m_uniforms[L_SPECULARPOWER_U], material.specularPower);
 
-	//glUniform3fv(m_uniforms[L_SPOT_POINT_BASE_COLOR], 1, &renderingEngine.GetSpotLight().pointLight.base.color[0]);
-	//glUniform1f(m_uniforms[L_SPOT_POINT_BASE_INTENS], renderingEngine.GetSpotLight().pointLight.base.intensity);
-	//glUniform1f(m_uniforms[L_SPOT_POINT_ATTEN_CONS], renderingEngine.GetSpotLight().pointLight.atten.constant);
-	//glUniform1f(m_uniforms[L_SPOT_POINT_ATTEN_LINE], renderingEngine.GetSpotLight().pointLight.atten.linear);
-	//glUniform1f(m_uniforms[L_SPOT_POINT_ATTEN_EXPO], renderingEngine.GetSpotLight().pointLight.atten.exponent);
-	//glUniform3fv(m_uniforms[L_SPOT_POINT_POSITION], 1, &renderingEngine.GetSpotLight().pointLight.position[0]);
-	//glUniform1f(m_uniforms[L_SPOT_POINT_RANGE], renderingEngine.GetSpotLight().pointLight.range);
-	//glUniform3fv(m_uniforms[L_SPOT_DIRECTION], 1, &renderingEngine.GetSpotLight().direction[0]);
-	//glUniform1f(m_uniforms[L_SPOT_CUTOFF], renderingEngine.GetSpotLight().cutoff);
+	SpotLight spotLight = *(SpotLight*)renderingEngine.GetActiveLight();
+
+	glUniform3fv(m_uniforms[L_SPOT_POINT_BASE_COLOR], 1, &spotLight.color[0]);
+	glUniform1f(m_uniforms[L_SPOT_POINT_BASE_INTENS], spotLight.intensity);
+	glUniform1f(m_uniforms[L_SPOT_POINT_ATTEN_CONS], spotLight.atten.constant);
+	glUniform1f(m_uniforms[L_SPOT_POINT_ATTEN_LINE], spotLight.atten.linear);
+	glUniform1f(m_uniforms[L_SPOT_POINT_ATTEN_EXPO], spotLight.atten.exponent);
+	glUniform3fv(m_uniforms[L_SPOT_POINT_POSITION], 1, &spotLight.position[0]);
+	glUniform1f(m_uniforms[L_SPOT_POINT_RANGE], spotLight.range);
+	glUniform3fv(m_uniforms[L_SPOT_DIRECTION], 1, &spotLight.direction[0]);
+	glUniform1f(m_uniforms[L_SPOT_CUTOFF], spotLight.cutoff);
 
 
  }
