@@ -222,3 +222,72 @@ GLuint Shader::CreateShader(const std::string& text, GLenum shaderType)
 
 	return shader;
 }
+
+void Shader::AddAllAttributes(const std::string& vertexShaderText)
+{
+	static const std::string ATTRIBUTE_KEY = "attribute";
+
+	int currentAttribLocation = 0;
+	size_t attributeLocation = vertexShaderText.find(ATTRIBUTE_KEY);
+	while (attributeLocation != std::string::npos)
+	{
+		bool isCommented = false;
+		size_t lastLineEnd = vertexShaderText.rfind(";", attributeLocation);
+
+		if (lastLineEnd != std::string::npos)
+		{
+			std::string potentialCommentSection = vertexShaderText.substr(lastLineEnd, attributeLocation - lastLineEnd);
+			isCommented = potentialCommentSection.find("//") != std::string::npos;
+		}
+
+		if (!isCommented)
+		{
+			size_t begin = attributeLocation + ATTRIBUTE_KEY.length();
+			size_t end = vertexShaderText.find(";", begin);
+
+			std::string attributeLine = vertexShaderText.substr(begin + 1, end - begin - 1);
+
+			begin = attributeLine.find(" ");
+			std::string attributeName = attributeLine.substr(begin + 1);
+
+			glBindAttribLocation(m_program, currentAttribLocation, attributeName.c_str());
+			currentAttribLocation++;
+		}
+		attributeLocation = vertexShaderText.find(ATTRIBUTE_KEY, attributeLocation + ATTRIBUTE_KEY.length());
+	}
+}
+
+void Shader::AddShaderUniforms(const std::string& shaderText)
+{
+	static const std::string UNIFORM_KEY = "uniform";
+
+	//std::vector<UniformStruct> structs = FindUniformStructs(shaderText);
+
+	size_t uniformLocation = shaderText.find(UNIFORM_KEY);
+	while (uniformLocation != std::string::npos)
+	{
+		bool isCommented = false;
+		size_t lastLineEnd = shaderText.rfind(";", uniformLocation);
+
+		if (lastLineEnd != std::string::npos)
+		{
+			std::string potentialCommentSection = shaderText.substr(lastLineEnd, uniformLocation - lastLineEnd);
+			isCommented = potentialCommentSection.find("//") != std::string::npos;
+		}
+
+		if (!isCommented)
+		{
+			size_t begin = uniformLocation + UNIFORM_KEY.length();
+			size_t end = shaderText.find(";", begin);
+
+			std::string uniformLine = shaderText.substr(begin + 1, end - begin - 1);
+
+			begin = uniformLine.find(" ");
+			std::string uniformName = uniformLine.substr(begin + 1);
+			std::string uniformType = uniformLine.substr(0, begin);
+
+			//AddUniform(uniformName, uniformType, structs);
+		}
+		uniformLocation = shaderText.find(UNIFORM_KEY, uniformLocation + UNIFORM_KEY.length());
+	}
+}

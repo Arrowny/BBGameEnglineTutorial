@@ -75,6 +75,9 @@ protected:
 	static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
 	GLuint CreateShader(const std::string& text, unsigned int type);
 
+	void AddShaderUniforms(const std::string& shaderText);
+	void AddAllAttributes(const std::string& vertexShaderText);
+
 private:
 	Shader(const Shader& other) {}
 	void operator=(const Shader& other) {}

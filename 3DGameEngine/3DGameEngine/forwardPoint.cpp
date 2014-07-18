@@ -7,16 +7,18 @@
 
 ForwardPoint::ForwardPoint(const std::string& fileName)
 {
-	m_shaders[0] = CreateShader(LoadShader(fileName + ".vs"), GL_VERTEX_SHADER);
-	m_shaders[1] = CreateShader(LoadShader(fileName + ".fs"), GL_FRAGMENT_SHADER);
+	std::string vertexShaderText = LoadShader(fileName + ".vs");
+	std::string fragmentShaderText = LoadShader(fileName + ".fs");
+
+	m_shaders[0] = CreateShader(vertexShaderText, GL_VERTEX_SHADER);
+	m_shaders[1] = CreateShader(fragmentShaderText, GL_FRAGMENT_SHADER);
 
 	for (unsigned int i = 0; i < NUM_SHADERS; i++){
 		glAttachShader(m_program, m_shaders[i]);
 	}
 
-	glBindAttribLocation(m_program, 0, "position");
-	glBindAttribLocation(m_program, 1, "texCoord");
-	glBindAttribLocation(m_program, 2, "normal");
+	AddAllAttributes(vertexShaderText);
+
 	CompileShader();
 
 	m_uniforms[TRANSFORM_U] = glGetUniformLocation(m_program, "transform");
