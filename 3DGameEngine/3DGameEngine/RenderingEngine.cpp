@@ -20,7 +20,6 @@ mainCamera(glm::vec3(0, 1, -4), 70.0f, (float)WindowParameter::width / (float)Wi
 	glCullFace(GL_BACK);
 	glEnable(GL_DEPTH_CLAMP);
 
-	//	glEnable(GL_FRAMEBUFFER_SRGB);// it is already rgb colors so we do not need to do sth to it
 }
 
 
@@ -35,7 +34,6 @@ void RenderingEngine::input(Input input, float delta)
 
 void RenderingEngine::render(GameObject* object)
 {
-	//ClearLightList();
 	lights.clear();
 	object->AddToRenderingEngine(this);
 
@@ -60,54 +58,10 @@ void RenderingEngine::render(GameObject* object)
 	}
 
 
-	//for each (DirectionalLight light in directionalLights)
-	//{
-	//	activeDirectionalLight = light;
-	//	object->render(ForwardDirectional::GetInstance(), this);
-	//}
-
-	//for each (PointLight light in pointLights)
-	//{
-	//	activePointLight = light;
-	//	object->render(ForwardPoint::GetInstance(), this);
-	//}
-
-	//for each (SpotLight light in spotLights)
-	//{
-	//	activeSpotLight = light;
-	//	object->render(ForwardSpot::GetInstance(), this);
-	//}
-
-
 	glDepthFunc(GL_LESS);
 	glDepthMask(true); 
 	glDisable(GL_BLEND);
 }
-
-
-//const GLubyte* RenderingEngine::getOpenGLVersion()
-//{
-//	return glGetString(GL_VERSION);
-//}
-
-//void RenderingEngine::AddDirectionalLight(DirectionalLight directionalLight)
-//{
-//	directionalLights.push_back(directionalLight);
-//}
-//void RenderingEngine::AddPointLight(PointLight pointLight)
-//{
-//	pointLights.push_back(pointLight);
-//}
-//void RenderingEngine::AddSpotLight(SpotLight spotLight)
-//{
-//	spotLights.push_back(spotLight);
-//}
-//
-//void RenderingEngine::ClearLightList()
-//{
-//	directionalLights.clear();
-//	pointLights.clear();
-//}
 
 void RenderingEngine::AddLight(BaseLight* light)
 {

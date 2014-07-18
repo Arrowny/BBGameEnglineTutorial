@@ -1,12 +1,5 @@
 #include "TestGame.h"
 
-
-//PointLight pl[] = { PointLight(BaseLight(glm::fvec3(1.0, 0.5, 0.0), 0.8f), Attenuation(0.0, 0.0, 1.0), glm::fvec3(0.0, 0.0, 7.0), 4),
-//PointLight(BaseLight(glm::fvec3(1.0, 0.0, 0.5), 0.8f), Attenuation(0.0, 0.0, 1.0), glm::fvec3(2.0, 0.0, 7.0), 4)
-//};
-//SpotLight sl[] = { SpotLight(PointLight(BaseLight(glm::fvec3(0.0, 1.0, 1.0), 1.0f), Attenuation(0.0, 0.0, 0.1), glm::fvec3(-2.0, 0.0, 0.0), 30), glm::fvec3(1.0, 1.0, 1.0), 0.1f)
-//};
-
 TestGame::TestGame()
 {
 
@@ -20,9 +13,6 @@ TestGame::~TestGame()
 
 void TestGame::init()
 {
-	/*m_camera = Camera();
-	m_camera = Camera(glm::vec3(0, 1, -4), 70.0f, (float)WindowParameter::width / (float)WindowParameter::height, 1.0f, 1000.0f);*/
-
 	m_mesh = new Mesh("./res/plane.obj");
 	m_material = Material(new Texture("./res/pikaqiu2.jpg"), glm::fvec3(1.0, 1.0, 1.0), 2, 16);
 
@@ -36,18 +26,9 @@ void TestGame::init()
 	DirectionalLight* directionalLight = new DirectionalLight(glm::vec3(1, 0, 0), 0.2f, glm::vec3(1, 1, 1));
 	directionalLightObject->AddComponent(directionalLight);
 
-	//GameObject* pointLightObject = new GameObject();
-	//PointLight* pointLight = new PointLight(BaseLight(glm::vec3(0, 1, 1), 0.2f), Attenuation(0.0, 0.0, 0.5), glm::vec3(0, 0, 7), 30);
-	//pointLightObject->AddComponent(pointLight);
-
-	//GameObject* spotLightObject = new GameObject();
-	//SpotLight* spotLight = new SpotLight(PointLight(BaseLight(glm::fvec3(0.0, 0.0, 1.0), 0.2f), Attenuation(0.0, 0.0, 1.0), glm::fvec3(-2.0, 0.0, 0.0), 30), glm::fvec3(1.0, 1.0, 1.0), 0.1f);
-	//spotLightObject->AddComponent(spotLight);
-
 	GetRootObject().AddChild(*planeObject);
 	GetRootObject().AddChild(*directionalLightObject);
-	//GetRootObject().AddChild(*pointLightObject);
-	//GetRootObject().AddChild(*spotLightObject);
+
 	/* -------------------------------Light Part----------------------------------------
 	m_shader->SetAmbient(glm::fvec3(0.3, 0.3, 0.3));
 	m_shader->SetDirectionalLight(DirectionalLight(BaseLight(glm::vec3(1, 0, 0), 0.5f), glm::vec3(0, 0, -1)));

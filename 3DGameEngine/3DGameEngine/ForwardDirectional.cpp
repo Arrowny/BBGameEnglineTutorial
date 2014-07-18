@@ -49,8 +49,6 @@ void ForwardDirectional::Update(Transform& transform, RenderingEngine& rendering
 {
 	glm::mat4 worldMatrix = transform.GetModel();
 	glm::mat4 projectedMatrix = renderingEngine.GetMainCamera().GetViewProjection()* worldMatrix;
-	//glm::mat4 projectedMatrix =GetRenderingEngine()->GetMainCamera().GetViewProjection()* worldMatrix; // can not use GetRenderingEngine()->.........do not know why......
-	//glm::mat4 model = projectedMatrix * worldMatrix;
 
 	glUniformMatrix4fv(m_uniforms[model], 1, GL_FALSE, &worldMatrix[0][0]);
 	glUniformMatrix4fv(m_uniforms[MVP], 1, GL_FALSE, &projectedMatrix[0][0]);

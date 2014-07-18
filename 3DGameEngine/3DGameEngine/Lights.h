@@ -83,7 +83,6 @@ struct PointLight :public GameComponent
 	void SetPosition(glm::vec3 pos) { position = pos; }
 	void SetRange(float ran) { range = ran; }
 
-	//void AddToRenderingEngine(RenderingEngine* renderingEngine);
 };
 
 struct SpotLight :public GameComponent
@@ -108,8 +107,6 @@ public:
 
 	inline void SetDirection(glm::fvec3 direct) { direction = glm::normalize(direct); }
 	inline void SetCutoff(float cutoff) { this->cutoff = cutoff; }
-
-	//void AddToRenderingEngine(RenderingEngine* renderingEngine);
 };
 
 

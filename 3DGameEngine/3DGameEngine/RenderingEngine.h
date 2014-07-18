@@ -28,13 +28,6 @@ public:
 	//inline PointLight GetPointLight() { return activePointLight; }
 	//inline SpotLight GetSpotLight() { return activeSpotLight; }
 
-	//inline void SetAmbient(glm::fvec3 ambient) { ambientLight = ambient; }
-	//inline void SetDirectionalLight(DirectionalLight directionallight) { directionalLight = directionallight; }
-
-	//void AddDirectionalLight(DirectionalLight directionalLight);
-	//void AddPointLight(PointLight pointLight);
-	//void AddSpotLight(SpotLight spotLight);
-
 	void AddLight(BaseLight* lights);
 	BaseLight* GetActiveLight();
 
@@ -50,15 +43,6 @@ private:
 
 	glm::fvec3 ambientLight = glm::fvec3(0.1f, 0.1f, 0.1f);
 	BaseLight* activeLight;
-
-	//DirectionalLight activeDirectionalLight;// = DirectionalLight(BaseLight(glm::vec3(1, 0, 0), 0.2f), glm::vec3(1, 1, 1));
-	//DirectionalLight directionalLight2;// = DirectionalLight(BaseLight(glm::vec3(1, 0.5, 0), 0.4f), glm::vec3(-1, 1, -1));
-	//PointLight activePointLight;// = PointLight(BaseLight(glm::vec3(0, 0, 1), 0.8f), Attenuation(0.0, 0.0, 0.1), glm::vec3(0, 0, 7), 100);
-	//SpotLight activeSpotLight;
-
-	//std::vector<DirectionalLight> directionalLights;
-	//std::vector<PointLight> pointLights;
-	//std::vector<SpotLight> spotLights;
 
 	std::vector<BaseLight*> lights;
 	void ClearLightList();
