@@ -170,6 +170,9 @@
     <ClInclude Include="testGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="referenceCounter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\basicShader.fs">

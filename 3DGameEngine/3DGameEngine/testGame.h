@@ -28,12 +28,17 @@ private:
 	pointLight* pLight2;
 	pointLight* pLight3;
 	gameObject* m_sLightObj1;
+	gameObject* m_sLightObj2;
 	spotLight* sLight1;
 	spotLight* sLight2;
 
 	Mesh* m_mesh;
 	Material m_material;
+	Material m_material2;
+	Material m_material3;
 	Texture* m_texture;
+	Texture* m_texture2;
+	Texture* m_texture3;
 	meshRenderer* m_meshRenderer;
 	meshRenderer* m_meshRenderer2;
 	meshRenderer* m_meshRenderer3;

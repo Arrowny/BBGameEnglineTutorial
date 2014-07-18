@@ -30,17 +30,30 @@ void TestGame::init(){
 	m_dirLightObj1 = new gameObject();
 	m_pLightObj1 = new gameObject();
 	m_sLightObj1 = new gameObject();
+	m_sLightObj2 = new gameObject();
 	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
 	m_mesh = new Mesh("./res/triforce.obj");
 	m_texture = new Texture("./res/colour.jpg");
+	m_texture2 = new Texture("./res/bricks2.jpg");
+	m_texture3 = new Texture("./res/bricks2_normal.jpg");
 	m_material = Material();
 	m_material.AddTexture("diffuse", m_texture);
 	m_material.AddFloat("specularIntensity", 1);
 	m_material.AddFloat("specularPower", 36);
 
+	m_material2 = Material();
+	m_material2.AddTexture("diffuse", m_texture2);
+	m_material2.AddFloat("specularIntensity", 1);
+	m_material2.AddFloat("specularPower", 36);
+
+	m_material3 = Material();
+	m_material3.AddTexture("diffuse", m_texture3);
+	m_material3.AddFloat("specularIntensity", 1);
+	m_material3.AddFloat("specularPower", 36);
+
 	m_meshRenderer = new meshRenderer(*m_mesh, m_material);
-	m_meshRenderer2 = new meshRenderer(*m_mesh, m_material);
-	m_meshRenderer3 = new meshRenderer(*m_mesh, m_material);
+	m_meshRenderer2 = new meshRenderer(*m_mesh, m_material2);
+	m_meshRenderer3 = new meshRenderer(*m_mesh, m_material3);
 	m_planeObject->AddComponent(m_meshRenderer);
 	m_planeObject2->AddComponent(m_meshRenderer2);
 	m_planeObject3->AddComponent(m_meshRenderer3);
@@ -66,12 +79,16 @@ void TestGame::init(){
 	//m_pLightObj1->AddComponent(pLight3);
 	m_pLightObj1->GetTransform().SetPos(glm::fvec3(0, 1.5, 4.5));
 
-	sLight1 = new spotLight(glm::fvec3(1, 1, 1), 0.4f, Attenuation(0, 0, 0.5f), 0.8f);
-	sLight2 = new spotLight(glm::fvec3(1, 1, 1), 0.4f, Attenuation(0, 0, 0.5f), 0.8f);
+	sLight1 = new spotLight(glm::fvec3(1, 0, 0), 0.4f, Attenuation(0, 0, 0.5f), 0.8f);
+	sLight2 = new spotLight(glm::fvec3(1, 0, 0), 0.4f, Attenuation(0, 0, 0.5f), 0.8f);
 	m_sLightObj1->AddComponent(sLight1);
+	m_sLightObj2->AddComponent(sLight2);
 	//m_sLightObj1->AddComponent(sLight2);
-	m_sLightObj1->GetTransform().SetPos(glm::fvec3(0, -1.0, 4.7));
-	m_sLightObj1->GetTransform().SetRot(glm::quat(glm::radians(90.0f), 0.5, 0, 0));
+	m_sLightObj1->AddChild(m_sLightObj2);
+	m_sLightObj1->GetTransform().SetPos(glm::fvec3(0, -1.0, 5.0));
+	m_sLightObj2->GetTransform().SetPos(glm::fvec3(1.0, 0.0, -0.5));
+	m_sLightObj1->GetTransform().SetRot(glm::normalize(glm::quat(glm::radians(90.0f), 1.0, 0, 0)));
+	
 
 	AddToScene(m_planeObject);
 	AddToScene(m_dirLightObj1);
@@ -91,6 +108,7 @@ void TestGame::update(float delta){
 
 	m_pLightObj1->GetTransform().SetPos(glm::vec3(sinCounter, 1.5, 4.5));
 	m_sLightObj1->GetTransform().SetPos(glm::vec3(sinCounter * 2 - 2, -1.0, 4.7));
+	//m_planeObject->GetTransform().SetRot(glm::normalize(glm::quat(glm::radians(cosCounter*2), 0.0f, 1.0f, 0.0f)));
 	m_root.update(delta);
 
 	counter += 0.0003f;
