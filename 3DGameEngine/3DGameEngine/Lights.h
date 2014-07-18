@@ -63,9 +63,9 @@ struct PointLight : public BaseLight
 	Attenuation atten;
 	glm::vec3 position;
 	float range;
+	static const int COLOR_DEPTH = 256;
 
 	PointLight(glm::vec3 color = glm::vec3(0, 0, 0), float intensity = 0, Attenuation attenu = Attenuation());
-
 	
 	void SetRange(float ran) { range = ran; }
 

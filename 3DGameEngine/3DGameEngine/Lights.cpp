@@ -22,6 +22,11 @@ atten(atten),
 position(position),
 range(100)
 {
+	float a = atten.exponent;
+	float b = atten.linear;
+	float c = atten.constant - COLOR_DEPTH * intensity * glm::max(color.x, glm::max(color.y, color.z));
+
+	range = (float)(-b + std::sqrtf(b*b - 4 * a*c)) / (2 * a);
 	SetShader(ForwardPoint::GetInstance());
 }
 
