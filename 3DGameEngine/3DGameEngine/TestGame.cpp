@@ -31,11 +31,12 @@ void TestGame::init()
 	pointLightObject->AddComponent(pointLight);
 
 	GameObject* spotLightObject = new GameObject();
-	PointLight* spotLight = new SpotLight(glm::fvec3(0.0, 0.0, 1.0), 0.6f, Attenuation(0.0, 0.0, 0.1), glm::fvec3(1.0, 1.0, 1.0), 0.1f);
+	SpotLight* spotLight = new SpotLight(glm::fvec3(0.0, 0.0, 1.0), 0.6f, Attenuation(0.0, 0.0, 0.1), 0.1f);
 	spotLightObject->AddComponent(spotLight);
 
 	//std::cout << spotLight->GetTransform().GetPos().x << "," << spotLight->GetTransform().GetPos().y << "," << spotLight->GetTransform().GetPos().z << std::endl;
-	//spotLight->GetTransform().SetPos(glm::vec3(5, 0, 5));
+	spotLight->GetTransform().SetPos(glm::vec3(0, 0, 5));
+	spotLight->GetTransform().SetRot(glm::normalize(glm::quat(glm::radians(-90.0f), 0.0, 1.0, 0.0)));
 
 	GetRootObject().AddChild(*planeObject);
 	GetRootObject().AddChild(*directionalLightObject);

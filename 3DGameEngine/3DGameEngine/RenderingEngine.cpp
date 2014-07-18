@@ -72,3 +72,5 @@ BaseLight* RenderingEngine::GetActiveLight()
 {
 	return activeLight;
 }
+
+void RenderingEngine::AddCamera(Camera camera) { mainCamera = camera; }

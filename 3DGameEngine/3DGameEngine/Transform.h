@@ -1,14 +1,15 @@
 #pragma once
 #include <glm\glm.hpp>
 #include <glm\gtx\transform.hpp>
+//#include <glm\gtx\quaternion.hpp>
+#include <glm\gtc\quaternion.hpp>
 #include "Camera.h"
 #define PI 3.1415926
 
 class Transform
 {
 public:
-
-	Transform(const glm::vec3& pos = glm::vec3(), const glm::vec3& rot = glm::vec3(), const glm::vec3& scale = glm::vec3(1.0f, 1.0f, 1.0f)) :
+	Transform(const glm::vec3& pos = glm::vec3(), const glm::quat& rot = glm::quat(), const glm::vec3& scale = glm::vec3(1.0f, 1.0f, 1.0f)) :
 		m_pos(pos),
 		m_rot(rot),
 		m_scale(scale) {}
@@ -26,13 +27,6 @@ public:
 		return posMat * rotMat * scaleMat;
 	}
 
-	//inline glm::mat4 getProjectedTransformation()
-	//{
-	//	glm::mat4 transMatrix = GetModel();
-	//	glm::mat4 cameraMatrix = Camera::GetViewProjection();
-	//}
-
-
 	//inline glm::vec3* GetPos() { return &m_pos; }
 	//inline glm::vec3* GetRot() { return &m_rot; }
 	//inline glm::vec3* GetScale() { return &m_scale; }
@@ -42,14 +36,15 @@ public:
 	//inline void SetScale(glm::vec3& scale) { this->m_scale = scale; }
 
 	inline glm::vec3& GetPos() { return m_pos; }
-	inline glm::vec3& GetRot() { return m_rot; }
+	inline glm::quat& GetRot() { return m_rot; }
 	inline glm::vec3& GetScale() { return m_scale; }
 
 	inline void SetPos(const glm::vec3& pos) { m_pos = pos; }
-	inline void SetRot(const glm::vec3& rot) { m_rot = rot; }
+	inline void SetRot(const glm::quat& rot) { m_rot = rot; }
 	inline void SetScale(const glm::vec3& scale) { m_scale = scale; }
 
-	inline glm::fvec3 roatate(float angle, glm::fvec3 axis)
+	/* this rotate function is not used before [44]
+	inline glm::quat rotate(float angle, glm::vec3 axis)
 	{
 		float sinHalfAngle = (float)sin((angle/2)* (PI / 180));
 		float cosHalfAngle = (float)cos((angle / 2)* (PI / 180));
@@ -58,12 +53,15 @@ public:
 		float rz = axis.z * sinHalfAngle;
 		float rw = cosHalfAngle;
 
-		//glm::quat rotation(rx, ry, rz,rw);
-	}
-	
+		glm::quat rotation = glm::quat(rw, rx, ry, rz);
+		glm::quat conjugate = glm::conjugate(rotation);
+
+		glm::quat w = rotation * glm::vec3(1,1,1) * conjugate;
+	}*/
+
 private:
 	glm::vec3 m_pos;
-	glm::vec3 m_rot;
+	glm::quat m_rot;
 	glm::vec3 m_scale;
 
 };

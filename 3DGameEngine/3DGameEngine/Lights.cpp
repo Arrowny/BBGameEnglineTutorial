@@ -30,10 +30,10 @@ range(100)
 	SetShader(ForwardPoint::GetInstance());
 }
 
-SpotLight::SpotLight(glm::vec3 color, float intensity, const Attenuation atten,glm::vec3 direction, float cutoff) :
+SpotLight::SpotLight(glm::vec3 color, float intensity, const Attenuation atten, float cutoff) :
 PointLight(color, intensity, atten),
-direction(direction),
 cutoff(cutoff)
 {
+	//direction = GetTransform().GetRot().
 	SetShader(ForwardSpot::GetInstance());
 }

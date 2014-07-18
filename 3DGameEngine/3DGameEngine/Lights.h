@@ -1,7 +1,7 @@
 #pragma once
 #include <glm/glm.hpp>
 #include "GameComponent.h"
-
+#include "math.h"
 struct BaseLight :public GameComponent
 {
 public:
@@ -74,12 +74,11 @@ struct PointLight : public BaseLight
 struct SpotLight :public PointLight
 {
 public:
-	glm::vec3 direction;
 	float cutoff;
 
-	SpotLight(glm::vec3 color , float intensity, Attenuation attenu ,glm::fvec3 direct, float cutoff);
+	SpotLight(glm::vec3 color , float intensity, Attenuation attenu , float cutoff);
 
-	inline void SetDirection(glm::fvec3 direct) { direction = glm::normalize(direct); }
+	inline glm::vec3 GetDirection() { return    quatMath::GetForward(GetTransform().GetRot()); }//
 	inline void SetCutoff(float cutoff) { this->cutoff = cutoff; }
 };
 

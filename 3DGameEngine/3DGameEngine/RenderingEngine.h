@@ -31,6 +31,7 @@ public:
 	void AddLight(BaseLight* lights);
 	BaseLight* GetActiveLight();
 
+	void AddCamera(Camera camera);
 
 	~RenderingEngine();
 private:
