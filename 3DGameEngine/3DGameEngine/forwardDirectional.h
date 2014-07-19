@@ -8,16 +8,16 @@ public:
 
 	static ForwardDirectional* GetInstance()
 	{
-		static ForwardDirectional instance("./res/forwardDirectional");
+		static ForwardDirectional instance;
 		return &instance;
 	}
 
 	virtual void UpdateUniforms(const Transform& transform, const Material& material, renderingEngine* renderingEngine);
 protected:
 private:
-	ForwardDirectional(const std::string& fileName);
+	ForwardDirectional();
 
-	ForwardDirectional(ForwardDirectional const&){}// Don't Implement
+	ForwardDirectional(ForwardDirectional const&) : Shader("") {}// Don't Implement
 	void operator=(ForwardDirectional const&){} // Don't implement
 
 };

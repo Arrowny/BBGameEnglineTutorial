@@ -33,6 +33,8 @@ void TestGame::init(){
 	m_sLightObj2 = new gameObject();
 	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
 	m_mesh = new Mesh("./res/triforce.obj");
+	//m_mesh2 = new Mesh("./res/shield.obj");
+	//m_mesh3 = new Mesh("./res/luigi.obj");
 	m_texture = new Texture("./res/colour.jpg");
 	m_texture2 = new Texture("./res/bricks2.jpg");
 	m_texture3 = new Texture("./res/bricks2_normal.jpg");

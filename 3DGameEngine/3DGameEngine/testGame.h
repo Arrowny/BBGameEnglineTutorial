@@ -33,6 +33,8 @@ private:
 	spotLight* sLight2;
 
 	Mesh* m_mesh;
+	Mesh* m_mesh2;
+	Mesh* m_mesh3;
 	Material m_material;
 	Material m_material2;
 	Material m_material3;

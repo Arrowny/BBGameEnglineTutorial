@@ -15,7 +15,7 @@ public:
 	virtual void render(Shader* shader, renderingEngine* renderingEngine)
 	{
 		shader->Bind();
-		shader->Update(GetTransform(), *m_material, renderingEngine);
+		shader->UpdateUniforms(GetTransform(), *m_material, renderingEngine);
 		m_mesh->Draw();
 	}
 
