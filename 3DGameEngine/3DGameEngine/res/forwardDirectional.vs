@@ -8,10 +8,8 @@ varying vec2 texCoord0;
 varying vec3 normal0;
 varying vec3 worldPos0;
 
-uniform float uniformFloat;
 uniform mat4 transform;
 uniform mat4 Normal;
-uniform vec4 baseColor;
 
 void main()
 {

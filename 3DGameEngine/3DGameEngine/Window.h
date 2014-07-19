@@ -11,8 +11,6 @@ public:
 	~Window();
 
 	void ClearColor(float r, float g, float b, float a);
-
-	//Swap buffers to show latest image
 	void Update();
 	bool isClosed();
 	void Render();
