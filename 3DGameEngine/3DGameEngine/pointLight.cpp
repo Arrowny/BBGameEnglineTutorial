@@ -1,7 +1,7 @@
 #include "pointLight.h"
 #include "renderingEngine.h"
-#include "forwardPoint.h"
 #include <glm/gtx/extented_min_max.hpp>
+#include "Shader.h"
 
 #define COLOR_DEPTH 256
 
@@ -15,5 +15,5 @@ atten(atten)
 
 	range = (float)((-b + sqrtf(b*b - 4.0f * a*c)) / (2.0f * a));
 
-	SetShader(ForwardPoint::GetInstance());
+	SetShader(new Shader("./res/forwardPoint"));;
 }

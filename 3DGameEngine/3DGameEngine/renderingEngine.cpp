@@ -1,10 +1,7 @@
 #include "renderingEngine.h"
-#include "forwardAmbient.h"
-#include "forwardDirectional.h"
-#include "forwardPoint.h"
-#include "forwardSpot.h"
 #include "gameObject.h"
 #include <GL/glew.h>
+#include "Shader.h"
 
 renderingEngine::renderingEngine()
 {

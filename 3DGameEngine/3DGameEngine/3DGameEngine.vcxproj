@@ -81,10 +81,6 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="coreEngine.cpp" />
     <ClCompile Include="directionalLight.cpp" />
-    <ClCompile Include="forwardAmbient.cpp" />
-    <ClCompile Include="forwardDirectional.cpp" />
-    <ClCompile Include="forwardPoint.cpp" />
-    <ClCompile Include="forwardSpot.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -108,10 +104,6 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="coreEngine.h" />
     <ClInclude Include="directionalLight.h" />
-    <ClInclude Include="forwardAmbient.h" />
-    <ClInclude Include="forwardDirectional.h" />
-    <ClInclude Include="forwardPoint.h" />
-    <ClInclude Include="forwardSpot.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="gameComponent.h" />
     <ClInclude Include="gameObject.h" />

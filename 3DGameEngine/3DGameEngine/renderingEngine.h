@@ -23,7 +23,6 @@ public:
 	void input(const Input& input, float delta);
 
 	inline Camera& GetMainCamera() { return *m_mainCamera; }
-	inline glm::fvec3& GetAmbientLight() { return m_ambientLight; }
 	inline baseLight* GetActiveLight() { return m_activeLight; }
 	inline unsigned int GetSamplerSlot(const std::string& samplerName) { return m_samplerMap[samplerName]; }
 
@@ -42,7 +41,6 @@ private:
 	void operator=(const renderingEngine& other) {}
 
 	Camera* m_mainCamera;
-	glm::fvec3 m_ambientLight;
 	Shader* m_defaultShader;
 
 	baseLight* m_activeLight;
