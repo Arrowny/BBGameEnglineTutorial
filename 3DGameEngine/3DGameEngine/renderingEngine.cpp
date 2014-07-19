@@ -6,8 +6,7 @@
 #include "gameObject.h"
 #include <GL/glew.h>
 
-renderingEngine::renderingEngine():
-m_ambientLight(0.2f, 0.2f, 0.2f)
+renderingEngine::renderingEngine()
 {
 	std::cout << getOpenGLVersion() << std::endl;
 
@@ -22,6 +21,11 @@ m_ambientLight(0.2f, 0.2f, 0.2f)
 
 	m_activeLight = new baseLight();
 	m_mainCamera = new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f);
+
+	AddVector3f("ambientLight", glm::fvec3(0.1f, 0.1f, 0.1f));
+	m_defaultShader = new Shader("./res/forwardAmbient");
+
+	m_samplerMap.insert(std::pair<std::string, unsigned int>("diffuse", 0));
 }
 
 renderingEngine::~renderingEngine()
@@ -43,7 +47,7 @@ void renderingEngine::Render(gameObject* object)
 
 	object->AddToRenderingEngine(this);
 
-	object->render(ForwardAmbient::GetInstance(), this);
+	object->render(m_defaultShader, this);
 	
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);

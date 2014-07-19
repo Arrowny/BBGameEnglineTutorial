@@ -182,6 +182,9 @@
     <ClInclude Include="res\lighting.glh">
       <Filter>Resource Files</Filter>
     </ClInclude>
+    <ClInclude Include="mappedValues.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\basicShader.fs">

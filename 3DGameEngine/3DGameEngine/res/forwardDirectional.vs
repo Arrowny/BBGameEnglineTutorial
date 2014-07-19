@@ -8,13 +8,13 @@ varying vec2 texCoord0;
 varying vec3 normal0;
 varying vec3 worldPos0;
 
-uniform mat4 transform;
-uniform mat4 Normal;
+uniform mat4 T_transform;
+uniform mat4 T_Normal;
 
 void main()
 {
-	gl_Position = transform * vec4(position, 1.0);
+	gl_Position = T_transform * vec4(position, 1.0);
 	texCoord0 = texCoord;
-	normal0 = (Normal * vec4(normal, 0.0)).xyz;
-	worldPos0 = (Normal * vec4(position, 1.0)).xyz;
+	normal0 = (T_Normal * vec4(normal, 0.0)).xyz;
+	worldPos0 = (T_Normal * vec4(position, 1.0)).xyz;
 }

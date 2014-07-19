@@ -7,10 +7,13 @@
 #include "spotLight.h"
 #include <glm\glm.hpp>
 #include <vector>
+#include <map>
+#include "mappedValues.h"
+#include "Material.h"
 
 class gameObject;
 
-class renderingEngine
+class renderingEngine : public MappedValues
 {
 public:
 	renderingEngine();
@@ -22,9 +25,15 @@ public:
 	inline Camera& GetMainCamera() { return *m_mainCamera; }
 	inline glm::fvec3& GetAmbientLight() { return m_ambientLight; }
 	inline baseLight* GetActiveLight() { return m_activeLight; }
+	inline unsigned int GetSamplerSlot(const std::string& samplerName) { return m_samplerMap[samplerName]; }
 
 	inline void AddLight(baseLight* light) { m_lights.push_back(light); }
 	inline void AddCamera(Camera* camera) { m_mainCamera = camera; }
+
+	virtual void UpdateUniformStruct(const Transform& transform, const Material& material, Shader* shader, const std::string& uniformName, const std::string& uniformType)
+	{
+		throw uniformType + " is not supported by the rendering engine";
+	}
 
 	virtual ~renderingEngine();
 protected:
@@ -34,9 +43,10 @@ private:
 
 	Camera* m_mainCamera;
 	glm::fvec3 m_ambientLight;
+	Shader* m_defaultShader;
 
 	baseLight* m_activeLight;
 	std::vector<baseLight*> m_lights;
-
+	std::map<std::string, unsigned int> m_samplerMap;
 };
 

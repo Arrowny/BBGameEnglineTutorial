@@ -67,11 +67,17 @@ protected:
 	void AddAllAttributes(const std::string& vertexShaderText);
 	static std::string LoadShader(const std::string& fileName);
 	void AddUniform(const std::string& uniformName, const std::string& uniformType, const std::vector<UniformStruct>& structs);
+
+	void SetUniformDirectionalLight(const std::string& uniformName, const directionalLight& value);
+	void SetUniformPointLight(const std::string& uniformName, const pointLight& value);
+	void SetUniformSpotLight(const std::string& uniformName, const spotLight& value);
+
 private:
 	int m_program;
-	/*std::map<std::string, int> m_uniforms;*/
 	std::map<std::string, UniformData> m_uniforms;
 	std::vector<int> m_shaders;
+	std::vector<std::string> m_uniformNames;
+	std::vector<std::string> m_uniformTypes;
 
 	void AddProgram(const std::string& text, int type);
 	

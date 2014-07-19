@@ -7,7 +7,9 @@
 #include "Util.h"
 
 static void CheckShaderError(int shader, int flag, bool isProgram, const std::string& errorMessage);
-
+static std::vector<UniformStruct> FindUniformStructs(const std::string& shaderText);
+static std::string FindUniformStructName(const std::string& structStartToOpeningBrace);
+static std::vector<TypedData> FindUniformStructComponents(const std::string& openingBraceToClosingBrace);
 
 Shader::Shader()
 {
@@ -59,15 +61,6 @@ void Shader::Bind()
 	glUseProgram(m_program);
 }
 
-//void Shader::AddUniform(const std::string& uniform)
-//{
-//	unsigned int location = glGetUniformLocation(m_program, uniform.c_str());
-//
-//	assert(location != INVALID_VALUE);
-//
-//	m_uniforms[uniform] = location;
-//}
-
 void Shader::AddUniform(const std::string& uniformName, const std::string& uniformType, const std::vector<UniformStruct>& structs)
 {
 	bool addThis = true;
@@ -92,7 +85,6 @@ void Shader::AddUniform(const std::string& uniformName, const std::string& unifo
 	assert(location != INVALID_VALUE);
 
 	m_uniforms.insert(std::pair<std::string, UniformData>(uniformName, UniformData(location, uniformType)));
-	//result.push_back(UniformData(location, uniformType, uniformName));
 }
 
 void Shader::AddVertexShaderFromFile(const std::string& text)
@@ -171,7 +163,65 @@ void Shader::CompileShader()
 
 void Shader::UpdateUniforms(const Transform& transform, const Material& material, renderingEngine* renderingEngine)
 {
+	glm::mat4 worldMatrix = transform.GetModel();
+	glm::mat4 projectedMatrix = renderingEngine->GetMainCamera().GetViewProjection() * worldMatrix;
 
+	for (unsigned int i = 0; i < m_uniformNames.size(); i++)
+	{
+		std::string uniformName = m_uniformNames[i];
+		std::string uniformType = m_uniformTypes[i];
+
+		if (uniformType == "sampler2D")
+		{
+			int samplerSlot = renderingEngine->GetSamplerSlot(uniformName);
+			material.GetTexture(uniformName)->Bind(samplerSlot);
+			SetUniformi(uniformName, samplerSlot);
+		}
+
+		else if (uniformName.substr(0, 2) == "T_")
+		{
+			if (uniformName == "T_transform")
+				SetUniform("T_transform", projectedMatrix);
+			else if (uniformName == "T_Normal")
+				SetUniform("T_Normal", worldMatrix);
+			else
+				throw "Invalid Transform Uniform: " + uniformName;
+		}
+		else if (uniformName.substr(0, 2) == "R_")
+		{
+			std::string unprefixedName = uniformName.substr(2, uniformName.length());
+
+			if (uniformType == "vec3")
+				SetUniform(uniformName, renderingEngine->GetVector3f(unprefixedName));
+			else if (uniformType == "float")
+				SetUniformf(uniformName, renderingEngine->GetFloat(unprefixedName));
+			else if (uniformType == "DirectionalLight")
+				SetUniformDirectionalLight(uniformName, *(directionalLight*)renderingEngine->GetActiveLight());
+			else if (uniformType == "PointLight")
+				SetUniformPointLight(uniformName, *(pointLight*)renderingEngine->GetActiveLight());
+			else if (uniformType == "SpotLight")
+				SetUniformSpotLight(uniformName, *(spotLight*)renderingEngine->GetActiveLight());
+			else
+				renderingEngine->UpdateUniformStruct(transform, material, this, uniformName, uniformType);
+		}
+		else if (uniformName.substr(0, 2) == "C_")
+		{
+			if (uniformName == "C_eyePos")
+				SetUniform(uniformName, renderingEngine->GetMainCamera().GetTransform().GetTransformedPos());
+			else
+				throw "Invalid Camera Uniform: " + uniformName;
+		}
+		else
+		{
+			if (uniformType == "vec3")
+				SetUniform(uniformName, material.GetVector3f(uniformName));
+			else if (uniformType == "float")
+				SetUniformf(uniformName, material.GetFloat(uniformName));
+			else
+				throw uniformType + " is not supported by the Material class";
+		}
+
+	}
 }
 
 void Shader::SetUniformi(const std::string& name, int value)
@@ -396,10 +446,42 @@ void Shader::AddShaderUniforms(const std::string& shaderText)
 			std::string uniformName = uniformLine.substr(begin + 1);
 			std::string uniformType = uniformLine.substr(0, begin);
 
-
+			m_uniformNames.push_back(uniformName);
+			m_uniformTypes.push_back(uniformType);
 			AddUniform(uniformName, uniformType, structs);
 
 		}
 		uniformLocation = shaderText.find(UNIFORM_KEY, uniformLocation + UNIFORM_KEY.length());
 	}
+}
+
+void Shader::SetUniformDirectionalLight(const std::string& uniformName, const directionalLight& directionalLight)
+{
+	SetUniform(uniformName + ".direction", directionalLight.GetTransform().GetTransformedForward());
+	SetUniform(uniformName + ".base.color", directionalLight.m_color);
+	SetUniformf(uniformName + ".base.intensity", directionalLight.m_intensity);
+}
+
+void Shader::SetUniformPointLight(const std::string& uniformName, const pointLight& pointLight)
+{
+	SetUniform(uniformName + ".base.color", pointLight.m_color);
+	SetUniformf(uniformName + ".base.intensity", pointLight.m_intensity);
+	SetUniformf(uniformName + ".atten.constant", pointLight.atten.m_constant);
+	SetUniformf(uniformName + ".atten.linear", pointLight.atten.m_linear);
+	SetUniformf(uniformName + ".atten.exponent", pointLight.atten.m_exponent);
+	SetUniform(uniformName + ".position", pointLight.GetTransform().GetTransformedPos());
+	SetUniformf(uniformName + ".range", pointLight.range);
+}
+
+void Shader::SetUniformSpotLight(const std::string& uniformName, const spotLight& spotLight)
+{
+	SetUniform(uniformName + ".pointLight.base.color", spotLight.m_color);
+	SetUniformf(uniformName + ".pointLight.base.intensity", spotLight.m_intensity);
+	SetUniformf(uniformName + ".pointLight.atten.constant", spotLight.atten.m_constant);
+	SetUniformf(uniformName + ".pointLight.atten.linear", spotLight.atten.m_linear);
+	SetUniformf(uniformName + ".pointLight.atten.exponent", spotLight.atten.m_exponent);
+	SetUniform(uniformName + ".pointLight.position", spotLight.GetTransform().GetTransformedPos());
+	SetUniformf(uniformName + ".pointLight.range", spotLight.range);
+	SetUniform(uniformName + ".direction", spotLight.GetTransform().GetTransformedForward());
+	SetUniformf(uniformName + ".cutoff", spotLight.cutoff);
 }
