@@ -16,14 +16,29 @@ gameObject* gameObject::AddComponent(gameComponent* component)
 	return this;
 }
 
-void gameObject::ProcessInput(const Input& input, float delta)
+void gameObject::inputAll(float delta)
 {
-	ProcessInput(input, delta);
+	input(delta);
 
 	for (unsigned int i = 0; i < m_children.size(); i++)
-	{
-		m_children[i]->ProcessInput(input, delta);
-	}
+		m_children[i]->inputAll(delta);
+
+}
+
+void gameObject::updateAll(float delta)
+{
+	update(delta);
+
+	for (unsigned int i = 0; i < m_children.size(); i++)
+		m_children[i]->updateAll(delta);
+}
+
+void gameObject::renderAll(Shader* shader, renderingEngine* renderingEngine)
+{
+	render(shader, renderingEngine);
+
+	for (unsigned int i = 0; i < m_children.size(); i++)
+		m_children[i]->renderAll(shader, renderingEngine);
 }
 
 void gameObject::input(float delta)
@@ -33,27 +48,18 @@ void gameObject::input(float delta)
 	for (unsigned int i = 0; i < m_components.size(); i++)
 		m_components[i]->input(delta);
 
-	for (unsigned int i = 0; i < m_children.size(); i++)
-		m_children[i]->input(delta);
-
 }
 
 void gameObject::update(float delta)
 {
 	for (unsigned int i = 0; i < m_components.size(); i++)
 		m_components[i]->update(delta);
-
-	for (unsigned int i = 0; i < m_children.size(); i++)
-		m_children[i]->update(delta);
 }
 
 void gameObject::render(Shader* shader, renderingEngine* renderingEngine)
 {
 	for (unsigned int i = 0; i < m_components.size(); i++)
 		m_components[i]->render(shader, renderingEngine);
-
-	for (unsigned int i = 0; i < m_children.size(); i++)
-		m_children[i]->render(shader, renderingEngine);
 }
 
 void gameObject::SetEngine(coreEngine* engine)
@@ -68,4 +74,18 @@ void gameObject::SetEngine(coreEngine* engine)
 		for (unsigned int i = 0; i < m_children.size(); i++)
 			m_children[i]->SetEngine(engine);
 	}
+}
+
+std::vector<gameObject*> gameObject::GetAllAttached()
+{
+	std::vector<gameObject*> result;
+
+	for (unsigned int i = 0; i < m_children.size(); i++)
+	{
+		std::vector<gameObject*> childObjects = m_children[i]->GetAllAttached();
+		result.insert(result.end(), childObjects.begin(), childObjects.end());
+	}
+
+	result.push_back(this);
+	return result;
 }

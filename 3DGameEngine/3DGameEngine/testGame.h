@@ -29,6 +29,7 @@ private:
 	gameObject* m_planeObject;
 	gameObject* m_planeObject2;
 	gameObject* m_planeObject3;
+	gameObject* m_camera;
 	gameObject* m_dirLightObj1;
 	directionalLight* dirLight1;
 	directionalLight* dirLight2;

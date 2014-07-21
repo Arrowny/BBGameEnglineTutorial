@@ -2,7 +2,7 @@
 
 void Game::input(float delta){
 	
-	m_root.input(delta);
+	m_root.inputAll(delta);
 
 }
 
