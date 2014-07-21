@@ -43,6 +43,12 @@ void TestGame::init()
 	GetRootObject().AddChild(*pointLightObject);
 	GetRootObject().AddChild(*spotLightObject);
 
+	GameObject* testMesh1 = new GameObject();
+	testMesh1->AddComponent(new MeshRenderer(*m_mesh, m_material));
+
+	testMesh1->GetTransform().SetPos(glm::vec3(0,-1,23.5));
+	GetRootObject().AddChild(*testMesh1);
+
 	/* -------------------------------Light Part----------------------------------------
 	m_shader->SetAmbient(glm::fvec3(0.3, 0.3, 0.3));
 	m_shader->SetDirectionalLight(DirectionalLight(BaseLight(glm::vec3(1, 0, 0), 0.5f), glm::vec3(0, 0, -1)));
