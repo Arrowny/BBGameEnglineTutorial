@@ -1,7 +1,8 @@
 #include "baseLight.h"
 #include "renderingEngine.h"
+#include "coreEngine.h"
 
-void baseLight::AddToRenderingEngine(renderingEngine* renderingEngine)
+void baseLight::AddToEngine(coreEngine* engine)
 {
-	renderingEngine->AddLight(this);
+	engine->GetRenderingEngine()->AddLight(this);
 }

@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "main.h"
 
 void Game::input(float delta){
 	

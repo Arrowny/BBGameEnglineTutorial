@@ -3,9 +3,10 @@
 
 #include <string>
 #include "Window.h"
-#include "Game.h"
 #include "Input.h"
 #include "renderingEngine.h"
+
+class Game;
 
 class coreEngine
 {
@@ -18,6 +19,8 @@ public:
 	void cleanUp();
 	void Run();
 	void Render();
+
+	inline renderingEngine* GetRenderingEngine() { return m_renderingEngine; }
 
 protected:
 private:

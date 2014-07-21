@@ -1,6 +1,16 @@
 #pragma once
 
 #include "Game.h"
+#include "Mesh.h"
+#include "Shader.h"
+#include "Camera.h"
+#include "Texture.h"
+#include "pointLight.h"
+#include "meshRenderer.h"
+#include "Input.h"
+#include <iostream>
+#include "freeLook.h"
+#include "freeMove.h"
 
 class TestGame : public Game
 {

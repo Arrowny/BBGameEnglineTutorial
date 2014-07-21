@@ -3,6 +3,8 @@
 #include <glm\glm.hpp>
 #include "gameComponent.h"
 
+class coreEngine;
+
 struct baseLight : public gameComponent
 {
 public:
@@ -13,7 +15,7 @@ public:
 		m_color(color),
 		m_intensity(intensity) {}
 
-	virtual void AddToRenderingEngine(renderingEngine* renderingEngine);
+	virtual void AddToEngine(coreEngine* engine);
 	inline void SetShader(Shader* shader) { m_shader = shader; }
 	inline Shader* GetShader() { return m_shader; }
 

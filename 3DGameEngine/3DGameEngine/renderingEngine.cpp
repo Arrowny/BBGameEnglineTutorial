@@ -17,7 +17,8 @@ renderingEngine::renderingEngine()
 	glEnable(GL_TEXTURE_2D);
 
 	m_activeLight = new baseLight();
-	m_mainCamera = new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f);
+	m_freeLook = new FreeLook();
+	m_freeMove = new FreeMove();
 
 	AddVector3f("ambientLight", glm::fvec3(0.1f, 0.1f, 0.1f));
 	m_defaultShader = new Shader("./res/forwardAmbient");
@@ -32,17 +33,14 @@ renderingEngine::~renderingEngine()
 
 void renderingEngine::input(const Input& input, float delta)
 {
-	m_mainCamera->input(input, delta);
+	m_freeLook->input(input, delta);
+	m_freeMove->input(input, delta);
 }
 
 void renderingEngine::Render(gameObject* object)
 {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	m_lights.clear();
-
-	object->AddToRenderingEngine(this);
 
 	object->render(m_defaultShader, this);
 	

@@ -5,6 +5,7 @@ gameObject* gameObject::AddChild(gameObject* child)
 {
 	m_children.push_back(child);
 	child->GetTransform().SetParent(&m_transform);
+	child->SetEngine(m_coreEngine);
 	return this;
 }
 
@@ -13,6 +14,16 @@ gameObject* gameObject::AddComponent(gameComponent* component)
 	m_components.push_back(component);
 	component->SetParent(this);
 	return this;
+}
+
+void gameObject::ProcessInput(const Input& input, float delta)
+{
+	ProcessInput(input, delta);
+
+	for (unsigned int i = 0; i < m_children.size(); i++)
+	{
+		m_children[i]->ProcessInput(input, delta);
+	}
 }
 
 void gameObject::input(float delta)
@@ -45,11 +56,16 @@ void gameObject::render(Shader* shader, renderingEngine* renderingEngine)
 		m_children[i]->render(shader, renderingEngine);
 }
 
-void gameObject::AddToRenderingEngine(renderingEngine* renderingEngine)
+void gameObject::SetEngine(coreEngine* engine)
 {
-	for (unsigned int i = 0; i < m_components.size(); i++)
-		m_components[i]->AddToRenderingEngine(renderingEngine);
+	if (m_coreEngine != engine)
+	{
+		m_coreEngine = engine;
 
-	for (unsigned int i = 0; i < m_children.size(); i++)
-		m_children[i]->AddToRenderingEngine(renderingEngine);
+		for (unsigned int i = 0; i < m_components.size(); i++)
+			m_components[i]->AddToEngine(engine);
+
+		for (unsigned int i = 0; i < m_children.size(); i++)
+			m_children[i]->SetEngine(engine);
+	}
 }

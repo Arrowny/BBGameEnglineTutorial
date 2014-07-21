@@ -12,6 +12,7 @@ m_frameTime(1.0 / frameRate),
 m_renderingEngine(renderingEngine)
 {
 	m_isRunning = false;
+	m_game->SetEngine(this);
 }
 
 coreEngine::~coreEngine()

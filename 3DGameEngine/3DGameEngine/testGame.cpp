@@ -31,6 +31,7 @@ void TestGame::init(){
 	m_pLightObj1 = new gameObject();
 	m_sLightObj1 = new gameObject();
 	m_sLightObj2 = new gameObject();
+
 	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
 	m_mesh = new Mesh("./res/triforce.obj");
 	//m_mesh2 = new Mesh("./res/shield.obj");
@@ -60,6 +61,7 @@ void TestGame::init(){
 	m_planeObject->AddComponent(m_meshRenderer);
 	m_planeObject2->AddComponent(m_meshRenderer2);
 	m_planeObject3->AddComponent(m_meshRenderer3);
+	//m_planeObject->AddComponent(new FreeLook());
 	m_planeObject->AddChild(m_planeObject2);
 	m_planeObject->AddChild(m_planeObject3);
 	m_planeObject->GetTransform().SetPos(glm::fvec3(0, 0, 5));
@@ -98,8 +100,8 @@ void TestGame::init(){
 	AddToScene(m_sLightObj1);
 
 	//m_planeObject->GetTransform().SetRot(glm::normalize(glm::quat(glm::radians(-90.0f), 0.0f, 1.0f, 0.0f)));
-	m_planeObject3->AddChild((new gameObject())->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f)));
-	//AddToScene((new gameObject())->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f)));
+	//m_planeObject3->AddChild((new gameObject())->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f))->AddComponent(new FreeLook()));
+	AddToScene((new gameObject())->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f))->AddComponent(new FreeLook())->AddComponent(new FreeMove()));
 
 }
 

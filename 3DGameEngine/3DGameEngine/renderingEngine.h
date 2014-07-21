@@ -10,6 +10,8 @@
 #include <map>
 #include "mappedValues.h"
 #include "Material.h"
+#include "freeLook.h"
+#include "freeMove.h"
 
 class gameObject;
 
@@ -28,6 +30,8 @@ public:
 
 	inline void AddLight(baseLight* light) { m_lights.push_back(light); }
 	inline void AddCamera(Camera* camera) { m_mainCamera = camera; }
+	inline void AddFreeLook(FreeLook* freeLook) { m_freeLook = freeLook; }
+	inline void AddFreeMove(FreeMove* freeMove) { m_freeMove = freeMove; }
 
 	virtual void UpdateUniformStruct(const Transform& transform, const Material& material, Shader* shader, const std::string& uniformName, const std::string& uniformType)
 	{
@@ -41,6 +45,8 @@ private:
 	void operator=(const renderingEngine& other) {}
 
 	Camera* m_mainCamera;
+	FreeLook* m_freeLook;
+	FreeMove* m_freeMove;
 	Shader* m_defaultShader;
 
 	baseLight* m_activeLight;

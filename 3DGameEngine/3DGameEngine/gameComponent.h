@@ -16,7 +16,7 @@ public:
 	virtual void update(float delta) {}
 	virtual void render(Shader* shader, renderingEngine* renderingEngine) {}
 
-	virtual void AddToRenderingEngine(renderingEngine* renderingEngine) {}
+	virtual void AddToEngine(coreEngine* engine) {}
 
 	inline void SetParent(gameObject* parent) { m_parent = parent; }
 	inline Transform& GetTransform() { return m_parent->GetTransform(); }

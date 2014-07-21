@@ -81,6 +81,8 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="coreEngine.cpp" />
     <ClCompile Include="directionalLight.cpp" />
+    <ClCompile Include="freeLook.cpp" />
+    <ClCompile Include="freeMove.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -104,6 +106,8 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="coreEngine.h" />
     <ClInclude Include="directionalLight.h" />
+    <ClInclude Include="freeLook.h" />
+    <ClInclude Include="freeMove.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="gameComponent.h" />
     <ClInclude Include="gameObject.h" />
