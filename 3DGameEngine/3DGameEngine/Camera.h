@@ -5,32 +5,22 @@
 #include "Input.h"
 #include "timing.h"
 #include "Window.h"
+#include "GameComponent.h"
 
 
-class Camera
+class Camera :GameComponent
 {
 public:
-	Camera(const glm::vec3& pos, float fov, float aspect, float zNear, float zFar)
+	Camera(/*const glm::vec3& pos,*/ float fov, float aspect, float zNear, float zFar)
 	{
 		m_perspective = glm::perspective(fov, aspect, zNear, zFar);
-		m_position = pos;
+		m_position = glm::vec3(0, 0, 0);
 		m_forward = glm::vec3(0, 0, 1);
 		m_up = glm::vec3(0, 1, 0);
 
 		m_up = glm::normalize(m_up);
 		m_forward = glm::normalize(m_forward);
 	}
-
-	//Camera(float fov, float aspect, float zNear, float zFar)
-	//{
-	//	m_perspective = glm::perspective(fov, aspect, zNear, zFar);
-	//	m_position = glm::vec3(0, 0, 0);
-	//	m_forward = glm::vec3(0, 0, 1);
-	//	m_up = glm::vec3(0, 1, 0);
-
-	//	m_up = glm::normalize(m_up);
-	//	m_forward = glm::normalize(m_forward);
-	//}
 
 	inline glm::mat4 GetViewProjection() const
 	{
@@ -47,7 +37,7 @@ public:
 
 	glm::vec2 centerPosition = glm::vec2(WindowParameter::width / 2, WindowParameter::height / 2);
 
-	void Input(Input input, float delta)
+	void input(Input input, float delta)
 	{
 		float snsitivity = 0.1f;
 
@@ -169,7 +159,7 @@ public:
 		return m_forward;
 	}
 
-
+	void AddToRenderingEngine(RenderingEngine* renderingEngine);
 
 private:
 	glm::mat4 m_perspective;

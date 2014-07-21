@@ -33,6 +33,7 @@
       <Filter>Shader</Filter>
     </ClCompile>
     <ClCompile Include="Lights.cpp" />
+    <ClCompile Include="Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\VS_test\MonkeyHead[final]\MonkeyHead[final]\obj_loader.h" />

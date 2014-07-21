@@ -8,8 +8,9 @@
 #include "GameObject.h"
 
 
+
 RenderingEngine::RenderingEngine():
-mainCamera(glm::vec3(0, 1, -4), 70.0f, (float)WindowParameter::width / (float)WindowParameter::height, 1.0f, 1000.0f)
+mainCamera(70.0f, (float)WindowParameter::width / (float)WindowParameter::height, 1.0f, 1000.0f)
 {
 
 	//glClearColor(2.0f, 1.5f, 0.0f, 0.5f);
@@ -29,7 +30,7 @@ RenderingEngine::~RenderingEngine()
 
 void RenderingEngine::input(Input input, float delta)
 {
-	mainCamera.Input(input, delta);
+	mainCamera.input(input, delta);
 }
 
 void RenderingEngine::render(GameObject* object)
@@ -73,4 +74,4 @@ BaseLight* RenderingEngine::GetActiveLight()
 	return activeLight;
 }
 
-void RenderingEngine::AddCamera(Camera camera) { mainCamera = camera; }
+//void RenderingEngine::AddCamera(Camera* camera) { mainCamera = camera; }

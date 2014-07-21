@@ -37,7 +37,7 @@ public:
 private:
 
 	RenderingEngine(const RenderingEngine& other) :
-		mainCamera(glm::vec3(0, 1, 0), 70.0f, (float)WindowParameter::width / (float)WindowParameter::height, 1.0f, 1000.0f) {}
+		mainCamera( 70.0f, (float)WindowParameter::width / (float)WindowParameter::height, 1.0f, 1000.0f) {}
 	void operator=(const RenderingEngine& other) {}
 
 	Camera mainCamera;
