@@ -8,23 +8,18 @@
 #include "GameComponent.h"
 
 
-class Camera :GameComponent
+class Camera :public GameComponent
 {
 public:
 	Camera(/*const glm::vec3& pos,*/ float fov, float aspect, float zNear, float zFar)
 	{
 		m_perspective = glm::perspective(fov, aspect, zNear, zFar);
-		m_position = glm::vec3(0, 0, 0);
-		m_forward = glm::vec3(0, 0, 1);
-		m_up = glm::vec3(0, 1, 0);
 
-		m_up = glm::normalize(m_up);
-		m_forward = glm::normalize(m_forward);
 	}
 
 	inline glm::mat4 GetViewProjection() const
 	{
-		return m_perspective * glm::lookAt(m_position, m_position + m_forward, m_up);
+		return m_perspective * glm::lookAt(GetTransform().GetPos(), GetTransform().GetPos() + GetTransform().GetForward(), GetTransform().GetUp());
 		
 	}
 
@@ -39,10 +34,10 @@ public:
 
 	void input(Input input, float delta)
 	{
-		float snsitivity = 0.1f;
+		float sensitivity = -3.0f;
 
 		float movAmt = (float)(10 * delta);
-		float rotAmt = (float)(100 * delta);
+		float rotAmt = (float)(300 * delta);
 
 		if (input.GetKey(input.KEY_ESCAPE))
 		{
@@ -56,9 +51,11 @@ public:
 			bool rotY = deltaPos.x != 0;
 			bool rotX = deltaPos.y != 0;
 			if (rotY)
-				RotateY(-deltaPos.x * snsitivity);
+				GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(-deltaPos.x * sensitivity), yAxis)));
+				//RotateY(-deltaPos.x * sensitivity);
 			if (rotX)
-				RotateX(deltaPos.y * snsitivity);
+				GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(deltaPos.y * sensitivity), GetTransform().GetRight())));
+				//RotateX(deltaPos.y * sensitivity);
 			if (rotX || rotY)
 			{
 				input.SetMousePosition(glm::vec2(WindowParameter::width / 2, WindowParameter::height / 2));
@@ -78,94 +75,42 @@ public:
 
 
 		if (input.GetKey(input.KEY_W))
-			move(m_forward, movAmt);
+			move(GetTransform().GetForward(), movAmt);
 		if (input.GetKey(input.KEY_S))
-			move(m_forward, -movAmt);
+			move(GetTransform().GetForward(), -movAmt);
 		if (input.GetKey(input.KEY_A))
-			move(GetLeft(), movAmt);
+			move(GetTransform().GetLeft(), movAmt);
 		if (input.GetKey(input.KEY_D))
-			move(GetRight(), movAmt);
+			move(GetTransform().GetUp(), movAmt);
 
 		if (input.GetKey(input.KEY_CAPSLOCK))
-			move(m_up, movAmt);
+			move(GetTransform().GetUp(), movAmt);
 		if (input.GetKey(input.KEY_LSHIFT))
-			move(m_up, -movAmt);
+			move(GetTransform().GetUp(), -movAmt);
 
 		if (input.GetKey(input.KEY_UP))
-			RotateX(-rotAmt);
+			GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(rotAmt), GetTransform().GetRight())));
+			//RotateX(-rotAmt);
 		if (input.GetKey(input.KEY_DOWN))
-			RotateX(rotAmt);
+			GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(-rotAmt), GetTransform().GetRight())));
 		if (input.GetKey(input.KEY_LEFT))
-			RotateY(rotAmt);
+			GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(-rotAmt), yAxis)));
+			//RotateY(rotAmt);
 		if (input.GetKey(input.KEY_RIGHT))
-			RotateY(-rotAmt);
+			GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(rotAmt), yAxis)));
+			//RotateY(-rotAmt);
 	}
 
 	inline void move(glm::fvec3 dir, float amt)
 	{
-		m_position += (dir * amt);
+		GetTransform().GetPos() += (dir * amt);
 	}
 
-	inline void RotateX(float angle)
-	{
-		glm::fvec3 Haxis = glm::cross(yAxis, m_forward);
-		Haxis = glm::normalize(Haxis);
-
-		m_forward = glm::rotate(m_forward, angle, Haxis);
-		m_forward = glm::normalize(m_forward);
-
-		m_up = glm::cross(m_forward, Haxis);
-		m_up = glm::normalize(m_up);
-	}
-
-	inline void RotateY(float angle)
-	{
-		glm::fvec3 Haxis = glm::cross(yAxis, m_forward);
-		Haxis = glm::normalize(Haxis);
-
-		m_forward = glm::rotate(m_forward, angle, yAxis);
-		m_forward = glm::normalize(m_forward);
-
-		m_up = glm::cross(m_forward, Haxis);
-		m_up = glm::normalize(m_up);
-	}
-
-	inline glm::fvec3 GetLeft()
-	{
-		glm::fvec3 left = glm::cross(m_up, m_forward);
-		left = glm::normalize(left);
-		return left;
-	}
-
-	inline glm::fvec3 GetRight()
-	{
-		glm::fvec3 right = glm::cross(m_forward, m_up);
-		right = glm::normalize(right);
-		return right;
-	}
-
-	inline glm::fvec3 GetPos() const
-	{
-		return m_position;
-	}
-
-	inline glm::fvec3 GetUp() const
-	{
-		return m_up;
-	}
-
-	inline glm::fvec3 GetForward() const
-	{
-		return m_forward;
-	}
 
 	void AddToRenderingEngine(RenderingEngine* renderingEngine);
 
 private:
 	glm::mat4 m_perspective;
-	glm::vec3 m_position;
-	glm::vec3 m_forward;
-	glm::vec3 m_up;
 
 	glm::fvec3 yAxis = glm::fvec3(0, 1, 0);
 };

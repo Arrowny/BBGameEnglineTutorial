@@ -11,15 +11,17 @@ GameObject::~GameObject()
 {
 }
 
-void GameObject::AddChild(GameObject& child)
+GameObject* GameObject::AddChild(GameObject* child)
 {
-	children.push_back(&child);
+	children.push_back(child);
+	return this;
 }
 
-void GameObject::AddComponent(GameComponent* comp)
+GameObject* GameObject::AddComponent(GameComponent* comp)
 {
 	components.push_back(comp);
 	comp->SetParent(this);
+	return this;
 }
 
 void GameObject::AddToRenderingEngine(RenderingEngine* renderingEngine)

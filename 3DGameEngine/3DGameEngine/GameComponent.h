@@ -18,7 +18,7 @@ public:
 
 	inline void SetParent(GameObject* parent) { m_parent = parent; }
 	inline Transform& GetTransform() { return m_parent->GetTransform(); }
-
+	inline const Transform& GetTransform() const { return m_parent->GetTransform(); }
 
 	virtual ~GameComponent() {};
 

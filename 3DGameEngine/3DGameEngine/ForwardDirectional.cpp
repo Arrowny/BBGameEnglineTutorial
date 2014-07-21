@@ -53,7 +53,7 @@ void ForwardDirectional::Update(Transform& transform, RenderingEngine& rendering
 	glUniformMatrix4fv(m_uniforms[model], 1, GL_FALSE, &worldMatrix[0][0]);
 	glUniformMatrix4fv(m_uniforms[MVP], 1, GL_FALSE, &projectedMatrix[0][0]);
 
-	glUniform3fv(m_uniforms[EYEPOS_U], 1, &renderingEngine.GetMainCamera().GetPos()[0]);
+	glUniform3fv(m_uniforms[EYEPOS_U], 1, &renderingEngine.GetMainCamera().GetTransform().GetPos()[0]);
 	glUniform1f(m_uniforms[L_SPECULARINTENSITY_U], material.specularIntensity);
 	glUniform1f(m_uniforms[L_SPECULARPOWER_U], material.specularPower);
 

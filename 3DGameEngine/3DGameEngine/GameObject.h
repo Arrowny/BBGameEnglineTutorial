@@ -17,8 +17,8 @@ public:
 	void update(float delta);
 	void render(Shader* m_shader, RenderingEngine* renderingEngine);
 
-	void AddChild(GameObject& child);
-	void AddComponent(GameComponent* component);
+	GameObject* AddChild(GameObject* child);
+	GameObject* AddComponent(GameComponent* component);
 
 	void AddToRenderingEngine(RenderingEngine* renderingEngine);
 

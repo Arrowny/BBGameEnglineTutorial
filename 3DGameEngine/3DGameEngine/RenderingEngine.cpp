@@ -9,8 +9,8 @@
 
 
 
-RenderingEngine::RenderingEngine():
-mainCamera(70.0f, (float)WindowParameter::width / (float)WindowParameter::height, 1.0f, 1000.0f)
+RenderingEngine::RenderingEngine()/*:
+mainCamera(70.0f, (float)WindowParameter::width / (float)WindowParameter::height, 1.0f, 1000.0f)*/
 {
 
 	//glClearColor(2.0f, 1.5f, 0.0f, 0.5f);
@@ -21,6 +21,8 @@ mainCamera(70.0f, (float)WindowParameter::width / (float)WindowParameter::height
 	glCullFace(GL_BACK);
 	glEnable(GL_DEPTH_CLAMP);
 
+	mainCamera = new Camera(10.0f, 1.0, 1.0, 1000.0);
+
 }
 
 
@@ -30,7 +32,7 @@ RenderingEngine::~RenderingEngine()
 
 void RenderingEngine::input(Input input, float delta)
 {
-	mainCamera.input(input, delta);
+	mainCamera->input(input, delta);
 }
 
 void RenderingEngine::render(GameObject* object)
@@ -74,4 +76,4 @@ BaseLight* RenderingEngine::GetActiveLight()
 	return activeLight;
 }
 
-//void RenderingEngine::AddCamera(Camera* camera) { mainCamera = camera; }
+void RenderingEngine::AddCamera(Camera* camera) { mainCamera = camera; }

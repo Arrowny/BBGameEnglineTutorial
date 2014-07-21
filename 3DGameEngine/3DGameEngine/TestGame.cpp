@@ -38,16 +38,20 @@ void TestGame::init()
 	spotLight->GetTransform().SetPos(glm::vec3(0, 0, 5));
 	spotLight->GetTransform().SetRot(glm::normalize(glm::quat(glm::radians(-90.0f), 0.0, 1.0, 0.0)));
 
-	GetRootObject().AddChild(*planeObject);
-	GetRootObject().AddChild(*directionalLightObject);
-	GetRootObject().AddChild(*pointLightObject);
-	GetRootObject().AddChild(*spotLightObject);
+	GetRootObject().AddChild(planeObject);
+	GetRootObject().AddChild(directionalLightObject);
+	GetRootObject().AddChild(pointLightObject);
+	GetRootObject().AddChild(spotLightObject);
 
-	GameObject* testMesh1 = new GameObject();
+	GameObject* cameraObject = new GameObject();
+	cameraObject->AddComponent(new Camera(70.0f, (float)WindowParameter::width / (float)WindowParameter::height, 1.0, 1000.0));
+	GetRootObject().AddChild(cameraObject);
+
+	/*GameObject* testMesh1 = new GameObject();
 	testMesh1->AddComponent(new MeshRenderer(*m_mesh, m_material));
 
 	testMesh1->GetTransform().SetPos(glm::vec3(0,-1,23.5));
-	GetRootObject().AddChild(*testMesh1);
+	GetRootObject().AddChild(*testMesh1);*/
 
 	/* -------------------------------Light Part----------------------------------------
 	m_shader->SetAmbient(glm::fvec3(0.3, 0.3, 0.3));
