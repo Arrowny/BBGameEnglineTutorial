@@ -33,6 +33,8 @@ void GameObject::AddToRenderingEngine(RenderingEngine* renderingEngine)
 
 void GameObject::input(float delta)
 {
+	m_transform.Update();
+
 	for each (GameComponent* comp in components)
 		comp->input(delta);
 

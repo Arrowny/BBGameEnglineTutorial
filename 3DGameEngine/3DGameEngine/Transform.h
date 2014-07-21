@@ -27,12 +27,12 @@ public:
 
 		glm::mat4 rotMat = rotZ * rotY * rotX;
 
-		if (oldExist)
-		{
-			m_oldpos = m_pos;
-			m_oldrot = m_rot;
-			m_oldscale = m_scale;
-		}
+		//if (oldExist)
+		//{
+		//	m_oldpos = m_pos;
+		//	m_oldrot = m_rot;
+		//	m_oldscale = m_scale;
+		//}
 		return GetParentMatrix() * posMat * rotMat * scaleMat;
 	}
 
@@ -45,55 +45,55 @@ public:
 	inline void SetScale(const glm::vec3& scale) { m_scale = scale; }
 
 
-	//inline void Update()
-	//{
-	//	if (oldExist)
-	//	{
-	//		m_oldpos = m_pos;
-	//		m_oldrot = m_rot;
-	//		m_oldscale = m_scale;
-	//	}
-	//	else
-	//	{
-	//		m_oldpos = m_pos + glm::fvec3(1, 1, 1);
-	//		m_oldrot = m_rot * 0.5f;
-	//		m_oldscale = m_scale + glm::vec3(1, 1, 1);
-	//		oldExist = true;
-	//	}
-	//}
-
-	//inline glm::vec3 GetTransformedPos()
-	//{
-	//	glm::vec4 transPos(m_pos, 1.0);
-
-	//	return glm::vec3(GetParentMatrix() * transPos);
-
-	//}
-
-	//inline glm::quat GetTransformedRot()
-	//{
-	//	glm::quat parentRot = glm::normalize(glm::quat(1, 0, 0, 0));
-
-	//	if (m_parent != 0)
-	//	{
-	//		parentRot = m_parent->GetTransformedRot();
-	//	}
-
-	//	return parentRot * m_rot;
-	//}
-
-	inline bool Transform::HasChanged()
+	inline void Update()
 	{
-
-		if (!oldExist)
+		if (oldExist)
 		{
 			m_oldpos = m_pos;
 			m_oldrot = m_rot;
 			m_oldscale = m_scale;
-			oldExist = true;
-
-			return true;
 		}
+		else
+		{
+			m_oldpos = m_pos + glm::fvec3(1, 1, 1);
+			m_oldrot = m_rot * 0.5f;
+			m_oldscale = m_scale + glm::vec3(1, 1, 1);
+
+		}
+	}
+
+	inline glm::vec3 GetTransformedPos()
+	{
+		glm::vec4 transPos(m_pos, 1.0);
+
+		return glm::vec3(GetParentMatrix() * transPos);
+
+	}
+
+	inline glm::quat GetTransformedRot()
+	{
+		glm::quat parentRot = glm::normalize(glm::quat(1, 0, 0, 0));
+
+		if (m_parent != 0)
+		{
+			parentRot = m_parent->GetTransformedRot();
+		}
+
+		return parentRot * m_rot;
+	}
+
+	inline bool Transform::HasChanged()
+	{
+
+		//if (!oldExist)
+		//{
+		//	m_oldpos = m_pos;
+		//	m_oldrot = m_rot;
+		//	m_oldscale = m_scale;
+		//	oldExist = true;
+
+		//	return true;
+		//}
 
 		if (m_parent != 0 && m_parent->HasChanged())
 			return true;
