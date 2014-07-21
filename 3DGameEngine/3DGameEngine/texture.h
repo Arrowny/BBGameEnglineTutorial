@@ -3,6 +3,7 @@
 #include <string>
 #include <GL\glew.h>
 #include "stb_image.h"
+#include "textureResource.h"
 
 class Texture
 {
@@ -16,6 +17,11 @@ private:
 	Texture(const Texture& other) {}
 	void operator=(const Texture& other) {}
 
-	GLuint m_texture;
+
+	void initTexture(unsigned char* imageData, int width, int height);
+
+	std::string m_texFileName;
+	TextureResource* m_texResource;
+	//GLuint m_texture;
 };
 

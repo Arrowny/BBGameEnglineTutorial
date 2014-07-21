@@ -1,20 +1,37 @@
 #include "texture.h"
 #include <iostream>
 #include <cassert>
+#include "util.h"
 
 
 Texture::Texture(const std::string& fileName)
 {
-	int width, height, numComponents;
-	unsigned char* imageData = stbi_load(fileName.c_str(), &width, &height, &numComponents, 4);
+	this->m_texFileName = fileName;
 
-	if (imageData == NULL)
+	if (texResourceMap.find(m_texFileName) == texResourceMap.end()) //only set up new texture if texture has not been created.
 	{
-		std::cerr << "Error: Texture loading error for file " + fileName << std::endl;
-	}
+		int width, height, numComponents;
+		unsigned char* imageData = stbi_load(fileName.c_str(), &width, &height, &numComponents, 4);
 
-	glGenTextures(1, &m_texture);
-	glBindTexture(GL_TEXTURE_2D, m_texture);
+		if (imageData == NULL)
+		{
+			std::cerr << "Error: Texture loading error for file " + fileName << std::endl;
+		}
+
+		m_texResource = new TextureResource();
+		initTexture(imageData, width, height);
+	}
+	else
+	{
+		texResourceCount[m_texFileName]++;
+	}
+	
+}
+
+void Texture::initTexture(unsigned char* imageData, int width, int height)
+{
+	glGenTextures(1, m_texResource->getTexture());
+	glBindTexture(GL_TEXTURE_2D, *m_texResource->getTexture());
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -25,17 +42,24 @@ Texture::Texture(const std::string& fileName)
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
 
 	stbi_image_free(imageData);
+	texResourceMap[m_texFileName] = m_texResource;
 }
-
 
 Texture::~Texture()
 {
-	glDeleteTextures(1, &m_texture);
+	if (texResourceMap[m_texFileName] == 0)
+	{
+		meshResourceMap.erase(m_texFileName);
+	}
+	else 
+	{
+		texResourceCount[m_texFileName]--;
+	}
 }
 
 void Texture::Bind(const unsigned int& whichText)
 {
 	assert(whichText >= 0 && whichText <= 31);
 	glActiveTexture(GL_TEXTURE0 + whichText);
-	glBindTexture(GL_TEXTURE_2D, m_texture);
+	glBindTexture(GL_TEXTURE_2D, *texResourceMap[m_texFileName]->getTexture());
 }

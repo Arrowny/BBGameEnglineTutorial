@@ -27,6 +27,7 @@ private:
 	void operator=(const TestGame& other) {}
 
 	MeshRenderer* MonkeyMesh; GameObject monkeyObject;
+	MeshRenderer* MonkeyMesh2; GameObject monkeyObject2;
 	MeshRenderer* meshComponent; GameObject pyrimidGameObject;
 	MeshRenderer* meshComponent2; GameObject pyrimidGameObject2;
 	DirectionalLight* dLight; GameObject dLightObj;

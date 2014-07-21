@@ -5,6 +5,8 @@
 #include "vertex.h"
 #include "resourceLoader.h"
 #include "util.h"
+#include "meshResource.h"
+#include "util.h"
 
 class Mesh
 {
@@ -25,10 +27,11 @@ public:
 		NUM_BUFFERS
 	};
 
-	GLuint m_vertexArrayObject;
-	GLuint m_vertexArrayBuffers[NUM_BUFFERS];
+	MeshResource* m_meshResource;
+	//GLuint m_vertexArrayObject;
+	//GLuint m_vertexArrayBuffers[NUM_BUFFERS];
 
-	unsigned int m_drawCount;
+	//unsigned int m_drawCount;
 
 private:
 	Mesh(const Mesh& other);
@@ -37,5 +40,7 @@ private:
 	void initMesh(std::vector<glm::vec3> vertices, std::vector<unsigned int> indices, std::vector<glm::vec2> textCoords);
 	void initMesh(std::vector<glm::vec3> vertices, std::vector<unsigned int> indices, std::vector<glm::vec2> textCoords, std::vector<glm::vec3> normals);
 	std::vector<glm::vec3> calcNormals(const std::vector<glm::vec3>& vertices, const std::vector<unsigned int>& indices);
+	
+	std::string m_fileName;
 };
 

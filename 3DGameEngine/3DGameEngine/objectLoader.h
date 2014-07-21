@@ -3,18 +3,17 @@
 #include <string>
 #include <glm\glm.hpp>
 
+//not currently working. Bugs in loading normals/textures :(
 struct OBJIndex
 {
 public:
-	unsigned int vertexIndex;
-	unsigned int uvIndex;
-	unsigned int normalIndex;
+	unsigned int vertexIndex = 0;
+	unsigned int uvIndex = 0;
+	unsigned int normalIndex = 0;
 
 	bool operator<(const OBJIndex& r) const { return vertexIndex < r.vertexIndex; }
-	bool operator==(const OBJIndex& other)
-	{
-		return ((this->vertexIndex == other.vertexIndex) && (this->uvIndex == other.uvIndex) && (this->normalIndex == other.normalIndex));
-	}
+	bool operator==(const OBJIndex& other);
+	unsigned int hashCode();
 
 };
 
@@ -42,7 +41,7 @@ public:
 	std::vector<glm::vec3> positions;
 	std::vector<glm::vec2> texCoords;
 	std::vector<glm::vec3> normals;
-	std::vector<OBJIndex> indices;
+	std::vector<OBJIndex> OBJIndices;
 
 	OBJModel(std::string fileName);
 
@@ -50,6 +49,7 @@ public:
 
 private:
 	OBJIndex parseIndex(std::string token);
+	unsigned int FindLastVertexIndex(const std::vector<OBJIndex*>& indexLookup, const OBJIndex* currentIndex, const IndexedModel& result) const;
 
 	bool hasTexCoords = false;
 	bool hasNormals = false;

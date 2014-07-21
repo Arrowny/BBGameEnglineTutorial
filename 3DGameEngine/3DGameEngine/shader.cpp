@@ -1,13 +1,46 @@
 #include "shader.h"
-#include "resourceLoader.h"
+//#include "resourceLoader.h"
 #include <iostream>
+#include <fstream>
+#include <string>
 
 namespace
 {
 
 	std::string LoadShader(const std::string& fileName)
 	{
-		return Loader::LoadFile(fileName);
+		std::string INCLUDE_DIRECTIVE = "#include";
+		//return Loader::LoadFile(fileName);
+		std::ifstream file;
+		file.open(fileName.c_str());
+
+		std::string output;
+		std::string line;
+
+		if (file.is_open())
+		{
+			while (file.good())
+			{
+				std::getline(file, line);
+				std::vector<std::string> tokens = Util::Split(line, ' ');
+
+				if (tokens[0] == INCLUDE_DIRECTIVE) //must include another shader file
+				{
+					std::string includeName = tokens[1].substr(1, tokens[1].size() - 2);
+					output.append(LoadShader(includeName));
+				}
+				else
+				{
+					output.append(line + "\n");
+				}
+			}
+		}
+		else
+		{
+			std::cerr << "File Readin Error: unable to load file \"" << fileName << "\"" << std::endl;
+		}
+
+		return output;
 	}
 
 	static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage)

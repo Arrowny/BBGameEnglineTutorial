@@ -34,7 +34,8 @@ void TestGame::Init(Window* window)
 	textCoords.push_back(glm::vec2(0.5, 1.0));
 
 	//Set up mesh information.
-	MonkeyMesh = new MeshRenderer(new Mesh("box.obj"), Material("bricks.jpg", 2, 8));
+	MonkeyMesh = new MeshRenderer(new Mesh("monkey.obj"), Material("bricks.jpg", 2, 8));
+	MonkeyMesh2 = new MeshRenderer(new Mesh("monkey.obj"), Material("bricks.jpg", .5, 8));;
 	meshComponent = new MeshRenderer(new Mesh(vertices, indices, textCoords),
 										 Material("bricks.jpg", 2, 40));
 	meshComponent2 = new MeshRenderer(new Mesh(vertices, indices, textCoords),
@@ -49,7 +50,10 @@ void TestGame::Init(Window* window)
 	pyrimidGameObject2.addComponent(meshComponent2);
 
 	monkeyObject.addComponent(MonkeyMesh);
-	monkeyObject.m_transform = new Transform(glm::vec3(0, 3, 5));
+	monkeyObject.m_transform = new Transform(glm::vec3(0, 0, 3));
+
+	monkeyObject2.addComponent(MonkeyMesh2);
+	monkeyObject2.m_transform = new Transform(glm::vec3(0, 5, 3));
 
 
 	dLight = new DirectionalLight(glm::vec3(1, 1, 1), 0.8);
@@ -83,9 +87,10 @@ void TestGame::Init(Window* window)
 	addChild(&sLightObj);
 	//pyrimidGameObject2.addChild(&cameraObj);
 	addChild(&cameraObj);
-	pyrimidGameObject.addChild(&pyrimidGameObject2);
-	addChild(&pyrimidGameObject);
+	//pyrimidGameObject.addChild(&pyrimidGameObject2);
+	//addChild(&pyrimidGameObject);
 	addChild(&monkeyObject);
+	addChild(&monkeyObject2);
 }
 
 //void TestGame::ProcessInput(Input* &input)

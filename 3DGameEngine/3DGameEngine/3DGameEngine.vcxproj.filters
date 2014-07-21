@@ -102,6 +102,15 @@
     <ClInclude Include="objectLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="obj_loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="meshResource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="textureResource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="window.cpp">
@@ -179,6 +188,15 @@
     <ClCompile Include="objectLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="obj_loader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="meshResource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="textureResource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\shader.vert">
@@ -215,6 +233,9 @@
       <Filter>Resource Files\shaders</Filter>
     </None>
     <None Include="res\shaders\forward_SpotLight.vert">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="lighting.glh">
       <Filter>Resource Files\shaders</Filter>
     </None>
   </ItemGroup>

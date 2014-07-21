@@ -31,6 +31,16 @@
 #include <vector>
 #include <string>
 #include <GL\glew.h>
+#include <unordered_map>
+#include <string>
+
+class MeshResource;
+class TextureResource;
+
+extern std::unordered_map<std::string, MeshResource*> meshResourceMap;
+extern std::unordered_map<std::string, unsigned int>  meshResourceCount;
+extern std::unordered_map<std::string, TextureResource*> texResourceMap;
+extern std::unordered_map<std::string, unsigned int>  texResourceCount;
 
 namespace Util
 {

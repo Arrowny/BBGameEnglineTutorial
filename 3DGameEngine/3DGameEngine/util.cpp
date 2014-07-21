@@ -1,6 +1,12 @@
 #include "util.h"
 #include <SDL/SDL.h>
 
+
+std::unordered_map<std::string, MeshResource*> meshResourceMap;
+std::unordered_map<std::string, unsigned int>  meshResourceCount;
+std::unordered_map<std::string, TextureResource*> texResourceMap;
+std::unordered_map<std::string, unsigned int>  texResourceCount;
+
 void Util::Sleep(int milliseconds)
 {
 	SDL_Delay(milliseconds);
