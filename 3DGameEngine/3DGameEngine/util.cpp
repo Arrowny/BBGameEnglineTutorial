@@ -4,12 +4,15 @@
 #include <functional> 
 #include <cctype>
 #include <locale>
+#include "shaderResource.h"
 
 
 std::unordered_map<std::string, MeshResource*> meshResourceMap;
 std::unordered_map<std::string, unsigned int>  meshResourceCount;
 std::unordered_map<std::string, TextureResource*> texResourceMap;
 std::unordered_map<std::string, unsigned int>  texResourceCount;
+std::unordered_map<std::string, ShaderResource*> loadedShaders;
+std::unordered_map<std::string, unsigned int>  loadedShadersCount;
 
 void Util::Sleep(int milliseconds)
 {
@@ -62,7 +65,7 @@ bool Util::StartsWith(const std::string& stringToCheck, const std::string& check
 	
 	if (stringToCheck.size() > check.size())
 	{
-		for (int ii = 0; ii < check.size(); ii++)
+		for (unsigned int ii = 0; ii < check.size(); ii++)
 		{
 			if (stringToCheck[ii] != check[ii]) { return false; }
 		}

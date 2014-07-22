@@ -40,11 +40,14 @@
 
 class MeshResource;
 class TextureResource;
+class ShaderResource;
 
 extern std::unordered_map<std::string, MeshResource*> meshResourceMap;
 extern std::unordered_map<std::string, unsigned int>  meshResourceCount;
 extern std::unordered_map<std::string, TextureResource*> texResourceMap;
 extern std::unordered_map<std::string, unsigned int>  texResourceCount;
+extern std::unordered_map<std::string, ShaderResource*> loadedShaders;
+extern std::unordered_map<std::string, unsigned int>  loadedShadersCount;
 
 namespace Util
 {

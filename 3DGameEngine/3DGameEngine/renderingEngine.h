@@ -6,6 +6,7 @@
 #include "timing.h"
 #include "Lights.h"
 #include "mappedValues.h"
+#include "material.h"
 
 class GameObject;
 class Shader;

@@ -7,7 +7,6 @@
 
 namespace
 {
-
 	std::string LoadShader(const std::string& fileName)
 	{
 		std::string INCLUDE_DIRECTIVE = "#include";
@@ -99,47 +98,64 @@ namespace
 
 Shader::Shader(const std::string& fileName)
 {
-	m_program = glCreateProgram();
-
-	std::string vertShaderText = LoadShader("./res/shaders/" + fileName + ".vert");
-	std::string fragShaderText = LoadShader("./res/shaders/" + fileName + ".frag");
-
-	m_shaders[VERTEX_SHADER] = CreateShader(vertShaderText, GL_VERTEX_SHADER);
-	m_shaders[FRAGMENT_SHADER] = CreateShader(fragShaderText, GL_FRAGMENT_SHADER);
-
-	for (unsigned int ii = 0; ii < NUM_SHADERS; ii++)
+	shaderFileName = fileName;
+	if (loadedShaders.find(fileName) != loadedShaders.end())
 	{
-		glAttachShader(m_program, m_shaders[ii]);
+		loadedShadersCount[fileName]++;
+		m_resource = loadedShaders[fileName];
 	}
+	else
+	{
+		m_resource = new ShaderResource();
+		std::string vertShaderText = LoadShader("./res/shaders/" + fileName + ".vert");
+		std::string fragShaderText = LoadShader("./res/shaders/" + fileName + ".frag");
 
-	glLinkProgram(m_program);
-	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error: Shader program linking failed");
+		m_resource->m_shaders[VERTEX_SHADER] = CreateShader(vertShaderText, GL_VERTEX_SHADER);
+		m_resource->m_shaders[FRAGMENT_SHADER] = CreateShader(fragShaderText, GL_FRAGMENT_SHADER);
 
-	glValidateProgram(m_program);
-	CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: Shader program linking failed");
+		for (unsigned int ii = 0; ii < NUM_SHADERS; ii++)
+		{
+			glAttachShader(m_resource->getProgram(), m_resource->m_shaders[ii]);
+		}
 
-	std::unordered_map<std::string, std::vector<std::pair<std::string, std::string>>> vertStructMap = findUniformStructs(vertShaderText);
-	std::unordered_map<std::string, std::vector<std::pair<std::string, std::string>>> fragStructMap = findUniformStructs(fragShaderText);
+		glLinkProgram(m_resource->getProgram());
+		CheckShaderError(m_resource->getProgram(), GL_LINK_STATUS, true, "Error: Shader program linking failed");
 
-	addAllUniforms(vertShaderText, vertStructMap);
-	addAllUniforms(fragShaderText, fragStructMap);
+		glValidateProgram(m_resource->getProgram());
+		CheckShaderError(m_resource->getProgram(), GL_VALIDATE_STATUS, true, "Error: Shader program linking failed");
+
+		std::unordered_map<std::string, std::vector<std::pair<std::string, std::string>>> vertStructMap = findUniformStructs(vertShaderText);
+		std::unordered_map<std::string, std::vector<std::pair<std::string, std::string>>> fragStructMap = findUniformStructs(fragShaderText);
+
+		addAllUniforms(vertShaderText, vertStructMap);
+		addAllUniforms(fragShaderText, fragStructMap);
+		loadedShaders[fileName] = m_resource;
+	}
 }
 
 
 Shader::~Shader()
 {
-	for (unsigned int ii = 0; ii < NUM_SHADERS; ii++)
+	if (loadedShadersCount[shaderFileName] == 0)
 	{
-		glDetachShader(m_program, m_shaders[ii]);
-		glDeleteShader(m_shaders[ii]);
+		for (unsigned int ii = 0; ii < NUM_SHADERS; ii++)
+		{
+			glDetachShader(m_resource->getProgram(), m_resource->m_shaders[ii]);
+			glDeleteShader(m_resource->m_shaders[ii]);
+		}
+
+		glDeleteProgram(m_resource->getProgram());
+	}
+	else
+	{
+		loadedShadersCount[shaderFileName]--;
 	}
 
-	glDeleteProgram(m_program);
 }
 
 void Shader::Bind()
 {
-	glUseProgram(m_program);
+	glUseProgram(m_resource->getProgram());
 }
 
 void Shader::addAllUniforms(std::string shaderText, std::unordered_map<std::string, std::vector<std::pair<std::string, std::string> > > structMap)
@@ -152,8 +168,8 @@ void Shader::addAllUniforms(std::string shaderText, std::unordered_map<std::stri
 		int end = shaderText.find(";", begin);
 		std::vector<std::string> uniformLine = Util::Split(shaderText.substr(begin, end - begin), ' '); //uniformLine[0] == uniformType. uniformLine[1] == uniformName
 		
-		std::string uniformName = uniformLine[1]; uniformNames.push_back(uniformName);
-		std::string uniformType = uniformLine[0]; uniformTypes.push_back(uniformType);
+		std::string uniformName = uniformLine[1]; m_resource->uniformNames.push_back(uniformName);
+		std::string uniformType = uniformLine[0]; m_resource->uniformTypes.push_back(uniformType);
 		
 		if (structMap.find(uniformType) != structMap.end())
 		{
@@ -221,7 +237,7 @@ void Shader::addUniform(std::unordered_map<std::string, std::vector<std::pair<st
 
 void Shader::addUniform(std::string uniform)
 {
-	GLint uniformLocation = glGetUniformLocation(m_program, uniform.c_str());
+	GLint uniformLocation = glGetUniformLocation(m_resource->getProgram(), uniform.c_str());
 
 	if (uniformLocation == 0xFFFFFFFF)
 	{
@@ -229,32 +245,32 @@ void Shader::addUniform(std::string uniform)
 		exit(1);
 	}
 
-	m_uniforms[uniform] = uniformLocation;
+	m_resource->m_uniforms[uniform] = uniformLocation;
 }
 
 void Shader::setUniform(std::string uniformName, GLint value)
 {
-	glUniform1i(m_uniforms[uniformName], value);
+	glUniform1i(m_resource->m_uniforms[uniformName], value);
 }
 
 void Shader::setUniform(std::string uniformName, GLfloat value)
 {
-	glUniform1f(m_uniforms[uniformName], value);
+	glUniform1f(m_resource->m_uniforms[uniformName], value);
 }
 
 void Shader::setUniform(std::string uniformName, glm::vec3 value)
 {
-	glUniform3f(m_uniforms[uniformName], value.x, value.y, value.z);
+	glUniform3f(m_resource->m_uniforms[uniformName], value.x, value.y, value.z);
 }
 
 void Shader::setUniform(std::string uniformName, glm::vec4 value)
 {
-	glUniform4f(m_uniforms[uniformName], value.x, value.y, value.z, value.w);
+	glUniform4f(m_resource->m_uniforms[uniformName], value.x, value.y, value.z, value.w);
 }
 
 void Shader::setUniform(std::string uniformName, glm::mat4 value)
 {
-	glUniformMatrix4fv(m_uniforms[uniformName], 1, GL_FALSE, &value[0][0]);
+	glUniformMatrix4fv(m_resource->m_uniforms[uniformName], 1, GL_FALSE, &value[0][0]);
 }
 
 void Shader::setUniform(std::string uniformName, Attenuation atten)
@@ -335,10 +351,10 @@ std::unordered_map<std::string, std::vector<std::pair<std::string, std::string> 
 void Shader::updateUniforms(const glm::mat4& worldMatrix, Material& mat, RenderingEngine* renderingEngine)
 {
 	glm::mat4 MVPMatrix = renderingEngine->getCamera()->getProjectionTransform()*worldMatrix;
-	for (int ii = 0; ii < uniformNames.size(); ii++)
+	for (int ii = 0; ii < m_resource->uniformNames.size(); ii++)
 	{
-		std::string uniformName = uniformNames[ii];
-		std::string uniformType = uniformTypes[ii];
+		std::string uniformName = m_resource->uniformNames[ii];
+		std::string uniformType = m_resource->uniformTypes[ii];
 
 		std::string unprefixedName = uniformName.substr(2);
 		if (Util::StartsWith(uniformName, "T_")) //taken from transform: "T_" prefix

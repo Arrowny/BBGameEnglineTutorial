@@ -2,10 +2,6 @@
 #include <iostream>
 #include "gameObject.h"
 #include "shader.h"
-#include "forwardAmbient.h"
-#include "forwardDirectional.h"
-#include "forwardPointLight.h"
-#include "forwardSpotLight.h"
 
 
 RenderingEngine::RenderingEngine()
@@ -19,7 +15,7 @@ RenderingEngine::RenderingEngine()
 	glEnable(GL_DEPTH_CLAMP);
 	glEnable(GL_TEXTURE_2D);
 
-	m_ambientShader = new ForwardAmbient("forward_ambient");
+	m_ambientShader = new Shader("forward_ambient");
 
 	m_samplerMap["diffuse"] = 0;
 	//m_samplerMap["normal"] = 0; TODO: add capability to include normal maps

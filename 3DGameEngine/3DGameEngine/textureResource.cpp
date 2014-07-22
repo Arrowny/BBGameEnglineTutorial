@@ -3,8 +3,8 @@
 
 TextureResource::TextureResource()
 {
+	glGenTextures(1, &m_texture);
 }
-
 
 TextureResource::~TextureResource()
 {

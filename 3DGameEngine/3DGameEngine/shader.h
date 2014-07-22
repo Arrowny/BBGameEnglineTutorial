@@ -10,6 +10,7 @@
 #include "camera.h"
 #include "renderingEngine.h"
 #include "Lights.h"
+#include "shaderResource.h"
 
 class Shader
 {
@@ -19,7 +20,7 @@ public:
 
 	void Bind();
 
-	virtual std::string getShaderType() = 0;
+	virtual std::string getShaderType() { return "BASIC_SHADER"; }
 	virtual void updateUniforms(const glm::mat4& worldMatrix, Material& mat, RenderingEngine* renderingEngine);
 
 protected:
@@ -52,11 +53,8 @@ private:
 		NUM_SHADERS
 	};
 
-	std::map<std::string, GLint> m_uniforms;
+	ShaderResource* m_resource;
+	std::string shaderFileName;
 
-	GLuint m_program;
-	GLuint m_shaders[NUM_SHADERS];
-	std::vector<std::string> uniformNames;
-	std::vector<std::string> uniformTypes;
 };
 

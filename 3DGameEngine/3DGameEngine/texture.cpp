@@ -25,12 +25,10 @@ Texture::Texture(const std::string& fileName)
 	{
 		texResourceCount[m_texFileName]++;
 	}
-	
 }
 
 void Texture::initTexture(unsigned char* imageData, int width, int height)
 {
-	glGenTextures(1, m_texResource->getTexture());
 	glBindTexture(GL_TEXTURE_2D, *m_texResource->getTexture());
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);

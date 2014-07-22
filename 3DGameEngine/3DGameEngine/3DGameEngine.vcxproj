@@ -80,10 +80,6 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="coreEngine.h" />
     <ClInclude Include="ExtraVecMath.h" />
-    <ClInclude Include="forwardAmbient.h" />
-    <ClInclude Include="forwardDirectional.h" />
-    <ClInclude Include="forwardPointLight.h" />
-    <ClInclude Include="forwardSpotLight.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gameComponent.h" />
     <ClInclude Include="gameObject.h" />
@@ -99,6 +95,7 @@
     <ClInclude Include="renderingEngine.h" />
     <ClInclude Include="resourceLoader.h" />
     <ClInclude Include="shader.h" />
+    <ClInclude Include="shaderResource.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="testGame.h" />
     <ClInclude Include="texture.h" />
@@ -112,10 +109,6 @@
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="coreEngine.cpp" />
-    <ClCompile Include="forwardAmbient.cpp" />
-    <ClCompile Include="forwardDirectional.cpp" />
-    <ClCompile Include="forwardPointLight.cpp" />
-    <ClCompile Include="forwardSpotLight.cpp" />
     <ClCompile Include="gameComponent.cpp" />
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="input.cpp" />
@@ -131,6 +124,7 @@
     <ClCompile Include="renderingEngine.cpp" />
     <ClCompile Include="resourceLoader.cpp" />
     <ClCompile Include="shader.cpp" />
+    <ClCompile Include="shaderResource.cpp" />
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="testGame.cpp" />
     <ClCompile Include="texture.cpp" />
