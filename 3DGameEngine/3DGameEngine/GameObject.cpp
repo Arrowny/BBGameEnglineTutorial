@@ -14,6 +14,7 @@ GameObject::~GameObject()
 GameObject* GameObject::AddChild(GameObject* child)
 {
 	children.push_back(child);
+	child->GetTransform().SetParent(&m_transform);
 	return this;
 }
 
@@ -35,7 +36,7 @@ void GameObject::AddToRenderingEngine(RenderingEngine* renderingEngine)
 
 void GameObject::input(float delta)
 {
-	m_transform.Update();
+	//m_transform.Update();
 
 	for each (GameComponent* comp in components)
 		comp->input(delta);

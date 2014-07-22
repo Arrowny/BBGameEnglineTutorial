@@ -51,7 +51,7 @@ public:
 			bool rotY = deltaPos.x != 0;
 			bool rotX = deltaPos.y != 0;
 			if (rotY)
-				GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(-deltaPos.x * sensitivity), yAxis)));
+				GetTransform().SetRot(GetTransform().GetRot()* glm::normalize(glm::angleAxis(glm::radians(-deltaPos.x * sensitivity), yAxis)));
 				//RotateY(-deltaPos.x * sensitivity);
 			if (rotX)
 				GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(deltaPos.y * sensitivity), GetTransform().GetRight())));
@@ -79,9 +79,9 @@ public:
 		if (input.GetKey(input.KEY_S))
 			move(GetTransform().GetForward(), -movAmt);
 		if (input.GetKey(input.KEY_A))
-			move(GetTransform().GetLeft(), movAmt);
+			move(GetTransform().GetLeft(), -movAmt);
 		if (input.GetKey(input.KEY_D))
-			move(GetTransform().GetUp(), movAmt);
+			move(GetTransform().GetUp(), -movAmt);
 
 		if (input.GetKey(input.KEY_CAPSLOCK))
 			move(GetTransform().GetUp(), movAmt);

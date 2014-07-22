@@ -1,8 +1,6 @@
 #pragma once
 #include <glm\glm.hpp>
-//#include <glm\gtx\transform.hpp>
 #include <glm\gtc\quaternion.hpp>
-//#include <glm\gtx\quaternion.hpp>
 #include <glm\gtx\vector_query.hpp>
 #include <glm\gtx\rotate_vector.hpp>
 
@@ -28,12 +26,12 @@ public:
 
 		//glm::mat4 rotMat = rotZ * rotY * rotX;
 
-		//if (oldExist)
-		//{
-		//	m_oldpos = m_pos;
-		//	m_oldrot = m_rot;
-		//	m_oldscale = m_scale;
-		//}
+		if (oldExist)
+		{
+			m_oldpos = m_pos;
+			m_oldrot = m_rot;
+			m_oldscale = m_scale;
+		}
 		return GetParentMatrix() * posMat * rotMat * scaleMat;
 	}
 
@@ -47,23 +45,24 @@ public:
 	inline void SetRot(const glm::quat& rot) { m_rot = rot; }
 	inline void SetScale(const glm::vec3& scale) { m_scale = scale; }
 
+	inline void SetParent(Transform* transform) { m_parent = transform; }
 
-	inline void Update()
-	{
-		if (oldExist)
-		{
-			m_oldpos = m_pos;
-			m_oldrot = m_rot;
-			m_oldscale = m_scale;
-		}
-		else
-		{
-			m_oldpos = m_pos + glm::fvec3(1, 1, 1);
-			m_oldrot = m_rot * 0.5f;
-			m_oldscale = m_scale + glm::vec3(1, 1, 1);
+	//inline void Update()
+	//{
+	//	if (oldExist)
+	//	{
+	//		m_oldpos = m_pos;
+	//		m_oldrot = m_rot;
+	//		m_oldscale = m_scale;
+	//	}
+	//	else
+	//	{
+	//		m_oldpos = m_pos + glm::vec3(1, 1, 1);
+	//		m_oldrot = m_rot * 0.5f;
+	//		m_oldscale = m_scale + glm::vec3(1, 1, 1);
 
-		}
-	}
+	//	}
+	//}
 
 	inline const glm::vec3 GetTransformedPos() const
 	{
@@ -88,18 +87,19 @@ public:
 	inline bool Transform::HasChanged()
 	{
 
-		//if (!oldExist)
-		//{
-		//	m_oldpos = m_pos;
-		//	m_oldrot = m_rot;
-		//	m_oldscale = m_scale;
-		//	oldExist = true;
+		if (!oldExist)
+		{
+			m_oldpos = m_pos;
+			m_oldrot = m_rot;
+			m_oldscale = m_scale;
+			oldExist = true;
 
-		//	return true;
-		//}
-
-		if (m_parent != 0 && m_parent->HasChanged())
 			return true;
+		}
+
+		if (m_parent != 0 && m_parent->HasChanged())		
+			return true;
+
 
 		if (m_pos != m_oldpos)
 			return true;

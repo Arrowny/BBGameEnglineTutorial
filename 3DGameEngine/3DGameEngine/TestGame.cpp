@@ -22,6 +22,13 @@ void TestGame::init()
 	planeObject->AddComponent(m_meshRenderer);
 	planeObject->GetTransform().SetPos(glm::vec3(0, -1, 7));
 
+	//GameObject* testMesh1 = new GameObject();
+	//testMesh1->AddComponent(new MeshRenderer(*m_mesh, m_material));
+	////testMesh1->AddComponent(new Camera(70.0f, (float)WindowParameter::width / (float)WindowParameter::height, 1.0, 1000.0));
+	//testMesh1->GetTransform().SetPos(glm::vec3(0, -1, 0));
+	//planeObject->AddChild(testMesh1);
+	
+
 	GameObject* directionalLightObject = new GameObject();
 	DirectionalLight* directionalLight = new DirectionalLight(glm::vec3(1, 1, 0), 0.1f, glm::vec3(0, 1, 1));
 	directionalLightObject->AddComponent(directionalLight);
@@ -47,11 +54,19 @@ void TestGame::init()
 	cameraObject->AddComponent(new Camera(70.0f, (float)WindowParameter::width / (float)WindowParameter::height, 1.0, 1000.0));
 	GetRootObject().AddChild(cameraObject);
 
-	/*GameObject* testMesh1 = new GameObject();
+	GameObject* testMesh1 = new GameObject();
+	GameObject* testMesh2 = new GameObject();
 	testMesh1->AddComponent(new MeshRenderer(*m_mesh, m_material));
+	testMesh2->AddComponent(new MeshRenderer(*m_mesh, m_material));
 
-	testMesh1->GetTransform().SetPos(glm::vec3(0,-1,23.5));
-	GetRootObject().AddChild(*testMesh1);*/
+	testMesh1->GetTransform().SetPos(glm::vec3(0, 1, 0));
+	testMesh1->GetTransform().SetRot(glm::quat(glm::radians(-90.0f), glm::vec3(0, 1, 0)));
+	testMesh1->GetTransform().SetScale(glm::vec3(0.2f, 0.2f, 0.2f));
+
+	testMesh2->GetTransform().SetPos(glm::vec3(0, 1, 0));
+
+	testMesh1->AddChild(testMesh2);
+	GetRootObject().AddChild(testMesh1);
 
 	/* -------------------------------Light Part----------------------------------------
 	m_shader->SetAmbient(glm::fvec3(0.3, 0.3, 0.3));
