@@ -257,6 +257,43 @@ void Shader::setUniform(std::string uniformName, glm::mat4 value)
 	glUniformMatrix4fv(m_uniforms[uniformName], 1, GL_FALSE, &value[0][0]);
 }
 
+void Shader::setUniform(std::string uniformName, Attenuation atten)
+{
+	setUniform(uniformName + ".constant", atten.m_constant);
+	setUniform(uniformName + ".linear", atten.m_linear);
+	setUniform(uniformName + ".exponent", atten.m_exponent);
+}
+
+void Shader::setUniform(std::string uniformName, DirectionalLight* dLight)
+{
+	setUniform(uniformName + ".base.color", dLight->m_color);
+	setUniform(uniformName + ".base.intensity", dLight->m_intensity);
+	setUniform(uniformName + ".direction", dLight->getDirection());
+}
+
+void Shader::setUniform(std::string uniformName, PointLight* pLight)
+{
+	setUniform(uniformName + ".atten", pLight->m_atten);
+	setUniform(uniformName + ".base.color", pLight->m_color);
+	setUniform(uniformName + ".base.intensity", pLight->m_intensity);
+	setUniform(uniformName + ".position", pLight->getPosition());
+	setUniform(uniformName + ".range", pLight->m_range);
+
+}
+
+void Shader::setUniform(std::string uniformName, SpotLight* sLight)
+{
+	setUniform(uniformName + ".pLight.atten", sLight->m_atten);
+	setUniform(uniformName + ".pLight.base.color", sLight->m_color);
+	setUniform(uniformName + ".pLight.base.intensity", sLight->m_intensity);
+	glm::vec3 p = sLight->getPosition();
+	setUniform(uniformName + ".pLight.position", sLight->getPosition());
+	setUniform(uniformName + ".pLight.range", sLight->m_range);
+	glm::vec3 d = sLight->getDirection();
+	setUniform(uniformName + ".direction", sLight->getDirection());
+	setUniform(uniformName + ".cutoff", sLight->m_cutoff);
+}
+
 std::unordered_map<std::string, std::vector<std::pair<std::string, std::string> > > Shader::findUniformStructs(std::string shaderText)
 {
 	std::string STRUCT_KEYWORD = "struct";
@@ -303,11 +340,11 @@ void Shader::updateUniforms(const glm::mat4& worldMatrix, Material& mat, Renderi
 		std::string uniformName = uniformNames[ii];
 		std::string uniformType = uniformTypes[ii];
 
-		
+		std::string unprefixedName = uniformName.substr(2);
 		if (Util::StartsWith(uniformName, "T_")) //taken from transform: "T_" prefix
 		{
 			if (uniformName == "T_MVP") { setUniform(uniformName, MVPMatrix); }
-			else if (uniformName == "T_world") { setUniform(uniformName, worldMatrix); }
+			else if (uniformName == "T_model") { setUniform(uniformName, worldMatrix); }
 			else
 			{
 				std::cerr << "Error: unknown component of transform: " << uniformName << "." << std::endl;
@@ -316,7 +353,6 @@ void Shader::updateUniforms(const glm::mat4& worldMatrix, Material& mat, Renderi
 		}
 		else if (Util::StartsWith(uniformName, "R_")) //taken from rendering engine: "R_" prefix
 		{
-			std::string unprefixedName = uniformName.substr(2);
 			if (uniformType == "sampler2D")
 			{
 				int samplerSlot = renderingEngine->getSamplerSlot(unprefixedName);
@@ -331,6 +367,42 @@ void Shader::updateUniforms(const glm::mat4& worldMatrix, Material& mat, Renderi
 			{
 				setUniform(uniformName, renderingEngine->getFloat(unprefixedName));
 			}
+			else if (uniformType == "DirectionalLight")
+			{
+				setUniform(uniformName, (DirectionalLight*)renderingEngine->activeLight);
+			}
+			else if (uniformType == "PointLight")
+			{
+				setUniform(uniformName, (PointLight*)renderingEngine->activeLight);
+			}
+			else if (uniformType == "SpotLight")
+			{
+				setUniform(uniformName, (SpotLight*)renderingEngine->activeLight);
+			}
+			else
+			{
+				renderingEngine->setUniformStruct(worldMatrix, mat, this, uniformName, uniformType);
+			}
+		}
+		else if (Util::StartsWith(uniformName, "C_")) //camera variable
+		{
+			if (unprefixedName == "eyePos")
+			{
+				setUniform(uniformName, renderingEngine->getCamera()->getTransform()->m_trans);
+			}
+			else if (uniformType == "vec3")
+			{
+				setUniform(uniformName, renderingEngine->getVector(unprefixedName));
+			}
+			else if (uniformType == "float")
+			{
+				setUniform(uniformName, renderingEngine->getFloat(unprefixedName));
+			}
+			else
+			{
+				std::cerr << "Error: unknown component of camera: " << uniformName << "." << std::endl;
+				exit(1);
+			}
 		}
 		else //taken from material: no prefix
 		{
@@ -340,7 +412,12 @@ void Shader::updateUniforms(const glm::mat4& worldMatrix, Material& mat, Renderi
 			}
 			else if (uniformType == "float")
 			{
-				setUniform(uniformName, matgetFloat(uniformName));
+				setUniform(uniformName, mat.getFloat(uniformName));
+			}
+			else
+			{
+				std::cerr << "Error: unknown component of material: " << uniformName << "." << std::endl;
+				exit(1);
 			}
 		}
 	}

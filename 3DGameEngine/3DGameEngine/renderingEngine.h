@@ -25,6 +25,8 @@ public:
 	void addLight(BaseLight* baseLight) { m_lights.push_back(baseLight); }
 	void addCamera(Camera* camera) { m_camera = camera; }
 
+	virtual void setUniformStruct(const glm::mat4& worldMatrix, Material& mat, Shader* shader, std::string uniformName, std::string uniformType); //can be used to expand potential shader capabilities
+
 	BaseLight* activeLight;
 private:
 	RenderingEngine(const RenderingEngine& other) {}

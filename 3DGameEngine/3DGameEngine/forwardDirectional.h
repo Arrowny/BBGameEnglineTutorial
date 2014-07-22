@@ -13,8 +13,8 @@ public:
 	virtual void updateUniforms(const glm::mat4& worldMatrix, Material& mat, RenderingEngine* renderingEngine);
 
 protected:
-	using Shader::setUniform;
-	void setUniform(std::string uniformName, BaseLight base);
-	void setUniform(std::string uniformName, DirectionalLight* dLight);
+	/*using Shader::setUniform;*/
+	//void setUniform(std::string uniformName, BaseLight base);
+	//void setUniform(std::string uniformName, DirectionalLight* dLight);
 };
 

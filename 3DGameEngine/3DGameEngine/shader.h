@@ -9,6 +9,7 @@
 #include "util.h"
 #include "camera.h"
 #include "renderingEngine.h"
+#include "Lights.h"
 
 class Shader
 {
@@ -27,6 +28,10 @@ protected:
 	void setUniform(std::string uniformName, glm::vec3 value);
 	void setUniform(std::string uniformName, glm::vec4 value);
 	void setUniform(std::string uniformName, glm::mat4 value);
+	void setUniform(std::string uniformName, Attenuation atten);
+	void setUniform(std::string uniformName, DirectionalLight* dLight);
+	void setUniform(std::string uniformName, PointLight* pLight);
+	void setUniform(std::string uniformName, SpotLight* sLight);
 
 private:
 	Shader(const Shader& other) {}

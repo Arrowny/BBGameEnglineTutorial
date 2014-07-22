@@ -24,7 +24,7 @@ RenderingEngine::RenderingEngine()
 	m_samplerMap["diffuse"] = 0;
 	//m_samplerMap["normal"] = 0; TODO: add capability to include normal maps
 
-	addVector("ambientIntensity", glm::vec3(0.2, 0.2, 0.2);)
+	addVector("ambientIntensity", glm::vec3(0.2, 0.2, 0.2));
 }
 
 RenderingEngine::~RenderingEngine()
@@ -67,4 +67,10 @@ int RenderingEngine::getSamplerSlot(std::string samplerName)
 std::string RenderingEngine::getOpenGLVersion()
 {
 	return (const char*)glGetString(GL_VERSION);
+}
+
+void RenderingEngine::setUniformStruct(const glm::mat4& worldMatrix, Material& mat, Shader* shader, std::string uniformName, std::string uniformType)
+{
+	std::cerr << "Error: unknown component of renderingEngine: " << uniformName << "." << std::endl;
+	exit(1);
 }

@@ -24,29 +24,31 @@ ForwardPointLight::~ForwardPointLight()
 {
 }
 
-void ForwardPointLight::setUniform(std::string uniformName, Attenuation atten)
-{
-	setUniform(uniformName + ".constant", atten.m_constant);
-	setUniform(uniformName + ".linear", atten.m_linear);
-	setUniform(uniformName + ".exponent", atten.m_exponent);
-}
-
-void ForwardPointLight::setUniform(std::string uniformName, PointLight* pLight)
-{
-	setUniform(uniformName + ".atten", pLight->m_atten);
-	setUniform(uniformName + ".base.color", pLight->m_color);
-	setUniform(uniformName + ".base.intensity", pLight->m_intensity);
-	setUniform(uniformName + ".position", pLight->getPosition());
-	setUniform(uniformName + ".range", pLight->m_range);
-
-}
+//void ForwardPointLight::setUniform(std::string uniformName, Attenuation atten)
+//{
+//	setUniform(uniformName + ".constant", atten.m_constant);
+//	setUniform(uniformName + ".linear", atten.m_linear);
+//	setUniform(uniformName + ".exponent", atten.m_exponent);
+//}
+//
+//void ForwardPointLight::setUniform(std::string uniformName, PointLight* pLight)
+//{
+//	setUniform(uniformName + ".atten", pLight->m_atten);
+//	setUniform(uniformName + ".base.color", pLight->m_color);
+//	setUniform(uniformName + ".base.intensity", pLight->m_intensity);
+//	setUniform(uniformName + ".position", pLight->getPosition());
+//	setUniform(uniformName + ".range", pLight->m_range);
+//
+//}
 
 void ForwardPointLight::updateUniforms(const glm::mat4& worldMatrix, Material& mat, RenderingEngine* renderingEngine)
 {
-	setUniform("MVP", renderingEngine->getCamera()->getProjectionTransform()*worldMatrix);
-	setUniform("model", worldMatrix);
-	setUniform("eyePos", renderingEngine->getCamera()->getTransform()->m_trans);
-	setUniform("specularIntensity", mat.getFloat("specularIntensity"));
-	setUniform("specularPower", mat.getFloat("specularPower"));
-	setUniform("pLight", (PointLight*)renderingEngine->activeLight);
+	Shader::updateUniforms(worldMatrix, mat, renderingEngine);
+
+	//setUniform("MVP", renderingEngine->getCamera()->getProjectionTransform()*worldMatrix);
+	//setUniform("model", worldMatrix);
+	//setUniform("eyePos", renderingEngine->getCamera()->getTransform()->m_trans);
+	//setUniform("specularIntensity", mat.getFloat("specularIntensity"));
+	//setUniform("specularPower", mat.getFloat("specularPower"));
+	//setUniform("pLight", (PointLight*)renderingEngine->activeLight);
 }
