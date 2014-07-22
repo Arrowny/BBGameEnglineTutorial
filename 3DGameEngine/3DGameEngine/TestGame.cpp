@@ -31,7 +31,7 @@ void TestGame::init()
 
 	GameObject* directionalLightObject = new GameObject();
 	DirectionalLight* directionalLight = new DirectionalLight(glm::vec3(1, 1, 0), 0.1f/*, glm::vec3(0, 1, 1)*/);
-	//directionalLight->GetTransform().SetRot(glm::normalize(glm::quat(glm::radians(45.0f), 1.0, 0.0, 0.0)));
+	directionalLightObject->GetTransform().SetRot(glm::normalize(glm::quat(glm::radians(90.0f), 1.0, 0.0, 0.0)));
 	directionalLightObject->AddComponent(directionalLight);
 
 	GameObject* pointLightObject = new GameObject();
