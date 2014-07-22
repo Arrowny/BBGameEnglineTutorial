@@ -36,7 +36,7 @@ private:
 
 	Camera* mainCamera;
 
-	glm::fvec3 ambientLight = glm::fvec3(0.1f, 0.1f, 0.1f);
+	glm::fvec3 ambientLight = glm::fvec3(0.2f, 0.2f, 0.2f);
 	BaseLight* activeLight;
 
 	std::vector<BaseLight*> lights;

@@ -77,5 +77,5 @@ public:
 			//inline void SetTexture(Texture* texture) { m_texture = texture; }
 			//inline glm::fvec3 GetColor() { return basic_color; }
 			//inline void SetColor(glm::fvec3 color) { basic_color = color; }
-		};
+};
 
