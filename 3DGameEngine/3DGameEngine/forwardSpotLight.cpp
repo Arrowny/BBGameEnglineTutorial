@@ -4,21 +4,21 @@
 ForwardSpotLight::ForwardSpotLight(std::string fileName) :
 Shader(fileName)
 {
-	addUniform("MVP");
-	addUniform("model");
-	addUniform("specularIntensity");
-	addUniform("specularPower");
-	addUniform("eyePos");
+	//addUniform("MVP");
+	//addUniform("model");
+	//addUniform("specularIntensity");
+	//addUniform("specularPower");
+	//addUniform("eyePos");
 
-	addUniform("sLight.pLight.base.color");
-	addUniform("sLight.pLight.base.intensity");
-	addUniform("sLight.pLight.atten.constant");
-	addUniform("sLight.pLight.atten.linear");
-	addUniform("sLight.pLight.atten.exponent");
-	addUniform("sLight.pLight.position");
-	addUniform("sLight.pLight.range");
-	addUniform("sLight.direction");
-	addUniform("sLight.cutoff");
+	//addUniform("sLight.pLight.base.color");
+	//addUniform("sLight.pLight.base.intensity");
+	//addUniform("sLight.pLight.atten.constant");
+	//addUniform("sLight.pLight.atten.linear");
+	//addUniform("sLight.pLight.atten.exponent");
+	//addUniform("sLight.pLight.position");
+	//addUniform("sLight.pLight.range");
+	//addUniform("sLight.direction");
+	//addUniform("sLight.cutoff");
 }
 
 ForwardSpotLight::~ForwardSpotLight()
@@ -45,7 +45,7 @@ void ForwardSpotLight::setUniform(std::string uniformName, SpotLight* sLight)
 	setUniform(uniformName + ".cutoff", sLight->m_cutoff);
 }
 
-void ForwardSpotLight::updateBasicUniformsAndTexture(const glm::mat4& worldMatrix, Material& mat, RenderingEngine* renderingEngine)
+void ForwardSpotLight::updateUniforms(const glm::mat4& worldMatrix, Material& mat, RenderingEngine* renderingEngine)
 {
 	setUniform("MVP", renderingEngine->getCamera()->getProjectionTransform()*worldMatrix);
 	setUniform("model", worldMatrix);

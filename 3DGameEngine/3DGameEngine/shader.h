@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <map>
+#include <unordered_map>
+#include <utility>
 #include <GL\glew.h>
 #include <glm\glm.hpp>
 #include "material.h"
@@ -15,21 +17,27 @@ public:
 	virtual ~Shader();
 
 	void Bind();
-	void addUniform(std::string uniform);
 
+	virtual std::string getShaderType() = 0;
+	virtual void updateUniforms(const glm::mat4& worldMatrix, Material& mat, RenderingEngine* renderingEngine);
+
+protected:
 	void setUniform(std::string uniformName, GLint value);
 	void setUniform(std::string uniformName, GLfloat value);
 	void setUniform(std::string uniformName, glm::vec3 value);
 	void setUniform(std::string uniformName, glm::vec4 value);
 	void setUniform(std::string uniformName, glm::mat4 value);
 
-	virtual std::string getShaderType() = 0;
-
-	virtual void updateBasicUniformsAndTexture(const glm::mat4& worldMatrix, Material& mat, RenderingEngine* renderingEngine) = 0;
-
 private:
 	Shader(const Shader& other) {}
 	void operator=(const Shader& other) {}
+
+	void addAllUniforms(std::string shaderText, std::unordered_map<std::string, std::vector<std::pair<std::string, std::string> > > structMap);
+	void addUniform(std::string uniform);
+	void addUniform(std::unordered_map<std::string, std::vector<std::pair<std::string, std::string> > > structMap, std::string structName, std::string structType);
+
+	std::unordered_map<std::string, std::vector<std::pair<std::string, std::string> > > findUniformStructs(std::string shaderText);
+	std::vector<std::string> addUniformHelper(std::unordered_map<std::string, std::vector<std::pair<std::string, std::string> > > structMap, std::string structName, std::string structType);
 
 	enum
 	{
@@ -43,5 +51,7 @@ private:
 
 	GLuint m_program;
 	GLuint m_shaders[NUM_SHADERS];
+	std::vector<std::string> uniformNames;
+	std::vector<std::string> uniformTypes;
 };
 

@@ -5,19 +5,19 @@
 ForwardPointLight::ForwardPointLight(std::string fileName) :
 Shader(fileName)
 {
-	addUniform("MVP");
-	addUniform("model");
-	addUniform("specularIntensity");
-	addUniform("specularPower");
-	addUniform("eyePos");
+	//addUniform("MVP");
+	//addUniform("model");
+	//addUniform("specularIntensity");
+	//addUniform("specularPower");
+	//addUniform("eyePos");
 
-	addUniform("pLight.base.color");
-	addUniform("pLight.base.intensity");
-	addUniform("pLight.atten.constant");
-	addUniform("pLight.atten.linear");
-	addUniform("pLight.atten.exponent");
-	addUniform("pLight.position");
-	addUniform("pLight.range");
+	//addUniform("pLight.base.color");
+	//addUniform("pLight.base.intensity");
+	//addUniform("pLight.atten.constant");
+	//addUniform("pLight.atten.linear");
+	//addUniform("pLight.atten.exponent");
+	//addUniform("pLight.position");
+	//addUniform("pLight.range");
 }
 
 ForwardPointLight::~ForwardPointLight()
@@ -41,7 +41,7 @@ void ForwardPointLight::setUniform(std::string uniformName, PointLight* pLight)
 
 }
 
-void ForwardPointLight::updateBasicUniformsAndTexture(const glm::mat4& worldMatrix, Material& mat, RenderingEngine* renderingEngine)
+void ForwardPointLight::updateUniforms(const glm::mat4& worldMatrix, Material& mat, RenderingEngine* renderingEngine)
 {
 	setUniform("MVP", renderingEngine->getCamera()->getProjectionTransform()*worldMatrix);
 	setUniform("model", worldMatrix);

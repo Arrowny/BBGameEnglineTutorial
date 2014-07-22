@@ -12,6 +12,7 @@ public:
 	virtual ~Texture();
 
 	void Bind(const unsigned int& whichText);
+	std::string getTextureFileName() { return m_texFileName; }
 
 private:
 	Texture(const Texture& other) {}

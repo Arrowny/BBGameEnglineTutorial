@@ -19,7 +19,12 @@ RenderingEngine::RenderingEngine()
 	glEnable(GL_DEPTH_CLAMP);
 	glEnable(GL_TEXTURE_2D);
 
-	m_ambientShader = new ForwardAmbient("forward_ambient", glm::vec3(0.2, 0.2, 0.2));
+	m_ambientShader = new ForwardAmbient("forward_ambient");
+
+	m_samplerMap["diffuse"] = 0;
+	//m_samplerMap["normal"] = 0; TODO: add capability to include normal maps
+
+	addVector("ambientIntensity", glm::vec3(0.2, 0.2, 0.2);)
 }
 
 RenderingEngine::~RenderingEngine()
@@ -46,10 +51,17 @@ void RenderingEngine::RenderGameObject(GameObject* gameObject)
 	glDisable(GL_BLEND);
 }
 
-void RenderingEngine::setTextures(bool enabled)
+int RenderingEngine::getSamplerSlot(std::string samplerName)
 {
-	if (enabled) { glEnable(GL_TEXTURE_2D);}
-	else { glDisable(GL_TEXTURE_2D); }
+	if (m_samplerMap.find(samplerName) != m_samplerMap.end())
+	{
+		return m_samplerMap[samplerName];
+	}
+	else
+	{
+		std::cerr << "Error: unknown sampler name: " << samplerName << std::endl;
+		exit(1);
+	}
 }
 
 std::string RenderingEngine::getOpenGLVersion()

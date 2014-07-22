@@ -1,5 +1,9 @@
 #include "util.h"
 #include <SDL/SDL.h>
+#include <algorithm> 
+#include <functional> 
+#include <cctype>
+#include <locale>
 
 
 std::unordered_map<std::string, MeshResource*> meshResourceMap;
@@ -53,7 +57,15 @@ std::vector<std::string> Util::RemoveEmptyStrings(const std::vector<std::string>
 	return output;
 }
 
-void Util::unbindTexture()
+bool Util::StartsWith(const std::string& stringToCheck, const std::string& check)
 {
 	
+	if (stringToCheck.size() > check.size())
+	{
+		for (int ii = 0; ii < check.size(); ii++)
+		{
+			if (stringToCheck[ii] != check[ii]) { return false; }
+		}
+	}
+	return true;
 }

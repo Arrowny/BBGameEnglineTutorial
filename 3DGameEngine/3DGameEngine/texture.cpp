@@ -57,9 +57,9 @@ Texture::~Texture()
 	}
 }
 
-void Texture::Bind(const unsigned int& whichText)
+void Texture::Bind(const unsigned int& samplerSlot)
 {
-	assert(whichText >= 0 && whichText <= 31);
-	glActiveTexture(GL_TEXTURE0 + whichText);
+	assert(samplerSlot >= 0 && samplerSlot <= 31);
+	glActiveTexture(GL_TEXTURE0 + samplerSlot);
 	glBindTexture(GL_TEXTURE_2D, *texResourceMap[m_texFileName]->getTexture());
 }

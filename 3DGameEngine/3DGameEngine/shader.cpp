@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <unordered_map>
 
 namespace
 {
@@ -100,8 +101,11 @@ Shader::Shader(const std::string& fileName)
 {
 	m_program = glCreateProgram();
 
-	m_shaders[VERTEX_SHADER] = CreateShader(LoadShader("./res/shaders/" + fileName + ".vert"), GL_VERTEX_SHADER);
-	m_shaders[FRAGMENT_SHADER] = CreateShader(LoadShader("./res/shaders/" + fileName + ".frag"), GL_FRAGMENT_SHADER);
+	std::string vertShaderText = LoadShader("./res/shaders/" + fileName + ".vert");
+	std::string fragShaderText = LoadShader("./res/shaders/" + fileName + ".frag");
+
+	m_shaders[VERTEX_SHADER] = CreateShader(vertShaderText, GL_VERTEX_SHADER);
+	m_shaders[FRAGMENT_SHADER] = CreateShader(fragShaderText, GL_FRAGMENT_SHADER);
 
 	for (unsigned int ii = 0; ii < NUM_SHADERS; ii++)
 	{
@@ -113,6 +117,12 @@ Shader::Shader(const std::string& fileName)
 
 	glValidateProgram(m_program);
 	CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: Shader program linking failed");
+
+	std::unordered_map<std::string, std::vector<std::pair<std::string, std::string>>> vertStructMap = findUniformStructs(vertShaderText);
+	std::unordered_map<std::string, std::vector<std::pair<std::string, std::string>>> fragStructMap = findUniformStructs(fragShaderText);
+
+	addAllUniforms(vertShaderText, vertStructMap);
+	addAllUniforms(fragShaderText, fragStructMap);
 }
 
 
@@ -130,6 +140,83 @@ Shader::~Shader()
 void Shader::Bind()
 {
 	glUseProgram(m_program);
+}
+
+void Shader::addAllUniforms(std::string shaderText, std::unordered_map<std::string, std::vector<std::pair<std::string, std::string> > > structMap)
+{
+	std::string UNIFORM_KEYWORD = "uniform";
+	unsigned int nxtUniformLocation = shaderText.find(UNIFORM_KEYWORD);
+	while (nxtUniformLocation != -1)
+	{
+		int begin = nxtUniformLocation + UNIFORM_KEYWORD.size() + 1;
+		int end = shaderText.find(";", begin);
+		std::vector<std::string> uniformLine = Util::Split(shaderText.substr(begin, end - begin), ' '); //uniformLine[0] == uniformType. uniformLine[1] == uniformName
+		
+		std::string uniformName = uniformLine[1]; uniformNames.push_back(uniformName);
+		std::string uniformType = uniformLine[0]; uniformTypes.push_back(uniformType);
+		
+		if (structMap.find(uniformType) != structMap.end())
+		{
+			addUniform(structMap, uniformName, uniformType);
+		}
+		else
+		{
+			addUniform(uniformLine[1]);
+		}
+		
+		nxtUniformLocation = shaderText.find(UNIFORM_KEYWORD, nxtUniformLocation + UNIFORM_KEYWORD.size());
+	}
+}
+
+std::vector<std::string> Shader::addUniformHelper(std::unordered_map<std::string, std::vector<std::pair<std::string, std::string> > > structMap, std::string structName, std::string structType)
+{
+	std::vector<std::pair<std::string, std::string>> variablePairs = structMap[structType];
+	std::vector<std::string> results;
+
+	for (int ii = 0; ii < variablePairs.size(); ii++)
+	{
+		std::string variableName = variablePairs[ii].second;
+		std::string variabletype = variablePairs[ii].first;
+
+		if (structMap.find(variabletype) == structMap.end())
+		{
+			results.push_back(structName + "." + variableName);
+		}
+		else
+		{
+			std::vector<std::string> structVariables = addUniformHelper(structMap, variableName, variabletype);
+			for (int jj = 0; jj < structVariables.size(); jj++)
+			{
+				results.push_back(structName + "." + structVariables[jj]);
+			}
+		}
+	}
+
+	return results;
+}
+
+void Shader::addUniform(std::unordered_map<std::string, std::vector<std::pair<std::string, std::string> > > structMap, std::string structName, std::string structType)
+{
+	std::vector<std::pair<std::string,std::string>> variablePairs = structMap[structType];
+	for (int ii = 0; ii < variablePairs.size(); ii++)
+	{
+		std::string variableName = variablePairs[ii].second;
+		std::string variableType = variablePairs[ii].first;
+
+		if (structMap.find(variableType) == structMap.end())
+		{
+			addUniform(structName + "." + variableName);
+		}
+		else
+		{
+			std::vector<std::string> structVariables = addUniformHelper(structMap, variableName, variableType);
+			for (int jj = 0; jj < structVariables.size(); jj++)
+			{
+				//Debug: std::cout << "adding Uniform: " << structName + "." + structVariables[jj] << std::endl;
+				addUniform(structName + "." + structVariables[jj]);
+			}
+		}
+	}
 }
 
 void Shader::addUniform(std::string uniform)
@@ -168,4 +255,93 @@ void Shader::setUniform(std::string uniformName, glm::vec4 value)
 void Shader::setUniform(std::string uniformName, glm::mat4 value)
 {
 	glUniformMatrix4fv(m_uniforms[uniformName], 1, GL_FALSE, &value[0][0]);
+}
+
+std::unordered_map<std::string, std::vector<std::pair<std::string, std::string> > > Shader::findUniformStructs(std::string shaderText)
+{
+	std::string STRUCT_KEYWORD = "struct";
+	unsigned int nxtStructLocation = shaderText.find(STRUCT_KEYWORD);
+
+	std::unordered_map<std::string, std::vector<std::pair<std::string, std::string> > > structMap;
+	while (nxtStructLocation != -1)
+	{
+		int nameBegin = nxtStructLocation + STRUCT_KEYWORD.size() + 1;
+		int openBracket = shaderText.find("{", nameBegin);
+		int closeBracket = shaderText.find("}", openBracket);
+
+		std::string structName = Util::rtrim(shaderText.substr(nameBegin, openBracket - nameBegin));
+
+		std::vector<std::pair<std::string,std::string>> structVariables;
+		unsigned int nxtbracket = shaderText.find(";", openBracket);
+		unsigned int beginVariable = openBracket;
+		while ( (nxtbracket != -1) && (nxtbracket < closeBracket) )
+		{
+			std::vector<std::string> tokens = Util::Split(shaderText.substr(beginVariable, nxtbracket - beginVariable), ' ');
+			std::vector<std::string> token = Util::Split(tokens[tokens.size() - 2], '\n'); //TODO: Can cause bugs. Requires that struct variables be declared a line after the bracket.
+			
+			std::string varName = Util::rtrim(tokens[tokens.size() - 1]);
+			std::string varType = Util::ltrim(Util::ltrim(token[token.size() - 1])); 
+
+			structVariables.push_back(std::make_pair(varType, varName));
+
+			beginVariable = nxtbracket + 1;
+			nxtbracket = shaderText.find(";", beginVariable);
+		}
+
+		structMap[structName] = structVariables;
+		nxtStructLocation = shaderText.find(STRUCT_KEYWORD, nxtStructLocation + STRUCT_KEYWORD.size());
+	}
+
+	return structMap;
+}
+
+void Shader::updateUniforms(const glm::mat4& worldMatrix, Material& mat, RenderingEngine* renderingEngine)
+{
+	glm::mat4 MVPMatrix = renderingEngine->getCamera()->getProjectionTransform()*worldMatrix;
+	for (int ii = 0; ii < uniformNames.size(); ii++)
+	{
+		std::string uniformName = uniformNames[ii];
+		std::string uniformType = uniformTypes[ii];
+
+		
+		if (Util::StartsWith(uniformName, "T_")) //taken from transform: "T_" prefix
+		{
+			if (uniformName == "T_MVP") { setUniform(uniformName, MVPMatrix); }
+			else if (uniformName == "T_world") { setUniform(uniformName, worldMatrix); }
+			else
+			{
+				std::cerr << "Error: unknown component of transform: " << uniformName << "." << std::endl;
+				exit(1);
+			}
+		}
+		else if (Util::StartsWith(uniformName, "R_")) //taken from rendering engine: "R_" prefix
+		{
+			std::string unprefixedName = uniformName.substr(2);
+			if (uniformType == "sampler2D")
+			{
+				int samplerSlot = renderingEngine->getSamplerSlot(unprefixedName);
+				mat.getTexture(unprefixedName)->Bind(samplerSlot);
+				setUniform(uniformName, samplerSlot);
+			}
+			else if (uniformType == "vec3")
+			{ 
+				setUniform(uniformName, renderingEngine->getVector(unprefixedName));
+			}
+			else if (uniformType == "float")
+			{
+				setUniform(uniformName, renderingEngine->getFloat(unprefixedName));
+			}
+		}
+		else //taken from material: no prefix
+		{
+			if (uniformType == "vec3")
+			{
+				setUniform(uniformName, mat.getVector(uniformName));
+			}
+			else if (uniformType == "float")
+			{
+				setUniform(uniformName, matgetFloat(uniformName));
+			}
+		}
+	}
 }

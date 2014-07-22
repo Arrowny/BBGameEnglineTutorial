@@ -4,15 +4,15 @@
 ForwardDirectional::ForwardDirectional(std::string fileName) :
 Shader(fileName)
 {
-	addUniform("MVP");
-	addUniform("model");
-	addUniform("eyePos");
-	addUniform("specularIntensity");
-	addUniform("specularPower");
+	//addUniform("MVP");
+	//addUniform("model");
+	//addUniform("eyePos");
+	//addUniform("specularIntensity");
+	//addUniform("specularPower");
 
-	addUniform("dLight.base.color");
-	addUniform("dLight.base.intensity");
-	addUniform("dLight.direction");
+	//addUniform("dLight.base.color");
+	//addUniform("dLight.base.intensity");
+	//addUniform("dLight.direction");
 }
 
 
@@ -27,7 +27,7 @@ void ForwardDirectional::setUniform(std::string uniformName, DirectionalLight* d
 	setUniform(uniformName + ".direction", dLight->getDirection());
 }
 
-void ForwardDirectional::updateBasicUniformsAndTexture(const glm::mat4& worldMatrix, Material& mat, RenderingEngine* renderingEngine)
+void ForwardDirectional::updateUniforms(const glm::mat4& worldMatrix, Material& mat, RenderingEngine* renderingEngine)
 {
 	setUniform("MVP", renderingEngine->getCamera()->getProjectionTransform()*worldMatrix);
 	setUniform("model", worldMatrix);

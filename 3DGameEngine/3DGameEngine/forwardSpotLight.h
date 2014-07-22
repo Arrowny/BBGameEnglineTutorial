@@ -9,11 +9,12 @@ public:
 	ForwardSpotLight(std::string fileName);
 	virtual ~ForwardSpotLight();
 
+	virtual std::string getShaderType() { return "FORWARD_SPOTLIGHT_SHADER"; }
+	virtual void updateUniforms(const glm::mat4& worldMatrix, Material& mat, RenderingEngine* renderingEngine);
+
+protected:
 	using Shader::setUniform;
 	void setUniform(std::string uniformName, Attenuation atten);
 	void setUniform(std::string uniformName, SpotLight* sLight);
-
-	virtual std::string getShaderType() { return "FORWARD_SPOTLIGHT_SHADER"; }
-	virtual void updateBasicUniformsAndTexture(const glm::mat4& worldMatrix, Material& mat, RenderingEngine* renderingEngine);
 };
 

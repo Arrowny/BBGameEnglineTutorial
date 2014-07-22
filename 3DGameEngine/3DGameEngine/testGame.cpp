@@ -34,12 +34,12 @@ void TestGame::Init(Window* window)
 	textCoords.push_back(glm::vec2(0.5, 1.0));
 
 	//Set up mesh information.
-	MonkeyMesh = new MeshRenderer(new Mesh("monkey.obj"), Material("bricks.jpg", 2, 8));
-	MonkeyMesh2 = new MeshRenderer(new Mesh("monkey.obj"), Material("bricks.jpg", .5, 8));;
+	MonkeyMesh = new MeshRenderer(new Mesh("monkey.obj"), Material("bricks.jpg","diffuse", 2, 8));
+	MonkeyMesh2 = new MeshRenderer(new Mesh("monkey.obj"), Material("bricks.jpg","diffuse", .5, 8));;
 	meshComponent = new MeshRenderer(new Mesh(vertices, indices, textCoords),
-										 Material("bricks.jpg", 2, 40));
+										 Material("bricks.jpg","diffuse", 2, 40));
 	meshComponent2 = new MeshRenderer(new Mesh(vertices, indices, textCoords),
-										Material("bricks.jpg", 2, 8));
+										Material("bricks.jpg","diffuse", 2, 8));
 
 	pyrimidGameObject.m_transform = new Transform(glm::vec3(0, 0, 5));
 	pyrimidGameObject.m_transform->m_rot = glm::normalize(glm::quat(glm::radians(90.0f), glm::vec3(1, 0, 0)));
