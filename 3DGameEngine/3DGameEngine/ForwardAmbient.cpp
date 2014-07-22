@@ -16,8 +16,6 @@ ForwardAmbient::ForwardAmbient(const std::string& fileName)
 	glValidateProgram(m_program);
 	CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: Program is invalid");
 
-
-
 	m_uniforms[MVP] = glGetUniformLocation(m_program, "MVP");
 	m_uniforms[ambientIntensity] = glGetUniformLocation(m_program, "ambientIntensity");
 }

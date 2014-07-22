@@ -9,8 +9,7 @@
 
 
 
-RenderingEngine::RenderingEngine()/*:
-mainCamera(70.0f, (float)WindowParameter::width / (float)WindowParameter::height, 1.0f, 1000.0f)*/
+RenderingEngine::RenderingEngine()
 {
 
 	//glClearColor(2.0f, 1.5f, 0.0f, 0.5f);
@@ -55,7 +54,6 @@ void RenderingEngine::render(GameObject* object)
 
 	for each (BaseLight* light in lights)
 	{
-		light->GetShader()->SetRenderingEngine(this);
 		activeLight = light;
 		object->render(light->GetShader(), this);
 	}

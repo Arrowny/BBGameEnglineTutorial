@@ -24,18 +24,22 @@ public:
 	{
 		GetRootObject().update(delta);
 	}
-	//void render()
-	//{
-	//	GetRootObject().render(m_camera);
-	//}
+	void render(RenderingEngine* renderingEngine)
+	{
+		renderingEngine->render(&GetRootObject());
+	}
 
-	inline GameObject& GetRootObject()
-	{ 
-		return m_root;
+	void AddObject(GameObject* root)
+	{
+		GetRootObject().AddChild(root);
 	}
 protected:
-private:
 
+private:
+	inline GameObject& GetRootObject()
+	{
+		return m_root;
+	}
 	GameObject m_root;
 	Mesh* m_mesh;
 	Shader* m_shader;

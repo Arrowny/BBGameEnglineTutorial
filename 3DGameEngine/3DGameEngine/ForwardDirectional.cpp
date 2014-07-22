@@ -54,8 +54,8 @@ void ForwardDirectional::Update(Transform& transform, RenderingEngine& rendering
 	glUniformMatrix4fv(m_uniforms[MVP], 1, GL_FALSE, &projectedMatrix[0][0]);
 
 	glUniform3fv(m_uniforms[EYEPOS_U], 1, &renderingEngine.GetMainCamera().GetTransform().GetTransformedPos()[0]);
-	glUniform1f(m_uniforms[L_SPECULARINTENSITY_U], material.specularIntensity);
-	glUniform1f(m_uniforms[L_SPECULARPOWER_U], material.specularPower);
+	glUniform1f(m_uniforms[L_SPECULARINTENSITY_U], material.GetFloat("specularIntensity"));
+	glUniform1f(m_uniforms[L_SPECULARPOWER_U], material.GetFloat("specularPower"));
 
 	DirectionalLight directionalLight = *(DirectionalLight*)renderingEngine.GetActiveLight();  // if activeLight in the renderingEngine is not a pointer, then this code doesnot work
 

@@ -95,14 +95,3 @@ void Shader::CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const 
 		std::cerr << errorMessage << ": '" << error << "'" << std::endl;
 	}
 }
-
-/*Actually not useful*/
-void Shader::SetRenderingEngine(RenderingEngine* renderingEngine)
-{
-	this->renderingEngine = renderingEngine;
-}
-
-RenderingEngine* Shader::GetRenderingEngine()
-{
-	return renderingEngine;
-}

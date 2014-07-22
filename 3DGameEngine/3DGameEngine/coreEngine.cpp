@@ -106,7 +106,7 @@ void coreEngine::Run(){
 		if (render)
 		{
 			m_window->ClearScreen();
-			renderingEngine->render(&m_game->GetRootObject());
+			m_game->render(renderingEngine);
 	
 			m_window->SwapBuffers();
 			//Render();

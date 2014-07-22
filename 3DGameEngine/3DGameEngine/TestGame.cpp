@@ -14,7 +14,11 @@ TestGame::~TestGame()
 void TestGame::init()
 {
 	m_mesh = new Mesh("./res/plane.obj");
-	m_material = Material(new Texture("./res/pikaqiu2.jpg"), glm::fvec3(1.0, 1.0, 1.0), 2, 32);
+//	m_material = Material(new Texture("./res/pikaqiu2.jpg"), glm::fvec3(1.0, 1.0, 1.0), 2, 32);
+
+	m_material.AddTexture("pikaqiu", new Texture("./res/pikaqiu2.jpg"));
+	m_material.AddFloat("specularIntensity", 1);
+	m_material.AddFloat("specularPower", 8);
 
 	m_meshRenderer = new MeshRenderer(*m_mesh, m_material);
 
@@ -46,14 +50,14 @@ void TestGame::init()
 	spotLight->GetTransform().SetPos(glm::vec3(0, 0, 5));
 	spotLight->GetTransform().SetRot(glm::normalize(glm::quat(glm::radians(-90.0f), 0.0, 1.0, 0.0)));
 
-	GetRootObject().AddChild(planeObject);
-	GetRootObject().AddChild(directionalLightObject);
-	GetRootObject().AddChild(pointLightObject);
-	GetRootObject().AddChild(spotLightObject);
+	AddObject(planeObject);
+	AddObject(directionalLightObject);
+	AddObject(pointLightObject);
+	AddObject(spotLightObject);
 
 	GameObject* cameraObject = new GameObject();
 	cameraObject->AddComponent(new Camera(70.0f, (float)WindowParameter::width / (float)WindowParameter::height, 1.0, 1000.0));
-	GetRootObject().AddChild(cameraObject);
+	AddObject(cameraObject);
 
 	GameObject* testMesh1 = new GameObject();
 	GameObject* testMesh2 = new GameObject();
@@ -73,7 +77,7 @@ void TestGame::init()
 
 
 	testMesh2->AddChild(cameraObject2);*/
-	GetRootObject().AddChild(testMesh1);
+	AddObject(testMesh1);
 
 	/* -------------------------------Light Part----------------------------------------
 	m_shader->SetAmbient(glm::fvec3(0.3, 0.3, 0.3));
