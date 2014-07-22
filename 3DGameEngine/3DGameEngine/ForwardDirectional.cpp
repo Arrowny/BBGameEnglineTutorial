@@ -53,7 +53,7 @@ void ForwardDirectional::Update(Transform& transform, RenderingEngine& rendering
 	glUniformMatrix4fv(m_uniforms[model], 1, GL_FALSE, &worldMatrix[0][0]);
 	glUniformMatrix4fv(m_uniforms[MVP], 1, GL_FALSE, &projectedMatrix[0][0]);
 
-	glUniform3fv(m_uniforms[EYEPOS_U], 1, &renderingEngine.GetMainCamera().GetTransform().GetPos()[0]);
+	glUniform3fv(m_uniforms[EYEPOS_U], 1, &renderingEngine.GetMainCamera().GetTransform().GetTransformedPos()[0]);
 	glUniform1f(m_uniforms[L_SPECULARINTENSITY_U], material.specularIntensity);
 	glUniform1f(m_uniforms[L_SPECULARPOWER_U], material.specularPower);
 
@@ -61,7 +61,7 @@ void ForwardDirectional::Update(Transform& transform, RenderingEngine& rendering
 
 	glUniform3fv(m_uniforms[L_DIRECTIONAL_BASE_COLOR_U], 1, &directionalLight.color[0]);
 	glUniform1f(m_uniforms[L_DIRECTIONAL_BASE_INTENSITY_U], directionalLight.intensity);
-	glUniform3fv(m_uniforms[L_DIRECTIONAL_DIRECTION_U], 1, &directionalLight.direction[0]);
+	glUniform3fv(m_uniforms[L_DIRECTIONAL_DIRECTION_U], 1, &directionalLight.GetDirection()[0]);
 
 
 

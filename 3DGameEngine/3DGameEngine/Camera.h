@@ -6,6 +6,7 @@
 #include "timing.h"
 #include "Window.h"
 #include "GameComponent.h"
+#include "math.h"
 
 
 class Camera :public GameComponent
@@ -81,29 +82,30 @@ public:
 		if (input.GetKey(input.KEY_A))
 			move(GetTransform().GetLeft(), -movAmt);
 		if (input.GetKey(input.KEY_D))
-			move(GetTransform().GetUp(), -movAmt);
+			move(GetTransform().GetRight(), -movAmt);
 
 		if (input.GetKey(input.KEY_CAPSLOCK))
 			move(GetTransform().GetUp(), movAmt);
 		if (input.GetKey(input.KEY_LSHIFT))
 			move(GetTransform().GetUp(), -movAmt);
 
-		if (input.GetKey(input.KEY_UP))
-			GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(rotAmt), GetTransform().GetRight())));
-			//RotateX(-rotAmt);
-		if (input.GetKey(input.KEY_DOWN))
-			GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(-rotAmt), GetTransform().GetRight())));
-		if (input.GetKey(input.KEY_LEFT))
-			GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(-rotAmt), yAxis)));
-			//RotateY(rotAmt);
-		if (input.GetKey(input.KEY_RIGHT))
-			GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(rotAmt), yAxis)));
+		//if (input.GetKey(input.KEY_UP))
+		//	GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(rotAmt), GetTransform().GetRight())));
+		//	//RotateX(-rotAmt);
+		//if (input.GetKey(input.KEY_DOWN))
+		//	GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(-rotAmt), GetTransform().GetRight())));
+		//if (input.GetKey(input.KEY_LEFT))
+		//	GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(-rotAmt), yAxis)));
+		//	//RotateY(rotAmt);
+		//if (input.GetKey(input.KEY_RIGHT))
+		//	GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(rotAmt), yAxis)));
 			//RotateY(-rotAmt);
 	}
 
 	inline void move(glm::fvec3 dir, float amt)
 	{
-		GetTransform().GetPos() += (dir * amt);
+		//GetTransform().GetPos() += (dir * amt);
+		GetTransform().SetPos(GetTransform().GetPos() + (dir * amt));
 	}
 
 

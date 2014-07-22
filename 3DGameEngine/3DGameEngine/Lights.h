@@ -31,9 +31,10 @@ struct DirectionalLight :public BaseLight
 public:
 	//glm::vec3 color;
 	//float intensity;
-	glm::vec3 direction;
+	//glm::vec3 direction;
 
-	DirectionalLight( glm::vec3 color = glm::vec3(0, 0, 0), float intensity = 0,  glm::vec3 direction = glm::vec3(0, 0, 0));
+	DirectionalLight(glm::vec3 color = glm::vec3(0, 0, 0), float intensity = 0/*, glm::vec3 direction = glm::vec3(0, 0, 0)*/);
+	glm::vec3 GetDirection(){ return GetTransform().GetForward(); }
 };
 
 struct Attenuation

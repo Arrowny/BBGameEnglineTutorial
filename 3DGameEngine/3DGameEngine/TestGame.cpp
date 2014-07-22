@@ -30,7 +30,8 @@ void TestGame::init()
 	
 
 	GameObject* directionalLightObject = new GameObject();
-	DirectionalLight* directionalLight = new DirectionalLight(glm::vec3(1, 1, 0), 0.1f, glm::vec3(0, 1, 1));
+	DirectionalLight* directionalLight = new DirectionalLight(glm::vec3(1, 1, 0), 0.1f/*, glm::vec3(0, 1, 1)*/);
+	//directionalLight->GetTransform().SetRot(glm::normalize(glm::quat(glm::radians(45.0f), 1.0, 0.0, 0.0)));
 	directionalLightObject->AddComponent(directionalLight);
 
 	GameObject* pointLightObject = new GameObject();
@@ -63,9 +64,15 @@ void TestGame::init()
 	testMesh1->GetTransform().SetRot(glm::quat(glm::radians(-90.0f), glm::vec3(0, 1, 0)));
 	testMesh1->GetTransform().SetScale(glm::vec3(0.2f, 0.2f, 0.2f));
 
-	testMesh2->GetTransform().SetPos(glm::vec3(0, 1, 0));
+	testMesh2->GetTransform().SetPos(glm::vec3(0, 1, 5));
 
 	testMesh1->AddChild(testMesh2);
+
+	/*GameObject* cameraObject2 = new GameObject(); 
+	cameraObject2->AddComponent(new Camera(70.0f, (float)WindowParameter::width / (float)WindowParameter::height, 1.0, 1000.0));
+
+
+	testMesh2->AddChild(cameraObject2);*/
 	GetRootObject().AddChild(testMesh1);
 
 	/* -------------------------------Light Part----------------------------------------
