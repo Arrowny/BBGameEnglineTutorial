@@ -21,6 +21,7 @@ protected:
 private:
 	Mesh* m_mesh;
 	Material m_material;
+	Material m_material2;
 	MeshRenderer* m_meshRenderer;
 };
 

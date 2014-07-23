@@ -13,12 +13,18 @@ TestGame::~TestGame()
 
 void TestGame::init()
 {
-	m_mesh = new Mesh("./res/mon.obj");
+	m_mesh = new Mesh("./res/cube3.obj");
 //	m_material = Material(new Texture("./res/pikaqiu2.jpg"), glm::fvec3(1.0, 1.0, 1.0), 2, 32);
 
-	m_material.AddTexture("pikaqiu", new Texture("./res/pikaqiu2.jpg"));
+	m_material.AddTexture("diffuse", new Texture("./res/pikaqiu.jpg"));
 	m_material.AddFloat("specularIntensity", 1);
 	m_material.AddFloat("specularPower", 8);
+
+	
+	m_material2.AddTexture("diffuse", new Texture("./res/bricks.jpg"));
+	m_material2.AddFloat("specularIntensity", 2);
+	m_material2.AddFloat("specularPower", 16);
+	
 
 	m_meshRenderer = new MeshRenderer(*m_mesh, m_material);
 
@@ -36,7 +42,7 @@ void TestGame::init()
 	GameObject* testMesh1 = new GameObject();
 	GameObject* testMesh2 = new GameObject();
 	testMesh1->AddComponent(new MeshRenderer(*m_mesh, m_material));
-	testMesh2->AddComponent(new MeshRenderer(*m_mesh, m_material));
+	testMesh2->AddComponent(new MeshRenderer(*m_mesh, m_material2));
 
 	testMesh1->GetTransform().SetPos(glm::vec3(-2, -2, 0));
 	//testMesh1->GetTransform().SetRot(glm::quat(glm::radians(-90.0f), glm::vec3(0, 1, 0)));

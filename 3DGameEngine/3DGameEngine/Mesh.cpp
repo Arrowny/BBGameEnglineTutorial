@@ -114,3 +114,8 @@ void Mesh::Draw()
 
 	glBindVertexArray(0);
 }
+
+void Mesh::Finalize()
+{
+	glDeleteBuffers(NUM_BUFFERS, m_vertexArrayBuffers);
+}
