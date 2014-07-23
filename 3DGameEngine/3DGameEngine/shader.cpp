@@ -280,6 +280,7 @@ void Shader::setUniform(std::string uniformName, Attenuation atten)
 	setUniform(uniformName + ".exponent", atten.m_exponent);
 }
 
+
 void Shader::setUniform(std::string uniformName, DirectionalLight* dLight)
 {
 	setUniform(uniformName + ".base.color", dLight->m_color);
@@ -404,7 +405,7 @@ void Shader::updateUniforms(const glm::mat4& worldMatrix, Material& mat, Renderi
 		{
 			if (unprefixedName == "eyePos")
 			{
-				setUniform(uniformName, renderingEngine->getCamera()->getTransform()->m_trans);
+				setUniform(uniformName, renderingEngine->getCamera()->getTransform()->getTransformedTrans());
 			}
 			else if (uniformType == "vec3")
 			{

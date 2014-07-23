@@ -17,8 +17,8 @@ public:
 	Camera(glm::vec3 pos, glm::vec3 lookAtPoint, glm::vec3 up, double zNear, double zFar, double fov, double screenWidth, double screenHeight);
 	virtual ~Camera();
 
-	virtual void ProcessInput(Input* input, double delta);
-	virtual void addToRenderingEngine(RenderingEngine* renderingEngine);
+	//virtual void ProcessInput(Input* input, double delta);
+	virtual void addToEngine(CoreEngine* coreEngine);
 
 	void reinitPerspectiveMatrix(double zNear, double zFar, double fov, double screenWidth, double screenHeight);
 	void Camera::lookAt(glm::vec3 destPoint, glm::vec3 up);

@@ -105,6 +105,9 @@
     <ClInclude Include="shaderResource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="freeLook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="window.cpp">
@@ -183,6 +186,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="shaderResource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="freeLook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

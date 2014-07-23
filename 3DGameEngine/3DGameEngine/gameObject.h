@@ -5,6 +5,7 @@
 #include "camera.h"
 #include "shader.h"
 #include "renderingEngine.h"
+#include "coreEngine.h"
 
 class GameComponent;
 
@@ -17,9 +18,9 @@ public:
 	void ProcessInput(Input* input, double delta);
 	void Update(double delta);
 	void Render(Shader* shader, RenderingEngine* renderingEngine);
-	void addToRenderingEngine(RenderingEngine* renderingEngine);
 	void addChild(GameObject* child);
 	void addComponent(GameComponent* component);
+	void setEngine(CoreEngine* coreEngine);
 
 	Transform* m_transform;
 
@@ -29,5 +30,6 @@ private:
 
 	std::vector<GameObject*> m_children;
 	std::vector<GameComponent*> m_components;
+	CoreEngine* coreEngine;
 };
 

@@ -1,6 +1,7 @@
 #include "coreEngine.h"
 #include "timing.h"
 #include "util.h"
+#include "testGame.h"
 #include <iostream>
 
 #define FRAME_CAP 5000
@@ -11,6 +12,7 @@ m_frameTime(double(1.0) / FRAME_CAP),
 m_window(window),
 m_game(game)
 {
+	m_game->setEngine(this);
 	m_game->Init(window);
 	m_input = new Input(m_window);
 	isRunning = false;

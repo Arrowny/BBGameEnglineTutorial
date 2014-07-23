@@ -29,7 +29,6 @@ RenderingEngine::~RenderingEngine()
 
 void RenderingEngine::RenderGameObject(GameObject* gameObject)
 {
-	gameObject->addToRenderingEngine(this);
 
 	gameObject->Render(m_ambientShader, this);
 
@@ -41,7 +40,6 @@ void RenderingEngine::RenderGameObject(GameObject* gameObject)
 		activeLight = m_lights[ii];
 		gameObject->Render(m_lights[ii]->m_shader, this);
 	}
-	m_lights.clear();
 
 	glDepthFunc(GL_LESS); glDepthMask(true);
 	glDisable(GL_BLEND);

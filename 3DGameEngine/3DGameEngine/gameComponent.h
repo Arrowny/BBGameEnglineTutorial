@@ -6,6 +6,7 @@
 class RenderingEngine;
 class Shader;
 class GameObject;
+class CoreEngine;
 
 class GameComponent
 {
@@ -17,7 +18,7 @@ public:
 	virtual void ProcessInput(Input* input, double delta) {}
 	virtual void Update( double delta) {}
 	virtual void Render( Shader* shader, RenderingEngine* renderingEngine) {}
-	virtual void addToRenderingEngine(RenderingEngine* renderingEngine) {}
+	virtual void addToEngine(CoreEngine* coreEngine) {}
 	Transform* getTransform();  //convienence method
 
 	GameObject* m_parent;

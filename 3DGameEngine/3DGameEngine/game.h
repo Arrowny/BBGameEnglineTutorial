@@ -36,6 +36,11 @@ public:
 		m_root.addComponent(gameCompenent);
 	}
 
+	void setEngine(CoreEngine* coreEngine)
+	{
+		m_root.setEngine(coreEngine);
+	}
+
 private:
 	Game(const Game& other) {}
 	void operator=(const Game& other) {}

@@ -41,6 +41,11 @@ void TestGame::Init(Window* window)
 	meshComponent2 = new MeshRenderer(new Mesh(vertices, indices, textCoords),
 										Material("bricks.jpg","diffuse", 2, 8));
 
+	//set up freelook
+	freeLook = new FreeLook();
+	//freeLookObject.addComponent(freeLook);
+	//freeLookObject.m_transform = new Transform();
+
 	pyrimidGameObject.m_transform = new Transform(glm::vec3(0, 0, 5));
 	pyrimidGameObject.m_transform->m_rot = glm::normalize(glm::quat(glm::radians(90.0f), glm::vec3(1, 0, 0)));
 
@@ -50,11 +55,11 @@ void TestGame::Init(Window* window)
 	pyrimidGameObject2.addComponent(meshComponent2);
 
 	monkeyObject.addComponent(MonkeyMesh);
+	monkeyObject.addComponent(freeLook);
 	monkeyObject.m_transform = new Transform(glm::vec3(0, 0, 3));
 
 	monkeyObject2.addComponent(MonkeyMesh2);
 	monkeyObject2.m_transform = new Transform(glm::vec3(0, 5, 3));
-
 
 	dLight = new DirectionalLight(glm::vec3(1, 1, 1), 0.8);
 	dLightObj.addComponent(dLight);
@@ -78,7 +83,9 @@ void TestGame::Init(Window* window)
 	camera = new Camera();
 	camera->reinitPerspectiveMatrix(.01f, 1000.0f, 70.0f, window->GetWidth(), window->GetHeight());
 	cameraObj.addComponent(camera);
+	//cameraObj.addComponent(freeLook);
 	cameraObj.m_transform = new Transform();
+	//freeLookObject.addChild(&cameraObj);
 	
 	//pyrimidGameObject.addChild(&dLightObj);
 	//m_root.addChild(&cameraObj);

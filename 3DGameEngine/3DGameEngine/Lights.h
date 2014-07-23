@@ -6,6 +6,8 @@
 
 #define COLOR_DEPTH 256
 
+class CoreEngine;
+
 struct Attenuation
 {
 	Attenuation() :
@@ -38,7 +40,7 @@ public:
 
 	virtual ~BaseLight() {}
 
-	void addToRenderingEngine(RenderingEngine* renderingEngine);
+	void addToEngine(CoreEngine* coreEngine);
 
 	glm::vec3 m_color;
 	GLfloat m_intensity;

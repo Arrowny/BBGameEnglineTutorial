@@ -80,6 +80,7 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="coreEngine.h" />
     <ClInclude Include="ExtraVecMath.h" />
+    <ClInclude Include="freeLook.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gameComponent.h" />
     <ClInclude Include="gameObject.h" />
@@ -109,6 +110,7 @@
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="coreEngine.cpp" />
+    <ClCompile Include="freeLook.cpp" />
     <ClCompile Include="gameComponent.cpp" />
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="input.cpp" />

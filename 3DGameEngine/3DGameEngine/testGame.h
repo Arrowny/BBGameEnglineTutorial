@@ -11,6 +11,7 @@
 #include "gameObject.h"
 #include "meshRenderer.h"
 #include "camera.h"
+#include "freeLook.h"
 
 
 class TestGame :
@@ -26,6 +27,7 @@ private:
 	TestGame(const TestGame& other) {}
 	void operator=(const TestGame& other) {}
 
+	FreeLook* freeLook; GameObject freeLookObject;
 	MeshRenderer* MonkeyMesh; GameObject monkeyObject;
 	MeshRenderer* MonkeyMesh2; GameObject monkeyObject2;
 	MeshRenderer* meshComponent; GameObject pyrimidGameObject;

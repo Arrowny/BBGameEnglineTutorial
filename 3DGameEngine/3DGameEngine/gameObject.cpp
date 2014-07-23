@@ -6,6 +6,7 @@
 GameObject::GameObject()
 {
 	m_transform = NULL;
+	coreEngine = NULL;
 }
 
 
@@ -75,17 +76,9 @@ void GameObject::Render(Shader* shader, RenderingEngine* renderingEngine)
 	}
 }
 
-void GameObject::addToRenderingEngine(RenderingEngine* renderingEngine)
-{
-	for (unsigned int ii = 0; ii < m_components.size(); ii++)
-	{ m_components[ii]->addToRenderingEngine(renderingEngine); }
-
-	for (unsigned int ii = 0; ii < m_children.size(); ii++)
-	{ m_children[ii]->addToRenderingEngine(renderingEngine); }
-}
-
 void GameObject::addChild(GameObject* child)
 { 
+	child->setEngine(coreEngine);
 	child->m_transform->setParent(this->m_transform);
 	m_children.push_back(child); 
 }
@@ -94,4 +87,22 @@ void GameObject::addComponent(GameComponent* component)
 { 
 	component->m_parent = this;
 	m_components.push_back(component); 
+}
+
+void GameObject::setEngine(CoreEngine* coreEngine)
+{ 
+	if (this->coreEngine != coreEngine)
+	{
+		this->coreEngine = coreEngine;
+
+		for (unsigned int ii = 0; ii < m_components.size(); ii++)
+		{
+			m_components[ii]->addToEngine(coreEngine);
+		}
+
+		for (unsigned int ii = 0; ii < m_children.size(); ii++)
+		{
+			m_children[ii]->setEngine(coreEngine);
+		}
+	}
 }

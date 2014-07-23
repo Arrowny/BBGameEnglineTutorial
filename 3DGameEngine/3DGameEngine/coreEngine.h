@@ -1,10 +1,11 @@
 #pragma once
 #include "window.h"
-#include "testGame.h"
 #include "input.h"
 #include "shader.h"
 #include "timing.h"
 #include "renderingEngine.h"
+
+class Game;
 
 class CoreEngine
 {
@@ -13,6 +14,8 @@ public:
 
 	void start();
 	void stop();
+
+	RenderingEngine m_renderingEngine;
 
 private:
 	CoreEngine(const CoreEngine& other) {}
@@ -26,6 +29,5 @@ private:
 	Game* m_game;
 	double m_frameTime;
 
-	RenderingEngine m_renderingEngine;
 };
 
