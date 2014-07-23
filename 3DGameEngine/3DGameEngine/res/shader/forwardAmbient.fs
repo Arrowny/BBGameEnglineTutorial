@@ -7,10 +7,10 @@ in vec2 texCoord0;
 // if we use "attribute vec3 position; " in the vertex shader instead of "layout (location = 0) in vec3 position;", 
 //then we should not use "out vec4 fragColor;" in the fragment shader.
 
-uniform vec3 ambientIntensity;
-uniform sampler2D sampler;
+uniform vec3 R_ambientIntensity;
+uniform sampler2D R_diffuse;
 
 void main()
 {
-   	  gl_FragColor = texture2D(sampler, texCoord0)* vec4(ambientIntensity,1.0);
+   	  gl_FragColor = texture2D(R_diffuse, texCoord0)* vec4(R_ambientIntensity,1.0);
 }	

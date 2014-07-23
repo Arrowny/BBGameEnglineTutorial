@@ -1,5 +1,6 @@
 #version 330
 #include "./res/shader/lighting.glh"
+
 in vec2 texCoord0;
 in vec3 normal0;
 in vec3 worldPos0;

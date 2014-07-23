@@ -22,25 +22,6 @@ public:
 	virtual ~ForwardDirectional();
 
 private:
-	//static const unsigned int NUM_SHADERS = 2;
 
-	//enum
-	//{
-	//	MVP,
-	//	model,
-	//	EYEPOS_U,
-	//	L_SPECULARINTENSITY_U,
-	//	L_SPECULARPOWER_U,
-
-	//	L_DIRECTIONAL_BASE_COLOR_U,
-	//	L_DIRECTIONAL_BASE_INTENSITY_U,
-	//	L_DIRECTIONAL_DIRECTION_U,
-
-
-	//	NUM_UNIFORMS
-	//};
-
-	//GLuint m_shaders[NUM_SHADERS];
-	//GLuint m_uniforms[NUM_UNIFORMS];
 
 };

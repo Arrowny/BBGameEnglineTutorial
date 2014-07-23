@@ -22,6 +22,23 @@ Shader::Shader()
 	
 }
 
+Shader::Shader(std::string& fileName)
+{
+	std::string vertexShaderText = LoadShader(fileName + ".vs");
+	std::string fragmentShaderText = LoadShader(fileName + ".fs");
+
+	m_shaders[0] = CreateShader(vertexShaderText, GL_VERTEX_SHADER);
+	m_shaders[1] = CreateShader(fragmentShaderText, GL_FRAGMENT_SHADER);
+
+	for (unsigned int i = 0; i < NUM_SHADERS; i++)
+		glAttachShader(m_program, m_shaders[i]);
+
+	glLinkProgram(m_program);
+	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error: Porgram linking failed");
+
+	glValidateProgram(m_program);
+	CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: Program is invalid");
+}
 
 Shader::~Shader()
 {

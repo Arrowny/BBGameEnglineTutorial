@@ -36,6 +36,7 @@ class Shader
 {
 public:
 	Shader();
+	Shader(std::string& fileName);
 	void Bind();//bind the shader, set the GPU in a state using vertex shader and frag shader in this class
 	virtual void Update(Transform& transform,RenderingEngine& renderingEngine, Material& material) = 0;//        , DirectionalLight& directionalLight
 
