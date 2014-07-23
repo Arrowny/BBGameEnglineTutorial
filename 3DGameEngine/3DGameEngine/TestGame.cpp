@@ -13,7 +13,7 @@ TestGame::~TestGame()
 
 void TestGame::init()
 {
-	m_mesh = new Mesh("./res/cube3.obj");
+	m_mesh = new Mesh("./res/cube.obj");
 //	m_material = Material(new Texture("./res/pikaqiu2.jpg"), glm::fvec3(1.0, 1.0, 1.0), 2, 32);
 
 	m_material.AddTexture("diffuse", new Texture("./res/pikaqiu.jpg"));

@@ -1,6 +1,11 @@
 #include "Mesh.h"
 #include <vector>
 
+//MeshData::MeshData(int indexSize)
+//{
+//
+//}
+
 Mesh::Mesh()
 {
 	IndexedModel model = OBJModel("./res/plane.obj").ToIndexedModel();
@@ -25,16 +30,16 @@ Mesh::Mesh(Vertex* vertices, unsigned int numVertices, unsigned int* indices, un
 
 	//model.positions.reserve(numVertices);
 	////texCoords.reserve(numVertices);
-	//model.CalcNormals();
-
-	//CalcNormals(vertices, numIndices, model);
 
 	for (unsigned int i = 0; i < numVertices; i++){
 
 		model.positions.push_back(*vertices[i].GetPos());
 		model.texCoords.push_back(*vertices[i].GetTexCoord());
-		model.normals.push_back(*vertices[i].GetNormal());
+		//model.normals.push_back(*vertices[i].GetNormal());
 	}
+	if (true)
+		this->CalcNormals(model);
+
 	for (unsigned int i = 0; i < numIndices; i++){
 		model.indices.push_back(indices[i]);
 	}
@@ -42,29 +47,6 @@ Mesh::Mesh(Vertex* vertices, unsigned int numVertices, unsigned int* indices, un
 	
 	InitMesh(model);
 
-}
-void Mesh::CalcNormals(Vertex* vertices, unsigned int numVertices, IndexedModel& model)
-{
-	for (unsigned int i = 0; i < model.indices.size(); i += 3)
-	{
-		int i0 = model.indices[i];
-		int i1 = model.indices[i + 1];
-		int i2 = model.indices[i + 2];
-
-		glm::vec3 v1 = *vertices[i1].GetPos() - *vertices[i0].GetPos();
-		glm::vec3 v2 = *vertices[i2].GetPos() - *vertices[i0].GetPos();
-
-		glm::vec3 normal = glm::normalize(glm::cross(v1, v2));
-
-		vertices[i0].SetNormal(*vertices[i0].GetNormal() + normal);
-		vertices[i1].SetNormal(*vertices[i1].GetNormal() + normal);
-		vertices[i2].SetNormal(*vertices[i2].GetNormal() + normal);
-	}
-
-	for (unsigned int i = 0; i < numVertices; i++)
-	{
-		vertices[i].SetNormal(glm::normalize(*vertices[i].GetNormal()));
-	}
 }
 
 Mesh::~Mesh()
@@ -76,7 +58,7 @@ Mesh::~Mesh()
 void Mesh::InitMesh(const IndexedModel& model)
 {
 	m_drawCount = model.indices.size();
-
+	
 	glGenBuffers(NUM_BUFFERS, m_vertexArrayBuffers); //m_vertexArrayBuffers is already a pointer, so not use &
 	/*POSITION PART*/
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[POSITION_VB]);// make it thinks that this block of data is an array
@@ -115,7 +97,47 @@ void Mesh::Draw()
 	glBindVertexArray(0);
 }
 
-void Mesh::Finalize()
+void Mesh::CalcNormals(Vertex* vertices, int numVertices, int* indices, int indexSize)
 {
-	glDeleteBuffers(NUM_BUFFERS, m_vertexArrayBuffers);
+	for(int i = 0; i < indexSize; i += 3)
+	{
+		int i0 = indices[i];
+		int i1 = indices[i + 1];
+		int i2 = indices[i + 2];
+
+		glm::vec3 v1 = *vertices[i1].GetPos() - *vertices[i0].GetPos();
+		glm::vec3 v2 = *vertices[i2].GetPos() - *vertices[i0].GetPos();
+
+		glm::vec3 normal = glm::normalize(glm::cross(v1, v2));
+
+		vertices[i0].SetNormal(*vertices[i0].GetNormal() + normal);
+		vertices[i1].SetNormal(*vertices[i1].GetNormal() + normal);
+		vertices[i2].SetNormal(*vertices[i2].GetNormal() + normal);
+	}
+
+	for (int i = 0; i < numVertices; i++)
+		vertices[i].SetNormal(glm::normalize(*vertices[i].GetNormal()));
+
+}
+
+void Mesh::CalcNormals(IndexedModel model)
+{
+	for (unsigned int i = 0; i < model.indices.size(); i += 3)
+	{
+		int i0 = model.indices[i];
+		int i1 = model.indices[i + 1];
+		int i2 = model.indices[i + 2];
+
+		glm::vec3 v1 = model.positions[i1] - model.positions[i0];
+		glm::vec3 v2 = model.positions[i2] - model.positions[i0];
+
+		glm::vec3 normal = glm::normalize(glm::cross(v1, v2));
+
+		model.normals[i0] += normal;
+		model.normals[i1] += normal;
+		model.normals[i2] += normal;
+	}
+
+	for (unsigned int i = 0; i < model.positions.size(); i++)
+		model.normals[i] = glm::normalize(model.normals[i]);
 }

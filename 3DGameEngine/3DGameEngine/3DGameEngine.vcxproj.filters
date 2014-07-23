@@ -79,6 +79,8 @@
       <Filter>Shader</Filter>
     </ClInclude>
     <ClInclude Include="math.h" />
+    <ClInclude Include="ReferenceCounter.h" />
+    <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3DGameEngine.rc" />

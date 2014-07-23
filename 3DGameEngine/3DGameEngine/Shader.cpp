@@ -1,4 +1,5 @@
 #include "Shader.h"
+#include "Util.h"
 #include <fstream>
 #include <iostream>
 #include <cassert>
@@ -59,12 +60,24 @@ std::string Shader::LoadShader(const std::string& fileName)
 	std::string output;
 	std::string line;
 
+//	const std::string INCLUDE_DIRECTIVE = "#include";
+
 	if (file.is_open())
 	{
 		while (file.good())
 		{
 			getline(file, line);
-			output.append(line + "\n");
+			if (line.find("#include") == std::string::npos)
+				output.append(line + "\n");
+			else
+			{
+				std::string includeFileName = Util::Split(line
+					, ' ')[1];
+				includeFileName = includeFileName.substr(1, includeFileName.length() - 2);
+
+				std::string toAppend = LoadShader(includeFileName);
+				output.append(toAppend + "\n");
+			}
 		}
 	}
 	else
