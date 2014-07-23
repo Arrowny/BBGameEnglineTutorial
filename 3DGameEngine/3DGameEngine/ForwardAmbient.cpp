@@ -4,8 +4,12 @@
 ForwardAmbient::ForwardAmbient(const std::string& fileName)
 {
 	fprintf(stderr, "in ambient shader \n");
-	m_shaders[0] = CreateShader(LoadShader(fileName + ".vs"), GL_VERTEX_SHADER);
-	m_shaders[1] = CreateShader(LoadShader(fileName + ".fs"), GL_FRAGMENT_SHADER);
+
+	std::string vertexShaderText = LoadShader(fileName + ".vs");
+	std::string fragmentShaderText = LoadShader(fileName + ".fs");
+
+	m_shaders[0] = CreateShader(vertexShaderText, GL_VERTEX_SHADER);
+	m_shaders[1] = CreateShader(fragmentShaderText, GL_FRAGMENT_SHADER);
 
 	for (unsigned int i = 0; i < NUM_SHADERS; i++)
 		glAttachShader(m_program, m_shaders[i]);

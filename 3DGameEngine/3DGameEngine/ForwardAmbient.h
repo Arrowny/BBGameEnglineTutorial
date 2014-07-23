@@ -19,17 +19,16 @@ public:
 	virtual ~ForwardAmbient();
 
 private:
-	static const unsigned int NUM_SHADERS = 2;
+	//static const unsigned int NUM_SHADERS = 2;
 
-	enum
-	{
-		//EYEPOS_U,
-		MVP,
-		ambientIntensity,
+	//enum
+	//{
+	//	MVP,
+	//	ambientIntensity,
 
-		NUM_UNIFORMS
-	};
+	//	NUM_UNIFORMS
+	//};
 
-	GLuint m_shaders[NUM_SHADERS];
-	GLuint m_uniforms[NUM_UNIFORMS];
+	//GLuint m_shaders[NUM_SHADERS];
+	//GLuint m_uniforms[NUM_UNIFORMS];
 };
