@@ -22,9 +22,9 @@ RenderingEngine::RenderingEngine()
 
 	mainCamera = new Camera(10.0f, 1.0, 1.0, 1000.0);
 	
-	AddVector("ambientIntensit", glm::fvec3(0.2f, 0.2f, 0.2f));
+	AddVector("ambientIntensity", glm::fvec3(0.2f, 0.2f, 0.2f));
 	m_samplerMap.insert(std::pair<std::string, unsigned int>("diffuse", 0));
-	//m_shader = new Shader("./res/shader/forwardAmbient");
+	m_shaderAmbient = new Shader("./res/shader/forwardAmbient");
 }
 
 
@@ -42,13 +42,7 @@ void RenderingEngine::render(GameObject* object)
 	lights.clear();
 	object->AddToRenderingEngine(this);
 
-	/*activeDirectionalLight = DirectionalLight(BaseLight(glm::vec3(1, 0, 0), 0.2f), glm::vec3(1, 1, 1));
-	directionalLight2 = DirectionalLight(BaseLight(glm::vec3(1, 1, 0), 0.4f), glm::vec3(-1, 1, -1));
-	activePointLight = PointLight(BaseLight(glm::vec3(0, 1, 1), 0.4f), Attenuation(0.0, 0.0, 0.1), glm::vec3(0, 0, 7), 30);
-	activeSpotLight = SpotLight(PointLight(BaseLight(glm::fvec3(0.0, 0.0, 1.0), 0.6f), Attenuation(0.0, 0.0, 0.1), glm::fvec3(-2.0, 0.0, 0.0), 30), glm::fvec3(1.0, 1.0, 1.0), 0.1f);*/
-
-
-	object->render(ForwardAmbient::GetInstance(),this);
+	object->render(m_shaderAmbient,this);
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);

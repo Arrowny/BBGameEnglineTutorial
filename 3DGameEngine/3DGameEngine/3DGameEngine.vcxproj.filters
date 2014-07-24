@@ -14,18 +14,6 @@
     <ClCompile Include="TestGame.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="RenderingEngine.cpp" />
-    <ClCompile Include="ForwardAmbient.cpp">
-      <Filter>Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="ForwardDirectional.cpp">
-      <Filter>Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="ForwardPoint.cpp">
-      <Filter>Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="ForwardSpot.cpp">
-      <Filter>Shader</Filter>
-    </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Shader</Filter>
     </ClCompile>
@@ -56,18 +44,6 @@
     </ClInclude>
     <ClInclude Include="MeshRenderer.h">
       <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="ForwardAmbient.h">
-      <Filter>Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="ForwardDirectional.h">
-      <Filter>Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="ForwardPoint.h">
-      <Filter>Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="ForwardSpot.h">
-      <Filter>Shader</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Shader</Filter>

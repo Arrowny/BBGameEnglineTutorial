@@ -18,16 +18,11 @@ public:
 	
 	void input(Input input, float delta);
 	void render(GameObject* object);
-	void clearScreen();
-	const GLubyte* getOpenGLVersion();
 
 	inline Camera& GetMainCamera() { return *mainCamera; }
 
-	inline glm::fvec3 GetAmbientLight() { return ambientLight; }
-
 	void AddLight(BaseLight* lights);
 	BaseLight* GetActiveLight();
-
 	void AddCamera(Camera* camera);
 
 	inline unsigned int GetSamplerSlot(const std::string& samplerName) { return m_samplerMap[samplerName]; }
@@ -61,14 +56,11 @@ private:
 
 	Camera* mainCamera;
 
-	glm::fvec3 ambientLight = glm::fvec3(0.2f, 0.2f, 0.2f);
-
 	BaseLight* activeLight;
-
 	std::vector<BaseLight*> lights;
 	void ClearLightList();
 
-	Shader* m_shader;
+	Shader* m_shaderAmbient;
 	std::map<std::string, unsigned int> m_samplerMap;
 	std::map<std::string, glm::vec3> m_vectorMap;
 	std::map<std::string, float> m_floatMap;

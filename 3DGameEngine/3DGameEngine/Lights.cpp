@@ -13,7 +13,7 @@ DirectionalLight::DirectionalLight(glm::vec3 color, float intensity/*,  glm::vec
 BaseLight(color, intensity)
 //direction(glm::normalize(direction))
 {
-	SetShader(ForwardDirectional::GetInstance());
+	SetShader(new Shader("./res/shader/fowardDirectional"));
 }
 
 PointLight::PointLight(glm::vec3 color, float intensity, Attenuation atten) :
@@ -27,7 +27,7 @@ range(100)
 	float c = atten.constant - COLOR_DEPTH * intensity * glm::max(color.x, glm::max(color.y, color.z));
 
 	range = (float)(-b + std::sqrtf(b*b - 4 * a*c)) / (2 * a);
-	SetShader(ForwardPoint::GetInstance());
+	SetShader(new Shader("./res/shader/forwardPointLight"));
 }
 
 SpotLight::SpotLight(glm::vec3 color, float intensity, const Attenuation atten, float cutoff) :
@@ -35,5 +35,5 @@ PointLight(color, intensity, atten),
 cutoff(cutoff)
 {
 	//direction = GetTransform().GetRot().
-	SetShader(ForwardSpot::GetInstance());
+	SetShader(new Shader("./res/shader/forwardSpotLight"));
 }
