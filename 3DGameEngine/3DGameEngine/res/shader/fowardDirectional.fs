@@ -6,7 +6,7 @@ in vec3 normal0;
 in vec3 worldPos0;
 
 uniform sampler2D diffuse;
-uniform DirectionalLight directionalLight;
+uniform DirectionalLight R_directionalLight;
 
 void main()
 {
@@ -15,7 +15,7 @@ void main()
 	vec3 normal =normalize(normal0);
 
 
-  	totalLight += calcDirectionalLight(directionalLight,normal,worldPos0);
+  	totalLight += calcDirectionalLight(R_directionalLight,normal,worldPos0);
 
     gl_FragColor = color * totalLight;
 }	

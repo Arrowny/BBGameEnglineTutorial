@@ -7,7 +7,7 @@ in vec3 worldPos0;
 
 uniform sampler2D diffuse;
 
-uniform SpotLight spotLight;
+uniform SpotLight R_spotLight;
 
 
 void main()
@@ -16,7 +16,7 @@ void main()
 	vec4 color = texture2D(diffuse, texCoord0);
 	vec3 normal =normalize(normal0);
 
-	 totalLight += calcSpotLight(spotLight,normal, worldPos0);
+	 totalLight += calcSpotLight(R_spotLight,normal, worldPos0);
 
     gl_FragColor = color * totalLight;
 }	

@@ -7,7 +7,7 @@ in vec3 worldPos0;
 
 //uniform vec3 eyePos;
 uniform sampler2D diffuse;
-uniform PointLight pointLight;
+uniform PointLight R_pointLight;
 
 
 
@@ -21,5 +21,5 @@ void main()
 
     //gl_FragColor = color * totalLight;
 
-    gl_FragColor = texture2D(diffuse, texCoord0.xy) * calcPointLight(pointLight, normalize(normal0), worldPos0);
+    gl_FragColor = texture2D(diffuse, texCoord0.xy) * calcPointLight(R_pointLight, normalize(normal0), worldPos0);
 }	

@@ -16,15 +16,15 @@ ForwardDirectional::ForwardDirectional() :Shader("./res/shader/fowardDirectional
 	//m_uniforms[L_DIRECTIONAL_BASE_INTENSITY_U] = glGetUniformLocation(m_program, "directionalLight.base.intensity");
 	//m_uniforms[L_DIRECTIONAL_DIRECTION_U] = glGetUniformLocation(m_program, "directionalLight.direction");
 
-	AddUniform("model");
-	AddUniform("MVP");
-	AddUniform("eyePos");
+	AddUniform("T_model");
+	AddUniform("T_MVP");
+	AddUniform("C_eyePos");
 	AddUniform("specularIntensity");
 	AddUniform("specularPower");
 
-	AddUniform("directionalLight.base.color");
-	AddUniform("directionalLight.base.intensity");
-	AddUniform("directionalLight.direction");
+	AddUniform("R_directionalLight.base.color");
+	AddUniform("R_directionalLight.base.intensity");
+	AddUniform("R_directionalLight.direction");
 }
 
 
@@ -45,18 +45,18 @@ void ForwardDirectional::Update(Transform& transform, RenderingEngine& rendering
 	glm::mat4 worldMatrix = transform.GetModel();
 	glm::mat4 projectedMatrix = renderingEngine.GetMainCamera().GetViewProjection()* worldMatrix;
 
-	SetUniform("model",worldMatrix);
-	SetUniform("MVP",projectedMatrix);
+	SetUniform("T_model",worldMatrix);
+	SetUniform("T_MVP",projectedMatrix);
 
-	SetUniform("eyePos", renderingEngine.GetMainCamera().GetTransform().GetTransformedPos());
+	SetUniform("C_eyePos", renderingEngine.GetMainCamera().GetTransform().GetTransformedPos());
 	SetUniformf("specularIntensity", material.GetFloat("specularIntensity"));
 	SetUniformf("specularPower", material.GetFloat("specularPower"));
 
 	DirectionalLight directionalLight = *(DirectionalLight*)renderingEngine.GetActiveLight();  // if activeLight in the renderingEngine is not a pointer, then this code doesnot work
 
-	SetUniform("directionalLight.base.color", directionalLight.color);
-	SetUniformf("directionalLight.base.intensity", directionalLight.intensity);
-	SetUniform("directionalLight.direction", directionalLight.GetDirection());
+	SetUniform("R_directionalLight.base.color", directionalLight.color);
+	SetUniformf("R_directionalLight.base.intensity", directionalLight.intensity);
+	SetUniform("R_directionalLight.direction", directionalLight.GetDirection());
 
 
 
