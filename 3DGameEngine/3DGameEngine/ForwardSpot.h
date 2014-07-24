@@ -7,20 +7,19 @@ class Shader;
 class ForwardSpot : public Shader
 {
 public:
-	ForwardSpot(const std::string& fileName);
 
 	void Update(Transform& transform, RenderingEngine& renderingEngine, Material& material);
 
 	static ForwardSpot* GetInstance()
 	{
-		static ForwardSpot Bshader("./res/shader/forwardSpotLight");
+		static ForwardSpot Bshader;
 		return &Bshader;
 	}
-
-
 
 	virtual ~ForwardSpot();
 
 private:
-
+	ForwardSpot();
+	ForwardSpot(ForwardSpot const&) : Shader("") {}// Don't Implement
+	void operator=(ForwardSpot const&){} // Don't implement
 };
