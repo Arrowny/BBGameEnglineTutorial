@@ -6,22 +6,20 @@
 #include <cassert>
 #include <GL/glew.h>
 #include <cstdlib>
-//Class RenderdingEnginge;
+
+//--------------------------------------------------------------------------------
+// Forward declarations
+//--------------------------------------------------------------------------------
+static std::map<std::string, ShaderData*> s_resourceMap;
+
+static std::string LoadShader(const std::string& fileName);
+static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
+
 static std::vector<UniformStruct> FindUniformStructs(const std::string& shaderText);
 static std::string FindUniformStructName(const std::string& structStartToOpeningBrace);
 static std::vector<TypedData> FindUniformStructComponents(const std::string& openingBraceToClosingBrace);
-Shader::Shader()
-{
-	m_program = glCreateProgram();
-	if (m_program == 0)
-	{
-		fprintf(stderr, "m_program is not created\n");
-		exit(1);
-	}
 
-}
-
-Shader::Shader(const std::string& fileName)
+ShaderData::ShaderData(const std::string& fileName)
 {
 	m_program = glCreateProgram();
 
@@ -45,7 +43,7 @@ Shader::Shader(const std::string& fileName)
 	AddShaderUniforms(fragmentShaderText);
 }
 
-Shader::~Shader()
+ShaderData::~ShaderData()
 {
 	for (std::vector<int>::iterator it = m_shaders.begin(); it != m_shaders.end(); ++it)
 	{
@@ -55,7 +53,7 @@ Shader::~Shader()
 	glDeleteProgram(m_program);
 }
 
-void Shader::CompileShader()
+void ShaderData::CompileShader()
 {
 	glLinkProgram(m_program);
 	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error linking shader program");
@@ -64,42 +62,44 @@ void Shader::CompileShader()
 	CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Invalid shader program");
 }
 
-
-void Shader::AddVertexShaderFromFile(const std::string& text)
-{
-	AddVertexShader(LoadShader(text));
-}
-
-void Shader::AddGeometryShaderFromFile(const std::string& text)
-{
-	AddGeometryShader(LoadShader(text));
-}
-
-void Shader::AddFragmentShaderFromFile(const std::string& text)
-{
-	AddFragmentShader(LoadShader(text));
-}
-
-void Shader::AddVertexShader(const std::string& text)
+void ShaderData::AddVertexShader(const std::string& text)
 {
 	AddProgram(text, GL_VERTEX_SHADER);
 }
 
-void Shader::AddGeometryShader(const std::string& text)
+void ShaderData::AddGeometryShader(const std::string& text)
 {
 	AddProgram(text, GL_GEOMETRY_SHADER);
 }
 
-void Shader::AddFragmentShader(const std::string& text)
+void ShaderData::AddFragmentShader(const std::string& text)
 {
 	AddProgram(text, GL_FRAGMENT_SHADER);
 }
-void Shader::Bind()
+
+Shader::Shader(const std::string& fileName)
 {
-	glUseProgram(m_program);
+	m_fileName = fileName;
+
+	std::map<std::string, ShaderData*>::const_iterator it = s_resourceMap.find(fileName);
+	if (it != s_resourceMap.end())
+	{
+		m_shaderData = it->second;
+		m_shaderData->AddReference();
+	}
+	else
+	{
+		m_shaderData = new ShaderData(fileName);
+		s_resourceMap.insert(std::pair<std::string, ShaderData*>(fileName, m_shaderData));
+	}
 }
 
-void Shader::AddUniform(const std::string& uniformName, const std::string& uniformType, const std::vector<UniformStruct>& structs)
+void Shader::Bind()
+{
+	glUseProgram(m_shaderData->GetProgram());
+}
+
+void ShaderData::AddUniform(const std::string& uniformName, const std::string& uniformType, const std::vector<UniformStruct>& structs)
 {
 	bool addThis = true;
 
@@ -121,11 +121,12 @@ void Shader::AddUniform(const std::string& uniformName, const std::string& unifo
 	unsigned int location = glGetUniformLocation(m_program, uniformName.c_str());
 
 	//assert(location != INVALID_VALUE);
+	m_uniformMap.insert(std::pair<std::string, unsigned int>(uniformName, location));
+	//m_uniforms.insert(std::pair<std::string, UniformData>(uniformName, UniformData(location, uniformType)));
 
-	m_uniforms.insert(std::pair<std::string, UniformData>(uniformName, UniformData(location, uniformType)));
 }
 
-void Shader::CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage)
+static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage)
 {
 	GLint success = 0;
 	GLchar error[1024] = { 0 };
@@ -146,7 +147,7 @@ void Shader::CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const 
 	}
 }
 
-std::string Shader::LoadShader(const std::string& fileName)
+static std::string LoadShader(const std::string& fileName)
 {
 	std::ifstream file;
 	file.open((fileName).c_str());
@@ -182,7 +183,7 @@ std::string Shader::LoadShader(const std::string& fileName)
 	return output;
 }
 
-void Shader::AddProgram(const std::string& text, int type)
+void ShaderData::AddProgram(const std::string& text, int type)
 {
 	int shader = glCreateShader(type);
 
@@ -223,10 +224,10 @@ void Shader::Update(Transform& transform, RenderingEngine& renderingEngine, Mate
 	glm::mat4 worldMatrix = transform.GetModel();
 	glm::mat4 projectedMatrix = renderingEngine.GetMainCamera().GetViewProjection()* worldMatrix;
 
-	for (unsigned int i = 0; i < m_uniformNames.size(); i++)
+	for (unsigned int i = 0; i < m_shaderData->GetUniformNames().size(); i++)
 	{
-		std::string uniformName = m_uniformNames[i];
-		std::string uniformType = m_uniformTypes[i];
+		std::string uniformName = m_shaderData->GetUniformNames()[i];
+		std::string uniformType = m_shaderData->GetUniformTypes()[i];
 
 		if (uniformType == "sampler2D")
 		{
@@ -284,30 +285,30 @@ void Shader::Update(Transform& transform, RenderingEngine& renderingEngine, Mate
 
 void Shader::SetUniformi(const std::string& name, int value)
 {
-	glUniform1i(m_uniforms.at(name).Location, value);
+	glUniform1i(m_shaderData->GetUniformMap().at(name), value);
 }
 
 void Shader::SetUniformf(const std::string& name, float value)
 {
-	glUniform1f(m_uniforms.at(name).Location, value);
+	glUniform1f(m_shaderData->GetUniformMap().at(name), value);
 }
 
 void Shader::SetUniform(const std::string& name, const glm::fvec3& value)
 {
-	glUniform3f(m_uniforms.at(name).Location, value.x, value.y, value.z);
+	glUniform3f(m_shaderData->GetUniformMap().at(name), value.x, value.y, value.z);
 }
 
 void Shader::SetUniform(const std::string& name, const glm::mat4& value)
 {
-	glUniformMatrix4fv(m_uniforms.at(name).Location, 1, GL_FALSE, &(value[0][0]));
+	glUniformMatrix4fv(m_shaderData->GetUniformMap().at(name), 1, GL_FALSE, &(value[0][0]));
 }
 
 void Shader::SetAttribLocation(const std::string& attributeName, int location)
 {
-	glBindAttribLocation(m_program, location, attributeName.c_str());
+	glBindAttribLocation(m_shaderData->GetProgram(), location, attributeName.c_str());
 }
 
-void Shader::AddAllAttributes(const std::string& vertexShaderText)
+void ShaderData::AddAllAttributes(const std::string& vertexShaderText)
 {
 	static const std::string ATTRIBUTE_KEY = "attribute";
 
@@ -334,7 +335,8 @@ void Shader::AddAllAttributes(const std::string& vertexShaderText)
 			begin = attributeLine.find(" ");
 			std::string attributeName = attributeLine.substr(begin + 1);
 
-			SetAttribLocation(attributeName, currentAttribLocation);
+			glBindAttribLocation(m_program, currentAttribLocation, attributeName.c_str()); 
+			//SetAttribLocation(attributeName, currentAttribLocation);
 			currentAttribLocation++;
 		}
 		attributeLocation = vertexShaderText.find(ATTRIBUTE_KEY, attributeLocation + ATTRIBUTE_KEY.length());
@@ -418,7 +420,7 @@ static std::vector<UniformStruct> FindUniformStructs(const std::string& shaderTe
 
 	return result;
 }
-void Shader::AddShaderUniforms(const std::string& shaderText)
+void ShaderData::AddShaderUniforms(const std::string& shaderText)
 {
 	static const std::string UNIFORM_KEY = "uniform";
 
