@@ -17,8 +17,6 @@ public:
 		return &Bshader;
 	}
 
-	
-
 	virtual ~ForwardDirectional();
 
 private:

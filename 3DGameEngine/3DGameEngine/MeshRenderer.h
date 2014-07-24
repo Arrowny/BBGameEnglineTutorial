@@ -17,7 +17,7 @@ public:
 	{
 		m_shader->Bind();
 		m_shader->Update(GetTransform(), *renderingEngine, *m_material);
-		m_material->GetTexture("diffuse")->Bind(0);
+
 		m_mesh->Draw();
 	}
 

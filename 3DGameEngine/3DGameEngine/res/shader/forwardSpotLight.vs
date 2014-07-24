@@ -9,8 +9,8 @@ out vec2 texCoord0;
 out vec3 normal0;
 out vec3 worldPos0;
 
-uniform mat4 T_model;//transform
-uniform mat4 T_MVP;//transprojected
+uniform mat4 T_model;
+uniform mat4 T_MVP;
 
 void main()
 {
