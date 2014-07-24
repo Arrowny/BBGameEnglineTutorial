@@ -18,7 +18,7 @@ public:
 		intensity(intensity)
 	{}
 
-	void AddToRenderingEngine(RenderingEngine* renderingEngine);
+	void AddToEngine(coreEngine* engine);
 	inline void SetShader(Shader* shader) { l_shader = shader; }
 	inline Shader* GetShader() { return l_shader; }
 

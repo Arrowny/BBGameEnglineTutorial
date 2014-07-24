@@ -39,8 +39,8 @@ void RenderingEngine::input(Input input, float delta)
 
 void RenderingEngine::render(GameObject* object)
 {
-	lights.clear();
-	object->AddToRenderingEngine(this);
+	//lights.clear();
+	//object->AddToRenderingEngine(this);
 
 	object->render(m_shaderAmbient,this);
 

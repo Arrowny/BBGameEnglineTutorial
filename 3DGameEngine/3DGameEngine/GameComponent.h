@@ -20,6 +20,7 @@ public:
 	inline Transform& GetTransform() { return m_parent->GetTransform(); }
 	inline const Transform& GetTransform() const { return m_parent->GetTransform(); }
 
+	virtual void AddToEngine(coreEngine* engine) {}
 	virtual ~GameComponent() {};
 
 private:

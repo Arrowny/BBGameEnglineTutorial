@@ -18,6 +18,8 @@ public:
 	void cleanUp();
 
 	void CreateWindow(std::string title);
+	
+	RenderingEngine* GetRenderingEngine() { return renderingEngine; }
 
 protected:
 private:

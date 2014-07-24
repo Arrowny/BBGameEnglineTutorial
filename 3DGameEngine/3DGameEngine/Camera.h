@@ -109,7 +109,7 @@ public:
 	}
 
 
-	void AddToRenderingEngine(RenderingEngine* renderingEngine);
+	void AddToEngine(coreEngine* engine);
 
 private:
 	glm::mat4 m_perspective;

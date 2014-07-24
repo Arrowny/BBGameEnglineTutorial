@@ -2,6 +2,7 @@
 #include <glm/glm.hpp>
 #include <vector>
 #include "Transform.h"
+class coreEngine;
 class GameComponent;
 class Shader;
 class RenderingEngine;
@@ -20,7 +21,7 @@ public:
 	GameObject* AddChild(GameObject* child);
 	GameObject* AddComponent(GameComponent* component);
 
-	void AddToRenderingEngine(RenderingEngine* renderingEngine);
+	void SetEngine(coreEngine* engine);
 
 
 	inline Transform& GetTransform() { return m_transform; }
@@ -29,5 +30,6 @@ private:
 	std::vector<GameComponent*> components;
 
 	Transform m_transform;
+	coreEngine* coreengine = nullptr;
 };
 

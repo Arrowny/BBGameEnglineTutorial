@@ -1,7 +1,7 @@
 #include "Camera.h"
-#include "RenderingEngine.h"
+#include "coreEngine.h"
 
-void Camera::AddToRenderingEngine(RenderingEngine* renderingEngine)
+void Camera::AddToEngine(coreEngine* engine)
 {
-	renderingEngine->AddCamera(this);
+	engine->GetRenderingEngine()->AddCamera(this);
 }

@@ -16,6 +16,7 @@ height(height),
 m_frameTime(1.0 / frameRate)
 {	
 	m_isRunning = false;
+	m_game->SetEngine(this);
 }
 
 coreEngine::~coreEngine()

@@ -33,6 +33,8 @@ public:
 	{
 		GetRootObject().AddChild(root);
 	}
+
+	void SetEngine(coreEngine* engine) {GetRootObject().SetEngine(engine); }
 protected:
 
 private:

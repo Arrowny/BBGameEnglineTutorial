@@ -3,10 +3,11 @@
 #include "ForwardDirectional.h"
 #include "ForwardPoint.h"
 #include "ForwardSpot.h"
+#include "coreEngine.h"
 
-void BaseLight::AddToRenderingEngine(RenderingEngine* renderingEngine) 
+void BaseLight::AddToEngine(coreEngine* engine)
 {
-	renderingEngine->AddLight(this);
+	engine->GetRenderingEngine()->AddLight(this);
 }
 
 DirectionalLight::DirectionalLight(glm::vec3 color, float intensity/*,  glm::vec3 direction*/) :
