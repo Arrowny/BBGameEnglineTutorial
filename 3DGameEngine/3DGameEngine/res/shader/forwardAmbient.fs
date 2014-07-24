@@ -8,9 +8,9 @@ in vec2 texCoord0;
 //then we should not use "out vec4 fragColor;" in the fragment shader.
 
 uniform vec3 R_ambientIntensity;
-uniform sampler2D R_diffuse;
+uniform sampler2D diffuse;
 
 void main()
 {
-   	  gl_FragColor = texture2D(R_diffuse, texCoord0)* vec4(R_ambientIntensity,1.0);
+   	  gl_FragColor = texture2D(diffuse, texCoord0)* vec4(R_ambientIntensity,1.0);
 }	
