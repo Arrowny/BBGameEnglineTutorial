@@ -59,6 +59,7 @@ public:
 	void SetUniform(const std::string& name, const glm::mat4& value);
 	void SetUniform(const std::string& name, const glm::vec3& value);
 
+
 	virtual ~Shader();
 
 protected:
@@ -72,12 +73,17 @@ protected:
 	std::string LoadShader(const std::string& fileName);
 	void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
 
+	void SetUniformDirectionalLight(const std::string& uniformName, const DirectionalLight& value);
+	void SetUniformPointLight(const std::string& uniformName, const PointLight& value);
+	void SetUniformSpotLight(const std::string& uniformName, const SpotLight& value);
+
 	int m_program;
 	/*GLuint m_shaders[NUM_SHADERS];*/
 	//GLuint m_uniforms[NUM_UNIFORMS];
-	std::map<std::string, UniformData> m_uniforms;
+	std::map<std::string, UniformData> m_uniforms = std::map<std::string, UniformData>();
 	std::vector<int> m_shaders;
-	//std::map<std::string, int > m_uniforms;
+	std::vector<std::string> m_uniformNames = std::vector<std::string>();
+	std::vector<std::string> m_uniformTypes = std::vector<std::string>();
 
 };
 

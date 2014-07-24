@@ -21,7 +21,10 @@ RenderingEngine::RenderingEngine()
 	glEnable(GL_DEPTH_CLAMP);
 
 	mainCamera = new Camera(10.0f, 1.0, 1.0, 1000.0);
-
+	
+	AddVector("ambientIntensit", glm::fvec3(0.2f, 0.2f, 0.2f));
+	m_samplerMap.insert(std::pair<std::string, unsigned int>("diffuse", 0));
+	//m_shader = new Shader("./res/shader/forwardAmbient");
 }
 
 
