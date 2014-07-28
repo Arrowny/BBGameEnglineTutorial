@@ -1,8 +1,8 @@
 #include "Lights.h"
 #include "RenderingEngine.h"
-#include "ForwardDirectional.h"
-#include "ForwardPoint.h"
-#include "ForwardSpot.h"
+//#include "ForwardDirectional.h"
+//#include "ForwardPoint.h"
+//#include "ForwardSpot.h"
 #include "coreEngine.h"
 
 void BaseLight::AddToEngine(coreEngine* engine)

@@ -3,7 +3,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\VS_test\MonkeyHead[final]\MonkeyHead[final]\obj_loader.cpp" />
     <ClCompile Include="coreEngine.cpp" />
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />

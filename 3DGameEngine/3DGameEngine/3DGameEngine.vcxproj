@@ -80,7 +80,6 @@
     <ClCompile Include="..\..\..\VS_test\MonkeyHead[final]\MonkeyHead[final]\obj_loader.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="coreEngine.cpp" />
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Lights.cpp" />
