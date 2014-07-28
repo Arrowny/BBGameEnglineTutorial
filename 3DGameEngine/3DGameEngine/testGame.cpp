@@ -101,7 +101,7 @@ void TestGame::init(){
 	m_camera->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f))->AddComponent(new FreeLook())->AddComponent(new FreeMove());
 	
 	AddToScene(m_planeObject);
-	//AddToScene(m_dirLightObj1);
+	AddToScene(m_dirLightObj1);
 	AddToScene(m_pLightObj1);
 	AddToScene(m_sLightObj1);
 	AddToScene(m_camera);
@@ -121,6 +121,7 @@ void TestGame::update(float delta){
 	m_pLightObj1->GetTransform().SetPos(m_planeObject->GetTransform().GetTransformedPos() + glm::fvec3(sinCounter, 1.5, -0.5));
 	m_sLightObj1->GetTransform().SetPos(m_camera->GetTransform().GetTransformedPos());
 	m_sLightObj1->GetTransform().SetRot(m_camera->GetTransform().GetTransformedRot());
+	m_planeObject2->GetTransform().SetRot(glm::conjugate(m_camera->GetTransform().GetTransformedRot()));
 	//m_sLightObj1->GetTransform().SetPos(m_planeObject->GetTransform().GetTransformedPos() + glm::vec3(sinCounter * 2 - 2, -1.2, -0.7));
 	//m_sLightObj1->GetTransform().SetPos(m_planeObject->GetTransform().GetTransformedPos() + glm::vec3(sinCounter * 2 - 2, 0, -0.7));
 	//m_planeObject->GetTransform().SetRot(glm::normalize(glm::quat(glm::radians(cosCounter*2), 0.0f, 1.0f, 0.0f)));
