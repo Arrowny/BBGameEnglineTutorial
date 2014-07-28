@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\..\VS_test\MonkeyHead[final]\MonkeyHead[final]\obj_loader.cpp" />
+    <ClCompile Include="coreEngine.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="stb_image.c" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Timing.cpp" />
+    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="TestGame.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="RenderingEngine.cpp" />
+    <ClCompile Include="ForwardAmbient.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="ForwardDirectional.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="ForwardPoint.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="ForwardSpot.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicShader.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Lights.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\VS_test\MonkeyHead[final]\MonkeyHead[final]\obj_loader.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="coreEngine.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="stb_image.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="Timing.h" />
+    <ClInclude Include="Transform.h" />
+    <ClInclude Include="Vertex.h" />
+    <ClInclude Include="Window.h" />
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="TestGame.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="RenderingEngine.h" />
+    <ClInclude Include="Lights.h" />
+    <ClInclude Include="GameComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshRenderer.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardAmbient.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardDirectional.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardPoint.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardSpot.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicShader.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="3DGameEngine.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="core">
+      <UniqueIdentifier>{0982dabd-966f-4564-a27b-889fa1fb367c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="physics">
+      <UniqueIdentifier>{3c9a2468-509c-45af-9ab0-fc6e2114cb70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rendering">
+      <UniqueIdentifier>{f0a6ac8f-ab3d-4f38-ad96-f2f3fa656840}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{9dda2188-28c9-40ce-878d-ad3f9736961a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{7e251f38-14cc-4a68-8a78-b6c2ac6265f5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
