@@ -1,5 +1,9 @@
 #include "util.h"
 #include <SDL/SDL.h>
+#include <algorithm> 
+#include <functional> 
+#include <cctype>
+#include <locale>
 
 void Util::Sleep(int milliseconds)
 {
@@ -30,4 +34,32 @@ std::vector<std::string> Util::Split(const std::string& s, char delim)
 	}
 
 	return elems;
+}
+
+std::vector<std::string> Util::RemoveEmptyStrings(const std::vector<std::string>& sVec)
+{
+	std::vector<std::string> output;
+
+	for (unsigned int ii = 0; ii < sVec.size(); ii++)
+	{
+		if (sVec[ii] != "")
+		{
+			output.push_back(sVec[ii]);
+		}
+	}
+
+	return output;
+}
+
+bool Util::StartsWith(const std::string& stringToCheck, const std::string& check)
+{
+
+	if (stringToCheck.size() > check.size())
+	{
+		for (unsigned int ii = 0; ii < check.size(); ii++)
+		{
+			if (stringToCheck[ii] != check[ii]) { return false; }
+		}
+	}
+	return true;
 }

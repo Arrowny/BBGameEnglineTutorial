@@ -33,7 +33,7 @@ public:
 	virtual ~Texture();
 protected:
 private:
-	static std::map<std::string, TextureData*> s_resourceMap;
+	static std::map<std::string, TextureData*> textureResourceMap;
 	static const TextureData* s_lastBind;
 
 	Texture(const Texture& other) {}

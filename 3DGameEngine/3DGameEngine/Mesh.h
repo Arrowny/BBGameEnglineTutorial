@@ -7,25 +7,35 @@
 #include <vector>
 #include "obj_loader.h"
 #include "referenceCounter.h"
-#include <map>
+#include <unordered_map>
+
+enum
+{
+	POSITION_VB,
+	TEXCOORD_VB,
+	NORMAL_VB,
+	INDEX_VB,
+
+	NUM_BUFFERS
+};
 
 class MeshData : public ReferenceCounter
 {
 public:
-	MeshData(int indexSize);
+	MeshData(unsigned int drawcount);
 	virtual ~MeshData();
 
-	inline unsigned int GetVBO() { return m_vbo; }
-	inline unsigned int GetIBO() { return m_ibo; }
-	inline int GetSize() { return m_size; }
-protected:
-private:
-	MeshData(MeshData& other) {}
-	void operator=(MeshData& other) {}
+	GLuint GetVAO();
+	GLuint GetVAB(const unsigned int& BUFFER);
+	unsigned int GetDrawCount();
 
-	unsigned int m_vbo;
-	unsigned int m_ibo;
-	int m_size;
+private:
+
+
+	GLuint m_vertexArrayObject;
+	GLuint m_vertexArrayBuffers[NUM_BUFFERS];
+
+	unsigned int m_drawCount;
 };
 
 struct Vertex
@@ -59,7 +69,7 @@ class Mesh
 {
 public:
 	Mesh(const std::string& fileName);
-	Mesh(Vertex* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices, bool calcNormals = true);
+	//Mesh(Vertex* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices, bool calcNormals = true);
 
 	void Draw();
 
@@ -68,18 +78,6 @@ protected:
 private:
 	Mesh(const Mesh& other);
 	void operator=(const Mesh& other);
-
-	static std::map<std::string, MeshData*> s_resourceMap;
-
-	enum
-	{
-		POSITION_VB,
-		TEXCOORD_VB,
-		NORMAL_VB,
-		INDEX_VB,
-		
-		NUM_BUFFERS
-	};
 
 	void CalcNormals(IndexedModel model);
 	void InitMesh(const IndexedModel& model);
@@ -90,6 +88,8 @@ private:
 
 	std::string m_fileName;
 	MeshData* m_meshData;
+
+	static std::unordered_map<std::string, MeshData*> meshResourceMap;
 
 };
 

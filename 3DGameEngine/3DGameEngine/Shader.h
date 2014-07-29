@@ -1,18 +1,15 @@
 #pragma once
 
-#include <map>
+#include <unordered_map>
 #include <string>
 #include <GL/glew.h>
 #include <glm\glm.hpp>
 #include "Timing.h"
 #include "Transform.h"
-#include "directionalLight.h"
-#include "baseLight.h"
 #include "Material.h"
-#include "pointLight.h"
-#include "spotLight.h"
 #include "renderingEngine.h"
 #include "referenceCounter.h"
+#include "Lights.h"
 
 struct TypedData
 {
@@ -80,9 +77,8 @@ protected:
 	void SetUniformSpotLight(const std::string& uniformName, const spotLight& value);
 
 private:
-	static std::map<std::string, ShaderData*> s_resourceMap;
+	static std::unordered_map<std::string, ShaderData*> shaderResourceMap;
 
-	ShaderData* m_shaderData;
 	std::string m_fileName;
 
 };

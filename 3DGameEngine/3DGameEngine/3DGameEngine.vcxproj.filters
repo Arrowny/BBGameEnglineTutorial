@@ -1,215 +1,208 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="CoreEngine">
+      <UniqueIdentifier>{739c05e0-07cc-4299-888a-1d44d8d7829f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    <Filter Include="RenderingEngine">
+      <UniqueIdentifier>{4eb66053-6b00-4cd7-afde-f62e46e375b0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
+    <Filter Include="PhysicsEngine">
+      <UniqueIdentifier>{17a311b9-f11e-43ad-aaf8-e8bd5d406f4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{c1c22cc0-9ef4-48a3-a6ed-ca53df7b2577}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderingEngine\Lights">
+      <UniqueIdentifier>{6d6cdbbe-1eea-4aba-a3a5-2b38216332e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GLSL Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Lights">
-      <UniqueIdentifier>{6d6cdbbe-1eea-4aba-a3a5-2b38216332e9}</UniqueIdentifier>
+    <Filter Include="Main">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="CoreEngine\Utilities">
+      <UniqueIdentifier>{a192b146-3e5b-45be-9529-cae104a7083e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\testGame">
+      <UniqueIdentifier>{56308eb1-4008-46ef-aefe-91e4e6edaa99}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Lights.cpp">
+      <Filter>RenderingEngine\Lights</Filter>
     </ClCompile>
     <ClCompile Include="coreEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Timing.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>CoreEngine</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="obj_loader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="stb_image.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="renderingEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="testGame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Util.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="baseLight.cpp">
-      <Filter>Lights</Filter>
-    </ClCompile>
-    <ClCompile Include="directionalLight.cpp">
-      <Filter>Lights</Filter>
-    </ClCompile>
-    <ClCompile Include="pointLight.cpp">
-      <Filter>Lights</Filter>
-    </ClCompile>
-    <ClCompile Include="spotLight.cpp">
-      <Filter>Lights</Filter>
+      <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Material.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>RenderingEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>CoreEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="renderingEngine.cpp">
+      <Filter>RenderingEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>CoreEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>CoreEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>CoreEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>CoreEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>CoreEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Timing.cpp">
+      <Filter>CoreEngine\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>CoreEngine\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="gameObject.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="testGame.cpp">
+      <Filter>Game\testGame</Filter>
+    </ClCompile>
+    <ClCompile Include="obj_loader.cpp">
+      <Filter>CoreEngine\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="stb_image.c">
+      <Filter>CoreEngine\Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Window.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="res\lighting.glh">
+      <Filter>GLSL Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Lights.h">
+      <Filter>RenderingEngine\Lights</Filter>
     </ClInclude>
     <ClInclude Include="coreEngine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Timing.h">
-      <Filter>Header Files</Filter>
+      <Filter>CoreEngine</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
+      <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="obj_loader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="stb_image.h">
-      <Filter>Header Files</Filter>
+      <Filter>CoreEngine</Filter>
     </ClInclude>
     <ClInclude Include="Material.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="main.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gameComponent.h">
-      <Filter>Header Files</Filter>
+      <Filter>RenderingEngine</Filter>
     </ClInclude>
     <ClInclude Include="meshRenderer.h">
-      <Filter>Header Files</Filter>
+      <Filter>RenderingEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>CoreEngine</Filter>
     </ClInclude>
     <ClInclude Include="renderingEngine.h">
-      <Filter>Header Files</Filter>
+      <Filter>RenderingEngine</Filter>
     </ClInclude>
-    <ClInclude Include="testGame.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Shader.h">
+      <Filter>CoreEngine</Filter>
     </ClInclude>
-    <ClInclude Include="referenceCounter.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Window.h">
+      <Filter>CoreEngine</Filter>
     </ClInclude>
-    <ClInclude Include="Util.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Texture.h">
+      <Filter>CoreEngine</Filter>
     </ClInclude>
-    <ClInclude Include="res\lighting.glh">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mappedValues.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="directionalLight.h">
-      <Filter>Lights</Filter>
-    </ClInclude>
-    <ClInclude Include="spotLight.h">
-      <Filter>Lights</Filter>
-    </ClInclude>
-    <ClInclude Include="pointLight.h">
-      <Filter>Lights</Filter>
-    </ClInclude>
-    <ClInclude Include="baseLight.h">
-      <Filter>Lights</Filter>
-    </ClInclude>
-    <ClInclude Include="Attenuation.h">
-      <Filter>Lights</Filter>
+    <ClInclude Include="main.h">
+      <Filter>Main</Filter>
     </ClInclude>
     <ClInclude Include="freeLook.h">
-      <Filter>Header Files</Filter>
+      <Filter>CoreEngine\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="freeMove.h">
-      <Filter>Header Files</Filter>
+      <Filter>CoreEngine\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>CoreEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Timing.h">
+      <Filter>CoreEngine\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>CoreEngine\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>CoreEngine\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="gameObject.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="gameComponent.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="testGame.h">
+      <Filter>Game\testGame</Filter>
+    </ClInclude>
+    <ClInclude Include="obj_loader.h">
+      <Filter>CoreEngine\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="mappedValues.h">
+      <Filter>CoreEngine\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="referenceCounter.h">
+      <Filter>CoreEngine\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>CoreEngine\Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\basicShader.fs">
-      <Filter>Resource Files</Filter>
+      <Filter>GLSL Files</Filter>
     </None>
     <None Include="res\basicShader.vs">
-      <Filter>Resource Files</Filter>
+      <Filter>GLSL Files</Filter>
     </None>
     <None Include="res\phongShader.fs">
-      <Filter>Resource Files</Filter>
+      <Filter>GLSL Files</Filter>
     </None>
     <None Include="res\phongShader.vs">
-      <Filter>Resource Files</Filter>
+      <Filter>GLSL Files</Filter>
     </None>
     <None Include="res\forwardAmbient.fs">
-      <Filter>Resource Files</Filter>
+      <Filter>GLSL Files</Filter>
     </None>
     <None Include="res\forwardAmbient.vs">
-      <Filter>Resource Files</Filter>
+      <Filter>GLSL Files</Filter>
     </None>
     <None Include="res\forwardDirectional.fs">
-      <Filter>Resource Files</Filter>
+      <Filter>GLSL Files</Filter>
     </None>
     <None Include="res\forwardDirectional.vs">
-      <Filter>Resource Files</Filter>
+      <Filter>GLSL Files</Filter>
     </None>
     <None Include="res\forwardPoint.fs">
-      <Filter>Resource Files</Filter>
+      <Filter>GLSL Files</Filter>
     </None>
     <None Include="res\forwardPoint.vs">
-      <Filter>Resource Files</Filter>
+      <Filter>GLSL Files</Filter>
     </None>
     <None Include="res\forwardSpot.fs">
-      <Filter>Resource Files</Filter>
+      <Filter>GLSL Files</Filter>
     </None>
     <None Include="res\forwardSpot.vs">
-      <Filter>Resource Files</Filter>
+      <Filter>GLSL Files</Filter>
     </None>
   </ItemGroup>
 </Project>

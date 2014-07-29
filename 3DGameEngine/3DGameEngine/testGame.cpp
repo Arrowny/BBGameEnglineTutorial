@@ -9,7 +9,7 @@ TestGame::~TestGame()
 
 void TestGame::init(){
 
-	Vertex vertices[] = { Vertex(glm::vec3(-0.8, -0.8, 0.0), glm::vec2(1.0f, 0.0), glm::vec3(0, 0, -1)),
+	/*Vertex vertices[] = { Vertex(glm::vec3(-0.8, -0.8, 0.0), glm::vec2(1.0f, 0.0), glm::vec3(0, 0, -1)),
 						  Vertex(glm::vec3(0.0, 0.8, 0.0), glm::vec2(0.5f, 0.0), glm::vec3(0, 0, -1)),
 						  Vertex(glm::vec3(0.8, -0.8, 0.0), glm::vec2(1.0f, 0.0), glm::vec3(0, 0, -1)),
 						  Vertex(glm::vec3(0.0, -0.8, 0.8), glm::vec2(0.0, 0.5f), glm::vec3(0, 0, -1)),
@@ -20,7 +20,7 @@ void TestGame::init(){
 							   0, 2, 3,
 							   4, 1, 2,
 							   1, 4, 0,
-							   2, 0, 4 };
+							   2, 0, 4 };*/
 
 	glm::fvec4 baseColor(1.0f, 1.0f, 1.0f, 1.0f);
 

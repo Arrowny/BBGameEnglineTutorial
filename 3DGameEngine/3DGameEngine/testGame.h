@@ -5,7 +5,6 @@
 #include "Shader.h"
 #include "Camera.h"
 #include "Texture.h"
-#include "pointLight.h"
 #include "meshRenderer.h"
 #include "Input.h"
 #include <iostream>

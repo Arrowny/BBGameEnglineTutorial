@@ -2,9 +2,7 @@
 
 #include "Camera.h"
 #include "Input.h"
-#include "directionalLight.h"
-#include "pointLight.h"
-#include "spotLight.h"
+#include "Lights.h"
 #include <glm\glm.hpp>
 #include <vector>
 #include <map>

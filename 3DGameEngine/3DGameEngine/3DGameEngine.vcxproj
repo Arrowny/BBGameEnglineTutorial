@@ -77,21 +77,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="baseLight.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="coreEngine.cpp" />
-    <ClCompile Include="directionalLight.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Lights.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="obj_loader.cpp" />
-    <ClCompile Include="pointLight.cpp" />
     <ClCompile Include="renderingEngine.cpp" />
     <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="spotLight.cpp" />
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="testGame.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -100,16 +97,14 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Attenuation.h" />
-    <ClInclude Include="baseLight.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="coreEngine.h" />
-    <ClInclude Include="directionalLight.h" />
     <ClInclude Include="freeLook.h" />
     <ClInclude Include="freeMove.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="gameComponent.h" />
     <ClInclude Include="gameObject.h" />
+    <ClInclude Include="Lights.h" />
     <ClInclude Include="mappedValues.h" />
     <ClInclude Include="referenceCounter.h" />
     <ClInclude Include="Input.h" />
@@ -118,11 +113,9 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="meshRenderer.h" />
     <ClInclude Include="obj_loader.h" />
-    <ClInclude Include="pointLight.h" />
     <ClInclude Include="renderingEngine.h" />
     <ClInclude Include="res\lighting.glh" />
     <ClInclude Include="Shader.h" />
-    <ClInclude Include="spotLight.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="testGame.h" />
     <ClInclude Include="Texture.h" />

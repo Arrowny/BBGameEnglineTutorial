@@ -4,7 +4,7 @@
 #include <cassert>
 
 const TextureData* Texture::s_lastBind = 0;
-std::map<std::string, TextureData*> Texture::s_resourceMap;
+std::map<std::string, TextureData*> Texture::textureResourceMap;
 
 TextureData::TextureData(GLenum textureTarget)
 {
@@ -21,8 +21,8 @@ Texture::Texture(const std::string& fileName)
 {
 	m_fileName = fileName;
 
-	std::map<std::string, TextureData*>::const_iterator it = s_resourceMap.find(fileName);
-	if (it != s_resourceMap.end())
+	std::map<std::string, TextureData*>::const_iterator it = textureResourceMap.find(fileName);
+	if (it != textureResourceMap.end())
 	{
 		m_textureData = it->second;
 		m_textureData->AddReference();
@@ -38,7 +38,7 @@ Texture::Texture(const std::string& fileName)
 		InitTexture(width, height, imageData);
 		stbi_image_free(imageData);
 
-		s_resourceMap.insert(std::pair<std::string, TextureData*>(fileName, m_textureData));
+		textureResourceMap.insert(std::pair<std::string, TextureData*>(fileName, m_textureData));
 	}
 }
 
@@ -47,7 +47,7 @@ Texture::~Texture()
 	if (m_textureData && m_textureData->RemoveReference())
 	{
 		if (m_fileName.length() > 0)
-			s_resourceMap.erase(m_fileName);
+			textureResourceMap.erase(m_fileName);
 
 		delete m_textureData;
 	}

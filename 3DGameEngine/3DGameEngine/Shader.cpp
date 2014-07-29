@@ -6,7 +6,7 @@
 #include <cstdlib>
 #include "Util.h"
 
-std::map<std::string, ShaderData*> Shader::s_resourceMap;
+std::unordered_map<std::string, ShaderData*> Shader::shaderResourceMap;
 
 static void CheckShaderError(int shader, int flag, bool isProgram, const std::string& errorMessage);
 static std::vector<UniformStruct> FindUniformStructs(const std::string& shaderText);
@@ -62,22 +62,19 @@ Shader::Shader(const std::string& fileName)
 {
 	m_fileName = fileName;
 
-	std::map<std::string, ShaderData*>::const_iterator it = s_resourceMap.find(fileName);
-	if (it != s_resourceMap.end())
+	if (shaderResourceMap.find(fileName) != shaderResourceMap.end())
 	{
-		m_shaderData = it->second;
-		m_shaderData->AddReference();
+		shaderResourceMap[m_fileName]->AddReference();
 	}
 	else
 	{
-		m_shaderData = new ShaderData(fileName);
-		s_resourceMap.insert(std::pair<std::string, ShaderData*>(fileName, m_shaderData));
+		shaderResourceMap[m_fileName] = new ShaderData(fileName);
 	}
 }
 
 void Shader::Bind()
 {
-	glUseProgram(m_shaderData->GetProgram());
+	glUseProgram(shaderResourceMap[m_fileName]->GetProgram());
 }
 
 void ShaderData::AddUniform(const std::string& uniformName, const std::string& uniformType, const std::vector<UniformStruct>& structs)
@@ -170,10 +167,10 @@ void Shader::UpdateUniforms(const Transform& transform, const Material& material
 	glm::mat4 worldMatrix = transform.GetModel();
 	glm::mat4 projectedMatrix = renderingEngine->GetMainCamera().GetViewProjection() * worldMatrix;
 
-	for (unsigned int i = 0; i < m_shaderData->GetUniformNames().size(); i++)
+	for (unsigned int i = 0; i < shaderResourceMap[m_fileName]->GetUniformNames().size(); i++)
 	{
-		std::string uniformName = m_shaderData->GetUniformNames()[i];
-		std::string uniformType = m_shaderData->GetUniformTypes()[i];
+		std::string uniformName = shaderResourceMap[m_fileName]->GetUniformNames()[i];
+		std::string uniformType = shaderResourceMap[m_fileName]->GetUniformTypes()[i];
 
 		if (uniformType == "sampler2D")
 		{
@@ -230,22 +227,22 @@ void Shader::UpdateUniforms(const Transform& transform, const Material& material
 
 void Shader::SetUniformi(const std::string& name, int value)
 {
-	glUniform1i(m_shaderData->GetUniformMap().at(name), value);
+	glUniform1i(shaderResourceMap[m_fileName]->GetUniformMap().at(name), value);
 }
 
 void Shader::SetUniformf(const std::string& name, float value)
 {
-	glUniform1f(m_shaderData->GetUniformMap().at(name), value);
+	glUniform1f(shaderResourceMap[m_fileName]->GetUniformMap().at(name), value);
 }
 
 void Shader::SetUniformVec3(const std::string& name, const glm::fvec3& value)
 {
-	glUniform3f(m_shaderData->GetUniformMap().at(name), value.x, value.y, value.z);
+	glUniform3f(shaderResourceMap[m_fileName]->GetUniformMap().at(name), value.x, value.y, value.z);
 }
 
 void Shader::SetUniformMat4(const std::string& name, const glm::mat4& value)
 {
-	glUniformMatrix4fv(m_shaderData->GetUniformMap().at(name), 1, GL_FALSE, &(value[0][0]));
+	glUniformMatrix4fv(shaderResourceMap[m_fileName]->GetUniformMap().at(name), 1, GL_FALSE, &(value[0][0]));
 }
 
 static void CheckShaderError(int shader, int flag, bool isProgram, const std::string& errorMessage)
