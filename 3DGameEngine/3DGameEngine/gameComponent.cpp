@@ -15,6 +15,5 @@ GameComponent::~GameComponent()
 
 Transform* GameComponent::getTransform()
 { 
-
 	return m_parent->m_transform;
 }

@@ -28,10 +28,6 @@ public:
 	};
 
 	MeshResource* m_meshResource;
-	//GLuint m_vertexArrayObject;
-	//GLuint m_vertexArrayBuffers[NUM_BUFFERS];
-
-	//unsigned int m_drawCount;
 
 private:
 	Mesh(const Mesh& other);
