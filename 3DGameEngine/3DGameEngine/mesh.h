@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include <GL\glew.h>
-#include "vertex.h"
+#include <glm\glm.hpp>
 #include "resourceLoader.h"
 #include "util.h"
 #include "meshResource.h"

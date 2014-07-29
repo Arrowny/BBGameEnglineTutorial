@@ -104,7 +104,6 @@
     <ClInclude Include="timing.h" />
     <ClInclude Include="transform.h" />
     <ClInclude Include="util.h" />
-    <ClInclude Include="vertex.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <ItemGroup>
