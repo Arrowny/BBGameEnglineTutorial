@@ -9,7 +9,6 @@
 
 struct FreeMove : public gameComponent
 {
-	virtual void AddToEngine(coreEngine* engine);
 
 	virtual void input(const Input& input, float delta)
 	{

@@ -2,6 +2,7 @@
 #include "gameObject.h"
 #include <GL/glew.h>
 #include "Shader.h"
+#include <iostream>
 
 renderingEngine::renderingEngine()
 {
@@ -17,8 +18,6 @@ renderingEngine::renderingEngine()
 	glEnable(GL_TEXTURE_2D);
 
 	m_activeLight = new baseLight();
-	m_freeLook = new FreeLook();
-	m_freeMove = new FreeMove();
 
 	AddVector3f("ambientLight", glm::fvec3(0.1f, 0.1f, 0.1f));
 	m_defaultShader = new Shader("./res/forwardAmbient");
@@ -29,12 +28,6 @@ renderingEngine::renderingEngine()
 renderingEngine::~renderingEngine()
 {
 	//dtor
-}
-
-void renderingEngine::input(const Input& input, float delta)
-{
-	m_freeLook->input(input, delta);
-	m_freeMove->input(input, delta);
 }
 
 void renderingEngine::Render(gameObject* object)

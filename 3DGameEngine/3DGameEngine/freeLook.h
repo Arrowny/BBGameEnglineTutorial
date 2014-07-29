@@ -10,7 +10,6 @@
 struct FreeLook : public gameComponent
 {
 public:
-	virtual void AddToEngine(coreEngine* engine);
 
 	bool mouseLocked = false;
 
@@ -18,7 +17,6 @@ public:
 	{
 		float sensitivity = 5.0f;
 		float movAmt = (float)(10 * delta);
-		//float rotAmt = (float)(200 * Time::getDelta());
 
 		if (input.GetKey(input.KEY_ESCAPE))
 		{

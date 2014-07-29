@@ -16,12 +16,12 @@ gameObject* gameObject::AddComponent(gameComponent* component)
 	return this;
 }
 
-void gameObject::inputAll(float delta)
+void gameObject::inputAll(const Input& gameInput, float delta)
 {
-	input(delta);
+	input(gameInput, delta);
 
 	for (unsigned int i = 0; i < m_children.size(); i++)
-		m_children[i]->inputAll(delta);
+		m_children[i]->inputAll(gameInput, delta);
 
 }
 
@@ -41,12 +41,12 @@ void gameObject::renderAll(Shader* shader, renderingEngine* renderingEngine)
 		m_children[i]->renderAll(shader, renderingEngine);
 }
 
-void gameObject::input(float delta)
+void gameObject::input(const Input& input, float delta)
 {
 	m_transform.Update();
 
 	for (unsigned int i = 0; i < m_components.size(); i++)
-		m_components[i]->input(delta);
+		m_components[i]->input(input, delta);
 
 }
 

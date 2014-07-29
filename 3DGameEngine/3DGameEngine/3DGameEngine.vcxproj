@@ -81,12 +81,11 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="coreEngine.cpp" />
     <ClCompile Include="directionalLight.cpp" />
-    <ClCompile Include="freeLook.cpp" />
-    <ClCompile Include="freeMove.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="obj_loader.cpp" />
     <ClCompile Include="pointLight.cpp" />

@@ -12,7 +12,7 @@ class gameComponent
 public:
 	virtual ~gameComponent() {}
 
-	virtual void input(float delta) {}
+	virtual void input(const Input& input, float delta) {}
 	virtual void update(float delta) {}
 	virtual void render(Shader* shader, renderingEngine* renderingEngine) {}
 

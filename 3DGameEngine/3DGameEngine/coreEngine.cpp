@@ -1,8 +1,6 @@
 #include "coreEngine.h"
-#include "Window.h"
 #include "Timing.h"
 #include "Game.h"
-#include "Input.h"
 #include <stdio.h>
 
 coreEngine::coreEngine(Game* game, renderingEngine* renderingEngine, Window* window, double frameRate) :
@@ -18,7 +16,6 @@ m_renderingEngine(renderingEngine)
 coreEngine::~coreEngine()
 {
 	m_window->Dispose();
-	//if (m_renderingEngine) delete m_renderingEngine;
 }
 
 void coreEngine::Start()
@@ -82,22 +79,21 @@ void coreEngine::Run(){
 				Stop();
 			}
 
-			m_game->input(m_frameTime);
-			m_renderingEngine->input(m_window->GetInput(), m_frameTime);
+			m_game->input(m_window->GetInput(), m_frameTime);
 			m_game->update(m_frameTime);
 
 			unprocessedTime -= m_frameTime;
 
 		}
 
-		if (render){
-
+		if (render)
+		{
 			Render();
 			frames++;
 		}
 
-		else{
-
+		else
+		{
 			SDL_Delay(1);
 		}
 

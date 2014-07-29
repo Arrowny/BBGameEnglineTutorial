@@ -18,20 +18,20 @@ public:
 	gameObject* AddChild(gameObject* child);
 	gameObject* AddComponent(gameComponent* component);
 
-
-	void inputAll(float delta);
+	void inputAll(const Input& input, float delta);
 	void updateAll(float delta);
 	void renderAll(Shader* shader, renderingEngine* renderingEngine);
-	void AddToRenderingEngine(renderingEngine* renderingEngine);
+	void SetEngine(coreEngine* engine);
 
 	std::vector<gameObject*> GetAllAttached();
 
 	inline Transform& GetTransform() { return m_transform; }
-	void SetEngine(coreEngine* engine);
+
 protected:
-	void input(float delta);
+	void input(const Input& input, float delta);
 	void update(float delta);
 	void render(Shader* shader, renderingEngine* renderingEngine);
+
 private:
 	std::vector<gameObject*> m_children;
 	std::vector<gameComponent*> m_components;

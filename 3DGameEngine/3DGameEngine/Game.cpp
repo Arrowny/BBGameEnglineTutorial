@@ -1,12 +1,12 @@
 #include "Game.h"
 
-void Game::input(float delta){
-	
-	m_root.inputAll(delta);
-
+void Game::input(const Input& input, float delta)
+{
+	m_root.inputAll(input, delta);
 }
 
-void Game::update(float delta){
+void Game::update(float delta)
+{
 
 }
 

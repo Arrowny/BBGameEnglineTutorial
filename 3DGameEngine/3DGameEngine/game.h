@@ -10,7 +10,7 @@ public:
 	Game() {}
 
 	virtual void init() {};
-	void input(float delta);
+	void input(const Input& input, float delta);
 	virtual void update(float delta);
 	void render(renderingEngine* renderingEngine);
 	
