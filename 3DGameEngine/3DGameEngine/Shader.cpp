@@ -181,10 +181,10 @@ void Shader::UpdateUniforms(const Transform& transform, const Material& material
 
 		else if (uniformName.substr(0, 2) == "T_")
 		{
-			if (uniformName == "T_transform")
-				SetUniformMat4("T_transform", projectedMatrix);
-			else if (uniformName == "T_Normal")
-				SetUniformMat4("T_Normal", worldMatrix);
+			if (uniformName == "T_model")
+				SetUniformMat4("T_model", projectedMatrix);
+			else if (uniformName == "T_MVP")
+				SetUniformMat4("T_MVP", worldMatrix);
 			else
 				throw "Invalid Transform Uniform: " + uniformName;
 		}
