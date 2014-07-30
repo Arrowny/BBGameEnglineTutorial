@@ -1,8 +1,9 @@
+#include <iostream>
+#include <GL/glew.h>
 #include "renderingEngine.h"
 #include "gameObject.h"
-#include <GL/glew.h>
 #include "Shader.h"
-#include <iostream>
+#include "skyBoxRenderer.h"
 
 renderingEngine::renderingEngine()
 {
@@ -22,7 +23,8 @@ renderingEngine::renderingEngine()
 	AddVector3f("ambientLight", glm::fvec3(0.1f, 0.1f, 0.1f));
 	m_defaultShader = new Shader("./res/forwardAmbient");
 
-	m_samplerMap.insert(std::pair<std::string, unsigned int>("diffuse", 0));
+	m_samplerMap["diffuse"] = 0;
+	m_skyBox = NULL;
 }
 
 renderingEngine::~renderingEngine()
@@ -51,6 +53,11 @@ void renderingEngine::Render(gameObject* object)
 	glDepthMask(GL_TRUE);
 	glDepthFunc(GL_LESS);
 	glDisable(GL_BLEND);
+
+	if (m_skyBox != NULL)
+	{
+		m_skyBox->renderSkyBox(this);
+	}
 }
 
 char* renderingEngine::getOpenGLVersion(){

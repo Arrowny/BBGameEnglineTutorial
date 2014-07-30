@@ -2,6 +2,7 @@
 
 #include "gameComponent.h"
 #include "Mesh.h"
+#include "Material.h"
 
 class meshRenderer : public gameComponent
 {

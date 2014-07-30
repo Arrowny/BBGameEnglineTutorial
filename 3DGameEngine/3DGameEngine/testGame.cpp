@@ -32,14 +32,20 @@ void TestGame::init(){
 	m_sLightObj1 = new gameObject();
 	m_sLightObj2 = new gameObject();
 	m_camera = new gameObject();
+	m_skyBoxObject = new gameObject();
+	
 
 	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
 	m_mesh = new Mesh("./res/triforce.obj");
-	//m_mesh2 = new Mesh("./res/shield.obj");
+	//m_mesh2 = new Mesh("./res/mon.obj");
 	//m_mesh3 = new Mesh("./res/luigi.obj");
 	m_texture = new Texture("./res/colour.jpg");
 	m_texture2 = new Texture("./res/bricks2.jpg");
 	m_texture3 = new Texture("./res/bricks2_normal.jpg");
+	m_skyTexture = new Texture3d("./res/skybox", "skyleft.png", "skyright.png", "skyup.png", "skydown.png", "skyfront.png", "skyback.png");
+//	m_skyTexture = new Texture3d("./res/skybox", "left2.jpg", "right2.jpg", "up2.jpg", "down2.jpg", "front2.jpg", "back2.jpg");
+
+//	m_skyTexture = new Texture3d("./res/skybox", "jajlands1_left.jpg", "jajlands1_right.jpg", "jajlands1_top.jpg", "jajlands1_bottom.jpg", "jajlands1_front.jpg", "jajlands1_back.jpg");
 
 	m_material = Material();
 	m_material.AddTexture("diffuse", m_texture);
@@ -56,9 +62,15 @@ void TestGame::init(){
 	m_material3.AddFloat("specularIntensity", 1);
 	m_material3.AddFloat("specularPower", 36);
 
+	m_sky = Material();
+	m_sky.AddTexture("diffuse", m_skyTexture);
+
 	m_meshRenderer = new meshRenderer(*m_mesh, m_material);
 	m_meshRenderer2 = new meshRenderer(*m_mesh, m_material2);
 	m_meshRenderer3 = new meshRenderer(*m_mesh, m_material3);
+
+	m_skyBoxrenderer = new SkyBoxRenderer(m_sky);
+
 	m_planeObject->AddComponent(m_meshRenderer);
 	m_planeObject2->AddComponent(m_meshRenderer2);
 	m_planeObject3->AddComponent(m_meshRenderer3);
@@ -99,12 +111,14 @@ void TestGame::init(){
 	//m_sLightObj2->GetTransform().SetRot(glm::normalize(glm::quat(glm::radians(90.0f), 1.0, 0, 0)));
 
 	m_camera->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f))->AddComponent(new FreeLook())->AddComponent(new FreeMove());
-	
+	m_skyBoxObject->AddComponent(m_skyBoxrenderer);
+
 	AddToScene(m_planeObject);
 	AddToScene(m_dirLightObj1);
 	AddToScene(m_pLightObj1);
 	AddToScene(m_sLightObj1);
 	AddToScene(m_camera);
+	AddToScene(m_skyBoxObject);
 
 	//m_planeObject->GetTransform().SetRot(glm::normalize(glm::quat(glm::radians(-90.0f), 0.0f, 1.0f, 0.0f)));
 	//m_planeObject3->AddChild((new gameObject())->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f))->AddComponent(new FreeLook()));

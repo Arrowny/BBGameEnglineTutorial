@@ -89,9 +89,11 @@
     <ClCompile Include="obj_loader.cpp" />
     <ClCompile Include="renderingEngine.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="skyBoxRenderer.cpp" />
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="testGame.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="texture3d.cpp" />
     <ClCompile Include="Timing.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -116,9 +118,11 @@
     <ClInclude Include="renderingEngine.h" />
     <ClInclude Include="res\lighting.glh" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="skyBoxRenderer.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="testGame.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="texture3d.h" />
     <ClInclude Include="Timing.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Util.h" />
@@ -137,6 +141,8 @@
     <None Include="res\forwardSpot.vs" />
     <None Include="res\phongShader.fs" />
     <None Include="res\phongShader.vs" />
+    <None Include="res\skyShader.fs" />
+    <None Include="res\skyShader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

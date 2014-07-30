@@ -5,7 +5,9 @@
 #include "Shader.h"
 #include "Camera.h"
 #include "Texture.h"
+#include "texture3d.h"
 #include "meshRenderer.h"
+#include "skyBoxRenderer.h"
 #include "Input.h"
 #include <iostream>
 #include "freeLook.h"
@@ -30,15 +32,19 @@ private:
 	gameObject* m_planeObject3;
 	gameObject* m_camera;
 	gameObject* m_dirLightObj1;
+	gameObject* m_skyBoxObject;
+	gameObject* m_pLightObj1;
+	gameObject* m_sLightObj1;
+	gameObject* m_sLightObj2;
+
 	directionalLight* dirLight1;
 	directionalLight* dirLight2;
 	directionalLight* dirLight3;
-	gameObject* m_pLightObj1;
+
 	pointLight* pLight1;
 	pointLight* pLight2;
 	pointLight* pLight3;
-	gameObject* m_sLightObj1;
-	gameObject* m_sLightObj2;
+
 	spotLight* sLight1;
 	spotLight* sLight2;
 
@@ -48,11 +54,14 @@ private:
 	Material m_material;
 	Material m_material2;
 	Material m_material3;
+	Material m_sky;
 	Texture* m_texture;
 	Texture* m_texture2;
 	Texture* m_texture3;
+	Texture* m_skyTexture;
 	meshRenderer* m_meshRenderer;
 	meshRenderer* m_meshRenderer2;
 	meshRenderer* m_meshRenderer3;
+	SkyBoxRenderer* m_skyBoxrenderer;
 };
 

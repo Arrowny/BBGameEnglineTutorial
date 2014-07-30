@@ -86,6 +86,12 @@
     <ClCompile Include="stb_image.c">
       <Filter>CoreEngine\Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="texture3d.cpp">
+      <Filter>CoreEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="skyBoxRenderer.cpp">
+      <Filter>RenderingEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="res\lighting.glh">
@@ -166,6 +172,12 @@
     <ClInclude Include="stb_image.h">
       <Filter>CoreEngine\Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="texture3d.h">
+      <Filter>CoreEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="skyBoxRenderer.h">
+      <Filter>RenderingEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\basicShader.fs">
@@ -202,6 +214,12 @@
       <Filter>GLSL Files</Filter>
     </None>
     <None Include="res\forwardSpot.vs">
+      <Filter>GLSL Files</Filter>
+    </None>
+    <None Include="res\skyShader.fs">
+      <Filter>GLSL Files</Filter>
+    </None>
+    <None Include="res\skyShader.vs">
       <Filter>GLSL Files</Filter>
     </None>
   </ItemGroup>

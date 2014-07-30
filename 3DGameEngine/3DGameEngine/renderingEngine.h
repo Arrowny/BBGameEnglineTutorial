@@ -10,6 +10,7 @@
 #include "Material.h"
 
 class gameObject;
+class SkyBoxRenderer;
 
 class renderingEngine : public MappedValues
 {
@@ -25,6 +26,7 @@ public:
 
 	inline void AddLight(baseLight* light) { m_lights.push_back(light); }
 	inline void AddCamera(Camera* camera) { m_mainCamera = camera; }
+	inline void AddSkyBox(SkyBoxRenderer* skybox) { m_skyBox = skybox; }
 
 	virtual void UpdateUniformStruct(const Transform& transform, const Material& material, Shader* shader, const std::string& uniformName, const std::string& uniformType)
 	{
@@ -38,6 +40,7 @@ private:
 	void operator=(const renderingEngine& other) {}
 
 	Camera* m_mainCamera;
+	SkyBoxRenderer* m_skyBox;
 	Shader* m_defaultShader;
 
 	baseLight* m_activeLight;
