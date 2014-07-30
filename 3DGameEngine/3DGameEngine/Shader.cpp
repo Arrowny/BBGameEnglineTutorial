@@ -179,12 +179,19 @@ void Shader::UpdateUniforms(const Transform& transform, const Material& material
 			SetUniformi(uniformName, samplerSlot);
 		}
 
+		else if (uniformType == "samplerCube")
+		{
+			int samplerSlot = renderingEngine->GetSamplerSlot(uniformName);
+			material.GetTexture(uniformName)->Bind(samplerSlot);
+			SetUniformi(uniformName, samplerSlot);
+		}
+
 		else if (uniformName.substr(0, 2) == "T_")
 		{
-			if (uniformName == "T_model")
-				SetUniformMat4("T_model", projectedMatrix);
-			else if (uniformName == "T_MVP")
-				SetUniformMat4("T_MVP", worldMatrix);
+			if (uniformName == "T_MVP")
+				SetUniformMat4("T_MVP", projectedMatrix);
+			else if (uniformName == "T_model")
+				SetUniformMat4("T_model", worldMatrix);
 			else
 				throw "Invalid Transform Uniform: " + uniformName;
 		}
