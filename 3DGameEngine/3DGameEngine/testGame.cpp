@@ -35,11 +35,13 @@ void TestGame::init(){
 
 	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
 	m_mesh = new Mesh("./res/triforce.obj");
-	//m_mesh2 = new Mesh("./res/shield.obj");
-	//m_mesh3 = new Mesh("./res/luigi.obj");
+	m_mesh2 = new Mesh("./res/mario.obj");
+	m_mesh3 = new Mesh("./res/luigi.obj");
 	m_texture = new Texture("./res/colour.jpg");
-	m_texture2 = new Texture("./res/bricks2.jpg");
-	m_texture3 = new Texture("./res/bricks2_normal.jpg");
+	//m_texture2 = new Texture("./res/bricks2.jpg");
+	//m_texture3 = new Texture("./res/bricks2_normal.jpg");
+	m_texture2 = new Texture("./res/marioD.jpg");
+	m_texture3 = new Texture("./res/luigiD.jpg");
 
 	m_material = Material();
 	m_material.AddTexture("diffuse", m_texture);
@@ -56,9 +58,9 @@ void TestGame::init(){
 	m_material3.AddFloat("specularIntensity", 1);
 	m_material3.AddFloat("specularPower", 36);
 
-	m_meshRenderer = new meshRenderer(*m_mesh, m_material);
-	m_meshRenderer2 = new meshRenderer(*m_mesh, m_material2);
-	m_meshRenderer3 = new meshRenderer(*m_mesh, m_material3);
+	m_meshRenderer = new meshRenderer(*m_mesh2, m_material2);
+	m_meshRenderer2 = new meshRenderer(*m_mesh3, m_material3);
+	m_meshRenderer3 = new meshRenderer(*m_mesh, m_material);
 	m_planeObject->AddComponent(m_meshRenderer);
 	m_planeObject2->AddComponent(m_meshRenderer2);
 	m_planeObject3->AddComponent(m_meshRenderer3);

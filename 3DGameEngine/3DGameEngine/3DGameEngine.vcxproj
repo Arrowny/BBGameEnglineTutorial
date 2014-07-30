@@ -87,6 +87,7 @@
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="obj_loader.cpp" />
+    <ClCompile Include="particleSystem.cpp" />
     <ClCompile Include="renderingEngine.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stb_image.c" />
@@ -106,6 +107,7 @@
     <ClInclude Include="gameObject.h" />
     <ClInclude Include="Lights.h" />
     <ClInclude Include="mappedValues.h" />
+    <ClInclude Include="particleSystem.h" />
     <ClInclude Include="referenceCounter.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="main.h" />

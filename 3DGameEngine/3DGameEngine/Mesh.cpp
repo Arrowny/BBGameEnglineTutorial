@@ -79,7 +79,6 @@ void Mesh::InitMesh(const IndexedModel& model){
 
 	glBindVertexArray(m_meshData->GetVAO());
 
-
 	glBindBuffer(GL_ARRAY_BUFFER, m_meshData->GetVAB(POSITION_VB));
 	glBufferData(GL_ARRAY_BUFFER, sizeof(model.positions[0]) * model.positions.size(), &model.positions[0], GL_STATIC_DRAW);
 	glEnableVertexAttribArray(0);

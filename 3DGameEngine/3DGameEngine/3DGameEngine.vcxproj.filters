@@ -30,6 +30,9 @@
     <Filter Include="Game\testGame">
       <UniqueIdentifier>{56308eb1-4008-46ef-aefe-91e4e6edaa99}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Particles">
+      <UniqueIdentifier>{e2cbf1a0-1739-4f81-9c0b-92e0a201e57a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -85,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="stb_image.c">
       <Filter>CoreEngine\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="particleSystem.cpp">
+      <Filter>Particles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +171,9 @@
     </ClInclude>
     <ClInclude Include="stb_image.h">
       <Filter>CoreEngine\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="particleSystem.h">
+      <Filter>Particles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
