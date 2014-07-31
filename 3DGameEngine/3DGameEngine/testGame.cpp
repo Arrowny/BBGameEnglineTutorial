@@ -43,9 +43,9 @@ void TestGame::init(){
 	m_texture2 = new Texture("./res/bricks2.jpg");
 	m_texture3 = new Texture("./res/bricks2_normal.jpg");
 	m_skyTexture = new Texture3d("./res/skybox", "skyleft.png", "skyright.png", "skyup.png", "skydown.png", "skyfront.png", "skyback.png");
-//	m_skyTexture = new Texture3d("./res/skybox", "left2.jpg", "right2.jpg", "up2.jpg", "down2.jpg", "front2.jpg", "back2.jpg");
+    //m_skyTexture = new Texture3d("./res/skybox", "left2.jpg", "right2.jpg", "up2.jpg", "down2.jpg", "front2.jpg", "back2.jpg");
 
-//	m_skyTexture = new Texture3d("./res/skybox", "jajlands1_left.jpg", "jajlands1_right.jpg", "jajlands1_top.jpg", "jajlands1_bottom.jpg", "jajlands1_front.jpg", "jajlands1_back.jpg");
+    //m_skyTexture = new Texture3d("./res/skybox", "jajlands1_left.jpg", "jajlands1_right.jpg", "jajlands1_top.jpg", "jajlands1_bottom.jpg", "jajlands1_front.jpg", "jajlands1_back.jpg");
 
 	m_material = Material();
 	m_material.AddTexture("diffuse", m_texture);
