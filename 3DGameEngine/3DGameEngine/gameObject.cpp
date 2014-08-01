@@ -33,6 +33,14 @@ void GameObject::updateAll(float delta)
 		m_children[i]->updateAll(delta);
 }
 
+void GameObject::updatePhysicsAll(Shader* shader, PhysicsEngine* physicsEngine)
+{
+	updatePhysics(shader, physicsEngine);
+
+	for (unsigned int i = 0; i < m_children.size(); i++)
+		m_children[i]->updatePhysicsAll(shader, physicsEngine);
+}
+
 void GameObject::renderAll(Shader* shader, RenderingEngine* renderingEngine)
 {
 	render(shader, renderingEngine);
@@ -54,6 +62,12 @@ void GameObject::update(float delta)
 {
 	for (unsigned int i = 0; i < m_components.size(); i++)
 		m_components[i]->update(delta);
+}
+
+void GameObject::updatePhysics(Shader* shader, PhysicsEngine* physicsEngine)
+{
+	for (unsigned int i = 0; i < m_components.size(); i++)
+		m_components[i]->updatePhysics(shader, physicsEngine);
 }
 
 void GameObject::render(Shader* shader, RenderingEngine* renderingEngine)

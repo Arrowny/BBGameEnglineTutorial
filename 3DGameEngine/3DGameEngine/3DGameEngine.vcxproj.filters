@@ -30,6 +30,18 @@
     <Filter Include="Game\testGame">
       <UniqueIdentifier>{56308eb1-4008-46ef-aefe-91e4e6edaa99}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GLSL Files\MeshRendering">
+      <UniqueIdentifier>{6b5b06ef-e54d-4f4a-ac9c-c952449fdd81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GLSL Files\ParticleRendering">
+      <UniqueIdentifier>{37083e73-e86a-4ebe-ac24-d49c77a7dd09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GLSL Files\ParticlePhysics">
+      <UniqueIdentifier>{6908a75b-bfd4-49d8-aa94-57787d811d16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GLSL Files\MeshPhysics">
+      <UniqueIdentifier>{6ba174f7-39d7-4fdd-ba12-5d7b1fae56ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -62,9 +74,6 @@
     <ClCompile Include="Texture.cpp">
       <Filter>CoreEngine</Filter>
     </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>CoreEngine</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>CoreEngine</Filter>
     </ClCompile>
@@ -95,11 +104,14 @@
     <ClCompile Include="physicsEngine.cpp">
       <Filter>PhysicsEngine</Filter>
     </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>CoreEngine\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="particleSystem.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="res\lighting.glh">
-      <Filter>GLSL Files</Filter>
-    </ClInclude>
     <ClInclude Include="Lights.h">
       <Filter>RenderingEngine\Lights</Filter>
     </ClInclude>
@@ -125,9 +137,6 @@
       <Filter>RenderingEngine</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>CoreEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="Window.h">
       <Filter>CoreEngine</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
@@ -184,49 +193,44 @@
     <ClInclude Include="physicsEngine.h">
       <Filter>PhysicsEngine</Filter>
     </ClInclude>
+    <ClInclude Include="res\lighting.glh">
+      <Filter>GLSL Files\MeshRendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>CoreEngine\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="particleSystem.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\basicShader.fs">
-      <Filter>GLSL Files</Filter>
-    </None>
-    <None Include="res\basicShader.vs">
-      <Filter>GLSL Files</Filter>
-    </None>
-    <None Include="res\phongShader.fs">
-      <Filter>GLSL Files</Filter>
-    </None>
-    <None Include="res\phongShader.vs">
-      <Filter>GLSL Files</Filter>
+    <None Include="res\skyShader.vs">
+      <Filter>GLSL Files\MeshRendering</Filter>
     </None>
     <None Include="res\forwardAmbient.fs">
-      <Filter>GLSL Files</Filter>
+      <Filter>GLSL Files\MeshRendering</Filter>
     </None>
     <None Include="res\forwardAmbient.vs">
-      <Filter>GLSL Files</Filter>
+      <Filter>GLSL Files\MeshRendering</Filter>
     </None>
     <None Include="res\forwardDirectional.fs">
-      <Filter>GLSL Files</Filter>
+      <Filter>GLSL Files\MeshRendering</Filter>
     </None>
     <None Include="res\forwardDirectional.vs">
-      <Filter>GLSL Files</Filter>
+      <Filter>GLSL Files\MeshRendering</Filter>
     </None>
     <None Include="res\forwardPoint.fs">
-      <Filter>GLSL Files</Filter>
+      <Filter>GLSL Files\MeshRendering</Filter>
     </None>
     <None Include="res\forwardPoint.vs">
-      <Filter>GLSL Files</Filter>
+      <Filter>GLSL Files\MeshRendering</Filter>
     </None>
     <None Include="res\forwardSpot.fs">
-      <Filter>GLSL Files</Filter>
+      <Filter>GLSL Files\MeshRendering</Filter>
     </None>
     <None Include="res\forwardSpot.vs">
-      <Filter>GLSL Files</Filter>
+      <Filter>GLSL Files\MeshRendering</Filter>
     </None>
     <None Include="res\skyShader.fs">
-      <Filter>GLSL Files</Filter>
-    </None>
-    <None Include="res\skyShader.vs">
-      <Filter>GLSL Files</Filter>
+      <Filter>GLSL Files\MeshRendering</Filter>
     </None>
   </ItemGroup>
 </Project>

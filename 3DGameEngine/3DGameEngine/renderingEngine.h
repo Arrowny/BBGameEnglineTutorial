@@ -40,7 +40,7 @@ private:
 
 	Camera* m_mainCamera;
 	SkyBoxRenderer* m_skyBox;
-	Shader* m_defaultShader;
+	Shader* m_ambientShader;
 
 	BaseLight* m_activeLight;
 	std::vector<BaseLight*> m_lights;

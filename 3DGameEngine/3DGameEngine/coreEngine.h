@@ -5,6 +5,7 @@
 #include "Window.h"
 #include "Input.h"
 #include "renderingEngine.h"
+#include "physicsEngine.h"
 
 class Game;
 
@@ -26,11 +27,12 @@ public:
 
 protected:
 private:
-	bool			  m_isRunning;
-	Game*			  m_game;
-	Window*			  m_window;
-	double			  m_frameTime;
-	RenderingEngine*  m_renderingEngine;
+	bool				m_isRunning;
+	Game*				m_game;
+	Window*				m_window;
+	double				m_frameTime;
+	RenderingEngine*	m_renderingEngine;
+	PhysicsEngine*		m_physicsEngine;
 
 
 };

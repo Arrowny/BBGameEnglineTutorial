@@ -1,6 +1,8 @@
 #pragma once
 
 class GameObject;
+class Shader;
+
 class PhysicsEngine
 {
 public:
@@ -9,5 +11,7 @@ public:
 
 	void UpdatePhysics(GameObject* object);
 
+private:
+	Shader* m_generalPhysics; //TODO: no general physics implemented yet
 };
 
