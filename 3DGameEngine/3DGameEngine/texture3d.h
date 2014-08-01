@@ -7,7 +7,7 @@
 class Texture3d : public Texture
 {
 public:
-	Texture3d(const std::string& Directory,
+	Texture3d(
 		const std::string& PosXFilename,
 		const std::string& NegXFilename,
 		const std::string& PosYFilename,

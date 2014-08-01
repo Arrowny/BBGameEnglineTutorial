@@ -45,7 +45,7 @@ Mesh::Mesh(const std::string& fileName){
 	}
 	else
 	{
-		InitMesh(OBJModel(fileName).ToIndexedModel());
+		InitMesh(OBJModel("./res/" + fileName).ToIndexedModel());
 	}
 	
 

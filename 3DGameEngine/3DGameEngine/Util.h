@@ -22,6 +22,8 @@
 #include <functional> 
 #include <cctype>
 #include <locale>
+#define ZERO_MEM(a) std::memset(a, 0, sizeof(a))
+
 
 namespace Util
 {
@@ -46,4 +48,5 @@ namespace Util
 	static inline std::string &trim(std::string &s) {
 		return ltrim(rtrim(s));
 	}
+
 };

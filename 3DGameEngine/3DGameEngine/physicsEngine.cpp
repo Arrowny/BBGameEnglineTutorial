@@ -2,8 +2,9 @@
 #include "gameObject.h"
 
 
-PhysicsEngine::PhysicsEngine()
+PhysicsEngine::PhysicsEngine(const float& delta)
 {
+	AddFloat("delta", delta);
 }
 
 
@@ -11,7 +12,7 @@ PhysicsEngine::~PhysicsEngine()
 {
 }
 
-void PhysicsEngine::UpdatePhysics(GameObject* object)
+void PhysicsEngine::UpdatePhysics(GameObject* object, float delta)
 {
-	object->updatePhysicsAll(m_generalPhysics, this);
+	object->updatePhysicsAll(m_generalPhysics, this, delta);
 }

@@ -27,7 +27,7 @@ class ShaderData : public ReferenceCounter
 {
 public:
 	ShaderData();
-	ShaderData(const std::string& fileName);
+	ShaderData(const std::string& fileName, const unsigned int&  shaderType);
 	virtual ~ShaderData();
 
 	inline int GetProgram() { return m_program; }
@@ -43,7 +43,9 @@ private:
 	void AddFragmentShader(const std::string& text);
 	void AddProgram(const std::string& text, int type);
 
+	
 	void AddShaderUniforms(const std::string& shaderText);
+	void AddAllVaryings(const std::string& gsText);
 	void AddAllAttributes(const std::string& vertexShaderText);
 	void AddUniform(const std::string& uniformName, const std::string& uniformType, const std::vector<UniformStruct>& structs);
 	void CompileShader();
@@ -59,16 +61,24 @@ class Shader
 {
 public:
 	Shader();
-	Shader(const std::string& fileName);
-	//virtual ~Shader();
+	Shader(const std::string& fileName, const unsigned int& shaderType = 0);
+	virtual ~Shader();
 
 	void Bind();
+	virtual void UpdateUniforms(PhysicsEngine* physicsEngine);
 	virtual void UpdateUniforms(const Transform& transform, const Material& material, RenderingEngine* renderingEngine);
 
 	void SetUniformi(const std::string& name, int value);
 	void SetUniformf(const std::string& name, float value);
 	void SetUniformMat4(const std::string& name, const glm::mat4& value);
 	void SetUniformVec3(const std::string& name, const glm::fvec3& value);
+
+	static enum
+	{
+		BASIC_SHADER_PIPELINE,
+		FULL_SHADER_PIPELINE,
+		PHYSICS_SHADER
+	};
 
 protected:
 

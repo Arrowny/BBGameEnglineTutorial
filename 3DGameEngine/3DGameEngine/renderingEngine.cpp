@@ -19,7 +19,7 @@ RenderingEngine::RenderingEngine()
 	m_activeLight = new BaseLight();
 
 	AddVector3f("ambientLight", glm::fvec3(0.1f, 0.1f, 0.1f));
-	m_ambientShader = new Shader("./res/forwardAmbient");
+	m_ambientShader = new Shader("forwardAmbient");
 
 	m_samplerMap["diffuse"] = 0;
 	m_skyBox = NULL;

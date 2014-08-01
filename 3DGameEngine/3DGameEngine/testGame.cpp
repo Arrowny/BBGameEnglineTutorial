@@ -36,13 +36,13 @@ void TestGame::init(){
 	
 
 	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
-	m_mesh = new Mesh("./res/triforce.obj");
+	m_mesh = new Mesh("triforce.obj");
 	//m_mesh2 = new Mesh("./res/mon.obj");
 	//m_mesh3 = new Mesh("./res/luigi.obj");
-	m_texture = new Texture("./res/colour.jpg");
-	m_texture2 = new Texture("./res/bricks2.jpg");
-	m_texture3 = new Texture("./res/bricks2_normal.jpg");
-	m_skyTexture = new Texture3d("./res/skybox", "skyleft.png", "skyright.png", "skyup.png", "skydown.png", "skyfront.png", "skyback.png");
+	m_texture = new Texture("colour.jpg");
+	m_texture2 = new Texture("bricks2.jpg");
+	m_texture3 = new Texture("bricks2_normal.jpg");
+	m_skyTexture = new Texture3d("skyleft.png", "skyright.png", "skyup.png", "skydown.png", "skyfront.png", "skyback.png");
     //m_skyTexture = new Texture3d("./res/skybox", "left2.jpg", "right2.jpg", "up2.jpg", "down2.jpg", "front2.jpg", "back2.jpg");
 
     //m_skyTexture = new Texture3d("./res/skybox", "jajlands1_left.jpg", "jajlands1_right.jpg", "jajlands1_top.jpg", "jajlands1_bottom.jpg", "jajlands1_front.jpg", "jajlands1_back.jpg");

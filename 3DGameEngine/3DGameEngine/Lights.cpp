@@ -14,7 +14,7 @@ DirectionalLight::DirectionalLight(const glm::fvec3& color, float intensity) :
 BaseLight(color, intensity),
 direction(glm::normalize(direction))
 {
-	SetShader(new Shader("./res/forwardDirectional"));
+	SetShader(new Shader("forwardDirectional"));
 }
 
 PointLight::PointLight(const glm::fvec3& color, float intensity, const Attenuation& atten) :
@@ -27,12 +27,12 @@ atten(atten)
 
 	range = (float)((-b + sqrtf(b*b - 4.0f * a*c)) / (2.0f * a));
 
-	SetShader(new Shader("./res/forwardPoint"));;
+	SetShader(new Shader("forwardPoint"));;
 }
 
 SpotLight::SpotLight(const glm::fvec3& color, float intensity, const Attenuation& atten, float cutoff) :
 PointLight(color, intensity, atten),
 cutoff(cutoff)
 {
-	SetShader(new Shader("./res/forwardSpot"));
+	SetShader(new Shader("forwardSpot"));
 }

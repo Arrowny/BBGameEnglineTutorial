@@ -12,7 +12,7 @@ static const GLenum types[6] =
 			GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
 			GL_TEXTURE_CUBE_MAP_NEGATIVE_Z };
 
-Texture3d::Texture3d(const std::string& Directory,
+Texture3d::Texture3d(
 	const std::string& PosXFilename,
 	const std::string& NegXFilename,
 	const std::string& PosYFilename,
@@ -20,8 +20,9 @@ Texture3d::Texture3d(const std::string& Directory,
 	const std::string& PosZFilename,
 	const std::string& NegZFilename)
 {
+	std::string BaseDir = "./res/skybox/";
 	std::string fileNames[6];
-	std::string BaseDir = (Directory[Directory.size() - 2] == '/') ? Directory : Directory + "/";
+	//std::string BaseDir = (Directory[Directory.size() - 2] == '/') ? Directory : Directory + "/";
 
 	fileNames[0] = BaseDir + PosXFilename;
 	fileNames[1] = BaseDir + NegXFilename;
