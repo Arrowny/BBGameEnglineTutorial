@@ -27,26 +27,26 @@ private:
 	TestGame(const TestGame& other) {}
 	void operator=(const TestGame& other) {}
 
-	gameObject* m_planeObject;
-	gameObject* m_planeObject2;
-	gameObject* m_planeObject3;
-	gameObject* m_camera;
-	gameObject* m_dirLightObj1;
-	gameObject* m_skyBoxObject;
-	gameObject* m_pLightObj1;
-	gameObject* m_sLightObj1;
-	gameObject* m_sLightObj2;
+	GameObject* m_planeObject;
+	GameObject* m_planeObject2;
+	GameObject* m_planeObject3;
+	GameObject* m_camera;
+	GameObject* m_dirLightObj1;
+	GameObject* m_skyBoxObject;
+	GameObject* m_pLightObj1;
+	GameObject* m_sLightObj1;
+	GameObject* m_sLightObj2;
 
-	directionalLight* dirLight1;
-	directionalLight* dirLight2;
-	directionalLight* dirLight3;
+	DirectionalLight* dirLight1;
+	DirectionalLight* dirLight2;
+	DirectionalLight* dirLight3;
 
-	pointLight* pLight1;
-	pointLight* pLight2;
-	pointLight* pLight3;
+	PointLight* pLight1;
+	PointLight* pLight2;
+	PointLight* pLight3;
 
-	spotLight* sLight1;
-	spotLight* sLight2;
+	SpotLight* sLight1;
+	SpotLight* sLight2;
 
 	Mesh* m_mesh;
 	Mesh* m_mesh2;
@@ -59,9 +59,9 @@ private:
 	Texture* m_texture2;
 	Texture* m_texture3;
 	Texture* m_skyTexture;
-	meshRenderer* m_meshRenderer;
-	meshRenderer* m_meshRenderer2;
-	meshRenderer* m_meshRenderer3;
+	MeshRenderer* m_meshRenderer;
+	MeshRenderer* m_meshRenderer2;
+	MeshRenderer* m_meshRenderer3;
 	SkyBoxRenderer* m_skyBoxrenderer;
 };
 

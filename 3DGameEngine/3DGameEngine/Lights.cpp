@@ -5,20 +5,20 @@
 
 #define COLOR_DEPTH 256
 
-void baseLight::AddToEngine(coreEngine* engine)
+void BaseLight::AddToEngine(CoreEngine* engine)
 {
 	engine->GetRenderingEngine()->AddLight(this);
 }
 
-directionalLight::directionalLight(const glm::fvec3& color, float intensity) :
-baseLight(color, intensity),
+DirectionalLight::DirectionalLight(const glm::fvec3& color, float intensity) :
+BaseLight(color, intensity),
 direction(glm::normalize(direction))
 {
-	SetShader(new Shader("./res/forwardDirectional"));
+	SetShader(new Shader("forwardDirectional"));
 }
 
-pointLight::pointLight(const glm::fvec3& color, float intensity, const Attenuation& atten) :
-baseLight(color, intensity),
+PointLight::PointLight(const glm::fvec3& color, float intensity, const Attenuation& atten) :
+BaseLight(color, intensity),
 atten(atten)
 {
 	float a = atten.m_exponent;
@@ -27,12 +27,12 @@ atten(atten)
 
 	range = (float)((-b + sqrtf(b*b - 4.0f * a*c)) / (2.0f * a));
 
-	SetShader(new Shader("./res/forwardPoint"));;
+	SetShader(new Shader("forwardPoint"));;
 }
 
-spotLight::spotLight(const glm::fvec3& color, float intensity, const Attenuation& atten, float cutoff) :
-pointLight(color, intensity, atten),
+SpotLight::SpotLight(const glm::fvec3& color, float intensity, const Attenuation& atten, float cutoff) :
+PointLight(color, intensity, atten),
 cutoff(cutoff)
 {
-	SetShader(new Shader("./res/forwardSpot"));
+	SetShader(new Shader("forwardSpot"));
 }

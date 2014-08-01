@@ -34,10 +34,10 @@ Texture::Texture(const std::string& fileName)
 	else
 	{
 		int width, height, numComponents;
-		unsigned char* imageData = stbi_load((fileName).c_str(), &width, &height, &numComponents, 4);
+		unsigned char* imageData = stbi_load(("./res/" + fileName).c_str(), &width, &height, &numComponents, 4);
 
 		if (imageData == NULL)
-			std::cerr << "Unable to load texture: " << fileName << std::endl;
+			std::cerr << "Unable to load texture: " << "./res/" + fileName << std::endl;
 
 		InitTexture(width, height, imageData);
 		stbi_image_free(imageData);

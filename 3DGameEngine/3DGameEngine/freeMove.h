@@ -7,7 +7,7 @@
 #include "Window.h"
 #include "gameComponent.h"
 
-struct FreeMove : public gameComponent
+struct FreeMove : public GameComponent
 {
 
 	virtual void input(const Input& input, float delta)

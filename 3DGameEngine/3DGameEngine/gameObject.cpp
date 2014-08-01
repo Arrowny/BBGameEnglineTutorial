@@ -1,7 +1,7 @@
 #include "gameObject.h"
 #include "gameComponent.h"
 
-gameObject* gameObject::AddChild(gameObject* child)
+GameObject* GameObject::AddChild(GameObject* child)
 {
 	m_children.push_back(child);
 	child->GetTransform().SetParent(&m_transform);
@@ -9,14 +9,14 @@ gameObject* gameObject::AddChild(gameObject* child)
 	return this;
 }
 
-gameObject* gameObject::AddComponent(gameComponent* component)
+GameObject* GameObject::AddComponent(GameComponent* component)
 {
 	m_components.push_back(component);
 	component->SetParent(this);
 	return this;
 }
 
-void gameObject::inputAll(const Input& gameInput, float delta)
+void GameObject::inputAll(const Input& gameInput, float delta)
 {
 	input(gameInput, delta);
 
@@ -25,7 +25,7 @@ void gameObject::inputAll(const Input& gameInput, float delta)
 
 }
 
-void gameObject::updateAll(float delta)
+void GameObject::updateAll(float delta)
 {
 	update(delta);
 
@@ -33,7 +33,15 @@ void gameObject::updateAll(float delta)
 		m_children[i]->updateAll(delta);
 }
 
-void gameObject::renderAll(Shader* shader, renderingEngine* renderingEngine)
+void GameObject::updatePhysicsAll(Shader* shader, PhysicsEngine* physicsEngine, float delta)
+{
+	updatePhysics(shader, physicsEngine, delta);
+
+	for (unsigned int i = 0; i < m_children.size(); i++)
+		m_children[i]->updatePhysicsAll(shader, physicsEngine, delta);
+}
+
+void GameObject::renderAll(Shader* shader, RenderingEngine* renderingEngine)
 {
 	render(shader, renderingEngine);
 
@@ -41,7 +49,7 @@ void gameObject::renderAll(Shader* shader, renderingEngine* renderingEngine)
 		m_children[i]->renderAll(shader, renderingEngine);
 }
 
-void gameObject::input(const Input& input, float delta)
+void GameObject::input(const Input& input, float delta)
 {
 	m_transform.Update();
 
@@ -50,19 +58,25 @@ void gameObject::input(const Input& input, float delta)
 
 }
 
-void gameObject::update(float delta)
+void GameObject::update(float delta)
 {
 	for (unsigned int i = 0; i < m_components.size(); i++)
 		m_components[i]->update(delta);
 }
 
-void gameObject::render(Shader* shader, renderingEngine* renderingEngine)
+void GameObject::updatePhysics(Shader* shader, PhysicsEngine* physicsEngine, float delta)
+{
+	for (unsigned int i = 0; i < m_components.size(); i++)
+		m_components[i]->updatePhysics(shader, physicsEngine, delta);
+}
+
+void GameObject::render(Shader* shader, RenderingEngine* renderingEngine)
 {
 	for (unsigned int i = 0; i < m_components.size(); i++)
 		m_components[i]->render(shader, renderingEngine);
 }
 
-void gameObject::SetEngine(coreEngine* engine)
+void GameObject::SetEngine(CoreEngine* engine)
 {
 	if (m_coreEngine != engine)
 	{
@@ -76,13 +90,13 @@ void gameObject::SetEngine(coreEngine* engine)
 	}
 }
 
-std::vector<gameObject*> gameObject::GetAllAttached()
+std::vector<GameObject*> GameObject::GetAllAttached()
 {
-	std::vector<gameObject*> result;
+	std::vector<GameObject*> result;
 
 	for (unsigned int i = 0; i < m_children.size(); i++)
 	{
-		std::vector<gameObject*> childObjects = m_children[i]->GetAllAttached();
+		std::vector<GameObject*> childObjects = m_children[i]->GetAllAttached();
 		result.insert(result.end(), childObjects.begin(), childObjects.end());
 	}
 

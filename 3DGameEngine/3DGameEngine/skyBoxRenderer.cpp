@@ -8,8 +8,8 @@
 SkyBoxRenderer::SkyBoxRenderer(Material material)
 {
 	m_material = material;
-	m_meshCube = new Mesh("./res/ball2.obj");
-	m_skyShader = new Shader("./res/skyShader");
+	m_meshCube = new Mesh("box.obj");
+	m_skyShader = new Shader("skyShader");
 }
 
 
@@ -17,7 +17,7 @@ SkyBoxRenderer::~SkyBoxRenderer()
 {
 }
 
-void SkyBoxRenderer::renderSkyBox(renderingEngine* renderingEngine)
+void SkyBoxRenderer::renderSkyBox(RenderingEngine* renderingEngine)
 {
 	m_skyShader->Bind();
 
@@ -33,11 +33,6 @@ void SkyBoxRenderer::renderSkyBox(renderingEngine* renderingEngine)
 	t.SetScale(glm::vec3(20.0f, 20.0f, 20.0f));
 	t.SetRot(glm::normalize(glm::quat(glm::radians(0.0f), 0, 0, 0)));
 	t.SetPos(glm::vec3(renderingEngine->GetMainCamera().GetTransform().GetPos()));
-	//glm::mat4 skyTransform = t.GetModel();
-	//glm::mat4 cameraProjection = renderingEngine->GetMainCamera().GetViewProjection();
-	//t.SetPerspectiveProj(m_persProjInfo);
-	//m_pSkyboxTechnique->SetWVP(p.GetWVPTrans());
-	//m_pCubemapTex->Bind(GL_TEXTURE0);
 
 	m_skyShader->UpdateUniforms(t, m_material, renderingEngine);
 	m_meshCube->Draw();
@@ -47,7 +42,7 @@ void SkyBoxRenderer::renderSkyBox(renderingEngine* renderingEngine)
 
 }
 
-void SkyBoxRenderer::AddToEngine(coreEngine* engine)
+void SkyBoxRenderer::AddToEngine(CoreEngine* engine)
 {
 	engine->GetRenderingEngine()->AddSkyBox(this);
 }

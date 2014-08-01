@@ -5,10 +5,8 @@
 #include "Shader.h"
 #include "skyBoxRenderer.h"
 
-renderingEngine::renderingEngine()
+RenderingEngine::RenderingEngine()
 {
-	std::cout << getOpenGLVersion() << std::endl;
-
 	glEnable(GL_DEPTH_TEST);
 
 	glEnable(GL_CULL_FACE);
@@ -18,26 +16,25 @@ renderingEngine::renderingEngine()
 
 	glEnable(GL_TEXTURE_2D);
 
-	m_activeLight = new baseLight();
+	m_activeLight = new BaseLight();
 
 	AddVector3f("ambientLight", glm::fvec3(0.1f, 0.1f, 0.1f));
-	m_defaultShader = new Shader("./res/forwardAmbient");
+	m_ambientShader = new Shader("forwardAmbient");
 
 	m_samplerMap["diffuse"] = 0;
 	m_skyBox = NULL;
 }
 
-renderingEngine::~renderingEngine()
+RenderingEngine::~RenderingEngine()
 {
-	//dtor
 }
 
-void renderingEngine::Render(gameObject* object)
+void RenderingEngine::Render(GameObject* object)
 {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	object->renderAll(m_defaultShader, this);
+	object->renderAll(m_ambientShader, this);
 	
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
@@ -58,10 +55,4 @@ void renderingEngine::Render(gameObject* object)
 	{
 		m_skyBox->renderSkyBox(this);
 	}
-}
-
-char* renderingEngine::getOpenGLVersion(){
-
-	return (char*)glGetString(GL_VERSION);
-
 }

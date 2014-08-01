@@ -12,17 +12,17 @@ public:
 	virtual void init() {};
 	void input(const Input& input, float delta);
 	virtual void update(float delta);
-	void render(renderingEngine* renderingEngine);
+	void render(RenderingEngine* renderingEngine);
 	
-	inline gameObject& GetRoot() { return m_root; }
-	inline void SetEngine(coreEngine* engine) { m_root.SetEngine(engine); }
+	inline GameObject& GetRoot() { return m_root; }
+	inline void SetEngine(CoreEngine* engine) { m_root.SetEngine(engine); }
 
 	float counter = 0.0f;
 
 protected:
-	void AddToScene(gameObject* child) { m_root.AddChild(child); }
+	void AddToScene(GameObject* child) { m_root.AddChild(child); }
 
-	gameObject m_root;
+	GameObject m_root;
 
 private:
 
