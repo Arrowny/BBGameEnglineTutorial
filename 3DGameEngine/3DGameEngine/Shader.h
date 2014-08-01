@@ -63,7 +63,7 @@ public:
 	//virtual ~Shader();
 
 	void Bind();
-	virtual void UpdateUniforms(const Transform& transform, const Material& material, renderingEngine* renderingEngine);
+	virtual void UpdateUniforms(const Transform& transform, const Material& material, RenderingEngine* renderingEngine);
 
 	void SetUniformi(const std::string& name, int value);
 	void SetUniformf(const std::string& name, float value);
@@ -72,9 +72,9 @@ public:
 
 protected:
 
-	void SetUniformDirectionalLight(const std::string& uniformName, const directionalLight& value);
-	void SetUniformPointLight(const std::string& uniformName, const pointLight& value);
-	void SetUniformSpotLight(const std::string& uniformName, const spotLight& value);
+	void SetUniformDirectionalLight(const std::string& uniformName, const DirectionalLight& value);
+	void SetUniformPointLight(const std::string& uniformName, const PointLight& value);
+	void SetUniformSpotLight(const std::string& uniformName, const SpotLight& value);
 
 private:
 	static std::unordered_map<std::string, ShaderData*> shaderResourceMap;

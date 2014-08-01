@@ -92,6 +92,9 @@
     <ClCompile Include="skyBoxRenderer.cpp">
       <Filter>RenderingEngine</Filter>
     </ClCompile>
+    <ClCompile Include="physicsEngine.cpp">
+      <Filter>PhysicsEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="res\lighting.glh">
@@ -177,6 +180,9 @@
     </ClInclude>
     <ClInclude Include="skyBoxRenderer.h">
       <Filter>RenderingEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="physicsEngine.h">
+      <Filter>PhysicsEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

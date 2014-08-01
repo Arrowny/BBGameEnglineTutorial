@@ -4,16 +4,16 @@
 
 class Mesh;
 class Shader;
-class coreEngine;
+class CoreEngine;
 
-class SkyBoxRenderer : public gameComponent
+class SkyBoxRenderer : public GameComponent
 {
 public:
 	SkyBoxRenderer(Material material);
 	virtual ~SkyBoxRenderer();
 
-	virtual void renderSkyBox(renderingEngine* renderingEngine);
-	virtual void AddToEngine(coreEngine* engine);
+	virtual void renderSkyBox(RenderingEngine* renderingEngine);
+	virtual void AddToEngine(CoreEngine* engine);
 
 private:
 private:

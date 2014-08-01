@@ -12,7 +12,7 @@ glm::mat4 Camera::GetViewProjection() const
 	return projection * glm::lookAt(GetTransform().GetTransformedPos(), GetTransform().GetTransformedPos() + GetTransform().GetForward(), GetTransform().GetUp());
 }
 
-void Camera::AddToEngine(coreEngine* engine)
+void Camera::AddToEngine(CoreEngine* engine)
 {
 	engine->GetRenderingEngine()->AddCamera(this);
 }

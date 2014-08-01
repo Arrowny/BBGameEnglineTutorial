@@ -3,19 +3,19 @@
 #include <glm\glm.hpp>
 #include "gameComponent.h"
 
-class coreEngine;
+class CoreEngine;
 
-struct baseLight : public gameComponent
+struct BaseLight : public GameComponent
 {
 public:
 	glm::fvec3	m_color;
 	float	m_intensity;
 
-	baseLight(const glm::fvec3& color = glm::fvec3(0, 0, 0), float intensity = 0) :
+	BaseLight(const glm::fvec3& color = glm::fvec3(0, 0, 0), float intensity = 0) :
 		m_color(color),
 		m_intensity(intensity) {}
 
-	virtual void AddToEngine(coreEngine* engine);
+	virtual void AddToEngine(CoreEngine* engine);
 	inline void SetShader(Shader* shader) { m_shader = shader; }
 	inline Shader* GetShader() { return m_shader; }
 
@@ -25,11 +25,11 @@ private:
 
 };
 
-struct directionalLight : public baseLight
+struct DirectionalLight : public BaseLight
 {
 	glm::fvec3 direction;
 
-	directionalLight(const glm::fvec3& color = glm::fvec3(0, 0, 0), float intensity = 0);
+	DirectionalLight(const glm::fvec3& color = glm::fvec3(0, 0, 0), float intensity = 0);
 
 };
 
@@ -46,21 +46,21 @@ struct Attenuation
 
 };
 
-struct pointLight : public baseLight
+struct PointLight : public BaseLight
 {
 	Attenuation atten;
 	glm::fvec3 position;
 	float range;
 
-	pointLight(const glm::fvec3& color = glm::fvec3(0, 0, 0), float intensity = 0, const Attenuation& atten = Attenuation());
+	PointLight(const glm::fvec3& color = glm::fvec3(0, 0, 0), float intensity = 0, const Attenuation& atten = Attenuation());
 
 };
 
-struct spotLight : public pointLight
+struct SpotLight : public PointLight
 {
 	glm::fvec3 direction;
 	float cutoff;
 
-	spotLight(const glm::fvec3& color = glm::fvec3(0, 0, 0), float intensity = 0, const Attenuation& atten = Attenuation(), float cutoff = 0);
+	SpotLight(const glm::fvec3& color = glm::fvec3(0, 0, 0), float intensity = 0, const Attenuation& atten = Attenuation(), float cutoff = 0);
 
 };

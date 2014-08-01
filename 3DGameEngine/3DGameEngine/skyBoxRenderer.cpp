@@ -17,7 +17,7 @@ SkyBoxRenderer::~SkyBoxRenderer()
 {
 }
 
-void SkyBoxRenderer::renderSkyBox(renderingEngine* renderingEngine)
+void SkyBoxRenderer::renderSkyBox(RenderingEngine* renderingEngine)
 {
 	m_skyShader->Bind();
 
@@ -47,7 +47,7 @@ void SkyBoxRenderer::renderSkyBox(renderingEngine* renderingEngine)
 
 }
 
-void SkyBoxRenderer::AddToEngine(coreEngine* engine)
+void SkyBoxRenderer::AddToEngine(CoreEngine* engine)
 {
 	engine->GetRenderingEngine()->AddSkyBox(this);
 }

@@ -9,22 +9,21 @@
 #include "mappedValues.h"
 #include "Material.h"
 
-class gameObject;
+class GameObject;
 class SkyBoxRenderer;
 
-class renderingEngine : public MappedValues
+class RenderingEngine : public MappedValues
 {
 public:
-	renderingEngine();
+	RenderingEngine();
 
-	void Render(gameObject* object);
-	char* getOpenGLVersion();
+	void Render(GameObject* object);
 
 	inline Camera& GetMainCamera() { return *m_mainCamera; }
-	inline baseLight* GetActiveLight() { return m_activeLight; }
+	inline BaseLight* GetActiveLight() { return m_activeLight; }
 	inline unsigned int GetSamplerSlot(const std::string& samplerName) { return m_samplerMap[samplerName]; }
 
-	inline void AddLight(baseLight* light) { m_lights.push_back(light); }
+	inline void AddLight(BaseLight* light) { m_lights.push_back(light); }
 	inline void AddCamera(Camera* camera) { m_mainCamera = camera; }
 	inline void AddSkyBox(SkyBoxRenderer* skybox) { m_skyBox = skybox; }
 
@@ -33,18 +32,18 @@ public:
 		throw uniformType + " is not supported by the rendering engine";
 	}
 
-	virtual ~renderingEngine();
+	virtual ~RenderingEngine();
 protected:
 private:
-	renderingEngine(const renderingEngine& other){}
-	void operator=(const renderingEngine& other) {}
+	RenderingEngine(const RenderingEngine& other){}
+	void operator=(const RenderingEngine& other) {}
 
 	Camera* m_mainCamera;
 	SkyBoxRenderer* m_skyBox;
 	Shader* m_defaultShader;
 
-	baseLight* m_activeLight;
-	std::vector<baseLight*> m_lights;
+	BaseLight* m_activeLight;
+	std::vector<BaseLight*> m_lights;
 	std::map<std::string, unsigned int> m_samplerMap;
 };
 

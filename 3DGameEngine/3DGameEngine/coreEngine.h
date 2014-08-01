@@ -8,11 +8,11 @@
 
 class Game;
 
-class coreEngine
+class CoreEngine
 {
 public:
-	coreEngine(Game* game, renderingEngine* renderingEngine, Window* window, double frameRate);
-	~coreEngine(); 
+	CoreEngine(Game* game, RenderingEngine* renderingEngine, Window* window, double frameRate);
+	~CoreEngine(); 
 
 	void Start(); //Starts running the game; contains central game loop.
 	void Stop();  //Stops running the game, and disables all subsystems.
@@ -20,7 +20,9 @@ public:
 	void Run();
 	void Render();
 
-	inline renderingEngine* GetRenderingEngine() { return m_renderingEngine; }
+	inline RenderingEngine* GetRenderingEngine() { return m_renderingEngine; }
+
+	char* getOpenGLVersion();
 
 protected:
 private:
@@ -28,7 +30,7 @@ private:
 	Game*			  m_game;
 	Window*			  m_window;
 	double			  m_frameTime;
-	renderingEngine*  m_renderingEngine;
+	RenderingEngine*  m_renderingEngine;
 
 
 };

@@ -10,7 +10,7 @@ void Game::update(float delta)
 
 }
 
-void Game::render(renderingEngine* renderingEngine)
+void Game::render(RenderingEngine* renderingEngine)
 {
 	renderingEngine->Render(&m_root);
 }

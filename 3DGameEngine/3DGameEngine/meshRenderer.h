@@ -4,16 +4,16 @@
 #include "Mesh.h"
 #include "Material.h"
 
-class meshRenderer : public gameComponent
+class MeshRenderer : public GameComponent
 {
 public:
-	meshRenderer(Mesh& mesh, Material& material)
+	MeshRenderer(Mesh& mesh, Material& material)
 	{
 		m_mesh = &mesh;
 		m_material = &material;
 	}
 
-	virtual void render(Shader* shader, renderingEngine* renderingEngine)
+	virtual void render(Shader* shader, RenderingEngine* renderingEngine)
 	{
 		shader->Bind();
 		shader->UpdateUniforms(GetTransform(), *m_material, renderingEngine);

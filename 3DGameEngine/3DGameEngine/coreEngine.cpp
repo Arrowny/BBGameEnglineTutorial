@@ -3,22 +3,23 @@
 #include "Game.h"
 #include <stdio.h>
 
-coreEngine::coreEngine(Game* game, renderingEngine* renderingEngine, Window* window, double frameRate) :
+CoreEngine::CoreEngine(Game* game, RenderingEngine* renderingEngine, Window* window, double frameRate) :
 m_game(game),
 m_window(window),
 m_frameTime(1.0 / frameRate),
 m_renderingEngine(renderingEngine)
 {
+	std::cout <<"OpenGL version: " << getOpenGLVersion() << std::endl;
 	m_isRunning = false;
 	m_game->SetEngine(this);
 }
 
-coreEngine::~coreEngine()
+CoreEngine::~CoreEngine()
 {
 	m_window->Dispose();
 }
 
-void coreEngine::Start()
+void CoreEngine::Start()
 {
 	if (m_isRunning)
 	{
@@ -28,7 +29,7 @@ void coreEngine::Start()
 	Run();
 }
 
-void coreEngine::Stop()
+void CoreEngine::Stop()
 {
 	if (!m_isRunning)
 	{
@@ -38,7 +39,7 @@ void coreEngine::Stop()
 	m_isRunning = false;
 }
 
-void coreEngine::Run(){
+void CoreEngine::Run(){
 
 	m_isRunning = true;
 
@@ -102,13 +103,18 @@ void coreEngine::Run(){
 	cleanUp();
 }
 
-void coreEngine::Render()
+void CoreEngine::Render()
 {
 	m_game->render(m_renderingEngine);
 	m_window->swapBuffers();
 }
 
-void coreEngine::cleanUp()
+void CoreEngine::cleanUp()
 {
 	m_window->Dispose();
+}
+
+char* CoreEngine::getOpenGLVersion()
+{
+	return (char*)glGetString(GL_VERSION);
 }

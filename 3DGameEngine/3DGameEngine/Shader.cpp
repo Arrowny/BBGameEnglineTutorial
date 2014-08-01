@@ -162,7 +162,7 @@ void ShaderData::CompileShader()
 
 }
 
-void Shader::UpdateUniforms(const Transform& transform, const Material& material, renderingEngine* renderingEngine)
+void Shader::UpdateUniforms(const Transform& transform, const Material& material, RenderingEngine* renderingEngine)
 {
 	glm::mat4 worldMatrix = transform.GetModel();
 	glm::mat4 projectedMatrix = renderingEngine->GetMainCamera().GetViewProjection() * worldMatrix;
@@ -204,11 +204,11 @@ void Shader::UpdateUniforms(const Transform& transform, const Material& material
 			else if (uniformType == "float")
 				SetUniformf(uniformName, renderingEngine->GetFloat(unprefixedName));
 			else if (uniformType == "DirectionalLight")
-				SetUniformDirectionalLight(uniformName, *(directionalLight*)renderingEngine->GetActiveLight());
+				SetUniformDirectionalLight(uniformName, *(DirectionalLight*)renderingEngine->GetActiveLight());
 			else if (uniformType == "PointLight")
-				SetUniformPointLight(uniformName, *(pointLight*)renderingEngine->GetActiveLight());
+				SetUniformPointLight(uniformName, *(PointLight*)renderingEngine->GetActiveLight());
 			else if (uniformType == "SpotLight")
-				SetUniformSpotLight(uniformName, *(spotLight*)renderingEngine->GetActiveLight());
+				SetUniformSpotLight(uniformName, *(SpotLight*)renderingEngine->GetActiveLight());
 			else
 				renderingEngine->UpdateUniformStruct(transform, material, this, uniformName, uniformType);
 		}
@@ -458,14 +458,14 @@ void ShaderData::AddShaderUniforms(const std::string& shaderText)
 	}
 }
 
-void Shader::SetUniformDirectionalLight(const std::string& uniformName, const directionalLight& directionalLight)
+void Shader::SetUniformDirectionalLight(const std::string& uniformName, const DirectionalLight& directionalLight)
 {
 	SetUniformVec3(uniformName + ".direction", directionalLight.GetTransform().GetTransformedForward());
 	SetUniformVec3(uniformName + ".base.color", directionalLight.m_color);
 	SetUniformf(uniformName + ".base.intensity", directionalLight.m_intensity);
 }
 
-void Shader::SetUniformPointLight(const std::string& uniformName, const pointLight& pointLight)
+void Shader::SetUniformPointLight(const std::string& uniformName, const PointLight& pointLight)
 {
 	SetUniformVec3(uniformName + ".base.color", pointLight.m_color);
 	SetUniformf(uniformName + ".base.intensity", pointLight.m_intensity);
@@ -476,7 +476,7 @@ void Shader::SetUniformPointLight(const std::string& uniformName, const pointLig
 	SetUniformf(uniformName + ".range", pointLight.range);
 }
 
-void Shader::SetUniformSpotLight(const std::string& uniformName, const spotLight& spotLight)
+void Shader::SetUniformSpotLight(const std::string& uniformName, const SpotLight& spotLight)
 {
 	SetUniformVec3(uniformName + ".pointLight.base.color", spotLight.m_color);
 	SetUniformf(uniformName + ".pointLight.base.intensity", spotLight.m_intensity);
