@@ -11,7 +11,7 @@ public:
 	PhysicsEngine(const float& delta);
 	virtual ~PhysicsEngine();
 
-	void UpdatePhysics(GameObject* object, float delta);
+	void UpdatePhysics(GameObject* object);
 
 	virtual void UpdateUniformStruct(Shader* shader, const std::string& uniformName, const std::string& uniformType)
 	{

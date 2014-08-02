@@ -15,7 +15,7 @@ public:
 
 	virtual void input(const Input& input, float delta) {}
 	virtual void update(float delta) {}
-	virtual void updatePhysics(Shader* shader, PhysicsEngine* physicsEngine, float delta) {}
+	virtual void updatePhysics(Shader* shader, PhysicsEngine* physicsEngine) {}
 	virtual void render(Shader* shader, RenderingEngine* renderingEngine) {}
 
 	virtual void AddToEngine(CoreEngine* engine) {}

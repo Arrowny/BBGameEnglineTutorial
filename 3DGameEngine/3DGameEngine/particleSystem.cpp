@@ -11,6 +11,8 @@ ParticleSystem::ParticleSystem(std::string physicsProgramName, Material* materia
 	m_time = 0;
 	m_material = material;
 	m_physicsProgram = new Shader(physicsProgramName, Shader::PHYSICS_SHADER);
+
+	InitParticleSystem(glm::vec3(0.0, 0.0, 0.0)); //TODO: update constructor to allow for multiple BASE_PARTICLES and SECONDARY_PARTICLES
 }
 
 
@@ -42,10 +44,12 @@ void ParticleSystem::InitParticleSystem(const glm::vec3& Pos)
 	glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, m_particleBuffer[1]);
 }
 
-void ParticleSystem::updatePhysics(Shader* shader, PhysicsEngine* physicsEngine, float delta)
+void ParticleSystem::updatePhysics(Shader* shader, PhysicsEngine* physicsEngine)
 {
 	m_physicsProgram->Bind();
 	m_physicsProgram->UpdateUniforms(physicsEngine);
+
+	glEnable(GL_RASTERIZER_DISCARD);
 
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
@@ -72,12 +76,27 @@ void ParticleSystem::updatePhysics(Shader* shader, PhysicsEngine* physicsEngine,
 	glDisableVertexAttribArray(1);
 	glDisableVertexAttribArray(2);
 	glDisableVertexAttribArray(3);
+	glDisable(GL_RASTERIZER_DISCARD);
 }
 
 void ParticleSystem::render(Shader* shader, RenderingEngine* renderingEngine)
 {
 	shader->Bind();
 	shader->UpdateUniforms(GetTransform(), *m_material, renderingEngine);
-	glBeginTransformFeedback(GL_POINTS);
+	drawParticles();
 
+	//swap current TFB setup
+	m_currVB = m_currTFB;
+	m_currTFB = (m_currTFB + 1) & 0x1;
 }
+
+void ParticleSystem::drawParticles()
+{
+	glBindBuffer(GL_ARRAY_BUFFER, m_particleBuffer[m_currTFB]);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Particle), (const GLvoid*)4);  // position
+	glDrawTransformFeedback(GL_POINTS, m_transformFeedback[m_currTFB]);
+	glDisableVertexAttribArray(0);
+}
+
+

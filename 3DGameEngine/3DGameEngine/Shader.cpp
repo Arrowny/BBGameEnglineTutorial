@@ -392,11 +392,11 @@ void Shader::UpdateUniforms(PhysicsEngine* physicsEngine)
 		//else
 		//{
 		//	if (uniformType == "vec3")
-		//		SetUniformVec3(uniformName, material.GetVector3f(uniformName));
+		//		SetUniformVec3(uniformName, physicsComponents.GetVector3f(uniformName));
 		//	else if (uniformType == "float")
-		//		SetUniformf(uniformName, material.GetFloat(uniformName));
+		//		SetUniformf(uniformName, physicsComponents.GetFloat(uniformName));
 		//	else
-		//		throw uniformType + " is not supported by the Material class";
+		//		throw uniformType + " is not supported by the physicsComponent class";
 		//}
 	}
 }

@@ -232,5 +232,23 @@
     <None Include="res\skyShader.fs">
       <Filter>GLSL Files\MeshRendering</Filter>
     </None>
+    <None Include="res\particleRenderer.vs">
+      <Filter>GLSL Files\ParticleRendering</Filter>
+    </None>
+    <None Include="res\particleRenderer.fs">
+      <Filter>GLSL Files\ParticleRendering</Filter>
+    </None>
+    <None Include="res\particleRenderer.gs">
+      <Filter>GLSL Files\ParticleRendering</Filter>
+    </None>
+    <None Include="res\basicParticlePhy.fs">
+      <Filter>GLSL Files\ParticlePhysics</Filter>
+    </None>
+    <None Include="res\basicParticlePhy.gs">
+      <Filter>GLSL Files\ParticlePhysics</Filter>
+    </None>
+    <None Include="res\basicParticlePhy.vs">
+      <Filter>GLSL Files\ParticlePhysics</Filter>
+    </None>
   </ItemGroup>
 </Project>

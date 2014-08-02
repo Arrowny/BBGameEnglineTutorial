@@ -5,6 +5,7 @@
 #include "gameComponent.h"
 #define MAX_PARTICLES 1000
 #define BASE_PARTICLE 0
+#define SECONDARY_PARTICLE 1
 
 class Material;
 class PhysicsEngine;
@@ -27,11 +28,12 @@ public:
 
 	void InitParticleSystem(const glm::vec3& Pos);
 
-	virtual void updatePhysics(Shader* shader, PhysicsEngine* physicsEngine, float delta);
+	virtual void updatePhysics(Shader* shader, PhysicsEngine* physicsEngine);
 	virtual void render(Shader* shader, RenderingEngine* renderingEngine);
 
-
 private:
+
+	void drawParticles();
 
 	bool m_isFirst;
 	unsigned int m_currVB;
