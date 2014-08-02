@@ -107,11 +107,13 @@ void ParticleSystem::drawParticles()
 {
 	if (!m_isFirst)
 	{
-		glBindBuffer(GL_ARRAY_BUFFER, m_particleBuffer[m_currTFB]);
+		glBindBuffer(GL_ARRAY_BUFFER, m_particleBuffer[m_currVB]);
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Particle), (const GLvoid*)4);  // position
-		glDrawTransformFeedback(GL_POINTS, m_transformFeedback[m_currTFB]);
+		glDrawArrays(GL_POINTS, 0, 100);
+		//glDrawTransformFeedback(GL_POINTS, m_transformFeedback[m_currTFB]);
 		glDisableVertexAttribArray(0);
+
 	}
 }
 

@@ -10,6 +10,7 @@ public:
 	Camera(float fov, float aspect, float zNear, float zFar);
 
 	glm::mat4 GetViewProjection() const;
+	glm::mat4 Camera::GetPerspective() const;
 
 	virtual void AddToEngine(CoreEngine* engine);
 

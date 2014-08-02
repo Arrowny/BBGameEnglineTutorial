@@ -396,6 +396,10 @@ void Shader::UpdateUniforms(PhysicsEngine* physicsEngine)
 			else
 				physicsEngine->UpdateUniformStruct(this, uniformName, uniformType);
 		}
+		else
+		{
+			throw uniformType + " is not supported by the physicsComponent class";
+		}
 		//TODO: add physics components class. Used in updating physics shader uniforms.
 		//else
 		//{
@@ -439,6 +443,8 @@ void Shader::UpdateUniforms(const Transform& transform, const Material& material
 				SetUniformMat4("T_MVP", projectedMatrix);
 			else if (uniformName == "T_VP")
 				SetUniformMat4("T_VP", viewProjectionMatrix);
+			else if (uniformName == "T_P")
+				SetUniformMat4("T_P", renderingEngine->GetMainCamera().GetPerspective());
 			else if (uniformName == "T_model")
 				SetUniformMat4("T_model", worldMatrix);
 			else
