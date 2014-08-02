@@ -39,8 +39,8 @@ ShaderData::ShaderData(const std::string& fileName, const unsigned int& shaderTy
 				exit(1);
 			}
 
-			std::string vertexShaderText = LoadShader("./res/" + fileName + ".vs");
-			std::string fragmentShaderText = LoadShader("./res/" + fileName + ".fs");
+			std::string vertexShaderText = LoadShader("./res/" + fileName + ".vert");
+			std::string fragmentShaderText = LoadShader("./res/" + fileName + ".frag");
 
 			AddVertexShader(vertexShaderText);
 			AddFragmentShader(fragmentShaderText);
@@ -63,9 +63,9 @@ ShaderData::ShaderData(const std::string& fileName, const unsigned int& shaderTy
 				exit(1);
 			}
 
-			std::string vertexShaderText = LoadShader("./res/" + fileName + ".vs");
-			std::string	geometryShaderText = LoadShader("./res/" + fileName + ".gs");
-			std::string fragmentShaderText = LoadShader("./res/" + fileName + ".fs");
+			std::string vertexShaderText = LoadShader("./res/" + fileName + ".vert");
+			std::string	geometryShaderText = LoadShader("./res/" + fileName + ".geom");
+			std::string fragmentShaderText = LoadShader("./res/" + fileName + ".frag");
 
 			AddVertexShader(vertexShaderText);
 			AddGeometryShader(geometryShaderText);
@@ -90,9 +90,9 @@ ShaderData::ShaderData(const std::string& fileName, const unsigned int& shaderTy
 				exit(1);
 			}
 
-			std::string vertexShaderText = LoadShader("./res/" + fileName + ".vs");
-			std::string	geometryShaderText = LoadShader("./res/" + fileName + ".gs");
-			std::string fragmentShaderText = LoadShader("./res/" + fileName + ".fs");
+			std::string vertexShaderText = LoadShader("./res/" + fileName + ".vert");
+			std::string	geometryShaderText = LoadShader("./res/" + fileName + ".geom");
+			std::string fragmentShaderText = LoadShader("./res/" + fileName + ".frag");
 
 			AddVertexShader(vertexShaderText);
 			AddGeometryShader(geometryShaderText);

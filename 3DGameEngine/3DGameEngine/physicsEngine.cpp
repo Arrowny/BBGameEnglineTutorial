@@ -17,5 +17,5 @@ PhysicsEngine::~PhysicsEngine()
 void PhysicsEngine::UpdatePhysics(GameObject* object)
 {
 	object->updatePhysicsAll(m_generalPhysics, this);
-	GetFloat
+	SetFloat("randomSeed", GetFloat("randomSeed") + GetFloat("delta"));
 }
