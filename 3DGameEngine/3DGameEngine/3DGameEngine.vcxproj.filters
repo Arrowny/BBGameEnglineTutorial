@@ -108,7 +108,7 @@
       <Filter>CoreEngine\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="particleSystem.cpp">
-      <Filter>Main</Filter>
+      <Filter>CoreEngine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -199,7 +199,9 @@
     <ClInclude Include="Window.h">
       <Filter>CoreEngine\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="particleSystem.h" />
+    <ClInclude Include="particleSystem.h">
+      <Filter>CoreEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\forwardAmbient.frag">

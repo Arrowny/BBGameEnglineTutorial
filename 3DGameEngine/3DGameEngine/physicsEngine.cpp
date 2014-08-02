@@ -1,12 +1,13 @@
 #include "physicsEngine.h"
 #include "gameObject.h"
-#include <time.h>
+#include "Util.h"
 
 
 PhysicsEngine::PhysicsEngine(const float& delta)
 {
+
 	SetFloat("delta", delta);
-	SetFloat("randomSeed", time(NULL));
+	SetVector3f("randomSeed", Util::randomVec3());
 }
 
 
@@ -17,5 +18,5 @@ PhysicsEngine::~PhysicsEngine()
 void PhysicsEngine::UpdatePhysics(GameObject* object)
 {
 	object->updatePhysicsAll(m_generalPhysics, this);
-	SetFloat("randomSeed", GetFloat("randomSeed") + GetFloat("delta"));
+	SetVector3f("randomSeed", Util::randomVec3());
 }

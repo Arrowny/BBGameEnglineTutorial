@@ -155,21 +155,29 @@ void ShaderData::AddUniform(const std::string& uniformName, const std::string& u
 
 void ShaderData::AddAllVaryings(const std::string& gsText)
 {
-	std::vector<const GLchar*> varyings;
-	std::string vKey = "TFB_";
+	//std::vector<const GLchar*> varyings;
+	//std::string vKey = "TFB_";
 
-	size_t vLocation = gsText.find(vKey);
-	while (vLocation != std::string::npos)
-	{
-		size_t begin = vLocation + vKey.length();
-		size_t end = gsText.find(";", begin);
+	//size_t vLocation = gsText.find(vKey);
+	//size_t programStart = gsText.find("main()");
+	//while (vLocation < programStart)
+	//{
+	//	//size_t begin = vLocation + vKey.length();
+	//	size_t begin = vLocation;
+	//	size_t end = gsText.find(";", begin);
 
-		std::string vName = gsText.substr(begin + 1, end - begin - 1); //TODO: may not be parsing names correctly
-		varyings.push_back(vName.c_str());
-		vLocation = gsText.find(vKey, end);
-	}
+	//	std::string vName = gsText.substr(begin, end - begin); //TODO: may not be parsing names correctly
+	//	varyings.push_back(vName.c_str());
+	//	vLocation = gsText.find(vKey, end);
+	//}
+	const GLchar* Varyings[4];
+	Varyings[0] = "TFB_Type";
+	Varyings[1] = "TFB_Position";
+	Varyings[2] = "TFB_Velocity";
+	Varyings[3] = "TFB_Age";
 
-	glTransformFeedbackVaryings(m_program, varyings.size(), &varyings[0], GL_INTERLEAVED_ATTRIBS);
+	//glTransformFeedbackVaryings(m_program, varyings.size(), &varyings[0], GL_INTERLEAVED_ATTRIBS);
+	glTransformFeedbackVaryings(m_program, 4, Varyings, GL_INTERLEAVED_ATTRIBS);
 }
 
 void ShaderData::AddVertexShader(const std::string& text)
@@ -403,7 +411,8 @@ void Shader::UpdateUniforms(PhysicsEngine* physicsEngine)
 void Shader::UpdateUniforms(const Transform& transform, const Material& material, RenderingEngine* renderingEngine)
 {
 	glm::mat4 worldMatrix = transform.GetModel();
-	glm::mat4 projectedMatrix = renderingEngine->GetMainCamera().GetViewProjection() * worldMatrix;
+	glm::mat4 viewProjectionMatrix = renderingEngine->GetMainCamera().GetViewProjection();
+	glm::mat4 projectedMatrix = viewProjectionMatrix * worldMatrix;
 
 	for (unsigned int i = 0; i < shaderResourceMap[m_fileName]->GetUniformNames().size(); i++)
 	{
@@ -428,6 +437,8 @@ void Shader::UpdateUniforms(const Transform& transform, const Material& material
 		{
 			if (uniformName == "T_MVP")
 				SetUniformMat4("T_MVP", projectedMatrix);
+			else if (uniformName == "T_VP")
+				SetUniformMat4("T_VP", viewProjectionMatrix);
 			else if (uniformName == "T_model")
 				SetUniformMat4("T_model", worldMatrix);
 			else
@@ -453,9 +464,13 @@ void Shader::UpdateUniforms(const Transform& transform, const Material& material
 		else if (uniformName.substr(0, 2) == "C_")
 		{
 			if (uniformName == "C_eyePos")
+			{
 				SetUniformVec3(uniformName, renderingEngine->GetMainCamera().GetTransform().GetTransformedPos());
+			}	
 			else
+			{
 				throw "Invalid Camera Uniform: " + uniformName;
+			}
 		}
 		else
 		{

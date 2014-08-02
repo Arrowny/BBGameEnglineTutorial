@@ -7,7 +7,7 @@
 class MappedValues
 {
 public:
-	inline void AddVector3f(const std::string& name, glm::fvec3 value) { m_vector3fMap[name] = value; }
+	inline void SetVector3f(const std::string& name, glm::fvec3 value) { m_vector3fMap[name] = value; }
 	inline void SetFloat(const std::string& name, float value) { m_floatMap[name] = value; }
 
 	inline glm::fvec3 GetVector3f(const std::string& name) const

@@ -18,10 +18,10 @@ RenderingEngine::RenderingEngine()
 
 	m_activeLight = new BaseLight();
 
-	AddVector3f("ambientLight", glm::fvec3(0.1f, 0.1f, 0.1f));
+	SetVector3f("ambientLight", glm::fvec3(0.1f, 0.1f, 0.1f));
 	m_ambientShader = new Shader("forwardAmbient");
 
-	m_samplerMap["diffuse"] = 0;
+	m_samplerMap["diffuse"] = 0; //set slot for diffuse texture
 	m_skyBox = NULL;
 }
 

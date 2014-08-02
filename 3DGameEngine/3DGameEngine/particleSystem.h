@@ -4,8 +4,8 @@
 #include <glm\glm.hpp>
 #include "gameComponent.h"
 #define MAX_PARTICLES 1000
-#define BASE_PARTICLE 0
-#define SECONDARY_PARTICLE 1
+#define BASE_PARTICLE 1
+#define SECONDARY_PARTICLE 0
 
 class Material;
 class PhysicsEngine;
@@ -14,7 +14,7 @@ class Shader;
 
 struct Particle
 {
-	int Type;
+	float Type;
 	glm::vec3 Pos;
 	glm::vec3 Vel;
 	float Age;
@@ -42,6 +42,7 @@ private:
 	GLuint m_transformFeedback[2];
 	Material* m_material;
 	Shader* m_physicsProgram;
+	Shader* m_rendererProgram;
 	int m_time;
 };
 

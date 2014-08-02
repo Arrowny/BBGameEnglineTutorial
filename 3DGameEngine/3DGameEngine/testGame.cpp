@@ -33,6 +33,7 @@ void TestGame::init(){
 	m_sLightObj2 = new GameObject();
 	m_camera = new GameObject();
 	m_skyBoxObject = new GameObject();
+	m_basicPSObj = new GameObject();
 	
 
 	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
@@ -113,12 +114,16 @@ void TestGame::init(){
 	m_camera->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f))->AddComponent(new FreeLook())->AddComponent(new FreeMove());
 	m_skyBoxObject->AddComponent(m_skyBoxrenderer);
 
+	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material2);
+	m_basicPSObj->AddComponent(m_basicPS);
+
 	AddToScene(m_planeObject);
 	AddToScene(m_dirLightObj1);
 	AddToScene(m_pLightObj1);
 	AddToScene(m_sLightObj1);
 	AddToScene(m_camera);
 	AddToScene(m_skyBoxObject);
+	AddToScene(m_basicPSObj);
 
 	//m_planeObject->GetTransform().SetRot(glm::normalize(glm::quat(glm::radians(-90.0f), 0.0f, 1.0f, 0.0f)));
 	//m_planeObject3->AddChild((new gameObject())->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f))->AddComponent(new FreeLook()));

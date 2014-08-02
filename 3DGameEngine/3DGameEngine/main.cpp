@@ -16,9 +16,10 @@ int main(int argc, char** argv)
 {
 	Window window(WIDTH, HEIGHT, TITLE);
 	RenderingEngine renderingEngine;
+	PhysicsEngine physicsEngine(1.0 / FRAME_CAP);
 	TestGame game;
 
-	CoreEngine core(&game, &renderingEngine, &window, FRAME_CAP);
+	CoreEngine core(&game, &renderingEngine, &physicsEngine, &window, FRAME_CAP);
 	core.Start();
 
 	return 0;

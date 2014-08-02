@@ -4,6 +4,8 @@
 #include "gameObject.h"
 #include "coreEngine.h"
 
+class PhysicsEngine;
+
 class Game
 {
 public:
@@ -12,6 +14,7 @@ public:
 	virtual void init() {};
 	void input(const Input& input, float delta);
 	virtual void update(float delta);
+	void updatePhysics(PhysicsEngine* physicsEngine);
 	void render(RenderingEngine* renderingEngine);
 	
 	inline GameObject& GetRoot() { return m_root; }
