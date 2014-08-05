@@ -40,7 +40,7 @@ void TestGame::init(){
 	m_mesh = new Mesh("triforce.obj");
 	//m_mesh2 = new Mesh("./res/mon.obj");
 	//m_mesh3 = new Mesh("./res/luigi.obj");
-	m_texture = new Texture("colour.jpg");
+	m_texture = new Texture("fireworks_red.jpg");
 	m_texture2 = new Texture("bricks2.jpg");
 	m_texture3 = new Texture("bricks2_normal.jpg");
 	m_skyTexture = new Texture3d("skyleft.png", "skyright.png", "skyup.png", "skydown.png", "skyfront.png", "skyback.png");

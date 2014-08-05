@@ -49,7 +49,6 @@ ParticleSystem::ParticleSystem()
     ZERO_MEM(m_particleBuffer);
 }
 
-
 ParticleSystem::~ParticleSystem()
 {
     SAFE_DELETE(m_pTexture);
@@ -125,7 +124,7 @@ void ParticleSystem::Render(int DeltaTimeMillis, const Matrix4f& VP, const Vecto
 {
     m_time += DeltaTimeMillis;
     
-    UpdateParticles(DeltaTimeMillis);
+    UpdateParticles(DeltaTimeaMillis);
 
     RenderParticles(VP, CameraPos);
 

@@ -13,7 +13,7 @@ ParticleSystem::ParticleSystem(std::string physicsProgramName, Material* materia
 	m_material = material;
 	m_physicsProgram = new Shader(physicsProgramName, Shader::PHYSICS_SHADER);
 	m_rendererProgram = new Shader("particleRenderer", Shader::FULL_SHADER_PIPELINE);
-	InitParticleSystem(glm::vec3(0.0, 0.0, 0.0)); //TODO: update constructor to allow for multiple BASE_PARTICLES and SECONDARY_PARTICLES
+	InitParticleSystem(glm::vec3(1.0, 0.0, 5.0)); //TODO: update constructor to allow for multiple BASE_PARTICLES and SECONDARY_PARTICLES
 
 	//Debug:
 	glGenQueries(1, &query);
@@ -79,7 +79,10 @@ void ParticleSystem::updatePhysics(Shader* shader, PhysicsEngine* physicsEngine)
 	//glBeginQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN, PrimsWritten);
 	//glDrawArrays(GL_POINTS, 0, inCount);
 	//glEndTransformFeedback();
-	//glEndQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN);	//glGetQueryObjectuiv(Query, GL_QUERY_RESULT, &outCount);
+	//glEndQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN);
+	//glGetQueryObjectuiv(Query, GL_QUERY_RESULT, &outCount);
+
+
 	glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, m_particleBuffer[m_currTFB]);
 
 	glBeginQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN, query);
