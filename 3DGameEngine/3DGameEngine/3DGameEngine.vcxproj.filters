@@ -196,11 +196,11 @@
     <ClInclude Include="res\lighting.glh">
       <Filter>GLSL Files\MeshRendering</Filter>
     </ClInclude>
-    <ClInclude Include="Window.h">
-      <Filter>CoreEngine\Utilities</Filter>
-    </ClInclude>
     <ClInclude Include="particleSystem.h">
       <Filter>CoreEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>CoreEngine\Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

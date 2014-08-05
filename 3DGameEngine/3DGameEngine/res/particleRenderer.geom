@@ -1,4 +1,5 @@
 #version 330
+#extension GL_EXT_geometry_shader4 : enable
 
 layout(points) in;
 layout(triangle_strip, max_vertices = 4) out;
@@ -24,6 +25,7 @@ void main(void){
 	vec4 rightVector 	= vec4(rightAxis.xyz, 1.0f);
 	vec4 upVector 		= vec4(upAxis.xyz, 1.0f);
 	vec4 particlePos	= T_LookAt*gl_in[0].gl_Position;
+
 
 	gl_Position = particlePos-rightVector*(quadLength*0.5f)-upVector*(quadLength*0.5f);
 	gl_Position = T_P*gl_Position;
