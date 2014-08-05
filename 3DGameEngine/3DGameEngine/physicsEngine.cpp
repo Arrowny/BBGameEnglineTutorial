@@ -18,5 +18,5 @@ PhysicsEngine::~PhysicsEngine()
 void PhysicsEngine::UpdatePhysics(GameObject* object)
 {
 	object->updatePhysicsAll(m_generalPhysics, this);
-	SetVector3f("randomSeed", Util::randomVec3());
+	SetVector3f("randomSeed", glm::normalize(Util::randomVec3()));
 }

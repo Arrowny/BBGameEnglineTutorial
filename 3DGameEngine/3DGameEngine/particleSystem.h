@@ -8,6 +8,7 @@
 #define SECONDARY_PARTICLE 0
 
 class Material;
+class CoreEngine;
 class PhysicsEngine;
 class RenderingEngine;
 class Shader;
@@ -29,7 +30,9 @@ public:
 	void InitParticleSystem(const glm::vec3& Pos);
 
 	virtual void updatePhysics(Shader* shader, PhysicsEngine* physicsEngine);
-	virtual void render(Shader* shader, RenderingEngine* renderingEngine);
+	virtual void renderParticles(Shader* shader, RenderingEngine* renderingEngine);
+
+	virtual void AddToEngine(CoreEngine* engine);
 
 private:
 
@@ -40,6 +43,8 @@ private:
 	unsigned int m_currTFB;
 	GLuint m_particleBuffer[2];
 	GLuint m_transformFeedback[2];
+	GLuint query;
+	int numberofparticles;
 	Material* m_material;
 	Shader* m_physicsProgram;
 	Shader* m_rendererProgram;

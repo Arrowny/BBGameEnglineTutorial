@@ -155,29 +155,24 @@ void ShaderData::AddUniform(const std::string& uniformName, const std::string& u
 
 void ShaderData::AddAllVaryings(const std::string& gsText)
 {
-	//std::vector<const GLchar*> varyings;
-	//std::string vKey = "TFB_";
+	std::vector<const GLchar*> varyings;
+	std::string vKey = "TFB_";
 
-	//size_t vLocation = gsText.find(vKey);
-	//size_t programStart = gsText.find("main()");
-	//while (vLocation < programStart)
-	//{
-	//	//size_t begin = vLocation + vKey.length();
-	//	size_t begin = vLocation;
-	//	size_t end = gsText.find(";", begin);
+	size_t vLocation = gsText.find(vKey);
+	size_t programStart = gsText.find("main()");
+	while (vLocation < programStart)
+	{
+		size_t begin = vLocation;
+		size_t end = gsText.find(";", begin);
 
-	//	std::string vName = gsText.substr(begin, end - begin); //TODO: may not be parsing names correctly
-	//	varyings.push_back(vName.c_str());
-	//	vLocation = gsText.find(vKey, end);
-	//}
-	const GLchar* Varyings[4];
-	Varyings[0] = "TFB_Type";
-	Varyings[1] = "TFB_Position";
-	Varyings[2] = "TFB_Velocity";
-	Varyings[3] = "TFB_Age";
+		std::string vName = gsText.substr(begin, end - begin);
+		GLchar *takeName = new char[vName.length() + 1];
+		strcpy(takeName, vName.c_str());
+		varyings.push_back(takeName);
+		vLocation = gsText.find(vKey, end);
+	}
 
-	//glTransformFeedbackVaryings(m_program, varyings.size(), &varyings[0], GL_INTERLEAVED_ATTRIBS);
-	glTransformFeedbackVaryings(m_program, 4, Varyings, GL_INTERLEAVED_ATTRIBS);
+	glTransformFeedbackVaryings(m_program, varyings.size(), &varyings[0], GL_INTERLEAVED_ATTRIBS);
 }
 
 void ShaderData::AddVertexShader(const std::string& text)
@@ -445,6 +440,8 @@ void Shader::UpdateUniforms(const Transform& transform, const Material& material
 				SetUniformMat4("T_VP", viewProjectionMatrix);
 			else if (uniformName == "T_P")
 				SetUniformMat4("T_P", renderingEngine->GetMainCamera().GetPerspective());
+			else if (uniformName == "T_LookAt")
+				SetUniformMat4("T_LookAt", renderingEngine->GetMainCamera().GetLookAt());
 			else if (uniformName == "T_model")
 				SetUniformMat4("T_model", worldMatrix);
 			else

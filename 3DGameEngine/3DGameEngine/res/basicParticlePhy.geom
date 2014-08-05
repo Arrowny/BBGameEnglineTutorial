@@ -17,18 +17,19 @@ out vec3 TFB_Velocity;
 out float TFB_Age; 
 
 //uniform float P_delta;   
-//uniform vec3 P_randomSeed;
+uniform vec3 P_randomSeed;
 
 void main()
 {
 	//for(int ii = 0; ii < 100; ii++)
 	//{
-		TFB_Type = 0.0;
-		TFB_Position = vec3(0,0,0);
-		TFB_Velocity = vec3(0,0,0);
-		TFB_Age = 0;
-		EmitVertex();
-	//}
+
+	////}
+	TFB_Type = 0.0;
+	TFB_Position = Position0[0] + P_randomSeed/100;
+	TFB_Velocity = vec3(0,0.01,0);
+	TFB_Age = 0;
+	EmitVertex();
 	EndPrimitive();
 
 	//if(Type0[0] == EMITTER_TYPE)
