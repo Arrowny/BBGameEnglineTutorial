@@ -8,6 +8,7 @@
 #include "texture3d.h"
 #include "meshRenderer.h"
 #include "skyBoxRenderer.h"
+#include "particleSystem.h"
 #include "Input.h"
 #include <iostream>
 #include "freeLook.h"
@@ -36,6 +37,7 @@ private:
 	GameObject* m_pLightObj1;
 	GameObject* m_sLightObj1;
 	GameObject* m_sLightObj2;
+	GameObject* m_basicPSObj;
 
 	DirectionalLight* dirLight1;
 	DirectionalLight* dirLight2;
@@ -63,5 +65,6 @@ private:
 	MeshRenderer* m_meshRenderer2;
 	MeshRenderer* m_meshRenderer3;
 	SkyBoxRenderer* m_skyBoxrenderer;
+	ParticleSystem* m_basicPS;
 };
 

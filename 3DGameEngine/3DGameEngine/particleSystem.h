@@ -4,16 +4,18 @@
 #include <glm\glm.hpp>
 #include "gameComponent.h"
 #define MAX_PARTICLES 1000
-#define BASE_PARTICLE 0
+#define BASE_PARTICLE 1
+#define SECONDARY_PARTICLE 0
 
 class Material;
+class CoreEngine;
 class PhysicsEngine;
 class RenderingEngine;
 class Shader;
 
 struct Particle
 {
-	int Type;
+	float Type;
 	glm::vec3 Pos;
 	glm::vec3 Vel;
 	float Age;
@@ -27,19 +29,25 @@ public:
 
 	void InitParticleSystem(const glm::vec3& Pos);
 
-	virtual void updatePhysics(Shader* shader, PhysicsEngine* physicsEngine, float delta);
-	virtual void render(Shader* shader, RenderingEngine* renderingEngine);
+	virtual void updatePhysics(Shader* shader, PhysicsEngine* physicsEngine);
+	virtual void renderParticles(Shader* shader, RenderingEngine* renderingEngine);
 
+	virtual void AddToEngine(CoreEngine* engine);
 
 private:
+
+	void drawParticles();
 
 	bool m_isFirst;
 	unsigned int m_currVB;
 	unsigned int m_currTFB;
 	GLuint m_particleBuffer[2];
 	GLuint m_transformFeedback[2];
+	GLuint query;
+	int numberofparticles;
 	Material* m_material;
 	Shader* m_physicsProgram;
+	Shader* m_rendererProgram;
 	int m_time;
 };
 

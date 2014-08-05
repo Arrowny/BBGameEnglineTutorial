@@ -4,6 +4,7 @@
 #include "gameObject.h"
 #include "Shader.h"
 #include "skyBoxRenderer.h"
+#include "particleSystem.h"
 
 RenderingEngine::RenderingEngine()
 {
@@ -18,10 +19,11 @@ RenderingEngine::RenderingEngine()
 
 	m_activeLight = new BaseLight();
 
-	AddVector3f("ambientLight", glm::fvec3(0.1f, 0.1f, 0.1f));
+	SetVector3f("ambientLight", glm::fvec3(0.1f, 0.1f, 0.1f));
 	m_ambientShader = new Shader("forwardAmbient");
+	m_baseParticleShader = NULL; //TODO: design overall basic particle shader;
 
-	m_samplerMap["diffuse"] = 0;
+	m_samplerMap["diffuse"] = 0; //set slot for diffuse texture
 	m_skyBox = NULL;
 }
 
@@ -41,15 +43,21 @@ void RenderingEngine::Render(GameObject* object)
 	glDepthMask(GL_FALSE);
 	glDepthFunc(GL_EQUAL);
 
-	for (unsigned int i = 0; i < m_lights.size(); i++)
+	for (unsigned int ii = 0; ii < m_lights.size(); ii++)
 	{
-		m_activeLight = m_lights[i];
+		m_activeLight = m_lights[ii];
 		object->renderAll(m_activeLight->GetShader(), this);
 	}
 
 	glDepthMask(GL_TRUE);
 	glDepthFunc(GL_LESS);
 	glDisable(GL_BLEND);
+
+	//TODO: currently baseParticleShader does nothing. Add functionality.
+	for (unsigned int ii = 0; ii < m_particles.size(); ii++)
+	{
+		m_particles[ii]->renderParticles(m_baseParticleShader, this);
+	}
 
 	if (m_skyBox != NULL)
 	{

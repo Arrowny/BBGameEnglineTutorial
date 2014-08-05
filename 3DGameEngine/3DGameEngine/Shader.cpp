@@ -39,8 +39,8 @@ ShaderData::ShaderData(const std::string& fileName, const unsigned int& shaderTy
 				exit(1);
 			}
 
-			std::string vertexShaderText = LoadShader("./res/" + fileName + ".vs");
-			std::string fragmentShaderText = LoadShader("./res/" + fileName + ".fs");
+			std::string vertexShaderText = LoadShader("./res/" + fileName + ".vert");
+			std::string fragmentShaderText = LoadShader("./res/" + fileName + ".frag");
 
 			AddVertexShader(vertexShaderText);
 			AddFragmentShader(fragmentShaderText);
@@ -63,9 +63,9 @@ ShaderData::ShaderData(const std::string& fileName, const unsigned int& shaderTy
 				exit(1);
 			}
 
-			std::string vertexShaderText = LoadShader("./res/" + fileName + ".vs");
-			std::string	geometryShaderText = LoadShader("./res/" + fileName + ".gs");
-			std::string fragmentShaderText = LoadShader("./res/" + fileName + ".fs");
+			std::string vertexShaderText = LoadShader("./res/" + fileName + ".vert");
+			std::string	geometryShaderText = LoadShader("./res/" + fileName + ".geom");
+			std::string fragmentShaderText = LoadShader("./res/" + fileName + ".frag");
 
 			AddVertexShader(vertexShaderText);
 			AddGeometryShader(geometryShaderText);
@@ -90,9 +90,9 @@ ShaderData::ShaderData(const std::string& fileName, const unsigned int& shaderTy
 				exit(1);
 			}
 
-			std::string vertexShaderText = LoadShader("./res/" + fileName + ".vs");
-			std::string	geometryShaderText = LoadShader("./res/" + fileName + ".gs");
-			std::string fragmentShaderText = LoadShader("./res/" + fileName + ".fs");
+			std::string vertexShaderText = LoadShader("./res/" + fileName + ".vert");
+			std::string	geometryShaderText = LoadShader("./res/" + fileName + ".geom");
+			std::string fragmentShaderText = LoadShader("./res/" + fileName + ".frag");
 
 			AddVertexShader(vertexShaderText);
 			AddGeometryShader(geometryShaderText);
@@ -159,13 +159,16 @@ void ShaderData::AddAllVaryings(const std::string& gsText)
 	std::string vKey = "TFB_";
 
 	size_t vLocation = gsText.find(vKey);
-	while (vLocation != std::string::npos)
+	size_t programStart = gsText.find("main()");
+	while (vLocation < programStart)
 	{
-		size_t begin = vLocation + vKey.length();
+		size_t begin = vLocation;
 		size_t end = gsText.find(";", begin);
 
-		std::string vName = gsText.substr(begin + 1, end - begin - 1); //TODO: may not be parsing names correctly
-		varyings.push_back(vName.c_str());
+		std::string vName = gsText.substr(begin, end - begin);
+		GLchar *takeName = new char[vName.length() + 1];
+		strcpy(takeName, vName.c_str());
+		varyings.push_back(takeName);
 		vLocation = gsText.find(vKey, end);
 	}
 
@@ -388,22 +391,27 @@ void Shader::UpdateUniforms(PhysicsEngine* physicsEngine)
 			else
 				physicsEngine->UpdateUniformStruct(this, uniformName, uniformType);
 		}
+		else
+		{
+			throw uniformType + " is not supported by the physicsComponent class";
+		}
 		//TODO: add physics components class. Used in updating physics shader uniforms.
 		//else
 		//{
 		//	if (uniformType == "vec3")
-		//		SetUniformVec3(uniformName, material.GetVector3f(uniformName));
+		//		SetUniformVec3(uniformName, physicsComponents.GetVector3f(uniformName));
 		//	else if (uniformType == "float")
-		//		SetUniformf(uniformName, material.GetFloat(uniformName));
+		//		SetUniformf(uniformName, physicsComponents.GetFloat(uniformName));
 		//	else
-		//		throw uniformType + " is not supported by the Material class";
+		//		throw uniformType + " is not supported by the physicsComponent class";
 		//}
 	}
 }
 void Shader::UpdateUniforms(const Transform& transform, const Material& material, RenderingEngine* renderingEngine)
 {
 	glm::mat4 worldMatrix = transform.GetModel();
-	glm::mat4 projectedMatrix = renderingEngine->GetMainCamera().GetViewProjection() * worldMatrix;
+	glm::mat4 viewProjectionMatrix = renderingEngine->GetMainCamera().GetViewProjection();
+	glm::mat4 projectedMatrix = viewProjectionMatrix * worldMatrix;
 
 	for (unsigned int i = 0; i < shaderResourceMap[m_fileName]->GetUniformNames().size(); i++)
 	{
@@ -428,6 +436,12 @@ void Shader::UpdateUniforms(const Transform& transform, const Material& material
 		{
 			if (uniformName == "T_MVP")
 				SetUniformMat4("T_MVP", projectedMatrix);
+			else if (uniformName == "T_VP")
+				SetUniformMat4("T_VP", viewProjectionMatrix);
+			else if (uniformName == "T_P")
+				SetUniformMat4("T_P", renderingEngine->GetMainCamera().GetPerspective());
+			else if (uniformName == "T_LookAt")
+				SetUniformMat4("T_LookAt", renderingEngine->GetMainCamera().GetLookAt());
 			else if (uniformName == "T_model")
 				SetUniformMat4("T_model", worldMatrix);
 			else
@@ -453,9 +467,13 @@ void Shader::UpdateUniforms(const Transform& transform, const Material& material
 		else if (uniformName.substr(0, 2) == "C_")
 		{
 			if (uniformName == "C_eyePos")
+			{
 				SetUniformVec3(uniformName, renderingEngine->GetMainCamera().GetTransform().GetTransformedPos());
+			}	
 			else
+			{
 				throw "Invalid Camera Uniform: " + uniformName;
+			}
 		}
 		else
 		{

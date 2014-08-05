@@ -21,7 +21,7 @@ public:
 
 	void inputAll(const Input& input, float delta);
 	void updateAll(float delta);
-	void updatePhysicsAll(Shader* shader, PhysicsEngine* physicsEngine, float delta);
+	void updatePhysicsAll(Shader* shader, PhysicsEngine* physicsEngine);
 	void renderAll(Shader* shader, RenderingEngine* renderingEngine);
 	void SetEngine(CoreEngine* engine);
 
@@ -32,7 +32,7 @@ public:
 protected:
 	void input(const Input& input, float delta);
 	void update(float delta);
-	void updatePhysics(Shader* shader, PhysicsEngine* physicsEngine, float delta);
+	void updatePhysics(Shader* shader, PhysicsEngine* physicsEngine);
 	void render(Shader* shader, RenderingEngine* renderingEngine);
 
 private:

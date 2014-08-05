@@ -108,7 +108,7 @@
       <Filter>CoreEngine\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="particleSystem.cpp">
-      <Filter>Main</Filter>
+      <Filter>CoreEngine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -199,38 +199,58 @@
     <ClInclude Include="Window.h">
       <Filter>CoreEngine\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="particleSystem.h" />
+    <ClInclude Include="particleSystem.h">
+      <Filter>CoreEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\skyShader.vs">
+    <None Include="res\forwardAmbient.frag">
       <Filter>GLSL Files\MeshRendering</Filter>
     </None>
-    <None Include="res\forwardAmbient.fs">
+    <None Include="res\forwardDirectional.frag">
       <Filter>GLSL Files\MeshRendering</Filter>
     </None>
-    <None Include="res\forwardAmbient.vs">
+    <None Include="res\forwardPoint.frag">
       <Filter>GLSL Files\MeshRendering</Filter>
     </None>
-    <None Include="res\forwardDirectional.fs">
+    <None Include="res\forwardSpot.frag">
       <Filter>GLSL Files\MeshRendering</Filter>
     </None>
-    <None Include="res\forwardDirectional.vs">
+    <None Include="res\skyShader.frag">
       <Filter>GLSL Files\MeshRendering</Filter>
     </None>
-    <None Include="res\forwardPoint.fs">
+    <None Include="res\basicParticlePhy.frag">
+      <Filter>GLSL Files\ParticlePhysics</Filter>
+    </None>
+    <None Include="res\particleRenderer.frag">
+      <Filter>GLSL Files\ParticleRendering</Filter>
+    </None>
+    <None Include="res\forwardAmbient.vert">
       <Filter>GLSL Files\MeshRendering</Filter>
     </None>
-    <None Include="res\forwardPoint.vs">
+    <None Include="res\forwardDirectional.vert">
       <Filter>GLSL Files\MeshRendering</Filter>
     </None>
-    <None Include="res\forwardSpot.fs">
+    <None Include="res\forwardPoint.vert">
       <Filter>GLSL Files\MeshRendering</Filter>
     </None>
-    <None Include="res\forwardSpot.vs">
+    <None Include="res\forwardSpot.vert">
       <Filter>GLSL Files\MeshRendering</Filter>
     </None>
-    <None Include="res\skyShader.fs">
+    <None Include="res\skyShader.vert">
       <Filter>GLSL Files\MeshRendering</Filter>
+    </None>
+    <None Include="res\basicParticlePhy.vert">
+      <Filter>GLSL Files\ParticlePhysics</Filter>
+    </None>
+    <None Include="res\particleRenderer.vert">
+      <Filter>GLSL Files\ParticleRendering</Filter>
+    </None>
+    <None Include="res\basicParticlePhy.geom">
+      <Filter>GLSL Files\ParticlePhysics</Filter>
+    </None>
+    <None Include="res\particleRenderer.geom">
+      <Filter>GLSL Files\ParticleRendering</Filter>
     </None>
   </ItemGroup>
 </Project>

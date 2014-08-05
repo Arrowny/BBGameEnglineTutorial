@@ -3,11 +3,12 @@
 #include "Game.h"
 #include <stdio.h>
 
-CoreEngine::CoreEngine(Game* game, RenderingEngine* renderingEngine, Window* window, double frameRate) :
+CoreEngine::CoreEngine(Game* game, RenderingEngine* renderingEngine, PhysicsEngine* physicEngine, Window* window, double frameRate) :
 m_game(game),
 m_window(window),
 m_frameTime(1.0 / frameRate),
-m_renderingEngine(renderingEngine)
+m_renderingEngine(renderingEngine),
+m_physicsEngine(physicEngine)
 {
 	std::cout <<"OpenGL version: " << getOpenGLVersion() << std::endl;
 	m_isRunning = false;
@@ -89,6 +90,7 @@ void CoreEngine::Run(){
 
 		if (render)
 		{
+			m_game->updatePhysics(m_physicsEngine);
 			Render();
 			frames++;
 		}

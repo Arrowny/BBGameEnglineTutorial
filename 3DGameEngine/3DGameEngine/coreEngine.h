@@ -12,7 +12,7 @@ class Game;
 class CoreEngine
 {
 public:
-	CoreEngine(Game* game, RenderingEngine* renderingEngine, Window* window, double frameRate);
+	CoreEngine(Game* game, RenderingEngine* renderingEngine, PhysicsEngine* physicsEngine, Window* window, double frameRate);
 	~CoreEngine(); 
 
 	void Start(); //Starts running the game; contains central game loop.
