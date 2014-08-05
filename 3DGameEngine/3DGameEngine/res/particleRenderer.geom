@@ -13,8 +13,8 @@ uniform vec3 C_eyePos;
 
 void main(void){
 
-	float quadLength = 0.00001f;
-	vec4 normal = gl_PositionIn[0] - vec4(C_eyePos, 1.0);
+	float quadLength = 0.1f;
+	vec4 normal = gl_in[0].gl_Position - vec4(C_eyePos, 1.0);
 	normal = T_LookAt*normal;
 	
 	vec3 rightAxis 	= cross(normal.xyz, vec3(0,1,0));
@@ -24,7 +24,8 @@ void main(void){
 	
 	vec4 rightVector 	= vec4(rightAxis.xyz, 1.0f);
 	vec4 upVector 		= vec4(upAxis.xyz, 1.0f);
-	vec4 particlePos	= T_LookAt*gl_PositionIn[0];
+	vec4 particlePos	= T_LookAt*gl_in[0].gl_Position;
+
 
 	gl_Position = particlePos-rightVector*(quadLength*0.5f)-upVector*(quadLength*0.5f);
 	gl_Position = T_P*gl_Position;
