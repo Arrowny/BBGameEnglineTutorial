@@ -40,9 +40,10 @@ void TestGame::init(){
 	m_mesh = new Mesh("triforce.obj");
 	//m_mesh2 = new Mesh("./res/mon.obj");
 	//m_mesh3 = new Mesh("./res/luigi.obj");
-	m_texture = new Texture("fireworks_red.jpg");
+	m_texture = new Texture("colour.jpg");
 	m_texture2 = new Texture("bricks2.jpg");
 	m_texture3 = new Texture("bricks2_normal.jpg");
+	m_texture4 = new Texture("fireworks_red.jpg");
 	m_skyTexture = new Texture3d("skyleft.png", "skyright.png", "skyup.png", "skydown.png", "skyfront.png", "skyback.png");
     //m_skyTexture = new Texture3d("./res/skybox", "left2.jpg", "right2.jpg", "up2.jpg", "down2.jpg", "front2.jpg", "back2.jpg");
 
@@ -62,6 +63,11 @@ void TestGame::init(){
 	m_material3.AddTexture("diffuse", m_texture3);
 	m_material3.AddFloat("specularIntensity", 1);
 	m_material3.AddFloat("specularPower", 36);
+
+	m_material4 = Material();
+	m_material4.AddTexture("diffuse", m_texture4);
+	m_material4.AddFloat("specularIntensity", 1);
+	m_material4.AddFloat("specularPower", 36);
 
 	m_sky = Material();
 	m_sky.AddTexture("diffuse", m_skyTexture);
@@ -114,7 +120,7 @@ void TestGame::init(){
 	m_camera->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f))->AddComponent(new FreeLook())->AddComponent(new FreeMove());
 	m_skyBoxObject->AddComponent(m_skyBoxrenderer);
 
-	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material);
+	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material4, glm::vec3(15,15,15));
 	m_basicPSObj->AddComponent(m_basicPS);
 
 	AddToScene(m_planeObject);

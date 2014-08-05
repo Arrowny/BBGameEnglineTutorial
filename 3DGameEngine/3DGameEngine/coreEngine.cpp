@@ -45,7 +45,6 @@ void CoreEngine::Run(){
 	m_isRunning = true;
 
 	m_game->init();
-	m_physicsEngine = new PhysicsEngine(m_frameTime);
 
 	int frames = 0;
 	double frameCounter = 0;

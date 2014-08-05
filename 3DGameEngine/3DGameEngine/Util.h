@@ -54,11 +54,11 @@ namespace Util
 	{
 		clock_t time = clock();
 		srand((float)time);
-		glm::vec3 random = glm::vec3(	(static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) * 2 - 1,
-										(static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) * 2 - 1,
-										(static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) * 2 - 1
+		glm::vec3 random = glm::vec3(	(static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) * 2.0f - 1.0f,
+										(static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) * 2.0f - 1.0f,
+										(static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) * 2.0f - 1.0f
 									);
-		return random;
+		return glm::normalize(random);
 	}
 
 };

@@ -3,9 +3,8 @@
 #include <GL\glew.h>
 #include <glm\glm.hpp>
 #include "gameComponent.h"
-#define MAX_PARTICLES 1000
-#define BASE_PARTICLE 1
-#define SECONDARY_PARTICLE 0
+#define MAX_PARTICLES 10000
+#define BASE_PARTICLE 0
 
 class Material;
 class CoreEngine;
@@ -15,7 +14,7 @@ class Shader;
 
 struct Particle
 {
-	float Type;
+	int Type;
 	glm::vec3 Pos;
 	glm::vec3 Vel;
 	float Age;
@@ -24,7 +23,7 @@ struct Particle
 class ParticleSystem : public GameComponent
 {
 public:
-	ParticleSystem(std::string physicsProgramName, Material* material);
+	ParticleSystem(std::string physicsProgramName, Material* material, glm::vec3 BasePosition = glm::vec3(0.0, 0.0, 0.0));
 	~ParticleSystem();
 
 	void InitParticleSystem(const glm::vec3& Pos);
@@ -43,8 +42,8 @@ private:
 	unsigned int m_currTFB;
 	GLuint m_particleBuffer[2];
 	GLuint m_transformFeedback[2];
-	GLuint query;
-	int numberofparticles;
+	GLuint m_query;
+	int m_numParticles;
 	Material* m_material;
 	Shader* m_physicsProgram;
 	Shader* m_rendererProgram;

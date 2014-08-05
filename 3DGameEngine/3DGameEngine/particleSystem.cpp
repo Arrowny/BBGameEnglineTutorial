@@ -4,7 +4,7 @@
 #include "coreEngine.h"
 
 
-ParticleSystem::ParticleSystem(std::string physicsProgramName, Material* material)
+ParticleSystem::ParticleSystem(std::string physicsProgramName, Material* material, glm::vec3 BasePosition)
 {
 	m_currVB = 0;
 	m_currTFB = 1;
@@ -13,10 +13,7 @@ ParticleSystem::ParticleSystem(std::string physicsProgramName, Material* materia
 	m_material = material;
 	m_physicsProgram = new Shader(physicsProgramName, Shader::PHYSICS_SHADER);
 	m_rendererProgram = new Shader("particleRenderer", Shader::FULL_SHADER_PIPELINE);
-	InitParticleSystem(glm::vec3(1.0, 0.0, 5.0)); //TODO: update constructor to allow for multiple BASE_PARTICLES and SECONDARY_PARTICLES
-
-	//Debug:
-	glGenQueries(1, &query);
+	InitParticleSystem(BasePosition); //TODO: update constructor to allow for multiple BASE_PARTICLES and SECONDARY_PARTICLES
 }
 
 
@@ -31,7 +28,7 @@ void ParticleSystem::InitParticleSystem(const glm::vec3& Pos)
 
 	Particles[0].Type = BASE_PARTICLE;
 	Particles[0].Pos = Pos;
-	Particles[0].Vel = glm::vec3(0.0f, 0.0000f, 0.0f);
+	Particles[0].Vel = glm::vec3(0.0f, 0.0f, 0.0f);
 	Particles[0].Age = 0.0f;
 
 	glGenTransformFeedbacks(2, m_transformFeedback);
@@ -49,12 +46,8 @@ void ParticleSystem::InitParticleSystem(const glm::vec3& Pos)
 	glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, m_particleBuffer[1]);
 	glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, 0);
 
-	//for (unsigned int i = 0; i < 2; i++) {
-	//	glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, m_transformFeedback[i]);
-	//	glBindBuffer(GL_ARRAY_BUFFER, m_particleBuffer[i]);
-	//	glBufferData(GL_ARRAY_BUFFER, sizeof(Particles), Particles, GL_DYNAMIC_DRAW);
-	//	glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, m_particleBuffer[i]);
-	//}
+	glGenQueries(1, &m_query);
+	m_numParticles = 1;
 }
 
 void ParticleSystem::updatePhysics(Shader* shader, PhysicsEngine* physicsEngine)
@@ -76,16 +69,9 @@ void ParticleSystem::updatePhysics(Shader* shader, PhysicsEngine* physicsEngine)
 	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Particle), (const GLvoid*)16);	// velocity
 	glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(Particle), (const GLvoid*)28);	// age
 
-	//glBeginQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN, PrimsWritten);
-	//glDrawArrays(GL_POINTS, 0, inCount);
-	//glEndTransformFeedback();
-	//glEndQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN);
-	//glGetQueryObjectuiv(Query, GL_QUERY_RESULT, &outCount);
-
-
 	glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, m_particleBuffer[m_currTFB]);
 
-	glBeginQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN, query);
+	glBeginQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN, m_query);
 	glBeginTransformFeedback(GL_POINTS);
 	if (m_isFirst) {
 		glDrawArrays(GL_POINTS, 0, 1);
@@ -93,13 +79,11 @@ void ParticleSystem::updatePhysics(Shader* shader, PhysicsEngine* physicsEngine)
 	}
 	else 
 	{
-		glDrawArrays(GL_POINTS, 0, numberofparticles);
-		//glDrawTransformFeedback(GL_POINTS, m_transformFeedback[m_currTFB]);
+		glDrawArrays(GL_POINTS, 0, m_numParticles);
 	}
 	glEndTransformFeedback();
 	glEndQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN);
-	//int numberofparticles = 0;
-	glGetQueryObjectiv(query, GL_QUERY_RESULT, &numberofparticles);
+	glGetQueryObjectiv(m_query, GL_QUERY_RESULT, &m_numParticles);
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
@@ -130,8 +114,7 @@ void ParticleSystem::drawParticles()
 		glBindBuffer(GL_ARRAY_BUFFER, m_particleBuffer[m_currVB]);
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Particle), (const GLvoid*)4);  // position
-		glDrawArrays(GL_POINTS, 0, numberofparticles);
-		//glDrawTransformFeedback(GL_POINTS, m_transformFeedback[m_currTFB]);
+		glDrawArrays(GL_POINTS, 0, m_numParticles);
 		glDisableVertexAttribArray(0);
 	}
 }

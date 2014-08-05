@@ -12,7 +12,7 @@ uniform vec3 C_eyePos;
 
 void main(void){
 
-	float quadLength = 0.00001f;
+	float quadLength = 0.1f;
 	vec4 normal = gl_in[0].gl_Position - vec4(C_eyePos, 1.0);
 	normal = T_LookAt*normal;
 	
