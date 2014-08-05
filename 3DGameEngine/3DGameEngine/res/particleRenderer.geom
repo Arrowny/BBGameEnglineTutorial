@@ -18,7 +18,7 @@ void main(void){
 
 	if(Type0[0] != BASE_PARTICLE) //never render base particles. Base particles should be used to seed other particles.
 	{
-		float quadLength = 0.1f;
+		float quadLength = 0.001f;
 		vec4 normal = gl_in[0].gl_Position - vec4(C_eyePos, 1.0);
 		normal = T_LookAt*normal;
 	

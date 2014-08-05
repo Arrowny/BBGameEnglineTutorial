@@ -65,7 +65,7 @@ public:
 	virtual ~Shader();
 
 	void Bind();
-	virtual void UpdateUniforms(PhysicsEngine* physicsEngine);
+	virtual void UpdateUniforms(const Transform& transform, PhysicsEngine* physicsEngine);
 	virtual void UpdateUniforms(const Transform& transform, const Material& material, RenderingEngine* renderingEngine);
 
 	void SetUniformi(const std::string& name, int value);

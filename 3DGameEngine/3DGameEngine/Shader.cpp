@@ -372,8 +372,9 @@ void Shader::Bind()
 	glUseProgram(shaderResourceMap[m_fileName]->GetProgram());
 }
 
-void Shader::UpdateUniforms(PhysicsEngine* physicsEngine)
+void Shader::UpdateUniforms(const Transform& transform, PhysicsEngine* physicsEngine)
 {
+	glm::mat4 worldMatrix = transform.GetModel();
 
 	for (unsigned int i = 0; i < shaderResourceMap[m_fileName]->GetUniformNames().size(); i++)
 	{
@@ -391,9 +392,12 @@ void Shader::UpdateUniforms(PhysicsEngine* physicsEngine)
 			else
 				physicsEngine->UpdateUniformStruct(this, uniformName, uniformType);
 		}
-		else
+		else if (uniformName.substr(0, 2) == "T_")
 		{
-			throw uniformType + " is not supported by the physicsComponent class";
+			if (uniformName == "T_model")
+				SetUniformMat4("T_model", worldMatrix);
+			else
+				throw "Invalid Transform Uniform: " + uniformName;
 		}
 		//TODO: add physics components class. Used in updating physics shader uniforms.
 		//else
@@ -405,6 +409,11 @@ void Shader::UpdateUniforms(PhysicsEngine* physicsEngine)
 		//	else
 		//		throw uniformType + " is not supported by the physicsComponent class";
 		//}
+		else
+		{
+			throw uniformType + " is not supported by the physicsComponent class";
+		}
+
 	}
 }
 void Shader::UpdateUniforms(const Transform& transform, const Material& material, RenderingEngine* renderingEngine)

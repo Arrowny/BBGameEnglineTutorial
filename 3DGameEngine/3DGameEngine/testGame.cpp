@@ -114,8 +114,9 @@ void TestGame::init(){
 	m_camera->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f))->AddComponent(new FreeLook())->AddComponent(new FreeMove());
 	m_skyBoxObject->AddComponent(m_skyBoxrenderer);
 
-	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material, glm::vec3(15.0,1.00,10.0));
+	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material, glm::vec3(0.0, 0.0, 10.0));
 	m_basicPSObj->AddComponent(m_basicPS);
+	m_basicPSObj->AddComponent(new FreeLook())->AddComponent(new FreeMove());
 
 	AddToScene(m_planeObject);
 	AddToScene(m_dirLightObj1);
