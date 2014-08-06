@@ -117,7 +117,7 @@ void ParticleSystem::drawParticles()
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(0, 1, GL_FLOAT, GL_FALSE, sizeof(Particle), 0);					// type
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Particle), (const GLvoid*)4);  // position
-		glDrawArrays(GL_POINTS, 0, m_numParticles);
+		glDrawArrays(GL_POINTS, 0, m_numParticles-9);
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
 	}
