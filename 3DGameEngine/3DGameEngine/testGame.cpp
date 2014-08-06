@@ -43,35 +43,15 @@ void TestGame::init(){
 	m_texture = new Texture("colour.jpg");
 	m_texture2 = new Texture("bricks2.jpg");
 	m_texture3 = new Texture("bricks2_normal.jpg");
-	m_texture4 = new Texture("particle.tga");
-	//m_texture4 = new Texture("fireworks_red.tga");
 	m_skyTexture = new Texture3d("skyleft.png", "skyright.png", "skyup.png", "skydown.png", "skyfront.png", "skyback.png");
     //m_skyTexture = new Texture3d("./res/skybox", "left2.jpg", "right2.jpg", "up2.jpg", "down2.jpg", "front2.jpg", "back2.jpg");
 
     //m_skyTexture = new Texture3d("./res/skybox", "jajlands1_left.jpg", "jajlands1_right.jpg", "jajlands1_top.jpg", "jajlands1_bottom.jpg", "jajlands1_front.jpg", "jajlands1_back.jpg");
 
-	m_material = Material();
-	m_material.AddTexture("diffuse", m_texture);
-	m_material.AddFloat("specularIntensity", 1);
-	m_material.AddFloat("specularPower", 36);
-
-	m_material2 = Material();
-	m_material2.AddTexture("diffuse", m_texture2);
-	m_material2.AddFloat("specularIntensity", 1);
-	m_material2.AddFloat("specularPower", 10);
-
-	m_material3 = Material();
-	m_material3.AddTexture("diffuse", m_texture3);
-	m_material3.AddFloat("specularIntensity", 1);
-	m_material3.AddFloat("specularPower", 36);
-
-	m_material4 = Material();
-	m_material4.AddTexture("diffuse", m_texture4);
-	m_material4.AddFloat("specularIntensity", 1);
-	m_material4.AddFloat("specularPower", 36);
-
-	m_sky = Material();
-	m_sky.AddTexture("diffuse", m_skyTexture);
+	m_material = Material(m_texture, 1, 36);
+	m_material2 = Material(m_texture2, 1, 10);
+	m_material3 = Material(m_texture3, 1, 36);
+	m_sky = Material(); m_sky.AddTexture("diffuse", m_skyTexture);
 
 	m_meshRenderer = new MeshRenderer(*m_mesh, m_material);
 	m_meshRenderer2 = new MeshRenderer(*m_mesh, m_material2);
@@ -121,7 +101,7 @@ void TestGame::init(){
 	m_camera->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f))->AddComponent(new FreeLook())->AddComponent(new FreeMove());
 	m_skyBoxObject->AddComponent(m_skyBoxrenderer);
 
-	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material4, glm::vec3(1,1,5));
+	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material, new PhysicsComponents(2), glm::vec3(0.0, 0.0, 10.0));
 	m_basicPSObj->AddComponent(m_basicPS);
 	m_basicPSObj->AddComponent(new FreeLook())->AddComponent(new FreeMove());
 
