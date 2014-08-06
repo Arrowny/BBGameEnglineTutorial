@@ -51,7 +51,7 @@ void TestGame::init(){
 	m_material = Material(m_texture, 1, 36);
 	m_material2 = Material(m_texture2, 1, 10);
 	m_material3 = Material(m_texture3, 1, 36);
-	m_sky = Material(); m_sky.AddTexture("diffuse", m_skyTexture);
+	m_sky = Material(); m_sky.SetTexture("diffuse", m_skyTexture);
 
 	m_meshRenderer = new MeshRenderer(*m_mesh, m_material);
 	m_meshRenderer2 = new MeshRenderer(*m_mesh, m_material2);
@@ -102,9 +102,10 @@ void TestGame::init(){
 	m_skyBoxObject->AddComponent(m_skyBoxrenderer);
 
 	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material, new PhysicsComponents(2), glm::vec3(0.0, 0.0, 10.0));
+	m_material.SetFloat("quadLength", 0.01);
 	m_basicPSObj->AddComponent(m_basicPS);
-	m_basicPSObj->AddComponent(new FreeLook())->AddComponent(new FreeMove());
-
+	//m_basicPSObj->AddComponent(new FreeLook())->AddComponent(new FreeMove());
+	
 	AddToScene(m_planeObject);
 	AddToScene(m_dirLightObj1);
 	AddToScene(m_pLightObj1);
