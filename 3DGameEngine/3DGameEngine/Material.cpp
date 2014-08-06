@@ -7,9 +7,9 @@ m_vec3fMap(std::unordered_map<std::string, glm::fvec3>()),
 m_floatMap(std::unordered_map<std::string, float>()),
 m_intMap(std::unordered_map<std::string, int>())
 {
-	AddTexture("diffuse", texture);
-	AddFloat("specularIntensity", specularIntensity);
-	AddFloat("specularPower", specularPower);
+	SetTexture("diffuse", texture);
+	SetFloat("specularIntensity", specularIntensity);
+	SetFloat("specularPower", specularPower);
 };
 
 Texture* Material::GetTexture(const std::string& name) const

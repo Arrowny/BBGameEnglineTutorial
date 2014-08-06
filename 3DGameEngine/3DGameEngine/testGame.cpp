@@ -53,11 +53,11 @@ void TestGame::init(){
 	m_material2 = Material(m_texture2, 1, 10);
 	m_material3 = Material(m_texture3, 1, 36);
 	m_material4 = Material(m_texture4, 1, 36);
-	m_sky = Material(); m_sky.AddTexture("diffuse", m_skyTexture);
+	m_sky = Material(); m_sky.SetTexture("diffuse", m_skyTexture);
 
 	m_basePhys = PhysicsComponents(2);
 	m_basePhys.SetInt("ageLimit", 1);
-	m_material4.AddFloat("quadLength", 0.1f);
+	m_material4.SetFloat("quadLength", 0.1f);
 
 	m_meshRenderer = new MeshRenderer(*m_mesh, m_material);
 	m_meshRenderer2 = new MeshRenderer(*m_mesh, m_material2);
