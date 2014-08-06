@@ -53,7 +53,7 @@ void ParticleSystem::InitParticleSystem(const glm::vec3& Pos)
 void ParticleSystem::updatePhysics(Shader* shader, PhysicsEngine* physicsEngine)
 {
 	m_physicsProgram->Bind();
-	m_physicsProgram->UpdateUniforms(physicsEngine);
+	m_physicsProgram->UpdateUniforms(GetTransform(), physicsEngine);
 
 	glEnable(GL_RASTERIZER_DISCARD);
 	glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, m_transformFeedback[m_currTFB]);
@@ -104,6 +104,7 @@ void ParticleSystem::renderParticles(Shader* shader, RenderingEngine* renderingE
 	//swap current TFB setup
 	m_currVB = m_currTFB;
 	m_currTFB = (m_currTFB + 1) & 0x1;
+
 }
 
 

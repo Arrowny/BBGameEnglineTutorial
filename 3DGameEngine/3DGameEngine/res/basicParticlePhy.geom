@@ -11,6 +11,7 @@ in int Type0[];
 in vec3 Position0[];                                                                
 in vec3 Velocity0[];                                                                
 in float Age0[];   
+in vec3 worldPos[];
 
 out int TFB_Type;                                                                    
 out vec3 TFB_Position;                                                                 
@@ -34,11 +35,9 @@ void main()
 		for(int ii = 0; ii < 2; ii++)
 		{
 			TFB_Type = PARTICLE_TYPE;
-			TFB_Position = Position0[0];
-			//Velocity1.x = P_randomSeed.x * ii;
-			//Velocity1.y = P_randomSeed.y * ii;
-			//Velocity1.z = P_randomSeed.z * ii;
+			TFB_Position = worldPos[0];
 			TFB_Velocity = P_randomSeed * ii * 10;
+//			TFB_Velocity = P_randomSeed * 10;
 			normalize(TFB_Velocity);
 			TFB_Age = 0.0;
 			EmitVertex();

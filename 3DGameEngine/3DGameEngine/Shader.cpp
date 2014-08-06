@@ -372,9 +372,9 @@ void Shader::Bind()
 	glUseProgram(shaderResourceMap[m_fileName]->GetProgram());
 }
 
-void Shader::UpdateUniforms(PhysicsEngine* physicsEngine)
+void Shader::UpdateUniforms(const Transform& transform, PhysicsEngine* physicsEngine)
 {
-
+	glm::mat4 worldMatrix = transform.GetModel();
 	for (unsigned int i = 0; i < shaderResourceMap[m_fileName]->GetUniformNames().size(); i++)
 	{
 		std::string uniformName = shaderResourceMap[m_fileName]->GetUniformNames()[i];
@@ -390,6 +390,13 @@ void Shader::UpdateUniforms(PhysicsEngine* physicsEngine)
 				SetUniformf(uniformName, physicsEngine->GetFloat(unprefixedName));
 			else
 				physicsEngine->UpdateUniformStruct(this, uniformName, uniformType);
+		}
+		else if (uniformName.substr(0, 2) == "T_")
+		{
+			if (uniformName == "T_model")
+				SetUniformMat4("T_model", worldMatrix);
+			else
+				throw "Invalid Transform Uniform: " + uniformName;
 		}
 		else
 		{

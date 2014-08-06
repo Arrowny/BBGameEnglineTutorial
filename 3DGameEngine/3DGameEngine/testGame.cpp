@@ -43,7 +43,8 @@ void TestGame::init(){
 	m_texture = new Texture("colour.jpg");
 	m_texture2 = new Texture("bricks2.jpg");
 	m_texture3 = new Texture("bricks2_normal.jpg");
-	m_texture4 = new Texture("fireworks_red.jpg");
+	m_texture4 = new Texture("particle.tga");
+	//m_texture4 = new Texture("fireworks_red.tga");
 	m_skyTexture = new Texture3d("skyleft.png", "skyright.png", "skyup.png", "skydown.png", "skyfront.png", "skyback.png");
     //m_skyTexture = new Texture3d("./res/skybox", "left2.jpg", "right2.jpg", "up2.jpg", "down2.jpg", "front2.jpg", "back2.jpg");
 
@@ -120,8 +121,9 @@ void TestGame::init(){
 	m_camera->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f))->AddComponent(new FreeLook())->AddComponent(new FreeMove());
 	m_skyBoxObject->AddComponent(m_skyBoxrenderer);
 
-	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material4, glm::vec3(5,5,5));
+	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material4, glm::vec3(1,1,5));
 	m_basicPSObj->AddComponent(m_basicPS);
+	m_basicPSObj->AddComponent(new FreeLook())->AddComponent(new FreeMove());
 
 	AddToScene(m_planeObject);
 	AddToScene(m_dirLightObj1);

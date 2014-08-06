@@ -1,5 +1,4 @@
 #version 330
-#extension GL_EXT_geometry_shader4 : enable
 
 #define BASE_PARTICLE 0
 
