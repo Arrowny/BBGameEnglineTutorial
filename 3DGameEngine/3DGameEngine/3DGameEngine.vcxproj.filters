@@ -110,6 +110,9 @@
     <ClCompile Include="particleSystem.cpp">
       <Filter>CoreEngine</Filter>
     </ClCompile>
+    <ClCompile Include="physicsComponents.cpp">
+      <Filter>PhysicsEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lights.h">
@@ -201,6 +204,9 @@
     </ClInclude>
     <ClInclude Include="Window.h">
       <Filter>CoreEngine\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="physicsComponents.h">
+      <Filter>PhysicsEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

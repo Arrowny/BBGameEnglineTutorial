@@ -48,23 +48,10 @@ void TestGame::init(){
 
     //m_skyTexture = new Texture3d("./res/skybox", "jajlands1_left.jpg", "jajlands1_right.jpg", "jajlands1_top.jpg", "jajlands1_bottom.jpg", "jajlands1_front.jpg", "jajlands1_back.jpg");
 
-	m_material = Material();
-	m_material.AddTexture("diffuse", m_texture);
-	m_material.AddFloat("specularIntensity", 1);
-	m_material.AddFloat("specularPower", 36);
-
-	m_material2 = Material();
-	m_material2.AddTexture("diffuse", m_texture2);
-	m_material2.AddFloat("specularIntensity", 1);
-	m_material2.AddFloat("specularPower", 10);
-
-	m_material3 = Material();
-	m_material3.AddTexture("diffuse", m_texture3);
-	m_material3.AddFloat("specularIntensity", 1);
-	m_material3.AddFloat("specularPower", 36);
-
-	m_sky = Material();
-	m_sky.AddTexture("diffuse", m_skyTexture);
+	m_material = Material(m_texture, 1, 36);
+	m_material2 = Material(m_texture2, 1, 10);
+	m_material3 = Material(m_texture3, 1, 36);
+	m_sky = Material(); m_sky.AddTexture("diffuse", m_skyTexture);
 
 	m_meshRenderer = new MeshRenderer(*m_mesh, m_material);
 	m_meshRenderer2 = new MeshRenderer(*m_mesh, m_material2);
@@ -114,7 +101,7 @@ void TestGame::init(){
 	m_camera->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f))->AddComponent(new FreeLook())->AddComponent(new FreeMove());
 	m_skyBoxObject->AddComponent(m_skyBoxrenderer);
 
-	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material, glm::vec3(0.0, 0.0, 10.0));
+	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material, new PhysicsComponents(2), glm::vec3(0.0, 0.0, 10.0));
 	m_basicPSObj->AddComponent(m_basicPS);
 	m_basicPSObj->AddComponent(new FreeLook())->AddComponent(new FreeMove());
 

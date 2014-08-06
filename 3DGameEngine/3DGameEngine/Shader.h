@@ -9,6 +9,8 @@
 #include "Material.h"
 #include "renderingEngine.h"
 #include "referenceCounter.h"
+#include "physicsEngine.h"
+#include "physicsComponents.h"
 #include "Lights.h"
 
 struct TypedData
@@ -65,7 +67,7 @@ public:
 	virtual ~Shader();
 
 	void Bind();
-	virtual void UpdateUniforms(const Transform& transform, PhysicsEngine* physicsEngine);
+	virtual void UpdateUniforms(const Transform& transform, const PhysicsComponents& components, PhysicsEngine* physicsEngine);
 	virtual void UpdateUniforms(const Transform& transform, const Material& material, RenderingEngine* renderingEngine);
 
 	void SetUniformi(const std::string& name, int value);

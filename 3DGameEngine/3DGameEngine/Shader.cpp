@@ -5,7 +5,7 @@
 #include <cassert>
 #include <cstdlib>
 #include "Util.h"
-#include "physicsEngine.h"
+#include "Texture.h"
 
 std::unordered_map<std::string, ShaderData*> Shader::shaderResourceMap;
 
@@ -372,7 +372,7 @@ void Shader::Bind()
 	glUseProgram(shaderResourceMap[m_fileName]->GetProgram());
 }
 
-void Shader::UpdateUniforms(const Transform& transform, PhysicsEngine* physicsEngine)
+void Shader::UpdateUniforms(const Transform& transform, const PhysicsComponents& components, PhysicsEngine* physicsEngine)
 {
 	glm::mat4 worldMatrix = transform.GetModel();
 
@@ -399,19 +399,16 @@ void Shader::UpdateUniforms(const Transform& transform, PhysicsEngine* physicsEn
 			else
 				throw "Invalid Transform Uniform: " + uniformName;
 		}
-		//TODO: add physics components class. Used in updating physics shader uniforms.
-		//else
-		//{
-		//	if (uniformType == "vec3")
-		//		SetUniformVec3(uniformName, physicsComponents.GetVector3f(uniformName));
-		//	else if (uniformType == "float")
-		//		SetUniformf(uniformName, physicsComponents.GetFloat(uniformName));
-		//	else
-		//		throw uniformType + " is not supported by the physicsComponent class";
-		//}
 		else
 		{
-			throw uniformType + " is not supported by the physicsComponent class";
+			if (uniformType == "vec3")
+				SetUniformVec3(uniformName, components.GetVector3f(uniformName));
+			else if (uniformType == "float")
+				SetUniformf(uniformName, components.GetFloat(uniformName));
+			else if (uniformType == "int")
+				SetUniformi(uniformName, components.GetInt(uniformName));
+			else
+				throw uniformType + " is not supported by the physicsComponent class";
 		}
 
 	}
@@ -490,6 +487,8 @@ void Shader::UpdateUniforms(const Transform& transform, const Material& material
 				SetUniformVec3(uniformName, material.GetVector3f(uniformName));
 			else if (uniformType == "float")
 				SetUniformf(uniformName, material.GetFloat(uniformName));
+			else if (uniformType == "int")
+				SetUniformf(uniformName, material.GetInt(uniformName));
 			else
 				throw uniformType + " is not supported by the Material class";
 		}
