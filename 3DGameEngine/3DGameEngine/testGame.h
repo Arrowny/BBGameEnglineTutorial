@@ -57,6 +57,7 @@ private:
 	Material m_material2;
 	Material m_material3;
 	Material m_material4;
+	PhysicsComponents m_basePhys;
 	Material m_sky;
 	Texture* m_texture;
 	Texture* m_texture2;

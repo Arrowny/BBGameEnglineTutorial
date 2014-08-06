@@ -21,6 +21,7 @@ uniform float P_delta;
 uniform vec3 P_randomSeed;
 uniform mat4 T_model;  
 uniform int numEmit;
+uniform int ageLimit;
 
 void main()
 {
@@ -37,12 +38,12 @@ void main()
 		{
 			TFB_Type = PARTICLE_TYPE;
 			TFB_Position = (T_model * vec4(emit_position, 1.0)).xyz;;
-			TFB_Velocity = P_randomSeed * (ii+1)*100;
+			TFB_Velocity = P_randomSeed * ii *100;
 			TFB_Age = 0.0;
 			EmitVertex();
 		}
 	}
-	else if (Age0[0] < 100.0)
+	else if (Age0[0] < ageLimit)
 	{
 		TFB_Type = Type0[0];
 		TFB_Position = Position0[0] + (Velocity0[0] * P_delta);
