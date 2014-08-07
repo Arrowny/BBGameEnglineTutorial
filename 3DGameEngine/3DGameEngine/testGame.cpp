@@ -57,7 +57,7 @@ void TestGame::init(){
 
 	m_basePhys = PhysicsComponents(2);
 	m_basePhys.SetInt("ageLimit", 1);
-	m_material4.SetFloat("quadLength", 0.1f);
+	m_material4.SetFloat("quadLength", 0.5f);
 
 	m_meshRenderer = new MeshRenderer(*m_mesh, m_material);
 	m_meshRenderer2 = new MeshRenderer(*m_mesh, m_material2);
@@ -107,9 +107,12 @@ void TestGame::init(){
 	m_camera->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f))->AddComponent(new FreeLook())->AddComponent(new FreeMove());
 	m_skyBoxObject->AddComponent(m_skyBoxrenderer);
 
-	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material4, &m_basePhys, glm::vec3(0.0, 0.0, 10.0));
+	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material, &m_basePhys, glm::vec3(0.0, 0.0, 0.0));
 	m_basicPSObj->AddComponent(m_basicPS);
 	//m_basicPSObj->AddComponent(new FreeLook())->AddComponent(new FreeMove());
+
+	//m_basicPS2 = new ParticleSystem("basicParticlePhy", &m_material4, &m_basePhys, glm::vec3(0.0, 0.0, 10.0));
+	//m_basicPSObj->AddComponent(m_basicPS2);
 
 	AddToScene(m_planeObject);
 	AddToScene(m_dirLightObj1);

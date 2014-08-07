@@ -69,5 +69,6 @@ private:
 	MeshRenderer* m_meshRenderer3;
 	SkyBoxRenderer* m_skyBoxrenderer;
 	ParticleSystem* m_basicPS;
+	ParticleSystem* m_basicPS2;
 };
 

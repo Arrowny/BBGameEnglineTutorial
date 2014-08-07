@@ -10,9 +10,6 @@ RenderingEngine::RenderingEngine()
 {
 	glEnable(GL_DEPTH_TEST);
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 
@@ -64,8 +61,8 @@ void RenderingEngine::Render(GameObject* object)
 	//Particles should be rendered last
 	glEnable(GL_BLEND);
 	glEnable(GL_DEPTH_TEST);
+
 	glDepthMask(0);
-	//glEnable(GL_NORMALIZE);
 	//glColor4f(.1, .8, .8, 0.1);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 	//TODO: currently baseParticleShader does nothing. Add functionality.
