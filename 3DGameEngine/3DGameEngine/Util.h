@@ -25,6 +25,7 @@
 #include <locale>
 #include <ctime>
 #define ZERO_MEM(a) std::memset(a, 0, sizeof(a))
+#define ZERO_MEM2(a,b) std::memset(a, 0, b)
 
 
 namespace Util

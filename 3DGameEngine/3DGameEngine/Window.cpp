@@ -88,7 +88,6 @@ void Window::Update()
 		if (e.type == SDL_KEYDOWN)
 		{
 			int value = e.key.keysym.scancode;
-			std::cout << "Down:" << value << std::endl;
 
 			m_input.SetKey(value, true);
 			m_input.SetKeyDown(value, true);
@@ -96,7 +95,6 @@ void Window::Update()
 		if (e.type == SDL_KEYUP)
 		{
 			int value = e.key.keysym.scancode;
-			std::cout << "Up:" << value << std::endl;
 
 			m_input.SetKey(value, false);
 			m_input.SetKeyUp(value, true);
@@ -104,7 +102,6 @@ void Window::Update()
 		if (e.type == SDL_MOUSEBUTTONDOWN)
 		{
 			int value = e.button.button;
-			std::cout << "MDown:" << value << std::endl;
 
 			m_input.SetMouse(value, true);
 			m_input.SetMouseDown(value, true);
@@ -112,7 +109,6 @@ void Window::Update()
 		if (e.type == SDL_MOUSEBUTTONUP)
 		{
 			int value = e.button.button;
-			std::cout << "MUp:" << value << std::endl;
 
 			m_input.SetMouse(value, false);
 			m_input.SetMouseUp(value, true);

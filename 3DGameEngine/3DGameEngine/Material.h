@@ -23,6 +23,7 @@ struct Material
 	inline void SetTexture(const std::string& name, Texture* value) { m_textureMap[name] = value; }
 	inline void SetVector3f(const std::string& name, glm::fvec3 value) { m_vec3fMap[name] = value; }
 	inline void SetFloat(const std::string& name, float value) { m_floatMap[name] = value; }
+	inline void SetInt(const std::string& name, float value) { m_floatMap[name] = value; }
 
 	Texture* GetTexture(const std::string& name) const;
 	glm::fvec3 GetVector3f(const std::string& name) const;

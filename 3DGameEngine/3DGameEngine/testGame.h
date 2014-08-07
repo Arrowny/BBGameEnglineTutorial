@@ -56,19 +56,18 @@ private:
 	Material m_material;
 	Material m_material2;
 	Material m_material3;
-	Material m_material4;
-	PhysicsComponents m_basePhys;
+	Material m_particleMaterial;
 	Material m_sky;
 	Texture* m_texture;
 	Texture* m_texture2;
 	Texture* m_texture3;
-	Texture* m_texture4;
+	Texture* m_particleTexture;
 	Texture* m_skyTexture;
 	MeshRenderer* m_meshRenderer;
 	MeshRenderer* m_meshRenderer2;
 	MeshRenderer* m_meshRenderer3;
 	SkyBoxRenderer* m_skyBoxrenderer;
 	ParticleSystem* m_basicPS;
-	ParticleSystem* m_basicPS2;
+	ParticleSystem* m_luminousPS;
 };
 
