@@ -3,10 +3,12 @@
 #include "Shader.h"
 #include "coreEngine.h"
 #include "physicsComponents.h"
+#include <vector>
 
 
-ParticleSystem::ParticleSystem(std::string physicsProgramName, Material* material, PhysicsComponents* components, glm::vec3 BasePosition)
+ParticleSystem::ParticleSystem(std::string physicsProgramName, Material* material, PhysicsComponents* components, glm::vec3 BasePosition, const int& maxParticles, const int& rendSpecification)
 {
+	m_renderingSpecification = rendSpecification;
 	m_currVB = 0;
 	m_currTFB = 1;
 	m_isFirst = true;
@@ -15,11 +17,12 @@ ParticleSystem::ParticleSystem(std::string physicsProgramName, Material* materia
 	m_components = components;
 	m_physicsPrograms.push_back(new Shader(physicsProgramName, Shader::PHYSICS_SHADER));
 	m_rendererProgram = new Shader("particleRenderer", Shader::FULL_SHADER_PIPELINE);
-	InitParticleSystem(BasePosition);
+	InitParticleSystem(BasePosition, maxParticles);
 }
 
-ParticleSystem::ParticleSystem(std::vector<std::string> physicsProgramNames, Material* material, glm::vec3 BasePosition)
+ParticleSystem::ParticleSystem(std::vector<std::string> physicsProgramNames, Material* material, glm::vec3 BasePosition, const int& maxParticles, const int& rendSpecification)
 {
+	m_renderingSpecification = rendSpecification;
 	m_currVB = 0;
 	m_currTFB = 1;
 	m_isFirst = true;
@@ -30,35 +33,49 @@ ParticleSystem::ParticleSystem(std::vector<std::string> physicsProgramNames, Mat
 		m_physicsPrograms.push_back(new Shader(physicsProgramNames[ii], Shader::PHYSICS_SHADER));
 	}
 	m_rendererProgram = new Shader("particleRenderer", Shader::FULL_SHADER_PIPELINE);
-	InitParticleSystem(BasePosition);
+	InitParticleSystem(BasePosition, maxParticles);
 }
 
 ParticleSystem::~ParticleSystem()
 {
 }
 
-void ParticleSystem::InitParticleSystem(const glm::vec3& Pos)
+void ParticleSystem::InitParticleSystem(const glm::vec3& Pos, const int& maxParticles)
 {
-	Particle Particles[MAX_PARTICLES];
-	ZERO_MEM(Particles);
 
-	Particles[0].Type = BASE_PARTICLE;
-	Particles[0].Pos = Pos;
-	Particles[0].Vel = glm::vec3(0.0f, 0.0f, 0.0f);
-	Particles[0].Age = 0.0f;
+	int sizep = sizeof(Particle)*maxParticles;
+	std::vector<Particle> particles;
+	particles.resize(maxParticles);
+	ZERO_MEM2(&particles[0], sizeof(Particle)*maxParticles);
+	particles[0].Type = BASE_PARTICLE;
+	particles[0].Pos = Pos;
+	particles[0].Vel = glm::vec3(0.0f, 0.0f, 0.0f);
+	particles[0].Age = 0.0f;
+
+	
+	//old version using default max particles
+	//Particle Particles[DEFAULT_MAX_PARTICLES];
+	//int sizeP = sizeof(Particles);
+	//ZERO_MEM(Particles);
+	//Particles[0].Type = BASE_PARTICLE;
+	//Particles[0].Pos = Pos;
+	//Particles[0].Vel = glm::vec3(0.0f, 0.0f, 0.0f);
+	//Particles[0].Age = 0.0f;
 
 	glGenTransformFeedbacks(2, m_transformFeedback);
 	glGenBuffers(2, m_particleBuffer);
 
 	glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, m_transformFeedback[0]);
 	glBindBuffer(GL_ARRAY_BUFFER, m_particleBuffer[0]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Particles), &Particles[0], GL_STREAM_DRAW);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(Particles), &Particles[0], GL_STREAM_DRAW); //use with old version
+	glBufferData(GL_ARRAY_BUFFER, sizep, &particles[0], GL_STREAM_DRAW);
 	glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, m_particleBuffer[0]);
 	glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, 0);
 
 	glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, m_transformFeedback[1]);
 	glBindBuffer(GL_ARRAY_BUFFER, m_particleBuffer[1]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Particles), &Particles[0], GL_STREAM_DRAW);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(Particles), &Particles[0], GL_STREAM_DRAW); //use with old version
+	glBufferData(GL_ARRAY_BUFFER, sizep, &particles[0], GL_STREAM_DRAW);
 	glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, m_particleBuffer[1]);
 	glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, 0);
 
@@ -96,7 +113,7 @@ void ParticleSystem::EnableVertexAttribs()
 	glEnableVertexAttribArray(2);
 	glEnableVertexAttribArray(3);
 
-	glVertexAttribPointer(0, 1, GL_INT, GL_FALSE, sizeof(Particle), 0);						// type
+	glVertexAttribPointer(0, 1, GL_FLOAT, GL_FALSE, sizeof(Particle), 0);					// type
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Particle), (const GLvoid*)4);	// position
 	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Particle), (const GLvoid*)16);	// velocity
 	glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(Particle), (const GLvoid*)28);	// age
@@ -147,9 +164,9 @@ void ParticleSystem::drawParticles()
 		glBindBuffer(GL_ARRAY_BUFFER, m_particleBuffer[m_currVB]);
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(0, 1, GL_INT, GL_FALSE, sizeof(Particle), 0);						// type
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Particle), (const GLvoid*)4);	// position
-		glDrawArrays(GL_POINTS, 0, m_numParticles - (numNewParticles));
+		glVertexAttribPointer(0, 1, GL_FLOAT, GL_FALSE, sizeof(Particle), 0);					// type
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Particle), (const GLvoid*)4);	// position
+		glDrawArrays(GL_POINTS, 0, m_numParticles - (numNewParticles)); //David's Note: do not render last # newParticles. For some reason this data is junk data.
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
 	}
@@ -158,6 +175,40 @@ void ParticleSystem::drawParticles()
 void ParticleSystem::AddToEngine(CoreEngine* engine)
 {
 	engine->GetRenderingEngine()->AddParticleSystem(this);
+}
+
+void ParticleSystem::EnableGLRenderingSpecs()
+{
+
+	switch (m_renderingSpecification)
+	{
+	case TEXTURE_ONLY:
+		break;
+	case LUMINIOUS_BLEND:
+		glEnable(GL_BLEND);
+		glEnable(GL_DEPTH_TEST);
+		glDepthMask(GL_FALSE);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		break;
+	default:
+		break;
+	}
+
+}
+
+void ParticleSystem::DisableGLRenderingSpecs()
+{
+	switch (m_renderingSpecification)
+	{
+	case TEXTURE_ONLY:
+		break;
+	case LUMINIOUS_BLEND:
+		glDisable(GL_BLEND);
+		glDepthMask(GL_TRUE);
+		break;
+	default:
+		break;
+	}
 }
 
 

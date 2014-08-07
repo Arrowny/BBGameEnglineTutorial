@@ -48,7 +48,6 @@ void Input::Update()
 		if (e.type == SDL_KEYDOWN)
 		{
 			int value = e.key.keysym.scancode;
-			std::cout << "Down:" << value << std::endl;
 
 			SetKey(value, true);
 			SetKeyDown(value, true);
@@ -58,7 +57,6 @@ void Input::Update()
 		if (e.type == SDL_KEYUP)
 		{
 			int value = e.key.keysym.scancode;
-			std::cout << "Up:" << value << std::endl;
 
 			SetKey(value, false);
 			SetKeyUp(value, true);
@@ -68,7 +66,6 @@ void Input::Update()
 		if (e.type == SDL_MOUSEBUTTONDOWN)
 		{
 			int value = e.button.button;
-			std::cout << "MDown:" << value << std::endl;
 
 			SetMouse(value, true);
 			SetMouseDown(value, true);
@@ -76,7 +73,6 @@ void Input::Update()
 		if (e.type == SDL_MOUSEBUTTONUP)
 		{
 			int value = e.button.button;
-			std::cout << "MUp:" << value << std::endl;
 
 			SetMouse(value, false);
 			SetMouseUp(value, true);

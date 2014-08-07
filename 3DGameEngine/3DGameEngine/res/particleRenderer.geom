@@ -1,11 +1,11 @@
 #version 400
 
-#define BASE_PARTICLE 0
+#define BASE_PARTICLE 1.0
 
 layout(points) in;
 layout(triangle_strip) out;
 layout(max_vertices = 4) out;
-in int Type0[];    
+in float Type0[];    
 
 
 out vec2 TexCoord;   
@@ -17,7 +17,6 @@ uniform float quadLength;
 
 void main(void){
 
-	
 	if(Type0[0] != BASE_PARTICLE) //Don't render base particles. Base particles should be used to seed other particles.
 	{
 		vec4 normal = gl_in[0].gl_Position - vec4(C_eyePos, 1.0);

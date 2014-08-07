@@ -44,6 +44,8 @@ void TestGame::init(){
 	m_texture2 = new Texture("bricks2.jpg");
 	m_texture3 = new Texture("bricks2_normal.jpg");
 	m_skyTexture = new Texture3d("skyleft.png", "skyright.png", "skyup.png", "skydown.png", "skyfront.png", "skyback.png");
+	m_particleTexture = new Texture("Particle.tga");
+
     //m_skyTexture = new Texture3d("./res/skybox", "left2.jpg", "right2.jpg", "up2.jpg", "down2.jpg", "front2.jpg", "back2.jpg");
 
     //m_skyTexture = new Texture3d("./res/skybox", "jajlands1_left.jpg", "jajlands1_right.jpg", "jajlands1_top.jpg", "jajlands1_bottom.jpg", "jajlands1_front.jpg", "jajlands1_back.jpg");
@@ -51,6 +53,7 @@ void TestGame::init(){
 	m_material = Material(m_texture, 1, 36);
 	m_material2 = Material(m_texture2, 1, 10);
 	m_material3 = Material(m_texture3, 1, 36);
+	m_particleMaterial = Material(m_particleTexture, 1, 36);
 	m_sky = Material(); m_sky.SetTexture("diffuse", m_skyTexture);
 
 	m_meshRenderer = new MeshRenderer(*m_mesh, m_material);
@@ -101,10 +104,14 @@ void TestGame::init(){
 	m_camera->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f))->AddComponent(new FreeLook())->AddComponent(new FreeMove());
 	m_skyBoxObject->AddComponent(m_skyBoxrenderer);
 
-	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material, new PhysicsComponents(2), glm::vec3(0.0, 0.0, 10.0));
-	m_material.SetFloat("quadLength", 0.01);
+	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material, new PhysicsComponents(2), glm::vec3(0.0, 0.0, 10.0), 10000);
+	m_luminousPS = new ParticleSystem("basicParticlePhy", &m_particleMaterial, new PhysicsComponents(2), glm::vec3(0.0, 0.0, 0.0), 10000, LUMINIOUS_BLEND);
+	m_material.SetFloat("quadLength", 0.1);
+	m_particleMaterial.SetFloat("quadLength", 0.1);
 	m_basicPSObj->AddComponent(m_basicPS);
+	m_basicPSObj->AddComponent(m_luminousPS);
 	//m_basicPSObj->AddComponent(new FreeLook())->AddComponent(new FreeMove());
+
 	
 	AddToScene(m_planeObject);
 	AddToScene(m_dirLightObj1);
