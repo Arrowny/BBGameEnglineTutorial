@@ -43,7 +43,7 @@ void TestGame::init(){
 	m_texture = new Texture("colour.jpg");
 	m_texture2 = new Texture("bricks2.jpg");
 	m_texture3 = new Texture("bricks2_normal.jpg");
-	m_skyTexture = new Texture3d("skyleft.png", "skyright.png", "skyup.png", "skydown.png", "skyfront.png", "skyback.png");
+	m_skyTexture = new TextureCube("skyleft.png", "skyright.png", "skyup.png", "skydown.png", "skyfront.png", "skyback.png");
 	m_particleTexture = new Texture("Particle.tga");
 
     //m_skyTexture = new Texture3d("./res/skybox", "left2.jpg", "right2.jpg", "up2.jpg", "down2.jpg", "front2.jpg", "back2.jpg");
@@ -104,13 +104,13 @@ void TestGame::init(){
 	m_camera->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f))->AddComponent(new FreeLook())->AddComponent(new FreeMove());
 	m_skyBoxObject->AddComponent(m_skyBoxrenderer);
 
-	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material, new PhysicsComponents(2), glm::vec3(0.0, 0.0, 10.0), 10000);
-	m_luminousPS = new ParticleSystem("basicParticlePhy", &m_particleMaterial, new PhysicsComponents(2), glm::vec3(0.0, 0.0, 0.0), 10000, LUMINIOUS_BLEND);
+	m_luminousPS = new ParticleSystem("basicParticlePhy", &m_particleMaterial, new PhysicsComponents(2), glm::vec3(0.0, 0.0, 10.0), 10000, LUMINIOUS_BLEND);
+	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material, new PhysicsComponents(2), glm::vec3(0.0, 0.0, 5.0), 10000);
 	m_material.SetFloat("quadLength", 0.1);
 	m_particleMaterial.SetFloat("quadLength", 0.1);
-	m_basicPSObj->AddComponent(m_basicPS);
+//	m_basicPSObj->AddComponent(m_basicPS);
 	m_basicPSObj->AddComponent(m_luminousPS);
-	//m_basicPSObj->AddComponent(new FreeLook())->AddComponent(new FreeMove());
+	m_basicPSObj->AddComponent(new FreeLook())->AddComponent(new FreeMove());
 
 	
 	AddToScene(m_planeObject);

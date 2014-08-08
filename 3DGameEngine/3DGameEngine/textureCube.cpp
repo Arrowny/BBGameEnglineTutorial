@@ -1,4 +1,4 @@
-#include "texture3d.h"
+#include "textureCube.h"
 #include <iostream>
 #include <cassert>
 #include "stb_image.h"
@@ -12,7 +12,7 @@ static const GLenum types[6] =
 			GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
 			GL_TEXTURE_CUBE_MAP_NEGATIVE_Z };
 
-Texture3d::Texture3d(
+TextureCube::TextureCube(
 	const std::string& PosXFilename,
 	const std::string& NegXFilename,
 	const std::string& PosYFilename,
@@ -34,12 +34,12 @@ Texture3d::Texture3d(
 	InitTexture(fileNames);
 }
 
-Texture3d::~Texture3d()
+TextureCube::~TextureCube()
 {
 	glDeleteTextures(1, &m_texture);
 }
 
-void Texture3d::InitTexture(std::string* fileNames)
+void TextureCube::InitTexture(std::string* fileNames)
 {
 	glGenTextures(1, &m_texture);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, m_texture);
@@ -67,7 +67,7 @@ void Texture3d::InitTexture(std::string* fileNames)
 
 }
 
-void Texture3d::Bind(unsigned int unit) const
+void TextureCube::Bind(unsigned int unit) const
 {
 	assert(unit >= 0 && unit <= 31);
 	glActiveTexture(GL_TEXTURE0 + unit);
