@@ -51,13 +51,23 @@ namespace Util
 	static inline std::string &trim(std::string &s) {
 		return ltrim(rtrim(s));
 	}
+
+	inline unsigned int randhash(unsigned int seed)
+	{
+		unsigned int i = (seed ^ 12345391u) * 2654435769u;
+		i ^= (i << 6) ^ (i >> 26);
+		i *= 2654435769u;
+		i += (i << 5) ^ (i >> 12);
+		return i;
+	}
+
 	static inline glm::vec3 randomVec3()
 	{
 		clock_t time = clock();
 		srand((float)time);
-		glm::vec3 random = glm::vec3(	(static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) * 2.0f - 1.0f,
-										(static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) * 2.0f - 1.0f,
-										(static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) * 2.0f - 1.0f
+		glm::vec3 random = glm::vec3(	(static_cast <float> (randhash(rand())) / static_cast <float> (UINT_MAX)) * 2.0f - 1.0f,
+										(static_cast <float> (randhash(rand())) / static_cast <float> (UINT_MAX)) * 2.0f - 1.0f,
+										(static_cast <float> (randhash(rand())) / static_cast <float> (UINT_MAX)) * 2.0f - 1.0f
 									);
 		return glm::normalize(random);
 	}

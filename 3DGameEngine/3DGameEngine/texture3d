@@ -21,5 +21,6 @@ public:
 private:
 
 	void InitTexture(std::string* fileNames);
+	//GLuint m_texture3D;
 };
 

@@ -113,6 +113,9 @@
     <ClCompile Include="textureCube.cpp">
       <Filter>CoreEngine</Filter>
     </ClCompile>
+    <ClCompile Include="texture3D.cpp">
+      <Filter>CoreEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lights.h">
@@ -206,6 +209,9 @@
       <Filter>PhysicsEngine</Filter>
     </ClInclude>
     <ClInclude Include="textureCube.h">
+      <Filter>CoreEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="texture3D.h">
       <Filter>CoreEngine</Filter>
     </ClInclude>
   </ItemGroup>

@@ -75,7 +75,7 @@ void ParticleSystem::InitParticleSystem(const glm::vec3& Pos, const int& maxPart
 	glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, m_transformFeedback[1]);
 	glBindBuffer(GL_ARRAY_BUFFER, m_particleBuffer[1]);
 	//glBufferData(GL_ARRAY_BUFFER, sizeof(Particles), &Particles[0], GL_STREAM_DRAW); //use with old version
-	glBufferData(GL_ARRAY_BUFFER, sizep, &particles[0], GL_STREAM_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizep, 0, GL_STREAM_DRAW);
 	glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, m_particleBuffer[1]);
 	glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, 0);
 
