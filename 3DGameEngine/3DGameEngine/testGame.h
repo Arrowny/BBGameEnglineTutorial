@@ -5,7 +5,7 @@
 #include "Shader.h"
 #include "Camera.h"
 #include "Texture.h"
-#include "texture3d.h"
+#include "textureCube.h"
 #include "meshRenderer.h"
 #include "skyBoxRenderer.h"
 #include "particleSystem.h"

@@ -8,6 +8,9 @@ PhysicsEngine::PhysicsEngine(const float& delta)
 
 	SetFloat("delta", delta);
 	SetVector3f("randomSeed", Util::randomVec3());
+
+	m_samplerMap["vectorField"] = 0; //set slot for baseVectorField
+	//add more vectorfields if needed
 }
 
 

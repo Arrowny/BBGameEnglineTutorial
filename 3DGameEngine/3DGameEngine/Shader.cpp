@@ -381,7 +381,19 @@ void Shader::UpdateUniforms(const Transform& transform, const PhysicsComponents&
 		std::string uniformName = shaderResourceMap[m_fileName]->GetUniformNames()[i];
 		std::string uniformType = shaderResourceMap[m_fileName]->GetUniformTypes()[i];
 
-		if (uniformName.substr(0, 2) == "P_")
+		if (uniformType == "sampler2D")
+		{
+			int samplerSlot = physicsEngine->GetSamplerSlot(uniformName);
+			components.GetTexture(uniformName)->Bind(samplerSlot);
+			SetUniformi(uniformName, samplerSlot);
+		}
+		else if (uniformType == "sampler3D")
+		{
+			int samplerSlot = physicsEngine->GetSamplerSlot(uniformName);
+			components.GetTexture(uniformName)->Bind(samplerSlot);
+			SetUniformi(uniformName, samplerSlot);
+		}
+		else if (uniformName.substr(0, 2) == "P_")
 		{
 			std::string unprefixedName = uniformName.substr(2, uniformName.length());
 

@@ -96,7 +96,8 @@
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="testGame.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="texture3d.cpp" />
+    <ClCompile Include="texture3D.cpp" />
+    <ClCompile Include="textureCube.cpp" />
     <ClCompile Include="Timing.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -128,7 +129,8 @@
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="testGame.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="texture3d.h" />
+    <ClInclude Include="texture3D.h" />
+    <ClInclude Include="textureCube.h" />
     <ClInclude Include="Timing.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Util.h" />

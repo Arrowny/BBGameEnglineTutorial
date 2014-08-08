@@ -17,6 +17,15 @@ PhysicsComponents::~PhysicsComponents()
 {
 }
 
+Texture* PhysicsComponents::GetTexture(const std::string& name) const
+{
+	std::unordered_map<std::string, Texture*>::const_iterator it = m_textureMap.find(name);
+	if (it != m_textureMap.end())
+		return it->second;
+
+	return 0;
+}
+
 glm::fvec3 PhysicsComponents::GetVector3f(const std::string& name) const
 {
 	std::unordered_map<std::string, glm::fvec3>::const_iterator it = m_vec3fMap.find(name);
