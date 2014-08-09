@@ -95,9 +95,6 @@
     <ClCompile Include="stb_image.c">
       <Filter>CoreEngine\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="texture3d.cpp">
-      <Filter>CoreEngine</Filter>
-    </ClCompile>
     <ClCompile Include="skyBoxRenderer.cpp">
       <Filter>RenderingEngine</Filter>
     </ClCompile>
@@ -108,6 +105,15 @@
       <Filter>CoreEngine\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="particleSystem.cpp">
+      <Filter>CoreEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="physicsComponents.cpp">
+      <Filter>PhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="textureCube.cpp">
+      <Filter>CoreEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="texture3D.cpp">
       <Filter>CoreEngine</Filter>
     </ClCompile>
   </ItemGroup>
@@ -184,9 +190,6 @@
     <ClInclude Include="stb_image.h">
       <Filter>CoreEngine\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="texture3d.h">
-      <Filter>CoreEngine</Filter>
-    </ClInclude>
     <ClInclude Include="skyBoxRenderer.h">
       <Filter>RenderingEngine</Filter>
     </ClInclude>
@@ -201,6 +204,15 @@
     </ClInclude>
     <ClInclude Include="Window.h">
       <Filter>CoreEngine\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="physicsComponents.h">
+      <Filter>PhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="textureCube.h">
+      <Filter>CoreEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="texture3D.h">
+      <Filter>CoreEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,18 +1,23 @@
-#include "Material.h"
-#include "Texture.h"
+#include "physicsComponents.h"
 
-Material::Material(Texture* texture, float specularIntensity, float specularPower, float quadLength) :
-m_textureMap(std::unordered_map<std::string, Texture*>()),
+PhysicsComponents::PhysicsComponents() :
 m_vec3fMap(std::unordered_map<std::string, glm::fvec3>()),
 m_floatMap(std::unordered_map<std::string, float>()),
 m_intMap(std::unordered_map<std::string, int>())
 {
-	SetTexture("diffuse", texture);
-	SetFloat("specularIntensity", specularIntensity);
-	SetFloat("specularPower", specularPower);
-};
+	SetInt("numEmit", 1);
+}
 
-Texture* Material::GetTexture(const std::string& name) const
+PhysicsComponents::PhysicsComponents(const int& numEmittedParticles)
+{
+	SetInt("numEmit", numEmittedParticles);
+}
+
+PhysicsComponents::~PhysicsComponents()
+{
+}
+
+Texture* PhysicsComponents::GetTexture(const std::string& name) const
 {
 	std::unordered_map<std::string, Texture*>::const_iterator it = m_textureMap.find(name);
 	if (it != m_textureMap.end())
@@ -21,7 +26,7 @@ Texture* Material::GetTexture(const std::string& name) const
 	return 0;
 }
 
-glm::fvec3 Material::GetVector3f(const std::string& name) const
+glm::fvec3 PhysicsComponents::GetVector3f(const std::string& name) const
 {
 	std::unordered_map<std::string, glm::fvec3>::const_iterator it = m_vec3fMap.find(name);
 	if (it != m_vec3fMap.end())
@@ -30,16 +35,16 @@ glm::fvec3 Material::GetVector3f(const std::string& name) const
 	return glm::fvec3(0.0, 0.0, 0.0);
 }
 
-float Material::GetFloat(const std::string& name) const
+float PhysicsComponents::GetFloat(const std::string& name) const
 {
 	std::unordered_map<std::string, float>::const_iterator it = m_floatMap.find(name);
 	if (it != m_floatMap.end())
 		return it->second;
 
-	return 0;
+	return 0.0;
 }
 
-int Material::GetInt(const std::string& name) const
+int PhysicsComponents::GetInt(const std::string& name) const
 {
 	std::unordered_map<std::string, int>::const_iterator it = m_intMap.find(name);
 	if (it != m_intMap.end())

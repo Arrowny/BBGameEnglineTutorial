@@ -5,7 +5,7 @@
 #include "Shader.h"
 #include "Camera.h"
 #include "Texture.h"
-#include "texture3d.h"
+#include "textureCube.h"
 #include "meshRenderer.h"
 #include "skyBoxRenderer.h"
 #include "particleSystem.h"
@@ -56,15 +56,18 @@ private:
 	Material m_material;
 	Material m_material2;
 	Material m_material3;
+	Material m_particleMaterial;
 	Material m_sky;
 	Texture* m_texture;
 	Texture* m_texture2;
 	Texture* m_texture3;
+	Texture* m_particleTexture;
 	Texture* m_skyTexture;
 	MeshRenderer* m_meshRenderer;
 	MeshRenderer* m_meshRenderer2;
 	MeshRenderer* m_meshRenderer3;
 	SkyBoxRenderer* m_skyBoxrenderer;
 	ParticleSystem* m_basicPS;
+	ParticleSystem* m_luminousPS;
 };
 

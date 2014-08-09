@@ -1,26 +1,25 @@
 #pragma once
-#include <string>
+
+#include <GL\glew.h>
+#include <glm\glm.hpp>
 #include <vector>
-#include <GL/glew.h>
 #include "Texture.h"
 
-class Texture3d : public Texture
+class Texture3D : public Texture
 {
 public:
-	Texture3d(
-		const std::string& PosXFilename,
-		const std::string& NegXFilename,
-		const std::string& PosYFilename,
-		const std::string& NegYFilename,
-		const std::string& PosZFilename,
-		const std::string& NegZFilename);
-	virtual ~Texture3d();
+	Texture3D(GLsizei texWidth, GLsizei texHeight, GLsizei texDepth, std::vector<glm::vec3> data);
+	virtual ~Texture3D();
 
 	virtual void Bind(unsigned int unit) const;
 
 private:
+	Texture3D(const Texture3D& other) {}
+	void operator=(const Texture3D& other) {}
 
-	void InitTexture(std::string* fileNames);
-	//GLuint m_texture3D;
+	GLsizei m_texWidth;
+	GLsizei m_texHeight;
+	GLsizei m_texDepth;
+
 };
 

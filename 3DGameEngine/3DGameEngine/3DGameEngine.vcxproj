@@ -88,6 +88,7 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="obj_loader.cpp" />
     <ClCompile Include="particleSystem.cpp" />
+    <ClCompile Include="physicsComponents.cpp" />
     <ClCompile Include="physicsEngine.cpp" />
     <ClCompile Include="renderingEngine.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -95,7 +96,8 @@
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="testGame.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="texture3d.cpp" />
+    <ClCompile Include="texture3D.cpp" />
+    <ClCompile Include="textureCube.cpp" />
     <ClCompile Include="Timing.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -111,6 +113,7 @@
     <ClInclude Include="Lights.h" />
     <ClInclude Include="mappedValues.h" />
     <ClInclude Include="particleSystem.h" />
+    <ClInclude Include="physicsComponents.h" />
     <ClInclude Include="physicsEngine.h" />
     <ClInclude Include="referenceCounter.h" />
     <ClInclude Include="Input.h" />
@@ -126,7 +129,8 @@
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="testGame.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="texture3d.h" />
+    <ClInclude Include="texture3D.h" />
+    <ClInclude Include="textureCube.h" />
     <ClInclude Include="Timing.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Util.h" />

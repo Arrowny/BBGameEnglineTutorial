@@ -53,14 +53,18 @@ void RenderingEngine::Render(GameObject* object)
 	glDepthFunc(GL_LESS);
 	glDisable(GL_BLEND);
 
-	//TODO: currently baseParticleShader does nothing. Add functionality.
-	for (unsigned int ii = 0; ii < m_particles.size(); ii++)
-	{
-		m_particles[ii]->renderParticles(m_baseParticleShader, this);
-	}
+
 
 	if (m_skyBox != NULL)
 	{
 		m_skyBox->renderSkyBox(this);
+	}
+
+	//TODO: currently baseParticleShader does nothing. Add functionality.
+	for (unsigned int ii = 0; ii < m_particles.size(); ii++)
+	{
+		m_particles[ii]->EnableGLRenderingSpecs();
+		m_particles[ii]->renderParticles(m_baseParticleShader, this);
+		m_particles[ii]->DisableGLRenderingSpecs();
 	}
 }

@@ -43,28 +43,18 @@ void TestGame::init(){
 	m_texture = new Texture("colour.jpg");
 	m_texture2 = new Texture("bricks2.jpg");
 	m_texture3 = new Texture("bricks2_normal.jpg");
-	m_skyTexture = new Texture3d("skyleft.png", "skyright.png", "skyup.png", "skydown.png", "skyfront.png", "skyback.png");
-    //m_skyTexture = new Texture3d("./res/skybox", "left2.jpg", "right2.jpg", "up2.jpg", "down2.jpg", "front2.jpg", "back2.jpg");
+	m_skyTexture = new TextureCube("skyleft.png", "skyright.png", "skyup.png", "skydown.png", "skyfront.png", "skyback.png");
+	m_particleTexture = new Texture("Particle.tga");
 
-    //m_skyTexture = new Texture3d("./res/skybox", "jajlands1_left.jpg", "jajlands1_right.jpg", "jajlands1_top.jpg", "jajlands1_bottom.jpg", "jajlands1_front.jpg", "jajlands1_back.jpg");
+    //m_skyTexture = new TextureCube("./res/skybox", "left2.jpg", "right2.jpg", "up2.jpg", "down2.jpg", "front2.jpg", "back2.jpg");
 
-	m_material = Material();
-	m_material.AddTexture("diffuse", m_texture);
-	m_material.AddFloat("specularIntensity", 1);
-	m_material.AddFloat("specularPower", 36);
+    //m_skyTexture = new TextureCube("./res/skybox", "jajlands1_left.jpg", "jajlands1_right.jpg", "jajlands1_top.jpg", "jajlands1_bottom.jpg", "jajlands1_front.jpg", "jajlands1_back.jpg");
 
-	m_material2 = Material();
-	m_material2.AddTexture("diffuse", m_texture2);
-	m_material2.AddFloat("specularIntensity", 1);
-	m_material2.AddFloat("specularPower", 10);
-
-	m_material3 = Material();
-	m_material3.AddTexture("diffuse", m_texture3);
-	m_material3.AddFloat("specularIntensity", 1);
-	m_material3.AddFloat("specularPower", 36);
-
-	m_sky = Material();
-	m_sky.AddTexture("diffuse", m_skyTexture);
+	m_material = Material(m_texture, 1, 36);
+	m_material2 = Material(m_texture2, 1, 10);
+	m_material3 = Material(m_texture3, 1, 36);
+	m_particleMaterial = Material(m_particleTexture, 1, 36);
+	m_sky = Material(); m_sky.SetTexture("diffuse", m_skyTexture);
 
 	m_meshRenderer = new MeshRenderer(*m_mesh, m_material);
 	m_meshRenderer2 = new MeshRenderer(*m_mesh, m_material2);
@@ -114,10 +104,15 @@ void TestGame::init(){
 	m_camera->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f))->AddComponent(new FreeLook())->AddComponent(new FreeMove());
 	m_skyBoxObject->AddComponent(m_skyBoxrenderer);
 
-	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material, glm::vec3(0.0, 0.0, 10.0));
+	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material, new PhysicsComponents(2), glm::vec3(0.0, 0.0, 10.0), 100000);
+	m_luminousPS = new ParticleSystem("basicParticlePhy", &m_particleMaterial, new PhysicsComponents(2), glm::vec3(0.0, 1.0, 10.0), 100000, LUMINOUS_BLEND);
+	m_material.SetFloat("quadLength", 0.1);
+	m_particleMaterial.SetFloat("quadLength", 0.1);
 	m_basicPSObj->AddComponent(m_basicPS);
-	m_basicPSObj->AddComponent(new FreeLook())->AddComponent(new FreeMove());
+	m_basicPSObj->AddComponent(m_luminousPS);
+	//m_basicPSObj->AddComponent(new FreeLook())->AddComponent(new FreeMove());
 
+	
 	AddToScene(m_planeObject);
 	AddToScene(m_dirLightObj1);
 	AddToScene(m_pLightObj1);

@@ -1,7 +1,9 @@
 #include "coreEngine.h"
+
+#include <stdio.h>
+#include <GL\glew.h>
 #include "Timing.h"
 #include "Game.h"
-#include <stdio.h>
 
 CoreEngine::CoreEngine(Game* game, RenderingEngine* renderingEngine, PhysicsEngine* physicEngine, Window* window, double frameRate) :
 m_game(game),
