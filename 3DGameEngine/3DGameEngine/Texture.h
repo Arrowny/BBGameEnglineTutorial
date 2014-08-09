@@ -26,12 +26,15 @@ private:
 class Texture
 {
 public:
+	Texture();
 	Texture(const std::string& fileName);
 
-	void Bind(unsigned int unit) const;
+	virtual void Bind(unsigned int unit) const;
 
 	virtual ~Texture();
 protected:
+	GLuint m_texture;
+
 private:
 	static std::map<std::string, TextureData*> textureResourceMap;
 	static const TextureData* s_lastBind;
@@ -39,7 +42,6 @@ private:
 	Texture(const Texture& other) {}
 	void operator=(const Texture& other) {}
 
-	GLuint m_texture;
 	TextureData* m_textureData;
 	std::string m_fileName;
 

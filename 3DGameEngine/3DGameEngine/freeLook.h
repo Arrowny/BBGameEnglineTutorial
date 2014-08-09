@@ -7,7 +7,7 @@
 #include "Window.h"
 #include "gameComponent.h"
 
-struct FreeLook : public gameComponent
+struct FreeLook : public GameComponent
 {
 public:
 

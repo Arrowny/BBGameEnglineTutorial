@@ -1,13 +1,13 @@
+#include <iostream>
+#include <GL/glew.h>
 #include "renderingEngine.h"
 #include "gameObject.h"
-#include <GL/glew.h>
 #include "Shader.h"
-#include <iostream>
+#include "skyBoxRenderer.h"
+#include "particleSystem.h"
 
-renderingEngine::renderingEngine()
+RenderingEngine::RenderingEngine()
 {
-	std::cout << getOpenGLVersion() << std::endl;
-
 	glEnable(GL_DEPTH_TEST);
 
 	glEnable(GL_CULL_FACE);
@@ -17,44 +17,50 @@ renderingEngine::renderingEngine()
 
 	glEnable(GL_TEXTURE_2D);
 
-	m_activeLight = new baseLight();
+	m_activeLight = new BaseLight();
 
-	AddVector3f("ambientLight", glm::fvec3(0.1f, 0.1f, 0.1f));
-	m_defaultShader = new Shader("./res/forwardAmbient");
+	SetVector3f("ambientLight", glm::fvec3(0.1f, 0.1f, 0.1f));
+	m_ambientShader = new Shader("forwardAmbient");
+	m_baseParticleShader = NULL; //TODO: design overall basic particle shader;
 
-	m_samplerMap.insert(std::pair<std::string, unsigned int>("diffuse", 0));
+	m_samplerMap["diffuse"] = 0; //set slot for diffuse texture
+	m_skyBox = NULL;
 }
 
-renderingEngine::~renderingEngine()
+RenderingEngine::~RenderingEngine()
 {
-	//dtor
 }
 
-void renderingEngine::Render(gameObject* object)
+void RenderingEngine::Render(GameObject* object)
 {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	object->renderAll(m_defaultShader, this);
+	object->renderAll(m_ambientShader, this);
 	
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
 	glDepthMask(GL_FALSE);
 	glDepthFunc(GL_EQUAL);
 
-	for (unsigned int i = 0; i < m_lights.size(); i++)
+	for (unsigned int ii = 0; ii < m_lights.size(); ii++)
 	{
-		m_activeLight = m_lights[i];
+		m_activeLight = m_lights[ii];
 		object->renderAll(m_activeLight->GetShader(), this);
 	}
 
 	glDepthMask(GL_TRUE);
 	glDepthFunc(GL_LESS);
 	glDisable(GL_BLEND);
-}
 
-char* renderingEngine::getOpenGLVersion(){
+	//TODO: currently baseParticleShader does nothing. Add functionality.
+	for (unsigned int ii = 0; ii < m_particles.size(); ii++)
+	{
+		m_particles[ii]->renderParticles(m_baseParticleShader, this);
+	}
 
-	return (char*)glGetString(GL_VERSION);
-
+	if (m_skyBox != NULL)
+	{
+		m_skyBox->renderSkyBox(this);
+	}
 }

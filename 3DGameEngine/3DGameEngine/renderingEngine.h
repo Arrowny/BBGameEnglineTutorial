@@ -9,39 +9,48 @@
 #include "mappedValues.h"
 #include "Material.h"
 
-class gameObject;
+class GameObject;
+class SkyBoxRenderer;
+class ParticleSystem;
 
-class renderingEngine : public MappedValues
+class RenderingEngine : public MappedValues
 {
 public:
-	renderingEngine();
+	RenderingEngine();
 
-	void Render(gameObject* object);
-	char* getOpenGLVersion();
+	void Render(GameObject* object);
 
 	inline Camera& GetMainCamera() { return *m_mainCamera; }
-	inline baseLight* GetActiveLight() { return m_activeLight; }
+	inline BaseLight* GetActiveLight() { return m_activeLight; }
 	inline unsigned int GetSamplerSlot(const std::string& samplerName) { return m_samplerMap[samplerName]; }
 
-	inline void AddLight(baseLight* light) { m_lights.push_back(light); }
+	inline void AddLight(BaseLight* light) { m_lights.push_back(light); }
+	inline void ClearLights() { m_lights.clear(); }
 	inline void AddCamera(Camera* camera) { m_mainCamera = camera; }
+	inline void AddSkyBox(SkyBoxRenderer* skybox) { m_skyBox = skybox; }
+	inline void UnsetSkyBox() { m_skyBox = NULL; }
+	inline void AddParticleSystem(ParticleSystem* particleSystem) { m_particles.push_back(particleSystem); }
+	inline void ClearParticles() { m_particles.clear(); }
 
 	virtual void UpdateUniformStruct(const Transform& transform, const Material& material, Shader* shader, const std::string& uniformName, const std::string& uniformType)
 	{
 		throw uniformType + " is not supported by the rendering engine";
 	}
 
-	virtual ~renderingEngine();
+	virtual ~RenderingEngine();
 protected:
 private:
-	renderingEngine(const renderingEngine& other){}
-	void operator=(const renderingEngine& other) {}
+	RenderingEngine(const RenderingEngine& other){}
+	void operator=(const RenderingEngine& other) {}
 
 	Camera* m_mainCamera;
-	Shader* m_defaultShader;
+	SkyBoxRenderer* m_skyBox;
+	Shader* m_ambientShader;
+	Shader* m_baseParticleShader;
 
-	baseLight* m_activeLight;
-	std::vector<baseLight*> m_lights;
+	BaseLight* m_activeLight;
+	std::vector<BaseLight*> m_lights;
+	std::vector<ParticleSystem*> m_particles;
 	std::map<std::string, unsigned int> m_samplerMap;
 };
 

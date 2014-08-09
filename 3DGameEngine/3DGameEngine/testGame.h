@@ -5,7 +5,10 @@
 #include "Shader.h"
 #include "Camera.h"
 #include "Texture.h"
+#include "texture3d.h"
 #include "meshRenderer.h"
+#include "skyBoxRenderer.h"
+#include "particleSystem.h"
 #include "Input.h"
 #include <iostream>
 #include "freeLook.h"
@@ -25,22 +28,27 @@ private:
 	TestGame(const TestGame& other) {}
 	void operator=(const TestGame& other) {}
 
-	gameObject* m_planeObject;
-	gameObject* m_planeObject2;
-	gameObject* m_planeObject3;
-	gameObject* m_camera;
-	gameObject* m_dirLightObj1;
-	directionalLight* dirLight1;
-	directionalLight* dirLight2;
-	directionalLight* dirLight3;
-	gameObject* m_pLightObj1;
-	pointLight* pLight1;
-	pointLight* pLight2;
-	pointLight* pLight3;
-	gameObject* m_sLightObj1;
-	gameObject* m_sLightObj2;
-	spotLight* sLight1;
-	spotLight* sLight2;
+	GameObject* m_planeObject;
+	GameObject* m_planeObject2;
+	GameObject* m_planeObject3;
+	GameObject* m_camera;
+	GameObject* m_dirLightObj1;
+	GameObject* m_skyBoxObject;
+	GameObject* m_pLightObj1;
+	GameObject* m_sLightObj1;
+	GameObject* m_sLightObj2;
+	GameObject* m_basicPSObj;
+
+	DirectionalLight* dirLight1;
+	DirectionalLight* dirLight2;
+	DirectionalLight* dirLight3;
+
+	PointLight* pLight1;
+	PointLight* pLight2;
+	PointLight* pLight3;
+
+	SpotLight* sLight1;
+	SpotLight* sLight2;
 
 	Mesh* m_mesh;
 	Mesh* m_mesh2;
@@ -48,11 +56,15 @@ private:
 	Material m_material;
 	Material m_material2;
 	Material m_material3;
+	Material m_sky;
 	Texture* m_texture;
 	Texture* m_texture2;
 	Texture* m_texture3;
-	meshRenderer* m_meshRenderer;
-	meshRenderer* m_meshRenderer2;
-	meshRenderer* m_meshRenderer3;
+	Texture* m_skyTexture;
+	MeshRenderer* m_meshRenderer;
+	MeshRenderer* m_meshRenderer2;
+	MeshRenderer* m_meshRenderer3;
+	SkyBoxRenderer* m_skyBoxrenderer;
+	ParticleSystem* m_basicPS;
 };
 

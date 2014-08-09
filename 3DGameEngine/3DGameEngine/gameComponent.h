@@ -4,26 +4,28 @@
 #include "Transform.h"
 #include "gameObject.h"
 
-class renderingEngine;
+class RenderingEngine;
+class PhysicsEngine;
 class Shader;
 
-class gameComponent
+class GameComponent
 {
 public:
-	virtual ~gameComponent() {}
+	virtual ~GameComponent() {}
 
 	virtual void input(const Input& input, float delta) {}
 	virtual void update(float delta) {}
-	virtual void render(Shader* shader, renderingEngine* renderingEngine) {}
+	virtual void updatePhysics(Shader* shader, PhysicsEngine* physicsEngine) {}
+	virtual void render(Shader* shader, RenderingEngine* renderingEngine) {}
 
-	virtual void AddToEngine(coreEngine* engine) {}
+	virtual void AddToEngine(CoreEngine* engine) {}
 
-	inline void SetParent(gameObject* parent) { m_parent = parent; }
+	inline void SetParent(GameObject* parent) { m_parent = parent; }
 	inline Transform& GetTransform() { return m_parent->GetTransform(); }
 	inline const Transform& GetTransform() const { return m_parent->GetTransform(); }
 
 private:
-	gameObject* m_parent = new gameObject();
+	GameObject* m_parent = new GameObject();
 };
 
 #endif // GAMECOMPONENT_H_INCLUDED

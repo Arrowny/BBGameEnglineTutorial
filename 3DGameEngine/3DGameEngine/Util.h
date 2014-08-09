@@ -16,12 +16,16 @@
 #include <vector>
 #include <string>
 #include <GL\glew.h>
+#include <glm\glm.hpp>
 #include <unordered_map>
 #include <string>
 #include <algorithm> 
 #include <functional> 
 #include <cctype>
 #include <locale>
+#include <ctime>
+#define ZERO_MEM(a) std::memset(a, 0, sizeof(a))
+
 
 namespace Util
 {
@@ -46,4 +50,15 @@ namespace Util
 	static inline std::string &trim(std::string &s) {
 		return ltrim(rtrim(s));
 	}
+	static inline glm::vec3 randomVec3()
+	{
+		clock_t time = clock();
+		srand((float)time);
+		glm::vec3 random = glm::vec3(	(static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) * 2.0f - 1.0f,
+										(static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) * 2.0f - 1.0f,
+										(static_cast <float> (rand()) / static_cast <float> (RAND_MAX)) * 2.0f - 1.0f
+									);
+		return glm::normalize(random);
+	}
+
 };

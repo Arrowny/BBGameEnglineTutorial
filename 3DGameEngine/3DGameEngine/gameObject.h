@@ -4,39 +4,42 @@
 #include "Transform.h"
 #include "input.h"
 
-class coreEngine;
-class gameComponent;
+class CoreEngine;
+class GameComponent;
 class Shader;
-class renderingEngine;
+class RenderingEngine;
+class PhysicsEngine;
 
-class gameObject
+class GameObject
 {
 public:
-	gameObject() { m_coreEngine = 0; };
-	virtual ~gameObject() {};
+	GameObject() { m_coreEngine = 0; };
+	virtual ~GameObject() {};
 
-	gameObject* AddChild(gameObject* child);
-	gameObject* AddComponent(gameComponent* component);
+	GameObject* AddChild(GameObject* child);
+	GameObject* AddComponent(GameComponent* component);
 
 	void inputAll(const Input& input, float delta);
 	void updateAll(float delta);
-	void renderAll(Shader* shader, renderingEngine* renderingEngine);
-	void SetEngine(coreEngine* engine);
+	void updatePhysicsAll(Shader* shader, PhysicsEngine* physicsEngine);
+	void renderAll(Shader* shader, RenderingEngine* renderingEngine);
+	void SetEngine(CoreEngine* engine);
 
-	std::vector<gameObject*> GetAllAttached();
+	std::vector<GameObject*> GetAllAttached();
 
 	inline Transform& GetTransform() { return m_transform; }
 
 protected:
 	void input(const Input& input, float delta);
 	void update(float delta);
-	void render(Shader* shader, renderingEngine* renderingEngine);
+	void updatePhysics(Shader* shader, PhysicsEngine* physicsEngine);
+	void render(Shader* shader, RenderingEngine* renderingEngine);
 
 private:
-	std::vector<gameObject*> m_children;
-	std::vector<gameComponent*> m_components;
+	std::vector<GameObject*> m_children;
+	std::vector<GameComponent*> m_components;
 	Transform m_transform;
-	coreEngine* m_coreEngine;
+	CoreEngine* m_coreEngine;
 
 };
 

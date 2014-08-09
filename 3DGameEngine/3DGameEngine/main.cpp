@@ -8,18 +8,18 @@
 #include "renderingEngine.h"
 
 #define WIDTH 1000
-#define HEIGHT 800
+#define HEIGHT 600
 #define TITLE "3DGameEngine"
 #define FRAME_CAP 5000.0
 
 int main(int argc, char** argv)
 {
 	Window window(WIDTH, HEIGHT, TITLE);
-	renderingEngine renderingEngine;
+	RenderingEngine renderingEngine;
+	PhysicsEngine physicsEngine(1.0 / FRAME_CAP);
 	TestGame game;
 
-	coreEngine core(&game, &renderingEngine, &window, FRAME_CAP);
-
+	CoreEngine core(&game, &renderingEngine, &physicsEngine, &window, FRAME_CAP);
 	core.Start();
 
 	return 0;

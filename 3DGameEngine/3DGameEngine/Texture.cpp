@@ -3,7 +3,6 @@
 #include <iostream>
 #include <cassert>
 
-const TextureData* Texture::s_lastBind = 0;
 std::map<std::string, TextureData*> Texture::textureResourceMap;
 
 TextureData::TextureData(GLenum textureTarget)
@@ -15,6 +14,11 @@ TextureData::TextureData(GLenum textureTarget)
 TextureData::~TextureData()
 {
 	if (m_textureID) glDeleteTextures(1, &m_textureID);
+}
+
+Texture::Texture()
+{
+	m_fileName = "NO FILE LOADED";
 }
 
 Texture::Texture(const std::string& fileName)
@@ -30,10 +34,10 @@ Texture::Texture(const std::string& fileName)
 	else
 	{
 		int width, height, numComponents;
-		unsigned char* imageData = stbi_load((fileName).c_str(), &width, &height, &numComponents, 4);
+		unsigned char* imageData = stbi_load(("./res/" + fileName).c_str(), &width, &height, &numComponents, 4);
 
 		if (imageData == NULL)
-			std::cerr << "Unable to load texture: " << fileName << std::endl;
+			std::cerr << "Unable to load texture: " << "./res/" + fileName << std::endl;
 
 		InitTexture(width, height, imageData);
 		stbi_image_free(imageData);
@@ -73,12 +77,16 @@ void Texture::InitTexture(int width, int height, unsigned char* data)
 
 void Texture::Bind(unsigned int unit) const
 {
-	if (s_lastBind != m_textureData)
+	if (m_fileName != "NO FILE LOADED")
 	{
 		assert(unit >= 0 && unit <= 31);
 		glActiveTexture(GL_TEXTURE0 + unit);
 		glBindTexture(m_textureData->GetTextureTarget(), m_textureData->GetTextureID());
-		s_lastBind = m_textureData;
+	}
+	else
+	{
+		std::cerr << "Error: Attempted to bind texture without loading file" << std::endl;
+		exit(1);
 	}
 }
 
