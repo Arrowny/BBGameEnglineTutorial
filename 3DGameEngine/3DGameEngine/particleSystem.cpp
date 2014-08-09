@@ -184,7 +184,7 @@ void ParticleSystem::EnableGLRenderingSpecs()
 	{
 	case TEXTURE_ONLY:
 		break;
-	case LUMINIOUS_BLEND:
+	case LUMINOUS_BLEND:
 		glEnable(GL_BLEND);
 		glEnable(GL_DEPTH_TEST);
 		glDepthMask(GL_FALSE);
@@ -202,7 +202,7 @@ void ParticleSystem::DisableGLRenderingSpecs()
 	{
 	case TEXTURE_ONLY:
 		break;
-	case LUMINIOUS_BLEND:
+	case LUMINOUS_BLEND:
 		glDisable(GL_BLEND);
 		glDepthMask(GL_TRUE);
 		break;

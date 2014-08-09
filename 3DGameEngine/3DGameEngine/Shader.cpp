@@ -422,7 +422,6 @@ void Shader::UpdateUniforms(const Transform& transform, const PhysicsComponents&
 			else
 				throw uniformType + " is not supported by the physicsComponent class";
 		}
-
 	}
 }
 void Shader::UpdateUniforms(const Transform& transform, const Material& material, RenderingEngine* renderingEngine)

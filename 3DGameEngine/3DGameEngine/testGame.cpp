@@ -104,8 +104,8 @@ void TestGame::init(){
 	m_camera->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f))->AddComponent(new FreeLook())->AddComponent(new FreeMove());
 	m_skyBoxObject->AddComponent(m_skyBoxrenderer);
 
-	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material, new PhysicsComponents(2), glm::vec3(0.0, 0.0, 10.0), 10000);
-	m_luminousPS = new ParticleSystem("basicParticlePhy", &m_particleMaterial, new PhysicsComponents(2), glm::vec3(0.0, 0.0, 0.0), 10000, LUMINIOUS_BLEND);
+	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material, new PhysicsComponents(2), glm::vec3(0.0, 0.0, 10.0), 100000);
+	m_luminousPS = new ParticleSystem("basicParticlePhy", &m_particleMaterial, new PhysicsComponents(2), glm::vec3(0.0, 1.0, 10.0), 100000, LUMINOUS_BLEND);
 	m_material.SetFloat("quadLength", 0.1);
 	m_particleMaterial.SetFloat("quadLength", 0.1);
 	m_basicPSObj->AddComponent(m_basicPS);
