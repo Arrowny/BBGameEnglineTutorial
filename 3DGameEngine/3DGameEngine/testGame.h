@@ -57,6 +57,8 @@ private:
 	Material m_material2;
 	Material m_material3;
 	Material m_particleMaterial;
+	Material m_particleMaterial2;
+	Material m_particleMaterial3;
 	Material m_sky;
 	Texture* m_texture;
 	Texture* m_texture2;
@@ -69,5 +71,7 @@ private:
 	SkyBoxRenderer* m_skyBoxrenderer;
 	ParticleSystem* m_basicPS;
 	ParticleSystem* m_luminousPS;
+	ParticleSystem* m_luminousPS2;
+	ParticleSystem* m_luminousPS3;
 };
 

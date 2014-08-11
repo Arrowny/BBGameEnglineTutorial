@@ -10,6 +10,7 @@ m_intMap(std::unordered_map<std::string, int>())
 	SetTexture("diffuse", texture);
 	SetFloat("specularIntensity", specularIntensity);
 	SetFloat("specularPower", specularPower);
+	SetVector3f("color", glm::fvec3(1.0, 1.0, 1.0));
 };
 
 Texture* Material::GetTexture(const std::string& name) const

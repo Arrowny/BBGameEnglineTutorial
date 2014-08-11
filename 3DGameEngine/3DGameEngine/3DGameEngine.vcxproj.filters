@@ -42,6 +42,12 @@
     <Filter Include="GLSL Files\MeshPhysics">
       <UniqueIdentifier>{6ba174f7-39d7-4fdd-ba12-5d7b1fae56ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GLSL Files\VecFieldParticlePhysics">
+      <UniqueIdentifier>{905bb5f4-24f4-4de8-a5cd-c6e0c9ac0ee2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PhysicsEngine\VectorFieldPhysics">
+      <UniqueIdentifier>{8766541d-6a99-4200-8f84-3f78007a2886}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -115,6 +121,12 @@
     </ClCompile>
     <ClCompile Include="texture3D.cpp">
       <Filter>CoreEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="physicsAdvection.cpp">
+      <Filter>PhysicsEngine\VectorFieldPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="noise.cpp">
+      <Filter>CoreEngine\Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +226,12 @@
     <ClInclude Include="texture3D.h">
       <Filter>CoreEngine</Filter>
     </ClInclude>
+    <ClInclude Include="physicsAdvection.h">
+      <Filter>PhysicsEngine\VectorFieldPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="noise.h">
+      <Filter>CoreEngine\Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\forwardAmbient.frag">
@@ -263,6 +281,9 @@
     </None>
     <None Include="res\particleRenderer.geom">
       <Filter>GLSL Files\ParticleRendering</Filter>
+    </None>
+    <None Include="res\advectParticlePhy.vert">
+      <Filter>GLSL Files\VecFieldParticlePhysics</Filter>
     </None>
   </ItemGroup>
 </Project>

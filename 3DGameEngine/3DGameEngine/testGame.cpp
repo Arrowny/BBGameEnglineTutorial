@@ -54,6 +54,8 @@ void TestGame::init(){
 	m_material2 = Material(m_texture2, 1, 10);
 	m_material3 = Material(m_texture3, 1, 36);
 	m_particleMaterial = Material(m_particleTexture, 1, 36);
+	m_particleMaterial2 = Material(m_particleTexture, 1, 36);
+	m_particleMaterial3 = Material(m_particleTexture, 1, 36);
 	m_sky = Material(); m_sky.SetTexture("diffuse", m_skyTexture);
 
 	m_meshRenderer = new MeshRenderer(*m_mesh, m_material);
@@ -73,13 +75,15 @@ void TestGame::init(){
 	m_planeObject2->GetTransform().SetPos(glm::fvec3(-4, 0, 0));
 	m_planeObject3->GetTransform().SetPos(glm::fvec3(-2, 4, 0));
 
-	dirLight1 = new DirectionalLight(glm::fvec3(1.0f, 1.0f, 1.0f), 0.01f);
+	dirLight1 = new DirectionalLight(glm::fvec3(1.0f, 1.0f, 1.0f), 1.0f);
 	dirLight2 = new DirectionalLight(glm::fvec3(0.0f, 0.0f, 1.0f), 0.2f);
 	dirLight3 = new DirectionalLight(glm::fvec3(0.0f, 1.0f, 0.0f), 0.2f);
 	m_dirLightObj1->AddComponent(dirLight1);
 	//m_dirLightObj1->AddComponent(dirLight2);
 	//m_dirLightObj1->AddComponent(dirLight3);
-	m_dirLightObj1->GetTransform().SetRot(glm::normalize(glm::quat((float)-0.1f, 0.0f, 1.0f, 0.0f))); 
+	//m_dirLightObj1->GetTransform().SetRot(glm::normalize(glm::quat(glm::radians(-60.0f), 1.0f, 0.0f, 0.0f)));
+	m_dirLightObj1->GetTransform().SetRot(glm::normalize(glm::quat(glm::radians(150.0f), 1.0f, 1.0f, 0.0f)));
+	//m_dirLightObj1->GetTransform().SetPos(glm::fvec3(1.0, 1.0, 1.0));
 
 	pLight1 = new PointLight(glm::fvec3(1.0f, 1.0f, 1.0f), 0.2f, Attenuation(0, 0, 1));
 	pLight2 = new PointLight(glm::fvec3(0.0f, 1.0f, 0.0f), 0.2f, Attenuation(0, 0, 1));
@@ -104,14 +108,22 @@ void TestGame::init(){
 	m_camera->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f))->AddComponent(new FreeLook())->AddComponent(new FreeMove());
 	m_skyBoxObject->AddComponent(m_skyBoxrenderer);
 
-	m_basicPS = new ParticleSystem("basicParticlePhy", &m_material, new PhysicsComponents(2), glm::vec3(0.0, 0.0, 10.0), 100000);
-	m_luminousPS = new ParticleSystem("basicParticlePhy", &m_particleMaterial, new PhysicsComponents(2), glm::vec3(0.0, 1.0, 10.0), 100000, LUMINOUS_BLEND);
-	m_material.SetFloat("quadLength", 0.1);
+	//m_basicPS = new ParticleSystem("basicParticlePhy", &m_material, new PhysicsComponents(2), glm::vec3(0.0, 0.0, 10.0), 100000);
+	m_luminousPS = new ParticleSystem("basicParticlePhy", &m_particleMaterial, new PhysicsComponents(2), glm::vec3(-2.0, 1.8, 10.0), 5000, LUMINOUS_BLEND);
+	m_luminousPS2 = new ParticleSystem("basicParticlePhy", &m_particleMaterial2, new PhysicsComponents(2), glm::vec3(-4.0, 0.0, 10.0), 5000, LUMINOUS_BLEND);
+	m_luminousPS3 = new ParticleSystem("basicParticlePhy", &m_particleMaterial3, new PhysicsComponents(2), glm::vec3(-2.0, 4.0, 10.0), 5000, LUMINOUS_BLEND);
+	//m_material.SetFloat("quadLength", 0.1);
 	m_particleMaterial.SetFloat("quadLength", 0.1);
-	m_basicPSObj->AddComponent(m_basicPS);
+	//m_particleMaterial2.SetFloat("quadLength", 0.1);
+	//m_particleMaterial3.SetFloat("quadLength", 0.1);
+	m_particleMaterial.SetVector3f("color", glm::fvec3(0.5, 0.5, 0.9));
+	//m_particleMaterial2.SetVector3f("color", glm::fvec3(0.0, 1.0, 1.0));
+	//m_particleMaterial3.SetVector3f("color", glm::fvec3(1.0, 1.0, 1.0));
+	//m_basicPSObj->AddComponent(m_basicPS);
 	m_basicPSObj->AddComponent(m_luminousPS);
+	//m_basicPSObj->AddComponent(m_luminousPS2);
+	//m_basicPSObj->AddComponent(m_luminousPS3);
 	//m_basicPSObj->AddComponent(new FreeLook())->AddComponent(new FreeMove());
-
 	
 	AddToScene(m_planeObject);
 	AddToScene(m_dirLightObj1);

@@ -7,8 +7,8 @@
 #include "testGame.h"
 #include "renderingEngine.h"
 
-#define WIDTH 1000
-#define HEIGHT 600
+#define WIDTH 1600
+#define HEIGHT 900
 #define TITLE "3DGameEngine"
 #define FRAME_CAP 5000.0
 

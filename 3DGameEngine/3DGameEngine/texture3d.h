@@ -9,9 +9,12 @@ class Texture3D : public Texture
 {
 public:
 	Texture3D(GLsizei texWidth, GLsizei texHeight, GLsizei texDepth, std::vector<glm::vec3> data);
+	Texture3D(GLsizei texWidth, GLsizei texHeight, GLsizei texDepth, std::vector<float> data);
 	virtual ~Texture3D();
 
 	virtual void Bind(unsigned int unit) const;
+
+	inline GLuint GetHandle(){ return m_texture; }
 
 private:
 	Texture3D(const Texture3D& other) {}

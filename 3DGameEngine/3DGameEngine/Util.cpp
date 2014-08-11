@@ -1,4 +1,4 @@
-#include "util.h"
+#include "Util.h"
 #include <SDL/SDL.h>
 #include <algorithm> 
 #include <functional> 
