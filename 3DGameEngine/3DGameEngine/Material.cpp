@@ -10,6 +10,7 @@ m_intMap(std::unordered_map<std::string, int>())
 	SetTexture("diffuse", texture);
 	SetFloat("specularIntensity", specularIntensity);
 	SetFloat("specularPower", specularPower);
+	SetVector3f("color", glm::vec3(1, 1, 1));// set defual particle color
 };
 
 Texture* Material::GetTexture(const std::string& name) const

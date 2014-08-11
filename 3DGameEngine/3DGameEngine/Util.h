@@ -61,6 +61,7 @@ namespace Util
 		return i;
 	}
 
+	const float InverseMaxInt = 1.0;// / 4294967295.0;
 	static inline glm::vec3 randomVec3()
 	{
 		clock_t time = clock();
@@ -69,7 +70,7 @@ namespace Util
 										(static_cast <float> (randhash(rand())) / static_cast <float> (UINT_MAX)) * 2.0f - 1.0f,
 										(static_cast <float> (randhash(rand())) / static_cast <float> (UINT_MAX)) * 2.0f - 1.0f
 									);
-		return glm::normalize(random);
+		return glm::normalize(random * InverseMaxInt);
 	}
 
 };

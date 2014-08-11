@@ -25,7 +25,7 @@ struct Particle
 enum 
 {
 	TEXTURE_ONLY,
-	LUMINIOUS_BLEND,
+	LUMINOUS_BLEND,
 
 	NUM_RENDERING_TYPES
 };
