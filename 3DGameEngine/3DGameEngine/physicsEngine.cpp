@@ -5,7 +5,6 @@
 
 PhysicsEngine::PhysicsEngine(const float& delta)
 {
-
 	SetFloat("delta", delta);
 	SetVector3f("randomSeed", Util::randomVec3());
 

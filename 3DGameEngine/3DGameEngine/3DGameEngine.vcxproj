@@ -86,8 +86,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="noise.cpp" />
     <ClCompile Include="obj_loader.cpp" />
     <ClCompile Include="particleSystem.cpp" />
+    <ClCompile Include="physicsAdvection.cpp" />
     <ClCompile Include="physicsComponents.cpp" />
     <ClCompile Include="physicsEngine.cpp" />
     <ClCompile Include="renderingEngine.cpp" />
@@ -112,7 +114,9 @@
     <ClInclude Include="gameObject.h" />
     <ClInclude Include="Lights.h" />
     <ClInclude Include="mappedValues.h" />
+    <ClInclude Include="noise.h" />
     <ClInclude Include="particleSystem.h" />
+    <ClInclude Include="physicsAdvection.h" />
     <ClInclude Include="physicsComponents.h" />
     <ClInclude Include="physicsEngine.h" />
     <ClInclude Include="referenceCounter.h" />
@@ -137,6 +141,7 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\advectParticlePhy.vert" />
     <None Include="res\basicParticlePhy.frag" />
     <None Include="res\basicParticlePhy.geom" />
     <None Include="res\basicParticlePhy.vert" />

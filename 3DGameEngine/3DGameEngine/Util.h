@@ -24,9 +24,12 @@
 #include <cctype>
 #include <locale>
 #include <ctime>
+#include <stdarg.h>
+#include <iostream>
+
 #define ZERO_MEM(a) std::memset(a, 0, sizeof(a))
 #define ZERO_MEM2(a,b) std::memset(a, 0, b)
-
+#define countof(A) (sizeof(A) / sizeof(A[0]))
 
 namespace Util
 {
@@ -71,6 +74,22 @@ namespace Util
 										(static_cast <float> (randhash(rand())) / static_cast <float> (UINT_MAX)) * 2.0f - 1.0f
 									);
 		return glm::normalize(random * InverseMaxInt);
+	}
+
+	static inline void CheckCondition(int condition, ...)
+	{
+		va_list a;
+		const char* pStr;
+
+		if (condition)
+			return;
+
+		va_start(a, condition);
+		pStr = va_arg(a, const char*);
+
+		//_PezFatalError(pStr, a);
+		std::cout << pStr << std::endl;
+		exit(1);
 	}
 
 };

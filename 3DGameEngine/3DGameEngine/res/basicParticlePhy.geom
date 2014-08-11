@@ -43,7 +43,7 @@ void main()
 			EmitVertex();
 		}
 	}
-	else if ( Age0[0] < 100.0 )
+	else if ( Age0[0] < 0.5 )
 	{
 		TFB_Type = Type0[0];
 		TFB_Position = Position0[0] + (Velocity0[0] * P_delta);
