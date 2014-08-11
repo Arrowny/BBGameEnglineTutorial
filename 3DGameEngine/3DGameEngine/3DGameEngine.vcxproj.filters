@@ -119,7 +119,7 @@
     <ClCompile Include="textureCube.cpp">
       <Filter>CoreEngine</Filter>
     </ClCompile>
-    <ClCompile Include="texture3D.cpp">
+    <ClCompile Include="texture3d.cpp">
       <Filter>CoreEngine</Filter>
     </ClCompile>
     <ClCompile Include="physicsAdvection.cpp">
@@ -223,7 +223,7 @@
     <ClInclude Include="textureCube.h">
       <Filter>CoreEngine</Filter>
     </ClInclude>
-    <ClInclude Include="texture3D.h">
+    <ClInclude Include="texture3d.h">
       <Filter>CoreEngine</Filter>
     </ClInclude>
     <ClInclude Include="physicsAdvection.h">
