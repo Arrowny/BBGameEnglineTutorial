@@ -141,6 +141,8 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\advectParticlePhy.frag" />
+    <None Include="res\advectParticlePhy.geom" />
     <None Include="res\advectParticlePhy.vert" />
     <None Include="res\basicParticlePhy.frag" />
     <None Include="res\basicParticlePhy.geom" />

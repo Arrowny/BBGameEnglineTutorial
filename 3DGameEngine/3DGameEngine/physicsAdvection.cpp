@@ -118,7 +118,7 @@ glm::vec3 PhysicsAdvection::ComputeCurl(glm::vec3 p)
 	return glm::vec3(x, y, z) / (2 * e);
 }
 
-TexturePod PhysicsAdvection::CreateVelocityTexture(GLsizei texWidth, GLsizei texHeight, GLsizei texDepth)
+void PhysicsAdvection::CreateVelocityTexture(GLsizei texWidth, GLsizei texHeight, GLsizei texDepth)
 {
 	VelocityCache.Data.resize(texWidth * texHeight * texDepth * 3);
 
@@ -172,6 +172,6 @@ TexturePod PhysicsAdvection::CreateVelocityTexture(GLsizei texWidth, GLsizei tex
 	VelocityCache.Description.Height = texHeight;
 	VelocityCache.Description.Depth = texDepth;
 
-	return VelocityCache.Description;
+	//return VelocityCache.Description;
 }
 

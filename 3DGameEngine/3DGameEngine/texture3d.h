@@ -14,7 +14,10 @@ public:
 
 	virtual void Bind(unsigned int unit) const;
 
-	inline GLuint GetHandle(){ return m_texture; }
+	GLuint GetHandle() { return m_texture; }
+	GLsizei GetTexWidth() { return m_texWidth; }
+	GLsizei GetTexHeight() { return m_texHeight; }
+	GLsizei GetTexDepth() { return m_texDepth; }
 
 private:
 	Texture3D(const Texture3D& other) {}

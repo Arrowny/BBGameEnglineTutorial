@@ -4,12 +4,14 @@
 #include <unordered_map>
 
 class Texture;
+class Texture3D;
 
 class PhysicsComponents
 {
 public:
 	PhysicsComponents();
 	PhysicsComponents(const int& numEmittedParticles);
+	PhysicsComponents(const int& numEmittedParticles, Texture3D* texture);
 	virtual ~PhysicsComponents();
 
 	inline void SetTexture(const std::string& name, Texture* value) { m_textureMap[name] = value; }
