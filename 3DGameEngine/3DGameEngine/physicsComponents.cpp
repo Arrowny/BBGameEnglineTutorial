@@ -1,4 +1,5 @@
 #include "physicsComponents.h"
+#include "texture3D.h"
 
 PhysicsComponents::PhysicsComponents() :
 m_vec3fMap(std::unordered_map<std::string, glm::fvec3>()),
@@ -11,6 +12,15 @@ m_intMap(std::unordered_map<std::string, int>())
 PhysicsComponents::PhysicsComponents(const int& numEmittedParticles)
 {
 	SetInt("numEmit", numEmittedParticles);
+}
+
+PhysicsComponents::PhysicsComponents(const int& numEmittedParticles, Texture3D* texture)
+{
+	SetInt("numEmit", numEmittedParticles);
+	SetTexture("vectorField", texture);
+	SetVector3f("Size", glm::fvec3((float)texture->GetTexWidth(), (float)texture->GetTexHeight(), (float)texture->GetTexDepth()));
+	SetVector3f("Extent", glm::vec3(2, 4, 2));
+
 }
 
 PhysicsComponents::~PhysicsComponents()

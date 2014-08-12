@@ -13,6 +13,7 @@
 #include <iostream>
 #include "freeLook.h"
 #include "freeMove.h"
+#include "physicsAdvection.h"
 
 class TestGame : public Game
 {
@@ -73,5 +74,9 @@ private:
 	ParticleSystem* m_luminousPS;
 	ParticleSystem* m_luminousPS2;
 	ParticleSystem* m_luminousPS3;
+
+	PhysicsAdvection* m_phyAdvect;
+	Texture3D* m_advectTexture;
+	ParticleSystem* m_advectPS;
 };
 

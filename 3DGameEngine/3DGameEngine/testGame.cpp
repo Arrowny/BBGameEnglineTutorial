@@ -108,6 +108,11 @@ void TestGame::init(){
 	m_camera->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f))->AddComponent(new FreeLook())->AddComponent(new FreeMove());
 	m_skyBoxObject->AddComponent(m_skyBoxrenderer);
 
+
+	/*m_phyAdvect->CreateVelocityTexture(128, 256, 128);
+	m_advectTexture = m_phyAdvect->getTexture3D();
+	m_advectPS = new ParticleSystem("advectParticlePhy", &m_particleMaterial, new PhysicsComponents(2, m_advectTexture), glm::vec3(-2.0, 1.8, 10.0), 5000, LUMINOUS_BLEND);*/
+
 	//m_basicPS = new ParticleSystem("basicParticlePhy", &m_material, new PhysicsComponents(2), glm::vec3(0.0, 0.0, 10.0), 100000);
 	m_luminousPS = new ParticleSystem("basicParticlePhy", &m_particleMaterial, new PhysicsComponents(2), glm::vec3(-2.0, 1.8, 10.0), 5000, LUMINOUS_BLEND);
 	m_luminousPS2 = new ParticleSystem("basicParticlePhy", &m_particleMaterial2, new PhysicsComponents(2), glm::vec3(-4.0, 0.0, 10.0), 5000, LUMINOUS_BLEND);

@@ -285,5 +285,11 @@
     <None Include="res\advectParticlePhy.vert">
       <Filter>GLSL Files\VecFieldParticlePhysics</Filter>
     </None>
+    <None Include="res\advectParticlePhy.geom">
+      <Filter>GLSL Files\VecFieldParticlePhysics</Filter>
+    </None>
+    <None Include="res\advectParticlePhy.frag">
+      <Filter>GLSL Files\VecFieldParticlePhysics</Filter>
+    </None>
   </ItemGroup>
 </Project>
