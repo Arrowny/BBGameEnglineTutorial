@@ -39,7 +39,8 @@ void TestGame::init(){
 	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
 	m_mesh = new Mesh("triforce.obj");
 	//m_mesh2 = new Mesh("./res/mon.obj");
-	//m_mesh3 = new Mesh("./res/luigi.obj");
+	//m_mesh3 = new Mesh("luigi.obj");
+	//m_texture = new Texture("luigiD.jpg");
 	m_texture = new Texture("colour.jpg");
 	m_texture2 = new Texture("bricks2.jpg");
 	m_texture3 = new Texture("bricks2_normal.jpg");
@@ -47,7 +48,6 @@ void TestGame::init(){
 	m_particleTexture = new Texture("Particle.tga");
 
     //m_skyTexture = new TextureCube("./res/skybox", "left2.jpg", "right2.jpg", "up2.jpg", "down2.jpg", "front2.jpg", "back2.jpg");
-
     //m_skyTexture = new TextureCube("./res/skybox", "jajlands1_left.jpg", "jajlands1_right.jpg", "jajlands1_top.jpg", "jajlands1_bottom.jpg", "jajlands1_front.jpg", "jajlands1_back.jpg");
 
 	m_material = Material(m_texture, 1, 36);
@@ -64,7 +64,7 @@ void TestGame::init(){
 
 	m_skyBoxrenderer = new SkyBoxRenderer(m_sky);
 
-	m_planeObject->AddComponent(m_meshRenderer);
+	m_planeObject->AddComponent(m_meshRenderer);	
 	m_planeObject2->AddComponent(m_meshRenderer2);
 	m_planeObject3->AddComponent(m_meshRenderer3);
 	//m_planeObject2->AddComponent(new FreeLook());
@@ -108,20 +108,20 @@ void TestGame::init(){
 	m_camera->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f))->AddComponent(new FreeLook())->AddComponent(new FreeMove());
 	m_skyBoxObject->AddComponent(m_skyBoxrenderer);
 
-
-	/*m_phyAdvect->CreateVelocityTexture(128, 256, 128);
-	m_advectTexture = m_phyAdvect->getTexture3D();
-	m_advectPS = new ParticleSystem("advectParticlePhy", &m_particleMaterial, new PhysicsComponents(2, m_advectTexture), glm::vec3(-2.0, 1.8, 10.0), 5000, LUMINOUS_BLEND);*/
+	m_advectTexture = m_phyAdvect->CreateVelocityTexture(128, 256, 128);
+	//m_advectTexture = m_phyAdvect->GetTexture3D();
+	//m_advectPS = new ParticleSystem("advectParticlePhy", &m_particleMaterial, new PhysicsComponents(2, m_advectTexture), glm::vec3(-2.0, 1.8, 10.0), 5000, LUMINOUS_BLEND);
 
 	//m_basicPS = new ParticleSystem("basicParticlePhy", &m_material, new PhysicsComponents(2), glm::vec3(0.0, 0.0, 10.0), 100000);
-	m_luminousPS = new ParticleSystem("basicParticlePhy", &m_particleMaterial, new PhysicsComponents(2), glm::vec3(-2.0, 1.8, 10.0), 5000, LUMINOUS_BLEND);
+	//m_luminousPS = new ParticleSystem("basicParticlePhy", &m_particleMaterial, new PhysicsComponents(2), glm::vec3(-2.0, 1.8, 10.0), 5000, LUMINOUS_BLEND);
+	m_luminousPS = new ParticleSystem("advectParticlePhy", &m_particleMaterial, new PhysicsComponents(2, m_advectTexture), glm::vec3(-2.0, 1.8, 10.0), 10000, LUMINOUS_BLEND);
 	m_luminousPS2 = new ParticleSystem("basicParticlePhy", &m_particleMaterial2, new PhysicsComponents(2), glm::vec3(-4.0, 0.0, 10.0), 5000, LUMINOUS_BLEND);
 	m_luminousPS3 = new ParticleSystem("basicParticlePhy", &m_particleMaterial3, new PhysicsComponents(2), glm::vec3(-2.0, 4.0, 10.0), 5000, LUMINOUS_BLEND);
 	//m_material.SetFloat("quadLength", 0.1);
-	m_particleMaterial.SetFloat("quadLength", 0.1);
+	m_particleMaterial.SetFloat("quadLength", 0.2);
 	//m_particleMaterial2.SetFloat("quadLength", 0.1);
 	//m_particleMaterial3.SetFloat("quadLength", 0.1);
-	m_particleMaterial.SetVector3f("color", glm::fvec3(0.5, 0.5, 0.9));
+	//m_particleMaterial.SetVector3f("color", glm::fvec3(0.5, 0.5, 0.9));
 	//m_particleMaterial2.SetVector3f("color", glm::fvec3(0.0, 1.0, 1.0));
 	//m_particleMaterial3.SetVector3f("color", glm::fvec3(1.0, 1.0, 1.0));
 	//m_basicPSObj->AddComponent(m_basicPS);

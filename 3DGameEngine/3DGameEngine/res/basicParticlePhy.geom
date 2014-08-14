@@ -37,7 +37,7 @@ void main()
 		for(int ii = 0; ii < numEmit; ii++)
 		{
 			TFB_Type = PARTICLE_TYPE;
-			TFB_Position = (T_model * vec4(emit_position, 1.0)).xyz;;
+			TFB_Position = (T_model * vec4(emit_position, 1.0)).xyz;
 			TFB_Velocity = P_randomSeed * (ii+1)*10;
 			TFB_Age = 0.0;
 			EmitVertex();

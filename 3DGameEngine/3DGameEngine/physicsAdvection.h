@@ -36,8 +36,8 @@ public:
 	static glm::vec3 BlendVectors(glm::vec3 potential, float alpha, glm::vec3 distanceGradient);
 
 	static glm::vec3 ComputeCurl(glm::vec3 p);
-	void CreateVelocityTexture(GLsizei texWidth, GLsizei texHeight, GLsizei texDepth);
-	Texture3D* getTexture3D() { return m_texture3d; };
+	Texture3D* CreateVelocityTexture(GLsizei texWidth, GLsizei texHeight, GLsizei texDepth);
+	//Texture3D* GetTexture3D() { return m_texture3d; }
 
 protected:
 

@@ -28,6 +28,7 @@ inline glm::vec3 noise3d(glm::vec3 s) { return glm::vec3(noise0(s), noise1(s), n
 
 PhysicsAdvection::PhysicsAdvection()
 {
+	m_texture3d = NULL;
 }
 
 
@@ -118,7 +119,7 @@ glm::vec3 PhysicsAdvection::ComputeCurl(glm::vec3 p)
 	return glm::vec3(x, y, z) / (2 * e);
 }
 
-void PhysicsAdvection::CreateVelocityTexture(GLsizei texWidth, GLsizei texHeight, GLsizei texDepth)
+Texture3D* PhysicsAdvection::CreateVelocityTexture(GLsizei texWidth, GLsizei texHeight, GLsizei texDepth)
 {
 	VelocityCache.Data.resize(texWidth * texHeight * texDepth * 3);
 
@@ -127,7 +128,7 @@ void PhysicsAdvection::CreateVelocityTexture(GLsizei texWidth, GLsizei texHeight
 	const float D = W;
 
 	size_t requiredBytes = VelocityCache.Data.size() * sizeof(float);
-	FILE* voxelsFile = fopen("Velocity.dat", "rb");
+	FILE* voxelsFile = fopen("./res/Velocity.dat", "rb");
 	if (voxelsFile) {
 		size_t bytesRead = fread(&VelocityCache.Data[0], 1, requiredBytes, voxelsFile);
 		Util::CheckCondition(bytesRead == requiredBytes);
@@ -149,13 +150,13 @@ void PhysicsAdvection::CreateVelocityTexture(GLsizei texWidth, GLsizei texHeight
 			}
 		}
 
-		voxelsFile = fopen("Velocity.dat", "wb");
+		voxelsFile = fopen("./res/Velocity.dat", "wb");
 		size_t bytesWritten = fwrite(&VelocityCache.Data[0], 1, requiredBytes, voxelsFile);
 		Util::CheckCondition(bytesWritten == requiredBytes);
 	}
 	fclose(voxelsFile);
 
-	m_texture3d = new Texture3D(texWidth, texHeight, texDepth, VelocityCache.Data);
+	Texture3D* m_texture3d = new Texture3D(texWidth, texHeight, texDepth, VelocityCache.Data);
 
 	//GLuint handle;
 	//glGenTextures(1, &handle);
@@ -173,5 +174,6 @@ void PhysicsAdvection::CreateVelocityTexture(GLsizei texWidth, GLsizei texHeight
 	VelocityCache.Description.Depth = texDepth;
 
 	//return VelocityCache.Description;
+	return m_texture3d;
 }
 

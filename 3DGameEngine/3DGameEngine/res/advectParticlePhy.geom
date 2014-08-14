@@ -1,70 +1,55 @@
-#version 400
+#version 400  
 
-in vec3 Position;
-in float BirthTime;
-in vec3 Velocity;
+#define EMITTER_TYPE 1.0
+#define PARTICLE_TYPE 0.0                                                                     
+                                                                                    
+layout(points) in;                                                                  
+layout(points) out;                                                                 
+layout(max_vertices = 10) out;                                                      
+                                                                                    
+in float Type0[];                                                                   
+in vec3 Position0[];                                                                
+in vec3 Velocity0[];                                                                
+in float Age0[];   
 
-out vec3 vPosition;
-out float vBirthTime;
-out vec3 vVelocity;
+out float TFB_Type;                                                                    
+out vec3 TFB_Position;                                                                 
+out vec3 TFB_Velocity;                                                                 
+out float TFB_Age; 
 
-uniform sampler3D vectorField;
-uniform vec3 Size;
-uniform vec3 Extent;
-
-uniform float P_delta;
-uniform float TimeStep = 5.0;
-uniform float InitialBand = 0.1;
-uniform float SeedRadius = 0.25;
-uniform float PlumeCeiling = 3.0;
-uniform float PlumeBase = -3;
-
-const float TwoPi = 6.28318530718;
-const float UINT_MAX = 4294967295.0;
-
-uint randhash(uint seed)
-{
-    uint i=(seed^12345391u)*2654435769u;
-    i^=(i<<6u)^(i>>26u);
-    i*=2654435769u;
-    i+=(i<<5u)^(i>>12u);
-    return i;
-}
-
-float randhashf(uint seed, float b)
-{
-    return float(b * randhash(seed)) / UINT_MAX;
-}
-
-vec3 SampleVelocity(vec3 p)
-{
-    vec3 tc;
-    tc.x = (p.x + Extent.x) / (2 * Extent.x);
-    tc.y = (p.y + Extent.y) / (2 * Extent.y);
-    tc.z = (p.z + Extent.z) / (2 * Extent.z);
-    return texture(Sampler, tc).xyz;
-}
+uniform float P_delta;   
+uniform vec3 P_randomSeed;
+uniform mat4 T_model;  
+uniform int numEmit;
 
 void main()
 {
-    vPosition = Position;
-    vBirthTime = BirthTime;
+	vec3 emit_position = Position0[0];
+	int BASE_TYPE = 1;
+	if(Type0[0] == EMITTER_TYPE)
+	{
+		TFB_Type = EMITTER_TYPE;
+		TFB_Position = emit_position;
+		TFB_Velocity = Velocity0[0];
+		TFB_Age = 0.0;
+		EmitVertex();
 
-    // Seed a new particle as soon as an old one dies:
-    if (BirthTime == 0.0 || Position.y > PlumeCeiling) {
-        uint seed = uint(P_delta * 1000.0) + uint(gl_VertexID);
-        float theta = randhashf(seed++, TwoPi);
-        float r = randhashf(seed++, SeedRadius);
-        float y = randhashf(seed++, InitialBand);
-        vPosition.x = r * cos(theta);
-        vPosition.y = PlumeBase + y;
-        vPosition.z = r * sin(theta);
-        vBirthTime = P_delta;
-    }
-
-    // Move the particles forward using a half-step to reduce numerical issues:
-    vVelocity = SampleVelocity(Position);
-    vec3 midx = Position + 0.5f * TimeStep * vVelocity;
-    vVelocity = SampleVelocity(midx);
-    vPosition += TimeStep * vVelocity;
+		for(int ii = 0; ii < numEmit; ii++)
+		{
+			TFB_Type = PARTICLE_TYPE;
+			TFB_Position = (T_model * vec4(emit_position, 1.0)).xyz;
+			TFB_Velocity = P_randomSeed * (ii+1)*10;
+			TFB_Age = 0.0;
+			EmitVertex();
+		}
+	}
+	else if ( Age0[0] < 0.5 )
+	{
+		TFB_Type = Type0[0];
+		TFB_Position = Position0[0] + (Velocity0[0] * P_delta);
+		TFB_Velocity = Velocity0[0];
+		TFB_Age = Age0[0] + P_delta;
+		EmitVertex();
+	}
+	EndPrimitive();
 }
