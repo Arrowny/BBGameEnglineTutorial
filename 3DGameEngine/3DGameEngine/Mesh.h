@@ -42,7 +42,6 @@ class Mesh
 {
 public:
 	Mesh(const std::string& fileName);
-	//Mesh(Vertex* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices, bool calcNormals = true);
 
 	void Draw();
 

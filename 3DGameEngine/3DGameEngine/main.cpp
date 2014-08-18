@@ -9,7 +9,7 @@
 
 #define WIDTH 1600
 #define HEIGHT 900
-#define TITLE "3DGameEngine"
+#define TITLE "3DSummer_GameEngine_Project"
 #define FRAME_CAP 5000.0
 
 int main(int argc, char** argv)

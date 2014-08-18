@@ -41,7 +41,6 @@ public:
 
 			if (rotX)
 			{
-				//if ((int)glm::degrees(GetTransform().GetRot().x) <= 45.0 && (int)glm::degrees(GetTransform().GetRot().x) >= -45.0)
 				GetTransform().SetRot(GetTransform().GetRot() * glm::normalize(glm::angleAxis(glm::radians(-deltaPos.y * sensitivity), GetTransform().GetRight())));
 			}
 

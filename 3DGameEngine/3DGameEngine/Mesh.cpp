@@ -51,27 +51,6 @@ Mesh::Mesh(const std::string& fileName){
 
 }
 
-//Mesh::Mesh(Vertex* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices, bool calcNormals)
-//{
-//	IndexedModel model;
-//
-//	if (calcNormals)
-//		this->CalcNormals(model);
-//
-//	for (unsigned int i = 0; i < numVertices; i++)
-//	{
-//		model.positions.push_back(*vertices[i].GetPos());
-//		model.texCoords.push_back(*vertices[i].GetTexCoord());
-//		model.normals.push_back(*vertices[i].GetNormal());
-//	}
-//
-//	for (unsigned int i = 0; i < numIndices; i++)
-//		model.indices.push_back(indices[i]);
-//
-//	InitMesh(model);
-//
-//}
-
 void Mesh::InitMesh(const IndexedModel& model){
 
 	m_drawCount = model.indices.size();

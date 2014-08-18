@@ -25,7 +25,6 @@ PhysicsComponents::PhysicsComponents(const int& numEmittedParticles, Texture3D* 
 	SetFloat("SeedRadius", 0.25);
 	SetFloat("PlumeCeiling", 3.0);
 	SetFloat("PlumeBase", -3.0);
-
 }
 
 PhysicsComponents::~PhysicsComponents()

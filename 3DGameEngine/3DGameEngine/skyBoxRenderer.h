@@ -18,7 +18,7 @@ public:
 private:
 private:
 	Mesh*	  m_meshCube;
-	Material m_material;
-	Shader* m_skyShader;
+	Material  m_material;
+	Shader*   m_skyShader;
 };
 

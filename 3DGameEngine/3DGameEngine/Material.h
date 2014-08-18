@@ -9,8 +9,6 @@ class Texture;
 
 struct Material
 {
-
-
 	Material():
 		m_textureMap(std::unordered_map<std::string, Texture*>()),
 		m_vec3fMap(std::unordered_map<std::string, glm::fvec3>()),

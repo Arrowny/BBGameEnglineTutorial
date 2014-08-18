@@ -9,21 +9,6 @@ TestGame::~TestGame()
 
 void TestGame::init(){
 
-	/*Vertex vertices[] = { Vertex(glm::vec3(-0.8, -0.8, 0.0), glm::vec2(1.0f, 0.0), glm::vec3(0, 0, -1)),
-						  Vertex(glm::vec3(0.0, 0.8, 0.0), glm::vec2(0.5f, 0.0), glm::vec3(0, 0, -1)),
-						  Vertex(glm::vec3(0.8, -0.8, 0.0), glm::vec2(1.0f, 0.0), glm::vec3(0, 0, -1)),
-						  Vertex(glm::vec3(0.0, -0.8, 0.8), glm::vec2(0.0, 0.5f), glm::vec3(0, 0, -1)),
-						  Vertex(glm::vec3(0.0, -0.8, -0.8), glm::vec2(0.0, 0.5f), glm::vec3(0, 0, -1)) };
-
-	unsigned int indices[] = { 3, 1, 0,
-	  						   2, 1, 3,
-							   0, 2, 3,
-							   4, 1, 2,
-							   1, 4, 0,
-							   2, 0, 4 };*/
-
-	glm::fvec4 baseColor(1.0f, 1.0f, 1.0f, 1.0f);
-
 	m_planeObject = new GameObject();
 	m_planeObject2 = new GameObject();
 	m_planeObject3 = new GameObject();
@@ -34,21 +19,15 @@ void TestGame::init(){
 	m_camera = new GameObject();
 	m_skyBoxObject = new GameObject();
 	m_basicPSObj = new GameObject();
-	
 
-	//m_mesh = new Mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
 	m_mesh = new Mesh("triforce.obj");
-	//m_mesh2 = new Mesh("./res/mon.obj");
-	//m_mesh3 = new Mesh("luigi.obj");
+	//m_mesh2 = new Mesh("luigi.obj");
 	//m_texture = new Texture("luigiD.jpg");
 	m_texture = new Texture("colour.jpg");
 	m_texture2 = new Texture("bricks2.jpg");
 	m_texture3 = new Texture("bricks2_normal.jpg");
 	m_skyTexture = new TextureCube("skyleft.png", "skyright.png", "skyup.png", "skydown.png", "skyfront.png", "skyback.png");
 	m_particleTexture = new Texture("Particle.tga");
-
-    //m_skyTexture = new TextureCube("./res/skybox", "left2.jpg", "right2.jpg", "up2.jpg", "down2.jpg", "front2.jpg", "back2.jpg");
-    //m_skyTexture = new TextureCube("./res/skybox", "jajlands1_left.jpg", "jajlands1_right.jpg", "jajlands1_top.jpg", "jajlands1_bottom.jpg", "jajlands1_front.jpg", "jajlands1_back.jpg");
 
 	m_material = Material(m_texture, 1, 36);
 	m_material2 = Material(m_texture2, 1, 10);
@@ -67,8 +46,6 @@ void TestGame::init(){
 	m_planeObject->AddComponent(m_meshRenderer);	
 	m_planeObject2->AddComponent(m_meshRenderer2);
 	m_planeObject3->AddComponent(m_meshRenderer3);
-	//m_planeObject2->AddComponent(new FreeLook());
-	//m_planeObject2->AddComponent(new FreeMove());
 	m_planeObject->AddChild(m_planeObject2);
 	m_planeObject->AddChild(m_planeObject3);
 	m_planeObject->GetTransform().SetPos(glm::fvec3(0, 0, 10));
@@ -79,11 +56,7 @@ void TestGame::init(){
 	dirLight2 = new DirectionalLight(glm::fvec3(0.0f, 0.0f, 1.0f), 0.2f);
 	dirLight3 = new DirectionalLight(glm::fvec3(0.0f, 1.0f, 0.0f), 0.2f);
 	m_dirLightObj1->AddComponent(dirLight1);
-	//m_dirLightObj1->AddComponent(dirLight2);
-	//m_dirLightObj1->AddComponent(dirLight3);
-	//m_dirLightObj1->GetTransform().SetRot(glm::normalize(glm::quat(glm::radians(-60.0f), 1.0f, 0.0f, 0.0f)));
 	m_dirLightObj1->GetTransform().SetRot(glm::normalize(glm::quat(glm::radians(150.0f), 1.0f, 1.0f, 0.0f)));
-	//m_dirLightObj1->GetTransform().SetPos(glm::fvec3(1.0, 1.0, 1.0));
 
 	pLight1 = new PointLight(glm::fvec3(1.0f, 1.0f, 1.0f), 0.2f, Attenuation(0, 0, 1));
 	pLight2 = new PointLight(glm::fvec3(0.0f, 1.0f, 0.0f), 0.2f, Attenuation(0, 0, 1));
@@ -109,26 +82,17 @@ void TestGame::init(){
 	m_skyBoxObject->AddComponent(m_skyBoxrenderer);
 
 	m_advectTexture = m_phyAdvect->CreateVelocityTexture(128, 256, 128);
-	//m_advectTexture = m_phyAdvect->GetTexture3D();
-	//m_advectPS = new ParticleSystem("advectParticlePhy", &m_particleMaterial, new PhysicsComponents(2, m_advectTexture), glm::vec3(-2.0, 1.8, 10.0), 5000, LUMINOUS_BLEND);
 
 	//m_basicPS = new ParticleSystem("basicParticlePhy", &m_material, new PhysicsComponents(2), glm::vec3(0.0, 0.0, 10.0), 100000);
-	//m_luminousPS = new ParticleSystem("basicParticlePhy", &m_particleMaterial, new PhysicsComponents(2), glm::vec3(-2.0, 1.8, 10.0), 5000, LUMINOUS_BLEND);
-	m_luminousPS = new ParticleSystem("advectParticlePhy", &m_particleMaterial, new PhysicsComponents(2, m_advectTexture), glm::vec3(-2.0, 1.8, 10.0), 100000, LUMINOUS_BLEND);
-	m_luminousPS2 = new ParticleSystem("basicParticlePhy", &m_particleMaterial, new PhysicsComponents(2), glm::vec3(-4.0, 0.0, 10.0), 5000, LUMINOUS_BLEND);
-	m_luminousPS3 = new ParticleSystem("basicParticlePhy", &m_particleMaterial, new PhysicsComponents(2), glm::vec3(-2.0, 4.0, 10.0), 5000, LUMINOUS_BLEND);
 	//m_material.SetFloat("quadLength", 0.1);
+	m_luminousPS = new ParticleSystem("advectParticlePhy", &m_particleMaterial, new PhysicsComponents(2, m_advectTexture), glm::vec3(-2.0, 1.8, 10.0), 100000, LUMINOUS_BLEND);
+	m_luminousPS2 = new ParticleSystem("basicParticlePhy", &m_particleMaterial, new PhysicsComponents(2), glm::vec3(-4.0, 0.0, 10.0), 1000, LUMINOUS_BLEND);
+	m_luminousPS3 = new ParticleSystem("basicParticlePhy", &m_particleMaterial, new PhysicsComponents(2), glm::vec3(0.0, 0.0, 10.0), 1000, LUMINOUS_BLEND);
 	m_particleMaterial.SetFloat("quadLength", 0.01);
-	//m_particleMaterial2.SetFloat("quadLength", 0.1);
-	//m_particleMaterial3.SetFloat("quadLength", 0.1);
-	//m_particleMaterial.SetVector3f("color", glm::fvec3(1.0, 0.1, 0.1));
-	//m_particleMaterial2.SetVector3f("color", glm::fvec3(0.0, 1.0, 1.0));
-	//m_particleMaterial3.SetVector3f("color", glm::fvec3(1.0, 1.0, 1.0));
-	//m_basicPSObj->AddComponent(m_basicPS);
+	m_particleMaterial.SetVector3f("color", glm::fvec3(1.0, 1.0, 1.0));
 	m_basicPSObj->AddComponent(m_luminousPS);
-	//m_basicPSObj->AddComponent(m_luminousPS2);
-	//m_basicPSObj->AddComponent(m_luminousPS3);
-	//m_basicPSObj->AddComponent(new FreeLook())->AddComponent(new FreeMove());
+	m_basicPSObj->AddComponent(m_luminousPS2);
+	m_basicPSObj->AddComponent(m_luminousPS3);
 	
 	AddToScene(m_planeObject);
 	AddToScene(m_dirLightObj1);
@@ -137,11 +101,6 @@ void TestGame::init(){
 	AddToScene(m_camera);
 	AddToScene(m_skyBoxObject);
 	AddToScene(m_basicPSObj);
-
-	//m_planeObject->GetTransform().SetRot(glm::normalize(glm::quat(glm::radians(-90.0f), 0.0f, 1.0f, 0.0f)));
-	//m_planeObject3->AddChild((new gameObject())->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f))->AddComponent(new FreeLook()));
-	//AddToScene((new gameObject())->AddComponent(new Camera(70.0f, Window::getAspect(), 0.1f, 1000.0f))->AddComponent(new FreeLook())->AddComponent(new FreeMove()));
-
 }
 
 void TestGame::update(float delta){
@@ -149,7 +108,6 @@ void TestGame::update(float delta){
 	float sinCounter = sinf(counter);
 	float cosCounter = cosf(counter);
 
-	//m_pLightObj1->GetTransform().SetPos(glm::vec3(sinCounter, 1.5, 4.5));
 	m_pLightObj1->GetTransform().SetPos(m_planeObject->GetTransform().GetTransformedPos() + glm::fvec3(sinCounter, 1.5, -0.5));
 	m_sLightObj1->GetTransform().SetPos(m_camera->GetTransform().GetTransformedPos());
 	m_sLightObj1->GetTransform().SetRot(m_camera->GetTransform().GetTransformedRot());

@@ -37,7 +37,6 @@ public:
 
 	static glm::vec3 ComputeCurl(glm::vec3 p);
 	Texture3D* CreateVelocityTexture(GLsizei texWidth, GLsizei texHeight, GLsizei texDepth);
-	//Texture3D* GetTexture3D() { return m_texture3d; }
 
 protected:
 

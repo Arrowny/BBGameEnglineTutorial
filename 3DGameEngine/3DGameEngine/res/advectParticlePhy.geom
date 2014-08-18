@@ -76,7 +76,7 @@ void main()
 
 			float theta = randhashf(seedy, TwoPi);
 			float r = randhashf(seedx, SeedRadius);
-			float y = randhashf( seedz, InitialBand);
+			float y = randhashf(seedz, InitialBand);
 
 			TFB_Position.x = r * cos(theta) + P_randomSeed.x*0.33;
 			TFB_Position.y = PlumeBase + y + P_randomSeed.y*0.33;
@@ -95,9 +95,9 @@ void main()
 		TFB_Type = Type0[0]; 
 		if(Position0[0].y < PlumeCeiling)
 		{                                                             
-			TFB_Velocity = SampleVelocity(Position0[0])*5;                                                           
+			TFB_Velocity = SampleVelocity(Position0[0])*10;                                                           
 			vec3 midx = Position0[0] + 0.5 * P_delta * TFB_Velocity;
-			TFB_Velocity = SampleVelocity(midx)*5;  
+			TFB_Velocity = SampleVelocity(midx)*10;  
 			TFB_Position = Position0[0] + P_delta * TFB_Velocity;    
 		}
 		else

@@ -52,7 +52,6 @@ void ParticleSystem::InitParticleSystem(const glm::vec3& Pos, const int& maxPart
 	particles[0].Vel = glm::vec3(0.0f, 0.0f, 0.0f);
 	particles[0].Age = 0.0f;
 
-	
 	//old version using default max particles
 	//Particle Particles[DEFAULT_MAX_PARTICLES];
 	//int sizeP = sizeof(Particles);
