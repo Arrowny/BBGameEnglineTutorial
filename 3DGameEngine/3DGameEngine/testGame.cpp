@@ -114,14 +114,14 @@ void TestGame::init(){
 
 	//m_basicPS = new ParticleSystem("basicParticlePhy", &m_material, new PhysicsComponents(2), glm::vec3(0.0, 0.0, 10.0), 100000);
 	//m_luminousPS = new ParticleSystem("basicParticlePhy", &m_particleMaterial, new PhysicsComponents(2), glm::vec3(-2.0, 1.8, 10.0), 5000, LUMINOUS_BLEND);
-	m_luminousPS = new ParticleSystem("advectParticlePhy", &m_particleMaterial, new PhysicsComponents(2, m_advectTexture), glm::vec3(-2.0, 1.8, 10.0), 10000, LUMINOUS_BLEND);
-	m_luminousPS2 = new ParticleSystem("basicParticlePhy", &m_particleMaterial2, new PhysicsComponents(2), glm::vec3(-4.0, 0.0, 10.0), 5000, LUMINOUS_BLEND);
-	m_luminousPS3 = new ParticleSystem("basicParticlePhy", &m_particleMaterial3, new PhysicsComponents(2), glm::vec3(-2.0, 4.0, 10.0), 5000, LUMINOUS_BLEND);
+	m_luminousPS = new ParticleSystem("advectParticlePhy", &m_particleMaterial, new PhysicsComponents(2, m_advectTexture), glm::vec3(-2.0, 1.8, 10.0), 100000, LUMINOUS_BLEND);
+	m_luminousPS2 = new ParticleSystem("basicParticlePhy", &m_particleMaterial, new PhysicsComponents(2), glm::vec3(-4.0, 0.0, 10.0), 5000, LUMINOUS_BLEND);
+	m_luminousPS3 = new ParticleSystem("basicParticlePhy", &m_particleMaterial, new PhysicsComponents(2), glm::vec3(-2.0, 4.0, 10.0), 5000, LUMINOUS_BLEND);
 	//m_material.SetFloat("quadLength", 0.1);
-	m_particleMaterial.SetFloat("quadLength", 0.2);
+	m_particleMaterial.SetFloat("quadLength", 0.01);
 	//m_particleMaterial2.SetFloat("quadLength", 0.1);
 	//m_particleMaterial3.SetFloat("quadLength", 0.1);
-	//m_particleMaterial.SetVector3f("color", glm::fvec3(0.5, 0.5, 0.9));
+	//m_particleMaterial.SetVector3f("color", glm::fvec3(1.0, 0.1, 0.1));
 	//m_particleMaterial2.SetVector3f("color", glm::fvec3(0.0, 1.0, 1.0));
 	//m_particleMaterial3.SetVector3f("color", glm::fvec3(1.0, 1.0, 1.0));
 	//m_basicPSObj->AddComponent(m_basicPS);

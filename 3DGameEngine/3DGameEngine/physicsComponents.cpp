@@ -20,6 +20,11 @@ PhysicsComponents::PhysicsComponents(const int& numEmittedParticles, Texture3D* 
 	SetTexture("vectorField", texture);
 	SetVector3f("Size", glm::fvec3((float)texture->GetTexWidth(), (float)texture->GetTexHeight(), (float)texture->GetTexDepth()));
 	SetVector3f("Extent", glm::vec3(2, 4, 2));
+	SetFloat("TimeStep", 5.0);
+	SetFloat("InitialBand", 0.1);
+	SetFloat("SeedRadius", 0.25);
+	SetFloat("PlumeCeiling", 3.0);
+	SetFloat("PlumeBase", -3.0);
 
 }
 
